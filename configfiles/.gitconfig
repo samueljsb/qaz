@@ -1,0 +1,39 @@
+# Local/private config goes in the include
+[include]
+    path = ~/.gitconfig.local
+    path = ~/.gitconfig.extra
+
+[hub]
+    protocol = https
+
+[core]
+    editor = vim
+    excludesfile = ~/.gitignore
+    autocrlf = input
+
+[color]
+    ui = true
+
+[alias]
+    lg = log --oneline --graph --decorate
+    s = status --short
+    grep = grep --break --heading
+
+[submodule]
+    recurse = true
+
+[help]
+    autocorrect = 1
+
+[push]
+    # See `git help config` (search for push.default)
+    # for more information on different options of the below setting.
+    #
+    # Setting to git 2.0 default to suppress warning message
+    default = simple
+
+[grep]
+    lineNumber = true
+
+[pull]
+    rebase = true

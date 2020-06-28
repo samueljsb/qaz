@@ -1,0 +1,1 @@
+alias prun='poetry run'

@@ -1,0 +1,63 @@
+{
+  "[markdown]": {
+    "editor.formatOnSave": false,
+    "editor.rulers": [80]
+  },
+  "[plaintext]": {
+    "editor.wordWrap": "on"
+  },
+  "[python]": {
+    "editor.rulers": [88]
+  },
+  "[restructuredtext]": {
+    "editor.rulers": [79]
+  },
+  "breadcrumbs.enabled": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.detectIndentation": false,
+  "editor.fontFamily": "Hack Nerd Font, Menlo, Monaco, 'Courier New', monospace",
+  "editor.formatOnSave": true,
+  "editor.insertSpaces": true,
+  "editor.minimap.renderCharacters": false,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.renderWhitespace": "boundary",
+  "editor.suggestSelection": "first",
+  "editor.wordWrap": "bounded",
+  "editor.wordWrapColumn": 120,
+  "files.associations": {
+    "*.html": "html",
+    "*.md": "markdown"
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/.vscode": true
+  },
+  "html.format.enable": false,
+  "material-icon-theme.files.associations": {
+    "*.sqlite3": "database",
+    ".flake8": "python-misc",
+    ".ruby-version": "ruby",
+    "TODO": "contributing"
+  },
+  "material-icon-theme.folders.associations": {
+    "_layouts": "template",
+    "migrations": "database"
+  },
+  "python.formatting.provider": "black",
+  "python.languageServer": "Microsoft",
+  "python.linting.enabled": true,
+  "python.linting.flake8Enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.linting.mypyEnabled": true,
+  "python.terminal.activateEnvironment": true,
+  "terminal.external.osxExec": "iTerm.app",
+  "terminal.integrated.fontFamily": "Hack Nerd Font",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "window.zoomLevel": 0,
+  "workbench.iconTheme": "material-icon-theme"
+}

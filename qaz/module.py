@@ -1,0 +1,152 @@
+from pathlib import Path
+from typing import Dict, List, Optional, Union
+
+from qaz.config import ModuleConfig, config
+from qaz.exceptions import DependenciesMissing
+from qaz.utils import create_symlink, error, message
+
+
+PathLike = Union[Path, str]
+
+
+class Module:
+    """A module to be installed.
+
+    Each module contains configuration and install/upgrade methods for one topic.
+
+    Attributes:
+        name (req'd): The module name. This should also be the folder containing it.
+        config_file: The name of the zsh config file for this module.
+        symlinks: A mapping of file (in `dotfiles/`) to the location of the symlink that should be created.
+        requires: The modules that need to be installed before this one.
+
+    """
+
+    # Attributes to overwrite
+    name: str
+    zshrc_file: Optional[str] = None
+    symlinks: Dict[PathLike, PathLike] = dict()
+    requires: List["Module"] = list()
+
+    # Internal attributes
+    _zshrc_path: Path
+    _base_requires: Optional[List["Module"]] = None
+
+    def __init__(self) -> None:
+        # .zshrc file
+        zshrc_fname = self.zshrc_file or f"{self.name.lower()}.zsh"
+        self._zshrc_path = config.root_dir / "zshrc" / zshrc_fname
+
+        # base requirements
+        self.requires = self.requires + (self._base_requires or [])
+
+        return super().__init_subclass__()
+
+    def install(self, install_dependencies: bool = False) -> None:
+        """Install the module.
+
+        Args:
+            install_dependencies: Install this modules dependencies if they are not installed.
+
+        Raises:
+            DependenciesMissing if a dependency is not installed and install_dependencies is False.
+            ModuleDoesNotExist if a dependency cannot be found.
+
+        """
+        module_config = self._get_config()
+        message(f"Installing {self.name}...")
+        if module_config.installed:
+            message(f"... {self.name} already installed!")
+            return
+
+        self._check_dependencies(install_dependencies=install_dependencies)
+
+        self._link_zshrc()
+        self._create_symlinks()
+        self.install_action()
+
+        module_config.installed = True
+        message(f"... {self.name} installed!")
+
+        self._save_config(module_config)
+
+    def install_action(self) -> None:
+        """Run actions to install this module.
+
+        Overwrite this method to provide custom install behaviour.
+        """
+        pass
+
+    def upgrade(self) -> None:
+        """Upgrade this module."""
+        if not self._get_config().installed:
+            error(f"Cannot upgrade: {self.name} is not installed")
+            return
+
+        message(f"Upgrading {self.name}...")
+
+        self._check_dependencies()
+
+        self._link_zshrc()
+        self._create_symlinks()
+        self.upgrade_action()
+
+        message(f"... {self.name} upgraded!")
+
+    def upgrade_action(self) -> None:
+        """Run actions to upgrade this module.
+
+        Overwrite this method to provide custom upgrade behaviour.
+        """
+        pass
+
+    def _get_config(self) -> ModuleConfig:
+        """Get the configuration for this module."""
+        return config.get_module(self.name)
+
+    def _save_config(self, module_config: ModuleConfig) -> None:
+        """Save the configuration for this module.
+
+        Args:
+            module_config: The configuration to save.
+
+        """
+        config.modules[self.name] = module_config
+        config.save()
+
+    def _check_dependencies(self, install_dependencies: bool = False) -> None:
+        """Check all dependencies are installed.
+
+        Args:
+            install_dependencies: Install missing dependencies.
+
+        Raises:
+            DependenciesMissing if a dependency is not installed and install_dependencies is False.
+            ModuleDoesNotExist if a dependency cannot be found.
+
+        """
+        if missing := [
+            dep for dep in self.requires if dep.name not in config.installed_modules
+        ]:
+            if install_dependencies:
+                # Import here to avoid circular import.
+                from qaz.modules import get_module
+
+                for dep in missing:
+                    get_module(dep.name).install(install_dependencies=True)
+            else:
+                raise DependenciesMissing([dep.name for dep in missing])
+
+    def _link_zshrc(self) -> None:
+        """Create symlink from ~/.zshrc.d to the zshrc file for this module."""
+        if self._zshrc_path.exists():
+            create_symlink(
+                self._zshrc_path, Path.home() / ".zshrc.d",
+            )
+
+    def _create_symlinks(self) -> None:
+        """Create symlinks for this module."""
+        for _target, _link in self.symlinks.items():
+            create_symlink(
+                config.root_dir / "configfiles" / _target, Path(_link).expanduser()
+            )
