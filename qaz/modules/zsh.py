@@ -11,6 +11,7 @@ class ZSHBase(Module):
     """Z shell."""
 
     name = "zsh"
+    zshrc_file = "_zsh.zsh"  # load early to allow modules to overwrite settings
     symlinks = {
         ".zshrc": "~",
         ".editorconfig": "~",
@@ -46,7 +47,7 @@ class OhMyZSH(Module):
     """Framework for managing your Zsh configuration."""
 
     name = "Oh-My-Zsh"
-    zshrc_file = "_oh-my-zsh.zsh"
+    zshrc_file = "_oh-my-zsh.zsh"  # load early to allow modules to overwrite settings
 
     def install_action(self) -> None:
         """Install Oh-My-Zsh and plugins."""

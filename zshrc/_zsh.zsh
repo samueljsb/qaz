@@ -1,6 +1,10 @@
 # Aliases
 alias reload!='. ~/.zshrc'
 
+# ls
+alias ll='ls -lh'
+alias la='ls -lAh'
+
 # Pipe my public key to my clipboard
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 # Add my public key to keychain
