@@ -1,7 +1,7 @@
 # Local/private config goes in the include
 [include]
     path = ~/.gitconfig.local
-    path = ~/.gitconfig.extra
+    path = ~/.gitconfig.diff-so-fancy
 
 [hub]
     protocol = https
