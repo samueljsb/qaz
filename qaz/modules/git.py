@@ -55,7 +55,7 @@ class Git(BrewModule):
         # Create SSH key if not already present.
         id_rsa = Path.home() / ".ssh/id_rsa"
         if not id_rsa.exists():
-            run(f"ssh-keygen -t rsa -b 4096 -C '{git_authoremail}' -f {id_rsa}")
+            run(f"ssh-keygen -t rsa -b 4096 -C '{git_authoremail}' -f ~/.ssh/{id_rsa}")
         id_rsa_pub = Path.home() / ".ssh/id_rsa.pub"
         with id_rsa_pub.open() as fd:
             public_key = fd.read()
