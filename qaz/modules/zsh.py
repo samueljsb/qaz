@@ -15,7 +15,7 @@ class ZSHBase(Module):
     symlinks = {
         ".zshrc": "~",
         ".editorconfig": "~",
-        "e": "/usr/local/bin",
+        "e": "~/.local/bin",
     }
 
 

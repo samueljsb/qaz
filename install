@@ -2,6 +2,8 @@
 #
 # This installs asdf, python, poetry, and qaz.
 
+set -e  # Exit if any step fails.
+
 QAZ=$(pwd)/$(dirname "$0")
 
 echo 'Installing dotfiles and management tool...'
@@ -16,16 +18,14 @@ if [ ! -x "$(command -v asdf)" ]; then
     cd $HOME/.asdf
     git checkout "$(git describe --abbrev=0 --tags)"
   fi
-  . $HOME/.asdf/asdf.sh
 fi
+. $HOME/.asdf/asdf.sh
 echo '... asdf installed!'
 
 # Install Python
 echo 'Installing Python...'
 asdf plugin add python
-set -e  # Exit if Python install fails. This is not unlikely.
 asdf install python latest
-set +e
 asdf shell python $(asdf latest python)
 echo '... Python installed!'
 
@@ -39,7 +39,7 @@ echo "Installing qaz management tool..."
 cd $QAZ
 asdf exec python -m venv venv
 . venv/bin/activate
-poetry install --no-dev
+$HOME/.poetry/bin/poetry install --no-dev
 ln -sf $QAZ/venv/bin/qaz /usr/local/bin
 echo "... management tool installed!"
 
