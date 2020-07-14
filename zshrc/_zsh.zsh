@@ -18,7 +18,7 @@ elif [ -x "$(command -v vim)" ]; then
 fi
 
 # Prompt
-RPROMPT="%*"
+RPROMPT="%B%*%b"
 export LSCOLORS=gxfxhxdxcxegedabagacad
 
 HISTFILE=~/.zsh_history
