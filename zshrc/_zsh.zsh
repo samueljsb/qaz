@@ -16,6 +16,10 @@ if [ -x "$(command -v code)" ]; then
 elif [ -x "$(command -v vim)" ]; then
   export EDITOR=vim
 fi
+# Set VISUAL editor (for crontab et al.)
+if [ -x "$(command -v vim)" ]; then
+  export VISUAL=vim
+fi
 
 # Prompt
 RPROMPT="%B%*%b"
