@@ -1,3 +1,5 @@
+import os
+
 from qaz.modules.asdf import ASDFModule
 
 
@@ -6,6 +8,11 @@ class NodeJS(ASDFModule):
 
     name = "Node.js"
     plugin_name = "nodejs"
+
+    def install_action(self) -> None:
+        """Do not check downloads against OpenPGP signatures."""
+        os.environ["NODEJS_CHECK_SIGNATURES"] = "no"
+        super().install_action()
 
 
 class Yarn(ASDFModule):
