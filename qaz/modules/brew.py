@@ -36,12 +36,12 @@ class BrewModule(Module):
     def install_action(self) -> None:
         """Install this package from Homebrew."""
         brew.install_or_upgrade(self.package_name)
-        return super().upgrade_action()
+        return super().install_action()
 
     def upgrade_action(self) -> None:
         """Upgrade this package from Homebrew."""
         brew.install_or_upgrade(self.package_name)
-        return super().install_action()
+        return super().upgrade_action()
 
 
 class BrewCaskModule(Module):
@@ -58,9 +58,9 @@ class BrewCaskModule(Module):
     def install_action(self) -> None:
         """Install this cask from Homebrew."""
         brew.install_or_upgrade_cask(self.cask_name)
-        return super().upgrade_action()
+        return super().install_action()
 
     def upgrade_action(self) -> None:
         """Upgrade this cask from Homebrew."""
         brew.install_or_upgrade_cask(self.cask_name)
-        return super().install_action()
+        return super().upgrade_action()
