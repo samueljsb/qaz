@@ -12,6 +12,7 @@ from .iterm2 import ITerm2
 from .macos import MacOS
 from .nodejs import NodeJS, Yarn
 from .python import Bpython, Pipx, Poetry, Python, Tox
+from .ruby import Ruby
 from .rust import Rust
 from .starship import Starship
 from .tools import Bat, Exa, Figlet
@@ -37,6 +38,7 @@ modules: List[Module] = [
     Python(),
     Bpython(),
     Tox(),
+    Ruby(),
     Rust(),
     Starship(),
     Vim(),
