@@ -52,7 +52,7 @@
     "dockerfile": "docker"
   },
   "python.formatting.provider": "black",
-  "python.languageServer": "Microsoft",
+  "python.languageServer": "Pylance",
   "python.linting.enabled": true,
   "python.linting.flake8Args": ["--ignore D501"],
   "python.linting.flake8Enabled": true,
