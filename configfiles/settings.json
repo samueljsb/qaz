@@ -48,6 +48,9 @@
     "_layouts": "template",
     "migrations": "database"
   },
+  "material-icon-theme.languages.associations": {
+    "dockerfile": "docker"
+  },
   "python.formatting.provider": "black",
   "python.languageServer": "Microsoft",
   "python.linting.enabled": true,
