@@ -6,4 +6,5 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
 )
+export ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
