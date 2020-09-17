@@ -15,7 +15,7 @@ from .python import Bpython, Pipx, Poetry, Python, Tox
 from .ruby import Ruby
 from .rust import Rust
 from .starship import Starship
-from .tools import Bat, Exa, Figlet
+from .tools import Bat, Exa, Figlet, TrashCLI
 from .vim import Vim
 from .vscode import VSCode
 from .zsh import ZSH, OhMyZSH
@@ -41,6 +41,7 @@ modules: List[Module] = [
     Ruby(),
     Rust(),
     Starship(),
+    TrashCLI(),
     Vim(),
     VSCode(),
     Yarn(),

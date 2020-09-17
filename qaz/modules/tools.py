@@ -1,4 +1,5 @@
 from qaz.modules.brew import BrewModule
+from qaz.modules.nodejs import NodeModule
 
 
 class Bat(BrewModule):
@@ -20,3 +21,10 @@ class Figlet(BrewModule):
 
     name = "FIGlet"
     package_name = "figlet"
+
+
+class TrashCLI(NodeModule):
+    """Move files and folders to the trash."""
+
+    name = "trash-cli"
+    package_name = "trash-cli"
