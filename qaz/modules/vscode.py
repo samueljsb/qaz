@@ -1,37 +1,10 @@
 from pathlib import Path
 from sys import platform
-from typing import List
 
 from qaz.exceptions import DependenciesMissing
 from qaz.module import Module
-from qaz.utils import capture, run
+from qaz.utils import capture
 
-
-EXTENSIONS = [
-    "alefragnani.Bookmarks",
-    "bungcip.better-toml",
-    "byi8220.indented-block-highlighting",
-    "codezombiech.gitignore",
-    "DavidAnson.vscode-markdownlint",
-    "dbaeumer.vscode-eslint",
-    "EditorConfig.EditorConfig",
-    "formulahendry.auto-close-tag",
-    "ginfuru.ginfuru-vscode-jekyll-syntax",
-    "lextudio.restructuredtext",
-    "mikestead.dotenv",
-    "ms-python.python",
-    "naumovs.color-highlight",
-    "npxms.hide-gitignored",
-    "numso.prettier-standard-vscode",
-    "PKief.material-icon-theme",
-    "pnp.polacode",
-    "sidneys1.gitconfig",
-    "syler.sass-indented",
-    "torn4dom4n.latex-support",
-    "VisualStudioExptTeam.vscodeintellicode",
-    "waderyan.gitblame",
-    "wholroyd.jinja",
-]
 
 if platform == "darwin":
     SETTINGS_DIR = Path.home() / "Library/Application Support/Code/User"
@@ -49,11 +22,31 @@ class VSCode(Module):
 
     name = "VSCode"
     symlinks = {"settings.json": SETTINGS_DIR}
-
-    @staticmethod
-    def list_extensions() -> List[str]:
-        """Get a list of the currently installed VSCode extensions."""
-        return capture("code --list-extensions").split()
+    vscode_extensions = [
+        "alefragnani.Bookmarks",
+        "bungcip.better-toml",
+        "byi8220.indented-block-highlighting",
+        "codezombiech.gitignore",
+        "DavidAnson.vscode-markdownlint",
+        "EditorConfig.EditorConfig",
+        "formulahendry.auto-close-tag",
+        "mikestead.dotenv",
+        "mrmlnc.vscode-apache",
+        "ms-azuretools.vscode-docker",
+        "ms-python.python",
+        "naumovs.color-highlight",
+        "npxms.hide-gitignored",
+        "PKief.material-icon-theme",
+        "pnp.polacode",
+        "sidneys1.gitconfig",
+        "syler.sass-indented",
+        "swyphcosmo.spellchecker",
+        "torn4dom4n.latex-support",
+        "VisualStudioExptTeam.vscodeintellicode",
+        "waderyan.gitblame",
+        "wholroyd.jinja",
+        "william-voyek.vscode-nginx",
+    ]
 
     def _check_dependencies(self, *args, **kwargs) -> None:  # type: ignore
         command = capture("command -v code")
@@ -64,14 +57,3 @@ class VSCode(Module):
                 ]
             )
         return super()._check_dependencies(*args, **kwargs)
-
-    def install_action(self) -> None:
-        """Install VSCode extensions."""
-        for name in EXTENSIONS:
-            run(f"code --install-extension {name}")
-
-    def upgrade_action(self) -> None:
-        """Install VSCode extensions."""
-        installed = self.list_extensions()
-        for name in [ext for ext in EXTENSIONS if ext not in installed]:
-            run(f"code --install-extension {name}")

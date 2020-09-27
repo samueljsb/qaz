@@ -10,6 +10,11 @@ class NodeJS(ASDFModule):
 
     name = "Node.js"
     plugin_name = "nodejs"
+    vscode_extensions = [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "numso.prettier-standard-vscode",
+    ]
 
     def install_action(self) -> None:
         """Do not check downloads against OpenPGP signatures."""

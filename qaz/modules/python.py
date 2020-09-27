@@ -15,6 +15,12 @@ class Python(ASDFModule):
     name = "Python"
     plugin_name = "python"
     symlinks = {".pypirc": "~"}
+    vscode_extensions = [
+        "lextudio.restructuredtext",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "wholroyd.jinja",
+    ]
 
 
 class Poetry(Module):
