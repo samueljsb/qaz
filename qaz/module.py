@@ -3,6 +3,7 @@ from typing import Dict, List, Optional, Union
 
 from qaz.config import ModuleConfig, config
 from qaz.exceptions import DependenciesMissing
+from qaz.managers import code
 from qaz.utils import create_symlink, error, message
 
 
@@ -27,6 +28,7 @@ class Module:
     zshrc_file: Optional[str] = None
     symlinks: Dict[PathLike, PathLike] = dict()
     requires: List["Module"] = list()
+    vscode_extensions: List[str] = list()
 
     # Internal attributes
     _zshrc_path: Path
@@ -63,6 +65,7 @@ class Module:
 
         self._link_zshrc()
         self._create_symlinks()
+        self._install_vscode_extensions()
         self.install_action()
 
         module_config.installed = True
@@ -89,6 +92,7 @@ class Module:
 
         self._link_zshrc()
         self._create_symlinks()
+        self._install_vscode_extensions()
         self.upgrade_action()
 
         message(f"... {self.name} upgraded!")
@@ -150,3 +154,10 @@ class Module:
             create_symlink(
                 config.root_dir / "configfiles" / _target, Path(_link).expanduser()
             )
+
+    def _install_vscode_extensions(self) -> None:
+        """Install VS Code extensions for this module."""
+        for extension in [
+            ext for ext in self.vscode_extensions if ext not in code.installed()
+        ]:
+            code.install(extension)
