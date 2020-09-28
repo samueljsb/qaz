@@ -2,12 +2,16 @@
 #
 # This installs asdf, python, poetry, and qaz.
 
+message() {
+    echo "\033[1m[QAZ]\033[0m $@"
+}
+
 QAZ=$(pwd)/$(dirname "$0")
 
-echo 'Installing dotfiles and management tool...'
+message 'Installing dotfiles and management tool...'
 
 # Install asdf
-echo 'Installing asdf...'
+message 'Installing asdf...'
 ## check if asdf is already installed
 if [ ! -x "$(command -v asdf)" ]; then
   ## install asdf
@@ -18,31 +22,31 @@ if [ ! -x "$(command -v asdf)" ]; then
   fi
   . $HOME/.asdf/asdf.sh
 fi
-echo '... asdf installed!'
+message '... asdf installed!'
 
 # Install Python
-echo 'Installing Python...'
+message 'Installing Python...'
 asdf plugin add python
 set -e  # Exit if Python install fails. This is not unlikely.
 asdf install python latest
 set +e
 asdf shell python $(asdf latest python)
-echo '... Python installed!'
+message '... Python installed!'
 
 # Install Poetry
-echo 'Installing Poetry...'
+message 'Installing Poetry...'
 curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
 source $HOME/.poetry/env
-echo '... Poetry installed!'
+message '... Poetry installed!'
 
 # Install management tool
-echo "Installing qaz management tool..."
+message "Installing qaz management tool..."
 cd $QAZ
 asdf exec python -m venv venv
 . venv/bin/activate
 poetry install --no-dev
 ln -sf $QAZ/venv/bin/qaz /usr/local/bin
-echo "... management tool installed!"
+message "... management tool installed!"
 
 # Run management tool to install basics
 mkdir -p $HOME/.config
