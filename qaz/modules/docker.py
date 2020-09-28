@@ -1,18 +1,18 @@
 from sys import platform
 
 from qaz.module import Module
-from qaz.modules.brew import BrewModule
+from qaz.modules.brew import BrewCaskModule, BrewModule
 from qaz.modules.python import PipxModule
 from qaz.utils import run
 
 
 if platform == "darwin":
 
-    class Docker(BrewModule):  # type: ignore
+    class Docker(BrewCaskModule):  # type: ignore
         """Docker for macOS."""
 
         name = "Docker"
-        package_name = "docker"
+        cask_name = "docker"
 
         def install_action(self) -> None:
             """Install Docker and open the application so it starts."""
