@@ -4,7 +4,7 @@ from typing import Dict, List, Optional, Union
 from qaz.config import ModuleConfig, config
 from qaz.exceptions import DependenciesMissing
 from qaz.managers import code
-from qaz.utils import create_symlink, error, message
+from qaz.utils import capture, create_symlink, error, message
 
 
 PathLike = Union[Path, str]
@@ -157,7 +157,13 @@ class Module:
 
     def _install_vscode_extensions(self) -> None:
         """Install VS Code extensions for this module."""
-        for extension in [
-            ext for ext in self.vscode_extensions if ext not in code.installed()
-        ]:
+        command = capture("command -v code")
+        if not command or not self.vscode_extensions:
+            return
+
+        message("Installing VS Code extensions...")
+        installed = set(code.installed())
+        extensions = set(self.vscode_extensions)
+        for extension in extensions - installed:
             code.install(extension)
+        message("... VS Code extensions installed!")
