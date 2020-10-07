@@ -25,6 +25,16 @@ class Bartender(BrewCaskModule):
     cask_name = "bartender"
 
 
+class Rectangle(BrewCaskModule):
+    """Move and resize windows using keyboard shortcuts or snap areas."""
+
+    name = "Rectangle"
+    cask_name = "rectagle"
+    symlinks = {
+        "rectangle.plist": "~/Library/Preferences/com.knollsoft.Rectangle.plist"
+    }
+
+
 # class IStats(GemModule):
 
 #     name = "iStats"

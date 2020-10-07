@@ -9,7 +9,7 @@ from .docker import Docker, DockerCompose, LazyDocker
 from .fonts import NerdFonts
 from .git import DiffSoFancy, Git, LazyGit
 from .iterm2 import ITerm2
-from .macos import Bartender, MacOS
+from .macos import Bartender, MacOS, Rectangle
 from .nodejs import NodeJS, Yarn
 from .python import Bpython, Pipx, Poetry, Python, Tox
 from .ruby import Ruby
@@ -51,7 +51,7 @@ modules: List[Module] = [
     Figlet(),
 ]
 
-mac_modules: List[Module] = [ITerm2(), MacOS(), Bartender()]
+mac_modules: List[Module] = [ITerm2(), MacOS(), Bartender(), Rectangle()]
 
 all_modules = modules
 if platform == "darwin":
