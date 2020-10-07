@@ -7,7 +7,7 @@ from .asdf import ASDF
 from .brew import Brew
 from .docker import Docker, DockerCompose, LazyDocker
 from .fonts import NerdFonts
-from .git import DiffSoFancy, Git, LazyGit
+from .git import DiffSoFancy, Git, GitHubCLI, LazyGit
 from .iterm2 import ITerm2
 from .macos import Bartender, MacOS, Rectangle
 from .nodejs import NodeJS, Yarn
@@ -28,6 +28,7 @@ modules: List[Module] = [
     DockerCompose(),
     LazyDocker(),
     Git(),
+    GitHubCLI(),
     LazyGit(),
     DiffSoFancy(),
     NerdFonts(),

@@ -90,6 +90,13 @@ class GitModule(Module):
         run(f"git -C {self.repo_path} pull")
 
 
+class GitHubCLI(BrewModule):
+    """GitHub command-line tool."""
+
+    name = "GitHub"
+    package_name = "gh"
+
+
 class LazyGit(BrewModule):
     """A simple terminal UI for git commands."""
 
