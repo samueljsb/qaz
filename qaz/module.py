@@ -63,10 +63,10 @@ class Module:
 
         self._check_dependencies(install_dependencies=install_dependencies)
 
+        self.install_action()
         self._link_zshrc()
         self._create_symlinks()
         self._install_vscode_extensions()
-        self.install_action()
 
         module_config.installed = True
         message(f"... {self.name} installed!")

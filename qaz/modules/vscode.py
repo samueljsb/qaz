@@ -1,9 +1,7 @@
 from pathlib import Path
 from sys import platform
 
-from qaz.exceptions import DependenciesMissing
-from qaz.module import Module
-from qaz.utils import capture
+from qaz.modules.brew import BrewCaskModule
 
 
 if platform == "darwin":
@@ -14,13 +12,11 @@ else:
     SETTINGS_DIR = Path.home() / ".config/Code/User"
 
 
-class VSCode(Module):
-    """My configuration and plugins for Visual Studio Code.
-
-    Requires VSCode to be installed before this module can be installed.
-    """
+class VSCode(BrewCaskModule):
+    """Open-source code editor."""
 
     name = "VSCode"
+    cask_name = "visual-studio-code"
     symlinks = {"settings.json": SETTINGS_DIR}
     vscode_extensions = [
         "alefragnani.Bookmarks",
@@ -47,13 +43,3 @@ class VSCode(Module):
         "wholroyd.jinja",
         "william-voyek.vscode-nginx",
     ]
-
-    def _check_dependencies(self, *args, **kwargs) -> None:  # type: ignore
-        command = capture("command -v code")
-        if not command:
-            raise DependenciesMissing(
-                [
-                    "VSCode is not installed, you must install VSCode before installing this module."
-                ]
-            )
-        return super()._check_dependencies(*args, **kwargs)
