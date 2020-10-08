@@ -23,6 +23,13 @@ class Figlet(BrewModule):
     package_name = "figlet"
 
 
+class Less(BrewModule):
+    """Pager program similar to more."""
+
+    name = "less"
+    package_name = "less"
+
+
 class TrashCLI(NodeModule):
     """Move files and folders to the trash."""
 
