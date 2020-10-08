@@ -27,7 +27,7 @@ class Poetry(Module):
     """Python dependency management and packaging made easy."""
 
     name = "Poetry"
-    dependencies = ["python"]
+    requires = [Python()]
 
     # N.B. This is installed by install.sh, so no install script is needed here.
 
@@ -41,7 +41,7 @@ class Pipx(BrewModule):
 
     name = "pipx"
     package_name = "pipx"
-    dependencies = ["python"]
+    requires = [Python()]
 
 
 class PipxModule(Module):

@@ -27,7 +27,7 @@ class Yarn(ASDFModule):
 
     name = "Yarn"
     plugin_name = "yarn"
-    dependencies = [NodeJS()]
+    requires = [NodeJS()]
 
 
 class NodeModule(Module):
