@@ -96,6 +96,11 @@ class GitHubCLI(BrewModule):
     name = "GitHub"
     package_name = "gh"
 
+    def install_action(self) -> None:
+        """Log in to GitHub after installation."""
+        super().install_action()
+        run("gh auth login --web")
+
 
 class LazyGit(BrewModule):
     """A simple terminal UI for git commands."""
