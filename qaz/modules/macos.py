@@ -29,7 +29,7 @@ class Rectangle(BrewCaskModule):
     """Move and resize windows using keyboard shortcuts or snap areas."""
 
     name = "Rectangle"
-    cask_name = "rectagle"
+    cask_name = "rectangle"
     symlinks = {
         "rectangle.plist": "~/Library/Preferences/com.knollsoft.Rectangle.plist"
     }
