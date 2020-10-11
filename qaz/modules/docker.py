@@ -2,7 +2,6 @@ from sys import platform
 
 from qaz.module import Module
 from qaz.modules.brew import BrewCaskModule, BrewModule
-from qaz.modules.python import PipxModule
 from qaz.utils import run
 
 
@@ -34,14 +33,6 @@ elif platform == "linux":
         def upgrade_action(self) -> None:
             """TODO."""
             raise NotImplementedError
-
-
-class DockerCompose(PipxModule):
-    """A tool for defining and running multi-container Docker applications."""
-
-    name = "docker-compose"
-    package_name = "docker-compose"
-    requires = [Docker()]
 
 
 class LazyDocker(BrewModule):

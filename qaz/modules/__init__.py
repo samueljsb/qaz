@@ -5,7 +5,7 @@ from qaz.exceptions import ModuleDoesNotExist
 from qaz.module import Module
 from .asdf import ASDF
 from .brew import Brew
-from .docker import Docker, DockerCompose, LazyDocker
+from .docker import Docker, LazyDocker
 from .fonts import NerdFonts
 from .git import DiffSoFancy, Git, GitHubCLI, LazyGit
 from .iterm2 import ITerm2
@@ -25,7 +25,6 @@ modules: List[Module] = [
     ASDF(),
     Brew(),
     Docker(),
-    DockerCompose(),
     LazyDocker(),
     Git(),
     GitHubCLI(),
