@@ -2,7 +2,7 @@ from qaz.modules.brew import BrewCaskModule
 
 
 class Mactex(BrewCaskModule):
-    """Full TeX Live distribution without GUI applications."""
+    """Full TeX Live distribution."""
 
     name = "LaTeX"
-    cask_name = "mactex-no-gui"
+    cask_name = "mactex"
