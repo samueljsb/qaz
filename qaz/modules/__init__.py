@@ -10,7 +10,7 @@ from .fonts import NerdFonts
 from .git import DiffSoFancy, Git, GitHubCLI, LazyGit
 from .iterm2 import ITerm2
 from .latex import Mactex
-from .macos import Bartender, MacOS, Rectangle
+from .macos import Bartender, MacOS, QuickLookExtensions, Rectangle
 from .nodejs import NodeJS, Yarn
 from .python import Bpython, Pipx, Poetry, Python, Tox
 from .ruby import Ruby
@@ -53,7 +53,14 @@ modules: List[Module] = [
     Figlet(),
 ]
 
-mac_modules: List[Module] = [ITerm2(), Mactex(), MacOS(), Bartender(), Rectangle()]
+mac_modules: List[Module] = [
+    ITerm2(),
+    Mactex(),
+    MacOS(),
+    QuickLookExtensions(),
+    Bartender(),
+    Rectangle(),
+]
 
 all_modules = modules
 if platform == "darwin":

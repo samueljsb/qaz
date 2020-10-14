@@ -1,6 +1,7 @@
 from qaz.config import config
+from qaz.managers import brew
 from qaz.module import Module
-from qaz.modules.brew import BrewCaskModule
+from qaz.modules.brew import Brew, BrewCaskModule
 from qaz.utils import run
 
 
@@ -16,6 +17,32 @@ class MacOS(Module):
     def upgrade_action(self) -> None:
         """Run the script to set defaults."""
         run(str(config.root_dir / "scripts" / "set-defaults.sh"))
+
+
+class QuickLookExtensions(Module):
+    """Extensions for MacOS QuickLook."""
+
+    name = "QuickLook"
+    _base_requires = [Brew()]
+
+    extensions = (
+        "qlcolorcode",
+        "qlstephen",
+        "qlmarkdown",
+        "suspicious-package",
+    )
+
+    def install_action(self) -> None:
+        """Install this cask from Homebrew."""
+        for extension in self.extensions:
+            brew.install_or_upgrade_cask(extension)
+        return super().install_action()
+
+    def upgrade_action(self) -> None:
+        """Upgrade this cask from Homebrew."""
+        for extension in self.extensions:
+            brew.install_or_upgrade_cask(extension)
+        return super().upgrade_action()
 
 
 class Bartender(BrewCaskModule):
