@@ -40,7 +40,7 @@ def upgrade_cask(name: str) -> None:
         name: The name of the cask to upgrade.
 
     """
-    run(f"brew cask upgrade {name}")
+    run(f"brew upgrade --cask {name}")
 
 
 def installed() -> List[str]:
@@ -50,7 +50,7 @@ def installed() -> List[str]:
 
 def installed_casks() -> List[str]:
     """Get a list of installed casks."""
-    return capture("brew cask list -1").split()
+    return capture("brew list --cask -1").split()
 
 
 def install_or_upgrade(name: str) -> None:
