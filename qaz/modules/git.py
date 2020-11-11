@@ -97,9 +97,20 @@ class GitHubCLI(BrewModule):
     package_name = "gh"
 
     def install_action(self) -> None:
-        """Log in to GitHub after installation."""
+        """Log in to GitHub and set config after installation."""
         super().install_action()
         run("gh auth login --web")
+        self._set_config()
+
+    def upgrade_action(self) -> None:
+        """Set config after upgrade."""
+        super().upgrade_action()
+        self._set_config()
+
+    def _set_config(self) -> None:
+        """Set gh config."""
+        run("gh config set prompt disabled")
+        run("gh alias set newpr 'pr create --fill --web'")
 
 
 class LazyGit(BrewModule):
