@@ -57,9 +57,6 @@ class Rectangle(BrewCaskModule):
 
     name = "Rectangle"
     cask_name = "rectangle"
-    symlinks = {
-        "rectangle.plist": "~/Library/Preferences/com.knollsoft.Rectangle.plist"
-    }
 
 
 # class IStats(GemModule):
