@@ -2,6 +2,9 @@
   "[html]": {
     "editor.formatOnSaveMode": "file"
   },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[markdown]": {
     "editor.formatOnSave": false,
     "editor.rulers": [80]
@@ -12,7 +15,6 @@
   "[python]": {
     "editor.formatOnSaveMode": "file",
     "editor.rulers": [88]
-
   },
   "[restructuredtext]": {
     "editor.rulers": [79]

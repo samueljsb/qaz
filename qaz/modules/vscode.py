@@ -25,6 +25,7 @@ class VSCode(BrewCaskModule):
         "codezombiech.gitignore",
         "DavidAnson.vscode-markdownlint",
         "EditorConfig.EditorConfig",
+        "esbenp.prettier-vscode",
         "formulahendry.auto-close-tag",
         "mikestead.dotenv",
         "mrmlnc.vscode-apache",
