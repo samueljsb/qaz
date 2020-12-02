@@ -57,11 +57,11 @@ class PipxModule(Module):
 
     def install_action(self) -> None:
         """Install this package from Pipx."""
-        pipx.install_or_upgrade(self.package_name)
+        pipx.install_or_upgrade_package(self.package_name)
 
     def upgrade_action(self) -> None:
         """Upgrade this package from Homebrew."""
-        pipx.install_or_upgrade(self.package_name)
+        pipx.install_or_upgrade_package(self.package_name)
 
 
 class Bpython(PipxModule):
