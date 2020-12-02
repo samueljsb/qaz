@@ -6,7 +6,7 @@ import click
 
 from .config import Config, config
 from .module import DependenciesMissing
-from .modules import ModuleDoesNotExist, all_modules, get_module
+from .modules import all_modules, get_modules
 from .utils import output, shell
 
 
@@ -39,17 +39,17 @@ def setup(root_dir: str) -> None:
     zshrc_dir = Path.home().joinpath(".zshrc.d")
     zshrc_dir.mkdir(exist_ok=True)
 
+    INSTALLED_BY_SCRIPT = ("asdf", "python", "poetry")
+    INSTALL_NOW = ("zsh",)
     try:
-        # 'Install' modules installed by install.sh (it's already installed, but this adds it properly)
-        get_module("asdf").install(install_dependencies=True)
-        get_module("python").install(install_dependencies=True)
-        get_module("poetry").install(install_dependencies=True)
-
-        # Install zsh
-        get_module("zsh").install(install_dependencies=True)
-    except (ModuleDoesNotExist, DependenciesMissing, CalledProcessError) as err:
-        output.error(str(err))
-        raise click.Abort
+        modules = get_modules(INSTALLED_BY_SCRIPT + INSTALL_NOW)
+    except ValueError as exc:
+        raise click.ClickException(str(exc))
+    for module in modules:
+        try:
+            module.install(install_dependencies=True)
+        except (DependenciesMissing, CalledProcessError) as exc:
+            raise click.ClickException(str(exc))
 
     # Set zsh as the system shell
     zsh_path = shell.capture("which zsh")
@@ -79,11 +79,16 @@ def install(modules: Tuple[str], install_dependencies: bool) -> None:
 
     The module names are case-insensitive.
     """
-    for module in modules:
+    try:
+        _modules = get_modules(modules)
+    except ValueError as exc:
+        raise click.ClickException(str(exc))
+
+    for module in _modules:
         try:
-            get_module(module).install(install_dependencies=install_dependencies)
-        except (ModuleDoesNotExist, DependenciesMissing, CalledProcessError) as err:
-            output.error(str(err))
+            module.install(install_dependencies=install_dependencies)
+        except (DependenciesMissing, CalledProcessError) as exc:
+            raise click.ClickException(str(exc))
 
 
 @cli.command()
@@ -98,11 +103,17 @@ def upgrade(modules: Iterable[str], upgrade_all: bool) -> None:
     """
     if upgrade_all:
         modules = config.installed_modules
-    for module in modules:
+
+    try:
+        _modules = get_modules(modules)
+    except ValueError as exc:
+        raise click.ClickException(str(exc))
+
+    for module in _modules:
         try:
-            get_module(module).upgrade()
-        except (ModuleDoesNotExist, DependenciesMissing, CalledProcessError) as err:
-            output.error(str(err))
+            module.upgrade()
+        except (DependenciesMissing, CalledProcessError) as exc:
+            raise click.ClickException(str(exc))
 
 
 @cli.command("list")

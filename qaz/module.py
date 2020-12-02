@@ -142,11 +142,8 @@ class Module:
             dep for dep in self.requires if dep.name not in config.installed_modules
         ]:
             if install_dependencies:
-                # Import here to avoid circular import.
-                from qaz.modules import get_module
-
-                for dep in missing:
-                    get_module(dep.name).install(install_dependencies=True)
+                for module in missing:
+                    module.install(install_dependencies=True)
             else:
                 raise DependenciesMissing([dep.name for dep in missing])
 

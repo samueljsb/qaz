@@ -1,5 +1,5 @@
 from sys import platform
-from typing import List
+from typing import Iterable, List
 
 from qaz.module import Module
 from .asdf import ASDF
@@ -66,34 +66,16 @@ if platform == "darwin":
     all_modules.extend(mac_modules)
 
 
-class ModuleDoesNotExist(Exception):
-    """Error raised when the requested module does not exist."""
+def get_modules(module_names: Iterable[str]) -> List[Module]:
+    modules_by_name = {m.name: m for m in all_modules}
+    found = []
+    missing = []
+    for name in module_names:
+        if name in modules_by_name:
+            found.append(modules_by_name[name])
+        else:
+            missing.append(name)
 
-    def __init__(self, module_name: str) -> None:
-        self.module_name = module_name
-
-    def __str__(self) -> str:
-        return f"Module '{self.module_name}' does not exist."
-
-
-def get_module(name: str) -> Module:
-    """Get a module by name.
-
-    The lookup is case-insensitive.
-
-    Args:
-        name: The name of the module to retreive.
-
-    Returns:
-        A `Module` instance with the given name.
-
-    Raises:
-        ModuleDoesNotExist if the module with the given name cannot be found.
-
-    """
-    try:
-        return next(
-            module for module in all_modules if module.name.lower() == name.lower()
-        )
-    except StopIteration:
-        raise ModuleDoesNotExist(name)
+    if missing:
+        raise ValueError(f"Modules not found with names: {missing}")
+    return found
