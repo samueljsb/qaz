@@ -11,14 +11,18 @@ from .utils import output, shell
 
 
 @click.group()
-def cli() -> None:
-    """Manage your system configuration and install/update tools."""
+def cli():
+    """
+    Manage your system configuration and install/update tools.
+    """
 
 
 @cli.command()
 @click.argument("root_dir")
-def setup(root_dir: str) -> None:
-    """Install this tool and the basics."""
+def setup(root_dir: str):
+    """
+    Install this tool and the basics.
+    """
     output.message("Installing qaz...")
 
     # Create config
@@ -51,17 +55,18 @@ def setup(root_dir: str) -> None:
 
 
 @cli.command()
-def update() -> None:
-    """Update this tool."""
+def update():
+    """
+    Update this tool.
+    """
     shell.run(f"git -C {config.root_dir} pull")
 
 
 @cli.command()
 @click.argument("modules", nargs=-1)
-def install(modules: Tuple[str]) -> None:
-    """Install modules.
-
-    The module names are case-insensitive.
+def install(modules: Tuple[str]):
+    """
+    Install modules.
     """
     try:
         _modules = get_modules(modules)
@@ -80,10 +85,9 @@ def install(modules: Tuple[str]) -> None:
 @click.option(
     "-a", "--all", "upgrade_all", is_flag=True, help="Upgrade all installed modules."
 )
-def upgrade(modules: Iterable[str], upgrade_all: bool) -> None:
-    """Upgrade modules.
-
-    The module names are case-insensitive.
+def upgrade(modules: Iterable[str], upgrade_all: bool):
+    """
+    Upgrade modules.
     """
     if upgrade_all:
         modules = config.installed_modules
@@ -101,8 +105,10 @@ def upgrade(modules: Iterable[str], upgrade_all: bool) -> None:
 
 
 @cli.command("list")
-def _list() -> None:
-    """List installed and available modules."""
+def _list():
+    """
+    List installed and available modules.
+    """
     for module in all_modules:
         if module.name in config.installed_modules:
             click.echo(f"{module.name} - installed")
@@ -111,6 +117,8 @@ def _list() -> None:
 
 
 @cli.command()
-def edit() -> None:
-    """Open the repo for editing."""
+def edit():
+    """
+    Open the repo for editing.
+    """
     shell.run(f"$EDITOR {config.root_dir}")
