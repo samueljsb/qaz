@@ -35,12 +35,12 @@ class BrewModule(Module):
 
     def install_action(self) -> None:
         """Install this package from Homebrew."""
-        brew.install_or_upgrade(self.package_name)
+        brew.install_or_upgrade_formula(self.package_name)
         return super().install_action()
 
     def upgrade_action(self) -> None:
         """Upgrade this package from Homebrew."""
-        brew.install_or_upgrade(self.package_name)
+        brew.install_or_upgrade_formula(self.package_name)
         return super().upgrade_action()
 
 
