@@ -2,6 +2,8 @@ from pathlib import Path
 from sys import platform
 from typing import List
 
+import click
+
 from qaz.module import Module
 from qaz.modules.brew import BrewModule
 from qaz.utils import output, shell
@@ -40,8 +42,8 @@ class Git(BrewModule):
         else:
             git_credential = ""
 
-        git_authorname = input("- What is your git author name? ")
-        git_authoremail = input("- What is your git author email? ")
+        git_authorname = click.prompt("git author name", err=True)
+        git_authoremail = click.prompt("git author email", err=True)
 
         with Path.home().joinpath(".gitconfig.local").open("w+") as fd:
             fd.write(
