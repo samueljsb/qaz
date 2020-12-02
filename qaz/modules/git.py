@@ -110,6 +110,7 @@ class GitHubCLI(BrewModule):
     def _set_config(self) -> None:
         """Set gh config."""
         run("gh config set prompt enabled")
+        run("gh config set pager 'less -RFX'")
         run("gh alias set newpr 'pr create --fill --web'")
 
 
