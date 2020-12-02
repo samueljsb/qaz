@@ -2,7 +2,7 @@ from qaz.config import config
 from qaz.managers import brew
 from qaz.module import Module
 from qaz.modules.brew import Brew, BrewCaskModule
-from qaz.utils import run
+from qaz.utils import shell
 
 
 class MacOS(Module):
@@ -12,11 +12,11 @@ class MacOS(Module):
 
     def install_action(self) -> None:
         """Run the script to set defaults."""
-        run(str(config.root_dir / "scripts" / "set-defaults.sh"))
+        shell.run(str(config.root_dir / "scripts" / "set-defaults.sh"))
 
     def upgrade_action(self) -> None:
         """Run the script to set defaults."""
-        run(str(config.root_dir / "scripts" / "set-defaults.sh"))
+        shell.run(str(config.root_dir / "scripts" / "set-defaults.sh"))
 
 
 class QuickLookExtensions(Module):

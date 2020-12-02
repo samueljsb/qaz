@@ -1,6 +1,6 @@
 from typing import Iterable, Set
 
-from qaz.utils import capture, run
+from qaz.utils import shell
 
 
 def install_extensions(extensions: Iterable[str]):
@@ -11,8 +11,8 @@ def install_extensions(extensions: Iterable[str]):
     installed extensions for the sake of speed.
     """
     for extension in set(extensions) - _get_installed_extensions():
-        run(f"code --install-extension {extension}")
+        shell.run(f"code --install-extension {extension}")
 
 
 def _get_installed_extensions() -> Set[str]:
-    return set(capture("code --list-extensions").split())
+    return set(shell.capture("code --list-extensions").split())

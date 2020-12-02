@@ -65,6 +65,7 @@ all_modules = modules
 if platform == "darwin":
     all_modules.extend(mac_modules)
 
+
 class ModuleDoesNotExist(Exception):
     """Error raised when the requested module does not exist."""
 

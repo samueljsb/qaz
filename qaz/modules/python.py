@@ -2,7 +2,7 @@ from qaz.managers import pipx
 from qaz.module import Module
 from qaz.modules.asdf import ASDFModule
 from qaz.modules.brew import BrewModule
-from qaz.utils import run
+from qaz.utils import shell
 
 
 class Python(ASDFModule):
@@ -33,7 +33,7 @@ class Poetry(Module):
 
     def upgrade_action(self) -> None:
         """Update poetry through its own command."""
-        run("poetry self update")
+        shell.run("poetry self update")
 
 
 class Pipx(BrewModule):

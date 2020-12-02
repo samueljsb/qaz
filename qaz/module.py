@@ -3,10 +3,11 @@ from typing import Dict, List, Optional, Union
 
 from qaz.config import ModuleConfig, config
 from qaz.managers import code
-from qaz.utils import capture, create_symlink, error, message
+from qaz.utils import files, output, shell
 
 
 PathLike = Union[Path, str]
+
 
 class DependenciesMissing(Exception):
     """Error raised when dependencies of a module are not installed."""
@@ -64,9 +65,9 @@ class Module:
 
         """
         module_config = self._get_config()
-        message(f"Installing {self.name}...")
+        output.message(f"Installing {self.name}...")
         if module_config.installed:
-            message(f"... {self.name} already installed!")
+            output.message(f"... {self.name} already installed!")
             return
 
         self._check_dependencies(install_dependencies=install_dependencies)
@@ -77,7 +78,7 @@ class Module:
         self._install_vscode_extensions()
 
         module_config.installed = True
-        message(f"... {self.name} installed!")
+        output.message(f"... {self.name} installed!")
 
         self._save_config(module_config)
 
@@ -91,10 +92,10 @@ class Module:
     def upgrade(self) -> None:
         """Upgrade this module."""
         if not self._get_config().installed:
-            error(f"Cannot upgrade: {self.name} is not installed")
+            output.error(f"Cannot upgrade: {self.name} is not installed")
             return
 
-        message(f"Upgrading {self.name}...")
+        output.message(f"Upgrading {self.name}...")
 
         self._check_dependencies()
 
@@ -103,7 +104,7 @@ class Module:
         self._install_vscode_extensions()
         self.upgrade_action()
 
-        message(f"... {self.name} upgraded!")
+        output.message(f"... {self.name} upgraded!")
 
     def upgrade_action(self) -> None:
         """Run actions to upgrade this module.
@@ -152,7 +153,7 @@ class Module:
     def _link_zshrc(self) -> None:
         """Create symlink from ~/.zshrc.d to the zshrc file for this module."""
         if self._zshrc_path.exists():
-            create_symlink(
+            files.create_symlink(
                 self._zshrc_path,
                 Path.home() / ".zshrc.d",
             )
@@ -160,16 +161,16 @@ class Module:
     def _create_symlinks(self) -> None:
         """Create symlinks for this module."""
         for _target, _link in self.symlinks.items():
-            create_symlink(
+            files.create_symlink(
                 config.root_dir / "configfiles" / _target, Path(_link).expanduser()
             )
 
     def _install_vscode_extensions(self) -> None:
         """Install VS Code extensions for this module."""
-        command = capture("command -v code")
+        command = shell.capture("command -v code")
         if not command or not self.vscode_extensions:
             return
 
-        message("Installing VS Code extensions...")
+        output.message("Installing VS Code extensions...")
         code.install_extensions(self.vscode_extensions)
-        message("... VS Code extensions installed!")
+        output.message("... VS Code extensions installed!")

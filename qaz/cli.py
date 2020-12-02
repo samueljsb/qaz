@@ -5,9 +5,9 @@ from typing import Iterable, Tuple
 import click
 
 from .config import Config, config
-from .modules import all_modules, get_module, ModuleDoesNotExist
 from .module import DependenciesMissing
-from .utils import capture, error, message, run
+from .modules import ModuleDoesNotExist, all_modules, get_module
+from .utils import output, shell
 
 
 SETUP_MESSAGE = """
@@ -28,7 +28,7 @@ def cli() -> None:
 @click.argument("root_dir")
 def setup(root_dir: str) -> None:
     """Install this tool and the basics."""
-    message("Installing qaz...")
+    output.message("Installing qaz...")
 
     # Create config
     new_config = Config(root_dir)
@@ -48,22 +48,22 @@ def setup(root_dir: str) -> None:
         # Install zsh
         get_module("zsh").install(install_dependencies=True)
     except (ModuleDoesNotExist, DependenciesMissing, CalledProcessError) as err:
-        error(str(err))
+        output.error(str(err))
         raise click.Abort
 
     # Set zsh as the system shell
-    zsh_path = capture("which zsh")
-    run(f"sudo bash -c 'echo \"{zsh_path}\" >> /etc/shells'")
-    run(f"chsh -s {zsh_path}")
+    zsh_path = shell.capture("which zsh")
+    shell.run(f"sudo bash -c 'echo \"{zsh_path}\" >> /etc/shells'")
+    shell.run(f"chsh -s {zsh_path}")
 
-    message("... qaz is installed.")
-    message(SETUP_MESSAGE)
+    output.message("... qaz is installed.")
+    output.message(SETUP_MESSAGE)
 
 
 @cli.command()
 def update() -> None:
     """Update this tool."""
-    run(f"git -C {config.root_dir} pull")
+    shell.run(f"git -C {config.root_dir} pull")
 
 
 @cli.command()
@@ -83,7 +83,7 @@ def install(modules: Tuple[str], install_dependencies: bool) -> None:
         try:
             get_module(module).install(install_dependencies=install_dependencies)
         except (ModuleDoesNotExist, DependenciesMissing, CalledProcessError) as err:
-            error(str(err))
+            output.error(str(err))
 
 
 @cli.command()
@@ -102,7 +102,7 @@ def upgrade(modules: Iterable[str], upgrade_all: bool) -> None:
         try:
             get_module(module).upgrade()
         except (ModuleDoesNotExist, DependenciesMissing, CalledProcessError) as err:
-            error(str(err))
+            output.error(str(err))
 
 
 @cli.command("list")
@@ -118,4 +118,4 @@ def _list() -> None:
 @cli.command()
 def edit() -> None:
     """Open the repo for editing."""
-    run(f"$EDITOR {config.root_dir}")
+    shell.run(f"$EDITOR {config.root_dir}")

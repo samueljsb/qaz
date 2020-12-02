@@ -4,7 +4,7 @@ from typing import List
 
 from qaz.module import Module
 from qaz.modules.brew import BrewModule
-from qaz.utils import message, run
+from qaz.utils import output, shell
 
 
 LOCAL_CONFIG_TEMPL = """
@@ -57,11 +57,11 @@ class Git(BrewModule):
         id_rsa = ssh_dir / "id_rsa"
         id_rsa_pub = ssh_dir / "id_rsa.pub"
         if not id_rsa.exists():
-            run(f"ssh-keygen -t rsa -b 4096 -C '{git_authoremail}' -f {id_rsa}")
+            shell.run(f"ssh-keygen -t rsa -b 4096 -C '{git_authoremail}' -f {id_rsa}")
         with id_rsa_pub.open() as fd:
             public_key = fd.read()
-        message(f"Add your public key to GitHub:\n    {public_key}")
-        run(f"ssh-add -K {id_rsa}")
+        output.message(f"Add your public key to GitHub:\n    {public_key}")
+        shell.run(f"ssh-add -K {id_rsa}")
 
 
 class GitModule(Module):
@@ -81,13 +81,13 @@ class GitModule(Module):
 
     def install_action(self) -> None:
         """Clone the repo."""
-        run(
+        shell.run(
             f"git clone {' '.join(self.additional_clone_options)} {self.repo_url} {self.repo_path}"
         )
 
     def upgrade_action(self) -> None:
         """Pull the latest commits for this repo."""
-        run(f"git -C {self.repo_path} pull")
+        shell.run(f"git -C {self.repo_path} pull")
 
 
 class GitHubCLI(BrewModule):
@@ -99,7 +99,7 @@ class GitHubCLI(BrewModule):
     def install_action(self) -> None:
         """Log in to GitHub and set config after installation."""
         super().install_action()
-        run("gh auth login --web")
+        shell.run("gh auth login --web")
         self._set_config()
 
     def upgrade_action(self) -> None:
@@ -109,9 +109,9 @@ class GitHubCLI(BrewModule):
 
     def _set_config(self) -> None:
         """Set gh config."""
-        run("gh config set prompt enabled")
-        run("gh config set pager 'less -RFX'")
-        run("gh alias set newpr 'pr create --fill --web'")
+        shell.run("gh config set prompt enabled")
+        shell.run("gh config set pager 'less -RFX'")
+        shell.run("gh alias set newpr 'pr create --fill --web'")
 
 
 class LazyGit(BrewModule):

@@ -1,6 +1,6 @@
 from qaz.managers import brew
 from qaz.module import Module
-from qaz.utils import run
+from qaz.utils import shell
 
 
 class Brew(Module):
@@ -10,16 +10,16 @@ class Brew(Module):
 
     def install_action(self) -> None:
         """Install Homebrew."""
-        run(
+        shell.run(
             '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"',
             env={"CI": "1"},
         )
-        run("brew analytics off")
+        shell.run("brew analytics off")
 
     def upgrade_action(self) -> None:
         """Update Homebrew."""
-        run("brew update")
-        run("brew analytics off")
+        shell.run("brew update")
+        shell.run("brew analytics off")
 
 
 class BrewModule(Module):

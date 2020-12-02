@@ -1,6 +1,6 @@
 from qaz.managers import asdf
 from qaz.module import Module
-from qaz.utils import run
+from qaz.utils import shell
 
 
 class ASDF(Module):
@@ -13,7 +13,7 @@ class ASDF(Module):
 
     def upgrade_action(self) -> None:
         """Update asdf."""
-        run("asdf update")
+        shell.run("asdf update")
 
 
 class ASDFModule(Module):

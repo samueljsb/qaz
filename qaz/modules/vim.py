@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from qaz.modules.git import GitModule
-from qaz.utils import run
+from qaz.utils import shell
 
 
 class Vim(GitModule):
@@ -15,9 +15,9 @@ class Vim(GitModule):
     def install_action(self) -> None:
         """Install plugins."""
         super().install_action()
-        run("vim +PluginInstall +qall")
+        shell.run("vim +PluginInstall +qall")
 
     def upgrade_action(self) -> None:
         """Install plugins."""
         super().upgrade_action()
-        run("vim +PluginInstall +qall")
+        shell.run("vim +PluginInstall +qall")

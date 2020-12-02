@@ -4,7 +4,7 @@ from sys import platform
 from qaz.module import Module
 from qaz.modules.brew import BrewModule
 from qaz.modules.git import GitModule
-from qaz.utils import run
+from qaz.utils import shell
 
 
 class ZSHBase(Module):
@@ -34,13 +34,13 @@ elif platform == "linux":
 
         def install_action(self) -> None:
             """Install zsh from apt."""
-            run("sudo apt update")
-            run("sudo apt install zsh")
+            shell.run("sudo apt update")
+            shell.run("sudo apt install zsh")
 
         def upgrade_action(self) -> None:
             """Upgrade zsh from apt."""
-            run("sudo apt update")
-            run("sudo apt upgrade zsh")
+            shell.run("sudo apt update")
+            shell.run("sudo apt upgrade zsh")
 
 
 class OhMyZSH(Module):
@@ -51,7 +51,7 @@ class OhMyZSH(Module):
 
     def install_action(self) -> None:
         """Install Oh-My-Zsh and plugins."""
-        run(
+        shell.run(
             'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"',
             env={"CHSH": "no", "RUNZSH": "no", "KEEP_ZSHRC": "yes"},
         )
@@ -63,7 +63,7 @@ class OhMyZSH(Module):
     def upgrade_action(self) -> None:
         """Upgrade oh-my-zsh and plugins."""
         zsh_dir = Path.home().resolve() / ".oh-my-zsh"
-        run(f"sh {zsh_dir / 'tools/upgrade.sh'}", env={"ZSH": str(zsh_dir)})
+        shell.run(f"sh {zsh_dir / 'tools/upgrade.sh'}", env={"ZSH": str(zsh_dir)})
 
         # Upgrade themes and plugins.
         self.ZshSyntaxHighlighting().upgrade()

@@ -2,7 +2,7 @@ from sys import platform
 
 from qaz.module import Module
 from qaz.modules.brew import BrewCaskModule, BrewModule
-from qaz.utils import run
+from qaz.utils import shell
 
 
 if platform == "darwin":
@@ -16,7 +16,7 @@ if platform == "darwin":
         def install_action(self) -> None:
             """Install Docker and open the application so it starts."""
             super().install_action()
-            run("open /Applications/Docker.app")
+            shell.run("open /Applications/Docker.app")
 
 
 elif platform == "linux":

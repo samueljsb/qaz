@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from qaz.modules.git import GitModule
-from qaz.utils import message, run
+from qaz.utils import output, shell
 
 
 FONTS = ["Hack"]
@@ -17,19 +17,19 @@ class NerdFonts(GitModule):
 
     def install_action(self) -> None:
         """Clone the repo and install fonts."""
-        message("... this might take a while!")
+        output.message("... this might take a while!")
         super().install_action()
 
         for font_name in FONTS:
-            message(f"... installing font: {font_name} ...")
-            run(f"{self.repo_path / 'install.sh'} {font_name}")
-            message(f"... ... {font_name} installed!")
+            output.message(f"... installing font: {font_name} ...")
+            shell.run(f"{self.repo_path / 'install.sh'} {font_name}")
+            output.message(f"... ... {font_name} installed!")
 
     def upgrade_action(self) -> None:
         """Pull the repo and install fonts."""
         super().upgrade_action()
 
         for font_name in FONTS:
-            message(f"... installing font: {font_name} ...")
-            run(f"{self.repo_path / 'install.sh'} {font_name}")
-            message(f"... ... {font_name} installed!")
+            output.message(f"... installing font: {font_name} ...")
+            shell.run(f"{self.repo_path / 'install.sh'} {font_name}")
+            output.message(f"... ... {font_name} installed!")
