@@ -163,8 +163,5 @@ class Module:
             return
 
         message("Installing VS Code extensions...")
-        installed = set(code.installed())
-        extensions = set(self.vscode_extensions)
-        for extension in extensions - installed:
-            code.install(extension)
+        code.install_extensions(self.vscode_extensions)
         message("... VS Code extensions installed!")
