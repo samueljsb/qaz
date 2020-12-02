@@ -70,6 +70,7 @@ def set_latest(name: str, env: str = "global") -> None:
         error(f"Cannot set the {env} version for {name}: no versions are installed.")
     latest = versions[-1]
     run(f"asdf {env} {name} {latest}")
+    run(f"asdf reshim {name}")
 
 
 def install_or_upgrade(name: str) -> None:
