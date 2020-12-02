@@ -10,15 +10,6 @@ from .modules import all_modules, get_modules
 from .utils import output, shell
 
 
-SETUP_MESSAGE = """
-Access this tool again with
-    qaz [OPTIONS] COMMAND [ARGS]...
-
-You may want to install some basics to begin:
-    qaz install -d git starship
-"""
-
-
 @click.group()
 def cli() -> None:
     """Manage your system configuration and install/update tools."""
@@ -57,7 +48,6 @@ def setup(root_dir: str) -> None:
     shell.run(f"chsh -s {zsh_path}")
 
     output.message("... qaz is installed.")
-    output.message(SETUP_MESSAGE)
 
 
 @cli.command()
