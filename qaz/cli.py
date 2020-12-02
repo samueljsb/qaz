@@ -38,7 +38,7 @@ def setup(root_dir: str) -> None:
         raise click.ClickException(str(exc))
     for module in modules:
         try:
-            module.install(install_dependencies=True)
+            module.install()
         except (DependenciesMissing, CalledProcessError) as exc:
             raise click.ClickException(str(exc))
 
@@ -58,13 +58,7 @@ def update() -> None:
 
 @cli.command()
 @click.argument("modules", nargs=-1)
-@click.option(
-    "-d",
-    "--install-dependencies",
-    is_flag=True,
-    help="Install this module's dependencies if they are missing.",
-)
-def install(modules: Tuple[str], install_dependencies: bool) -> None:
+def install(modules: Tuple[str]) -> None:
     """Install modules.
 
     The module names are case-insensitive.
@@ -76,7 +70,7 @@ def install(modules: Tuple[str], install_dependencies: bool) -> None:
 
     for module in _modules:
         try:
-            module.install(install_dependencies=install_dependencies)
+            module.install()
         except (DependenciesMissing, CalledProcessError) as exc:
             raise click.ClickException(str(exc))
 

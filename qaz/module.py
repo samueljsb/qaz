@@ -53,24 +53,14 @@ class Module:
 
         return super().__init_subclass__()
 
-    def install(self, install_dependencies: bool = False) -> None:
-        """Install the module.
-
-        Args:
-            install_dependencies: Install this modules dependencies if they are not installed.
-
-        Raises:
-            DependenciesMissing if a dependency is not installed and install_dependencies is False.
-            ModuleDoesNotExist if a dependency cannot be found.
-
-        """
+    def install(self):
         module_config = self._get_config()
         output.message(f"Installing {self.name}...")
         if module_config.installed:
             output.message(f"... {self.name} already installed!")
             return
 
-        self._check_dependencies(install_dependencies=install_dependencies)
+        self._check_dependencies()
 
         self.install_action()
         self._link_zshrc()
@@ -127,25 +117,14 @@ class Module:
         config.modules[self.name] = module_config
         config.save()
 
-    def _check_dependencies(self, install_dependencies: bool = False) -> None:
-        """Check all dependencies are installed.
-
-        Args:
-            install_dependencies: Install missing dependencies.
-
-        Raises:
-            DependenciesMissing if a dependency is not installed and install_dependencies is False.
-            ModuleDoesNotExist if a dependency cannot be found.
-
+    def _check_dependencies(self):
+        """
+        Check all dependencies are installed.
         """
         if missing := [
             dep for dep in self.requires if dep.name not in config.installed_modules
         ]:
-            if install_dependencies:
-                for module in missing:
-                    module.install(install_dependencies=True)
-            else:
-                raise DependenciesMissing([dep.name for dep in missing])
+            raise DependenciesMissing([dep.name for dep in missing])
 
     def _link_zshrc(self) -> None:
         """Create symlink from ~/.zshrc.d to the zshrc file for this module."""
