@@ -34,17 +34,9 @@ def setup(root_dir: str):
     zshrc_dir = Path.home().joinpath(".zshrc.d")
     zshrc_dir.mkdir(exist_ok=True)
 
-    INSTALLED_BY_SCRIPT = ("asdf", "python", "poetry")
+    ALREADY_INSTALLED = ("asdf", "python", "poetry")
     INSTALL_NOW = ("zsh",)
-    try:
-        modules = get_modules(INSTALLED_BY_SCRIPT + INSTALL_NOW)
-    except ValueError as exc:
-        raise click.ClickException(str(exc))
-    for module in modules:
-        try:
-            module.install()
-        except (DependenciesMissing, CalledProcessError) as exc:
-            raise click.ClickException(str(exc))
+    install(ALREADY_INSTALLED + INSTALL_NOW)
 
     output.message("... qaz is installed.")
 
