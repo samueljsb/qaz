@@ -35,8 +35,7 @@ def setup(root_dir: str):
     zshrc_dir.mkdir(exist_ok=True)
 
     ALREADY_INSTALLED = ("asdf", "python", "poetry")
-    INSTALL_NOW = ("zsh",)
-    install(ALREADY_INSTALLED + INSTALL_NOW)
+    install(ALREADY_INSTALLED)
 
     output.message("... qaz is installed.")
 
