@@ -18,6 +18,21 @@ class ZSHBase(Module):
         "e": "/usr/local/bin",
     }
 
+    def _set_default_shell(self):
+        """
+        Set zsh as the system shell.
+        """
+        zsh_path = shell.capture("which zsh")
+
+        # Make sure zsh is an allowed shell.
+        shells = Path("/etc/shells")
+        if zsh_path not in shells.read_text():
+            with shells.open("a") as fd:
+                fd.write(zsh_path + "\n")
+
+        # Make zsh the default shell.
+        shell.run(f"chsh -s {zsh_path}")
+
 
 if platform == "darwin":
 
@@ -26,21 +41,29 @@ if platform == "darwin":
 
         package_name = "zsh"
 
+        def install_action(self):
+            super().install_action()
+            self._set_default_shell()
+
+        def upgrade_action(self):
+            super().install_action()
+            self._set_default_shell()
+
 
 elif platform == "linux":
 
     class ZSH(ZSHBase):  # type: ignore
         """zsh for Linux."""
 
-        def install_action(self) -> None:
-            """Install zsh from apt."""
+        def install_action(self):
             shell.run("sudo apt update")
             shell.run("sudo apt install zsh")
+            self._set_default_shell()
 
-        def upgrade_action(self) -> None:
-            """Upgrade zsh from apt."""
+        def upgrade_action(self):
             shell.run("sudo apt update")
             shell.run("sudo apt upgrade zsh")
+            self._set_default_shell()
 
 
 class OhMyZSH(Module):

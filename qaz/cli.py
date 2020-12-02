@@ -46,11 +46,6 @@ def setup(root_dir: str):
         except (DependenciesMissing, CalledProcessError) as exc:
             raise click.ClickException(str(exc))
 
-    # Set zsh as the system shell
-    zsh_path = shell.capture("which zsh")
-    shell.run(f"sudo bash -c 'echo \"{zsh_path}\" >> /etc/shells'")
-    shell.run(f"chsh -s {zsh_path}")
-
     output.message("... qaz is installed.")
 
 
