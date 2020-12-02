@@ -2,6 +2,7 @@ from typing import Iterable, Set
 
 from qaz.utils import capture, run
 
+
 def install_extensions(extensions: Iterable[str]):
     """
     Install all currently uninstalled extensions.

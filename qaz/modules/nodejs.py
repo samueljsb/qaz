@@ -43,10 +43,10 @@ class NodeModule(Module):
 
     def install_action(self) -> None:
         """Install this package from Homebrew."""
-        npm.install_or_upgrade(self.package_name)
+        npm.install_or_upgrade_package(self.package_name)
         return super().install_action()
 
     def upgrade_action(self) -> None:
         """Upgrade this package from Homebrew."""
-        npm.install_or_upgrade(self.package_name)
+        npm.install_or_upgrade_package(self.package_name)
         return super().upgrade_action()
