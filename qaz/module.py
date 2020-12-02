@@ -2,12 +2,20 @@ from pathlib import Path
 from typing import Dict, List, Optional, Union
 
 from qaz.config import ModuleConfig, config
-from qaz.exceptions import DependenciesMissing
 from qaz.managers import code
 from qaz.utils import capture, create_symlink, error, message
 
 
 PathLike = Union[Path, str]
+
+class DependenciesMissing(Exception):
+    """Error raised when dependencies of a module are not installed."""
+
+    def __init__(self, dependencies: List[str]) -> None:
+        self.dependencies = dependencies
+
+    def __str__(self) -> str:
+        return f"Dependencies missing: {', '.join(self.dependencies)}."
 
 
 class Module:

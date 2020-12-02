@@ -5,8 +5,8 @@ from typing import Iterable, Tuple
 import click
 
 from .config import Config, config
-from .exceptions import DotfilesError
-from .modules import all_modules, get_module
+from .modules import all_modules, get_module, ModuleDoesNotExist
+from .module import DependenciesMissing
 from .utils import capture, error, message, run
 
 
@@ -47,7 +47,7 @@ def setup(root_dir: str) -> None:
 
         # Install zsh
         get_module("zsh").install(install_dependencies=True)
-    except (DotfilesError, CalledProcessError) as err:
+    except (ModuleDoesNotExist, DependenciesMissing, CalledProcessError) as err:
         error(str(err))
         raise click.Abort
 
@@ -82,7 +82,7 @@ def install(modules: Tuple[str], install_dependencies: bool) -> None:
     for module in modules:
         try:
             get_module(module).install(install_dependencies=install_dependencies)
-        except (DotfilesError, CalledProcessError) as err:
+        except (ModuleDoesNotExist, DependenciesMissing, CalledProcessError) as err:
             error(str(err))
 
 
@@ -101,7 +101,7 @@ def upgrade(modules: Iterable[str], upgrade_all: bool) -> None:
     for module in modules:
         try:
             get_module(module).upgrade()
-        except (DotfilesError, CalledProcessError) as err:
+        except (ModuleDoesNotExist, DependenciesMissing, CalledProcessError) as err:
             error(str(err))
 
 

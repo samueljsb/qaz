@@ -1,7 +1,6 @@
 from sys import platform
 from typing import List
 
-from qaz.exceptions import ModuleDoesNotExist
 from qaz.module import Module
 from .asdf import ASDF
 from .brew import Brew
@@ -65,6 +64,15 @@ mac_modules: List[Module] = [
 all_modules = modules
 if platform == "darwin":
     all_modules.extend(mac_modules)
+
+class ModuleDoesNotExist(Exception):
+    """Error raised when the requested module does not exist."""
+
+    def __init__(self, module_name: str) -> None:
+        self.module_name = module_name
+
+    def __str__(self) -> str:
+        return f"Module '{self.module_name}' does not exist."
 
 
 def get_module(name: str) -> Module:
