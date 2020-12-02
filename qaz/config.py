@@ -38,18 +38,15 @@ class Config:
         """Modules which have been installed."""
         return [name for name, module in self.modules.items() if module.installed]
 
-    def get_module(self, name: str) -> ModuleConfig:
-        """Get the configuration for a module.
+    def is_module_installed(self, name: str) -> bool:
+        return name in self.installed_modules
 
-        Args:
-            name: The name of the module.
-
-        Returns:
-            A ModuleConfig dataclass containing the stored information for the given module,
-            if it exists, or a default configuration.
-
-        """
-        return self.modules.get(name, ModuleConfig(installed=False))
+    def set_module_installed(self, name: str):
+        if name in self.modules:
+            self.modules[name].installed = True
+        else:
+            self.modules[name] = ModuleConfig(installed=True)
+        self.save_to_file()
 
     def load_from_file(self) -> None:
         """Load the configuration from ~/.config/qaz.json."""
@@ -63,8 +60,7 @@ class Config:
         }
         self.root_dir = Path(config["root_dir"])
 
-    def save(self) -> None:
-        """Save the configuration to ~/.config/qaz.json."""
+    def save_to_file(self):
         config = {
             "root_dir": str(self.root_dir),
             "modules": {name: cfg.to_dict() for name, cfg in self.modules.items()},

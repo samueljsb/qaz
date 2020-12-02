@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Dict, List, Optional, Union
 
-from qaz.config import ModuleConfig, config
+from qaz.config import config
 from qaz.managers import code
 from qaz.utils import files, output, shell
 
@@ -54,9 +54,8 @@ class Module:
         return super().__init_subclass__()
 
     def install(self):
-        module_config = self._get_config()
         output.message(f"Installing {self.name}...")
-        if module_config.installed:
+        if self.is_installed:
             output.message(f"... {self.name} already installed!")
             return
 
@@ -67,10 +66,8 @@ class Module:
         self._create_symlinks()
         self._install_vscode_extensions()
 
-        module_config.installed = True
+        self.set_installed()
         output.message(f"... {self.name} installed!")
-
-        self._save_config(module_config)
 
     def install_action(self) -> None:
         """Run actions to install this module.
@@ -81,7 +78,7 @@ class Module:
 
     def upgrade(self) -> None:
         """Upgrade this module."""
-        if not self._get_config().installed:
+        if not self.is_installed:
             output.error(f"Cannot upgrade: {self.name} is not installed")
             return
 
@@ -103,19 +100,12 @@ class Module:
         """
         pass
 
-    def _get_config(self) -> ModuleConfig:
-        """Get the configuration for this module."""
-        return config.get_module(self.name)
+    @property
+    def is_installed(self) -> bool:
+        return config.is_module_installed(self.name)
 
-    def _save_config(self, module_config: ModuleConfig) -> None:
-        """Save the configuration for this module.
-
-        Args:
-            module_config: The configuration to save.
-
-        """
-        config.modules[self.name] = module_config
-        config.save()
+    def set_installed(self):
+        config.set_module_installed(self.name, True)
 
     def _check_dependencies(self):
         """

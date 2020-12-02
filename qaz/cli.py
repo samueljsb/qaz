@@ -27,7 +27,7 @@ def setup(root_dir: str):
 
     # Create config
     new_config = Config(root_dir)
-    new_config.save()
+    new_config.save_to_file()
     config.load_from_file()
 
     # Create installed dir
