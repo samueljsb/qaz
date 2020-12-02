@@ -29,10 +29,10 @@ class ASDFModule(Module):
 
     def install_action(self) -> None:
         """Install this package from asdf."""
-        asdf.install_or_upgrade(self.plugin_name)
+        asdf.install_or_upgrade_plugin(self.plugin_name)
         return super().install_action()
 
     def upgrade_action(self) -> None:
         """Install this package from asdf."""
-        asdf.install_or_upgrade(self.plugin_name)
+        asdf.install_or_upgrade_plugin(self.plugin_name)
         return super().upgrade_action()
