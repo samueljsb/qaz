@@ -2,6 +2,7 @@ from sys import platform
 from typing import Iterable, List
 
 from qaz.module import Module
+
 from .asdf import ASDF
 from .brew import Brew
 from .docker import Docker, LazyDocker

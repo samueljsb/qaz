@@ -6,6 +6,7 @@ import click
 
 from qaz import config
 from qaz.utils import output, shell
+
 from .module import DependenciesMissing, Module
 from .modules import all_modules, get_modules
 
