@@ -1,4 +1,4 @@
-from qaz.config import config
+from qaz.config import legacy_config as config
 from qaz.managers import brew
 from qaz.module import Module
 from qaz.modules.brew import Brew, BrewCaskModule

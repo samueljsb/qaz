@@ -4,7 +4,8 @@ from typing import Iterable, Tuple
 
 import click
 
-from .config import Config, config
+from .config import LegacyConfig as Config
+from .config import legacy_config as config
 from .module import DependenciesMissing
 from .modules import all_modules, get_modules
 from .utils import output, shell

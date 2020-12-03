@@ -5,7 +5,7 @@ from typing import Dict, List
 
 
 @dataclass
-class ModuleConfig:
+class LegacyModuleConfig:
     """Configuration for a module."""
 
     installed: bool
@@ -15,16 +15,16 @@ class ModuleConfig:
         return dict(installed=self.installed)
 
     @staticmethod
-    def to_dataclass(data: dict) -> "ModuleConfig":
+    def to_dataclass(data: dict) -> "LegacyModuleConfig":
         """Create a ModuleConfig object from a dict representation."""
-        return ModuleConfig(installed=data["installed"])
+        return LegacyModuleConfig(installed=data["installed"])
 
 
-class Config:
+class LegacyConfig:
     """Configuration object."""
 
     # Values to save
-    modules: Dict[str, ModuleConfig] = {}
+    modules: Dict[str, LegacyModuleConfig] = {}
     root_dir: Path  # The location of this repo
 
     # Properties
@@ -45,7 +45,7 @@ class Config:
         if name in self.modules:
             self.modules[name].installed = True
         else:
-            self.modules[name] = ModuleConfig(installed=True)
+            self.modules[name] = LegacyModuleConfig(installed=True)
         self.save_to_file()
 
     def load_from_file(self) -> None:
@@ -55,7 +55,7 @@ class Config:
         with self.fpath.open() as fd:
             config = json.load(fd)
         self.modules = {
-            name: ModuleConfig.to_dataclass(cfg)
+            name: LegacyModuleConfig.to_dataclass(cfg)
             for name, cfg in config["modules"].items()
         }
         self.root_dir = Path(config["root_dir"])
@@ -69,5 +69,5 @@ class Config:
             json.dump(config, fd)
 
 
-config = Config()
-config.load_from_file()
+legacy_config = LegacyConfig()
+legacy_config.load_from_file()

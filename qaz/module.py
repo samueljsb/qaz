@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Dict, List, Optional, Union
 
-from qaz.config import config
+from qaz.config import legacy_config as config
 from qaz.managers import code
 from qaz.utils import files, output, shell
 
