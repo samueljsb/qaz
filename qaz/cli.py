@@ -46,6 +46,7 @@ def update():
     """
     root_dir = config.get_root_dir()
     shell.run(f"git -C {root_dir} pull")
+    shell.run("poetry install", cwd=root_dir)
 
 
 @cli.command()
