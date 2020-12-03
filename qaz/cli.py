@@ -1,12 +1,12 @@
 from pathlib import Path
 from subprocess import CalledProcessError
-from typing import Iterable, Tuple
+from typing import Iterable, List, Tuple
 
 import click
 
 from qaz import config
 from qaz.utils import output, shell
-from .module import DependenciesMissing
+from .module import DependenciesMissing, Module
 from .modules import all_modules, get_modules
 
 
@@ -53,12 +53,7 @@ def install(modules: Tuple[str]):
     """
     Install modules.
     """
-    try:
-        _modules = get_modules(modules)
-    except ValueError as exc:
-        raise click.ClickException(str(exc))
-
-    for module in _modules:
+    for module in _get_modules(modules):
         try:
             module.install()
         except (DependenciesMissing, CalledProcessError) as exc:
@@ -77,16 +72,18 @@ def upgrade(modules: Iterable[str], upgrade_all: bool):
     if upgrade_all:
         modules = config.get_installed_module_names()
 
-    try:
-        _modules = get_modules(modules)
-    except ValueError as exc:
-        raise click.ClickException(str(exc))
-
-    for module in _modules:
+    for module in _get_modules(modules):
         try:
             module.upgrade()
         except (DependenciesMissing, CalledProcessError) as exc:
             raise click.ClickException(str(exc))
+
+
+def _get_modules(module_names: Iterable[str]) -> List[Module]:
+    try:
+        return get_modules(module_names)
+    except ValueError as exc:
+        raise click.ClickException(str(exc))
 
 
 @cli.command("list")
