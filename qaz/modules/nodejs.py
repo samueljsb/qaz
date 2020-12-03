@@ -6,8 +6,6 @@ from qaz.modules.asdf import ASDFModule
 
 
 class NodeJS(ASDFModule):
-    """JavaScript runtime environment that executes JavaScript code outside a web browser."""
-
     name = "Node.js"
     plugin_name = "nodejs"
     vscode_extensions = [

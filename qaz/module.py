@@ -20,18 +20,6 @@ class DependenciesMissing(Exception):
 
 
 class Module:
-    """A module to be installed.
-
-    Each module contains configuration and install/upgrade methods for one topic.
-
-    Attributes:
-        name (req'd): The module name. This should also be the folder containing it.
-        config_file: The name of the zsh config file for this module.
-        symlinks: A mapping of file (in `dotfiles/`) to the location of the symlink that should be created.
-        requires: The modules that need to be installed before this one.
-
-    """
-
     # Attributes to overwrite
     name: str
     zshrc_file: Optional[str] = None

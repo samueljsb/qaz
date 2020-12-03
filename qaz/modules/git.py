@@ -84,7 +84,7 @@ class GitModule(Module):
     def install_action(self) -> None:
         """Clone the repo."""
         shell.run(
-            f"git clone {' '.join(self.additional_clone_options)} {self.repo_url} {self.repo_path}"
+            f"git clone {' '.join(self.additional_clone_options)} {self.repo_url} {self.repo_path}"  # noqa: E501
         )
 
     def upgrade_action(self) -> None:

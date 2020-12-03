@@ -75,7 +75,7 @@ class OhMyZSH(Module):
     def install_action(self) -> None:
         """Install Oh-My-Zsh and plugins."""
         shell.run(
-            'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"',
+            'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"',  # noqa: E501
             env={"CHSH": "no", "RUNZSH": "no", "KEEP_ZSHRC": "yes"},
         )
 

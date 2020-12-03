@@ -11,7 +11,7 @@ class Brew(Module):
     def install_action(self) -> None:
         """Install Homebrew."""
         shell.run(
-            '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"',
+            '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"',  # noqa: E501
             env={"CI": "1"},
         )
         shell.run("brew analytics off")

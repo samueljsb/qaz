@@ -12,5 +12,5 @@ class ITerm2(BrewCaskModule):
         """Install iTerm2 and run download integration script."""
         super().install_action()
         shell.run(
-            "curl -L https://iterm2.com/shell_integration/zsh -o ~/.zshrc.d/.iterm2_shell_integration.zsh"
+            "curl -L https://iterm2.com/shell_integration/zsh -o ~/.zshrc.d/.iterm2_shell_integration.zsh"  # noqa: E501
         )
