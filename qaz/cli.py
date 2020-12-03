@@ -5,9 +5,9 @@ from typing import Iterable, Tuple
 import click
 
 from qaz import config
+from qaz.utils import output, shell
 from .module import DependenciesMissing
 from .modules import all_modules, get_modules
-from .utils import output, shell
 
 
 @click.group()
