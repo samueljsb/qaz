@@ -1,6 +1,6 @@
 import os
 import subprocess
-from typing import Dict
+from typing import Dict, Optional
 
 from . import output
 
@@ -8,6 +8,7 @@ from . import output
 def run(
     command: str,
     *,
+    cwd: Optional[str] = None,
     allow_fail: bool = False,
     env: Dict[str, str] = None,
     log: bool = True
@@ -17,6 +18,7 @@ def run(
 
     process = subprocess.run(
         command,
+        cwd=cwd,
         shell=True,
         env=os.environ.update(env if env else {}),
     )
