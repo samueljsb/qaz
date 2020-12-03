@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Dict, List, Optional, Union
 
-from qaz.config import legacy_config as config
+from qaz import config
 from qaz.managers import code
 from qaz.utils import files, output, shell
 
@@ -46,7 +46,7 @@ class Module:
     def __init__(self) -> None:
         # .zshrc file
         zshrc_fname = self.zshrc_file or f"{self.name.lower()}.zsh"
-        self._zshrc_path = config.root_dir / "zshrc" / zshrc_fname
+        self._zshrc_path = config.get_root_dir() / "zshrc" / zshrc_fname
 
         # base requirements
         self.requires = self.requires + (self._base_requires or [])
@@ -112,7 +112,7 @@ class Module:
         Check all dependencies are installed.
         """
         if missing := [
-            dep for dep in self.requires if dep.name not in config.installed_modules
+            dep for dep in self.requires if not config.is_module_installed(dep.name)
         ]:
             raise DependenciesMissing([dep.name for dep in missing])
 
@@ -128,7 +128,8 @@ class Module:
         """Create symlinks for this module."""
         for _target, _link in self.symlinks.items():
             files.create_symlink(
-                config.root_dir / "configfiles" / _target, Path(_link).expanduser()
+                config.get_root_dir() / "configfiles" / _target,
+                Path(_link).expanduser(),
             )
 
     def _install_vscode_extensions(self) -> None:

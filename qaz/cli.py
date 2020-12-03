@@ -4,8 +4,7 @@ from typing import Iterable, Tuple
 
 import click
 
-from .config import LegacyConfig as Config
-from .config import legacy_config as config
+from qaz import config
 from .module import DependenciesMissing
 from .modules import all_modules, get_modules
 from .utils import output, shell
@@ -27,9 +26,7 @@ def setup(root_dir: str):
     output.message("Installing qaz...")
 
     # Create config
-    new_config = Config(root_dir)
-    new_config.save_to_file()
-    config.load_from_file()
+    config.create_new_config_file(root_dir)
 
     # Create installed dir
     zshrc_dir = Path.home().joinpath(".zshrc.d")
@@ -46,7 +43,8 @@ def update():
     """
     Update this tool.
     """
-    shell.run(f"git -C {config.root_dir} pull")
+    root_dir = config.get_root_dir()
+    shell.run(f"git -C {root_dir} pull")
 
 
 @cli.command()
@@ -77,7 +75,7 @@ def upgrade(modules: Iterable[str], upgrade_all: bool):
     Upgrade modules.
     """
     if upgrade_all:
-        modules = config.installed_modules
+        modules = config.get_installed_module_names()
 
     try:
         _modules = get_modules(modules)
@@ -97,7 +95,7 @@ def _list():
     List installed and available modules.
     """
     for module in all_modules:
-        if module.name in config.installed_modules:
+        if config.is_module_installed(module.name):
             click.echo(f"{module.name} - installed")
         else:
             click.echo(module.name)
