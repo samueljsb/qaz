@@ -6,13 +6,7 @@ from typing import Dict, List, TypedDict
 CONFIG_FILE = Path.home() / ".config/qaz.json"
 
 
-class ModuleConfig(TypedDict):
-    installed: bool
-
-
-class Config(TypedDict):
-    root_dir: str
-    modules: Dict[str, ModuleConfig]
+# Factories
 
 
 def create_new_config_file(root_dir: str):
@@ -22,13 +16,7 @@ def create_new_config_file(root_dir: str):
     _save_config_to_file(config)
 
 
-def get_root_dir() -> Path:
-    config = _load_config_from_file()
-    return Path(config["root_dir"])
-
-
-def is_module_installed(name: str) -> bool:
-    return name in get_installed_module_names()
+# Mutators: modules
 
 
 def set_module_installed(name: str):
@@ -42,6 +30,21 @@ def set_module_installed(name: str):
     _save_config_to_file(config)
 
 
+# Queries: root_dir
+
+
+def get_root_dir() -> Path:
+    config = _load_config_from_file()
+    return Path(config["root_dir"])
+
+
+# Queries: modules
+
+
+def is_module_installed(name: str) -> bool:
+    return name in get_installed_module_names()
+
+
 def get_installed_module_names() -> List[str]:
     config = _load_config_from_file()
     return [
@@ -49,6 +52,18 @@ def get_installed_module_names() -> List[str]:
         for name, module_cfg in config["modules"].items()
         if module_cfg["installed"]
     ]
+
+
+# Data retrieval and storage
+
+
+class ModuleConfig(TypedDict):
+    installed: bool
+
+
+class Config(TypedDict):
+    root_dir: str
+    modules: Dict[str, ModuleConfig]
 
 
 def _load_config_from_file() -> Config:
