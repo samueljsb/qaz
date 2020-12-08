@@ -1,89 +1,65 @@
 from pathlib import Path
 from subprocess import CalledProcessError
-from typing import Iterable, Tuple
+from typing import Iterable, List, Tuple
 
 import click
 
-from .config import Config, config
-from .exceptions import DotfilesError
-from .modules import all_modules, get_module
-from .utils import capture, error, message, run
+from qaz import config
+from qaz.utils import output, shell
 
-
-SETUP_MESSAGE = """
-Access this tool again with
-    qaz [OPTIONS] COMMAND [ARGS]...
-
-You may want to install some basics to begin:
-    qaz install -d git starship
-"""
+from .module import DependenciesMissing, Module
+from .modules import all_modules, get_modules
 
 
 @click.group()
-def cli() -> None:
-    """Manage your system configuration and install/update tools."""
+def cli():
+    """
+    Manage your system configuration and install/update tools.
+    """
 
 
 @cli.command()
 @click.argument("root_dir")
-def setup(root_dir: str) -> None:
-    """Install this tool and the basics."""
-    message("Installing qaz...")
+def setup(root_dir: str):
+    """
+    Install this tool and the basics.
+    """
+    output.message("Installing qaz...")
 
     # Create config
-    new_config = Config(root_dir)
-    new_config.save()
-    config.load_from_file()
+    config.create_new_config_file(root_dir)
 
     # Create installed dir
     zshrc_dir = Path.home().joinpath(".zshrc.d")
     zshrc_dir.mkdir(exist_ok=True)
 
-    try:
-        # 'Install' modules installed by install.sh (it's already installed, but this adds it properly)
-        get_module("asdf").install(install_dependencies=True)
-        get_module("python").install(install_dependencies=True)
-        get_module("poetry").install(install_dependencies=True)
+    ALREADY_INSTALLED = ("asdf", "python", "poetry")
+    install(ALREADY_INSTALLED)
 
-        # Install zsh
-        get_module("zsh").install(install_dependencies=True)
-    except (DotfilesError, CalledProcessError) as err:
-        error(str(err))
-        raise click.Abort
-
-    # Set zsh as the system shell
-    zsh_path = capture("which zsh")
-    run(f"sudo bash -c 'echo \"{zsh_path}\" >> /etc/shells'")
-    run(f"chsh -s {zsh_path}")
-
-    message("... qaz is installed.")
-    message(SETUP_MESSAGE)
+    output.message("... qaz is installed.")
 
 
 @cli.command()
-def update() -> None:
-    """Update this tool."""
-    run(f"git -C {config.root_dir} pull")
+def update():
+    """
+    Update this tool.
+    """
+    root_dir = config.get_root_dir()
+    shell.run(f"git -C {root_dir} pull")
+    shell.run("poetry install", cwd=root_dir)
 
 
 @cli.command()
 @click.argument("modules", nargs=-1)
-@click.option(
-    "-d",
-    "--install-dependencies",
-    is_flag=True,
-    help="Install this module's dependencies if they are missing.",
-)
-def install(modules: Tuple[str], install_dependencies: bool) -> None:
-    """Install modules.
-
-    The module names are case-insensitive.
+def install(modules: Tuple[str]):
     """
-    for module in modules:
+    Install modules.
+    """
+    for module in _get_modules(modules):
         try:
-            get_module(module).install(install_dependencies=install_dependencies)
-        except (DotfilesError, CalledProcessError) as err:
-            error(str(err))
+            module.install()
+        except (DependenciesMissing, CalledProcessError) as exc:
+            raise click.ClickException(str(exc))
 
 
 @cli.command()
@@ -91,31 +67,42 @@ def install(modules: Tuple[str], install_dependencies: bool) -> None:
 @click.option(
     "-a", "--all", "upgrade_all", is_flag=True, help="Upgrade all installed modules."
 )
-def upgrade(modules: Iterable[str], upgrade_all: bool) -> None:
-    """Upgrade modules.
-
-    The module names are case-insensitive.
+def upgrade(modules: Iterable[str], upgrade_all: bool):
+    """
+    Upgrade modules.
     """
     if upgrade_all:
-        modules = config.installed_modules
-    for module in modules:
+        modules = config.get_installed_module_names()
+
+    for module in _get_modules(modules):
         try:
-            get_module(module).upgrade()
-        except (DotfilesError, CalledProcessError) as err:
-            error(str(err))
+            module.upgrade()
+        except (DependenciesMissing, CalledProcessError) as exc:
+            raise click.ClickException(str(exc))
+
+
+def _get_modules(module_names: Iterable[str]) -> List[Module]:
+    try:
+        return get_modules(module_names)
+    except ValueError as exc:
+        raise click.ClickException(str(exc))
 
 
 @cli.command("list")
-def _list() -> None:
-    """List installed and available modules."""
+def _list():
+    """
+    List installed and available modules.
+    """
     for module in all_modules:
-        if module.name in config.installed_modules:
+        if config.is_module_installed(module.name):
             click.echo(f"{module.name} - installed")
         else:
             click.echo(module.name)
 
 
 @cli.command()
-def edit() -> None:
-    """Open the repo for editing."""
-    run(f"$EDITOR {config.root_dir}")
+def edit():
+    """
+    Open the repo for editing.
+    """
+    shell.run(f"$EDITOR {config.root_dir}")

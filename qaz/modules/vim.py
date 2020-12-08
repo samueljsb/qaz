@@ -1,23 +1,19 @@
 from pathlib import Path
 
 from qaz.modules.git import GitModule
-from qaz.utils import run
+from qaz.utils import shell
 
 
 class Vim(GitModule):
-    """My configuration and plugins for Vim."""
-
     name = "vim"
     repo_url = "https://github.com/VundleVim/Vundle.vim.git"
     repo_path = Path.home() / ".vim/bundle/Vundle.vim"
     symlinks = {".vimrc": "~"}
 
-    def install_action(self) -> None:
-        """Install plugins."""
+    def install_action(self):
         super().install_action()
-        run("vim +PluginInstall +qall")
+        shell.run("vim +PluginInstall +qall")
 
-    def upgrade_action(self) -> None:
-        """Install plugins."""
+    def upgrade_action(self):
         super().upgrade_action()
-        run("vim +PluginInstall +qall")
+        shell.run("vim +PluginInstall +qall")

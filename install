@@ -51,3 +51,6 @@ message "... management tool installed!"
 # Run management tool to install basics
 mkdir -p $HOME/.config
 $QAZ/venv/bin/qaz setup $QAZ
+
+# Install zsh and set as default shell
+$QAZ/venv/bin/qaz install zsh

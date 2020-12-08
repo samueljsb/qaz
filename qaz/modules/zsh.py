@@ -4,12 +4,10 @@ from sys import platform
 from qaz.module import Module
 from qaz.modules.brew import BrewModule
 from qaz.modules.git import GitModule
-from qaz.utils import run
+from qaz.utils import shell
 
 
 class ZSHBase(Module):
-    """Z shell."""
-
     name = "zsh"
     zshrc_file = "_zsh.zsh"  # load early to allow modules to overwrite settings
     symlinks = {
@@ -18,41 +16,54 @@ class ZSHBase(Module):
         "e": "/usr/local/bin",
     }
 
+    def _set_default_shell(self):
+        zsh_path = shell.capture("which zsh")
+
+        # Make sure zsh is an allowed shell.
+        shells = Path("/etc/shells")
+        if zsh_path not in shells.read_text():
+            with shells.open("a") as fd:
+                fd.write(zsh_path + "\n")
+
+        # Make zsh the default shell.
+        shell.run(f"chsh -s {zsh_path}")
+
 
 if platform == "darwin":
 
     class ZSH(ZSHBase, BrewModule):  # type: ignore
-        """Z shell."""
-
         package_name = "zsh"
+
+        def install_action(self):
+            super().install_action()
+            self._set_default_shell()
+
+        def upgrade_action(self):
+            super().install_action()
+            self._set_default_shell()
 
 
 elif platform == "linux":
 
     class ZSH(ZSHBase):  # type: ignore
-        """zsh for Linux."""
+        def install_action(self):
+            shell.run("sudo apt update")
+            shell.run("sudo apt install zsh")
+            self._set_default_shell()
 
-        def install_action(self) -> None:
-            """Install zsh from apt."""
-            run("sudo apt update")
-            run("sudo apt install zsh")
-
-        def upgrade_action(self) -> None:
-            """Upgrade zsh from apt."""
-            run("sudo apt update")
-            run("sudo apt upgrade zsh")
+        def upgrade_action(self):
+            shell.run("sudo apt update")
+            shell.run("sudo apt upgrade zsh")
+            self._set_default_shell()
 
 
 class OhMyZSH(Module):
-    """Framework for managing your Zsh configuration."""
-
     name = "Oh-My-Zsh"
     zshrc_file = "_oh-my-zsh.zsh"  # load early to allow modules to overwrite settings
 
-    def install_action(self) -> None:
-        """Install Oh-My-Zsh and plugins."""
-        run(
-            'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"',
+    def install_action(self):
+        shell.run(
+            'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"',  # noqa: E501
             env={"CHSH": "no", "RUNZSH": "no", "KEEP_ZSHRC": "yes"},
         )
 
@@ -60,10 +71,9 @@ class OhMyZSH(Module):
         self.ZshSyntaxHighlighting().install()
         self.ZshAutosuggestions().install()
 
-    def upgrade_action(self) -> None:
-        """Upgrade oh-my-zsh and plugins."""
+    def upgrade_action(self):
         zsh_dir = Path.home().resolve() / ".oh-my-zsh"
-        run(f"sh {zsh_dir / 'tools/upgrade.sh'}", env={"ZSH": str(zsh_dir)})
+        shell.run(f"sh {zsh_dir / 'tools/upgrade.sh'}", env={"ZSH": str(zsh_dir)})
 
         # Upgrade themes and plugins.
         self.ZshSyntaxHighlighting().upgrade()
@@ -72,8 +82,6 @@ class OhMyZSH(Module):
     #  Plugins
 
     class ZshSyntaxHighlighting(GitModule):
-        """Oh-My-Zsh plugin for syntax highlighting."""
-
         name = "zsh-syntax-highlighting"
         repo_url = "https://github.com/zsh-users/zsh-syntax-highlighting.git"
         repo_path = (
@@ -81,8 +89,6 @@ class OhMyZSH(Module):
         )
 
     class ZshAutosuggestions(GitModule):
-        """Oh-My-Zsh plugin for autosuggestions."""
-
         name = "zsh-autosuggestions"
         repo_url = "https://github.com/zsh-users/zsh-autosuggestions.git"
         repo_path = (

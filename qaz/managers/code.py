@@ -1,18 +1,18 @@
-from typing import List
+from typing import Iterable, Set
 
-from qaz.utils import capture, run
+from qaz.utils import shell
 
 
-def install(name: str) -> None:
-    """Install an extension.
-
-    Args:
-        name: The name of the extension to install.
-
+def install_extensions(extensions: Iterable[str]):
     """
-    run(f"code --install-extension {name}")
+    Install all currently uninstalled extensions.
+
+    VSCode extensions cannot be upgraded from the command line so we skip already
+    installed extensions for the sake of speed.
+    """
+    for extension in set(extensions) - _get_installed_extensions():
+        shell.run(f"code --install-extension {extension}")
 
 
-def installed() -> List[str]:
-    """Get a list of installed extensions."""
-    return capture("code --list-extensions").split()
+def _get_installed_extensions() -> Set[str]:
+    return set(shell.capture("code --list-extensions").split())

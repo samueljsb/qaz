@@ -1,8 +1,8 @@
 from sys import platform
-from typing import List
+from typing import Iterable, List
 
-from qaz.exceptions import ModuleDoesNotExist
 from qaz.module import Module
+
 from .asdf import ASDF
 from .brew import Brew
 from .docker import Docker, LazyDocker
@@ -67,24 +67,16 @@ if platform == "darwin":
     all_modules.extend(mac_modules)
 
 
-def get_module(name: str) -> Module:
-    """Get a module by name.
+def get_modules(module_names: Iterable[str]) -> List[Module]:
+    modules_by_name = {m.name: m for m in all_modules}
+    found = []
+    missing = []
+    for name in module_names:
+        if name in modules_by_name:
+            found.append(modules_by_name[name])
+        else:
+            missing.append(name)
 
-    The lookup is case-insensitive.
-
-    Args:
-        name: The name of the module to retreive.
-
-    Returns:
-        A `Module` instance with the given name.
-
-    Raises:
-        ModuleDoesNotExist if the module with the given name cannot be found.
-
-    """
-    try:
-        return next(
-            module for module in all_modules if module.name.lower() == name.lower()
-        )
-    except StopIteration:
-        raise ModuleDoesNotExist(name)
+    if missing:
+        raise ValueError(f"Modules not found with names: {missing}")
+    return found

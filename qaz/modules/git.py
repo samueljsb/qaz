@@ -2,9 +2,11 @@ from pathlib import Path
 from sys import platform
 from typing import List
 
+import click
+
 from qaz.module import Module
 from qaz.modules.brew import BrewModule
-from qaz.utils import message, run
+from qaz.utils import output, shell
 
 
 LOCAL_CONFIG_TEMPL = """
@@ -17,19 +19,11 @@ LOCAL_CONFIG_TEMPL = """
 
 
 class Git(BrewModule):
-    """Distributed version-control system.
-
-    Extras:
-        lazygit: A simple terminal UI for git commands.
-
-    """
-
     name = "git"
     package_name = "git"
     symlinks = {".gitconfig": "~", ".gitignore": "~"}
 
-    def install_action(self) -> None:
-        """Install git and set up local config."""
+    def install_action(self):
         super().install_action()
 
         # Set up local config
@@ -40,8 +34,8 @@ class Git(BrewModule):
         else:
             git_credential = ""
 
-        git_authorname = input("- What is your git author name? ")
-        git_authoremail = input("- What is your git author email? ")
+        git_authorname = click.prompt("git author name", err=True)
+        git_authoremail = click.prompt("git author email", err=True)
 
         with Path.home().joinpath(".gitconfig.local").open("w+") as fd:
             fd.write(
@@ -57,73 +51,53 @@ class Git(BrewModule):
         id_rsa = ssh_dir / "id_rsa"
         id_rsa_pub = ssh_dir / "id_rsa.pub"
         if not id_rsa.exists():
-            run(f"ssh-keygen -t rsa -b 4096 -C '{git_authoremail}' -f {id_rsa}")
+            shell.run(f"ssh-keygen -t rsa -b 4096 -C '{git_authoremail}' -f {id_rsa}")
         with id_rsa_pub.open() as fd:
             public_key = fd.read()
-        message(f"Add your public key to GitHub:\n    {public_key}")
-        run(f"ssh-add -K {id_rsa}")
+        output.message(f"Add your public key to GitHub:\n    {public_key}")
+        shell.run(f"ssh-add -K {id_rsa}")
 
 
 class GitModule(Module):
-    """A Module which is installed by cloning a git repo.
-
-    Attributes:
-      repo_url: The url of the repo to clone.
-      repo_path: The path to which to clone the repo.
-      additional_clone_options: Additional options to pass to git when cloning.
-
-    """
-
     repo_url: str
     repo_path: Path
     additional_clone_options: List[str] = list()
     _base_requires = [Git()]
 
-    def install_action(self) -> None:
-        """Clone the repo."""
-        run(
-            f"git clone {' '.join(self.additional_clone_options)} {self.repo_url} {self.repo_path}"
+    def install_action(self):
+        shell.run(
+            f"git clone {' '.join(self.additional_clone_options)} {self.repo_url} {self.repo_path}"  # noqa: E501
         )
 
-    def upgrade_action(self) -> None:
-        """Pull the latest commits for this repo."""
-        run(f"git -C {self.repo_path} pull")
+    def upgrade_action(self):
+        shell.run(f"git -C {self.repo_path} pull")
 
 
 class GitHubCLI(BrewModule):
-    """GitHub command-line tool."""
-
     name = "GitHub"
     package_name = "gh"
 
-    def install_action(self) -> None:
-        """Log in to GitHub and set config after installation."""
+    def install_action(self):
         super().install_action()
-        run("gh auth login --web")
+        shell.run("gh auth login --web")
         self._set_config()
 
-    def upgrade_action(self) -> None:
-        """Set config after upgrade."""
+    def upgrade_action(self):
         super().upgrade_action()
         self._set_config()
 
-    def _set_config(self) -> None:
-        """Set gh config."""
-        run("gh config set prompt enabled")
-        run("gh config set pager 'less -RFX'")
-        run("gh alias set newpr 'pr create --fill --web'")
+    def _set_config(self):
+        shell.run("gh config set prompt enabled")
+        shell.run("gh config set pager 'less -RFX'")
+        shell.run("gh alias set newpr 'pr create --fill --web'")
 
 
 class LazyGit(BrewModule):
-    """A simple terminal UI for git commands."""
-
     name = "lazygit"
     package_name = "jesseduffield/lazygit/lazygit"
 
 
 class DiffSoFancy(BrewModule):
-    """A simple terminal UI for git commands."""
-
     name = "diff-so-fancy"
     package_name = "diff-so-fancy"
     symlinks = {".gitconfig.diff-so-fancy": "~"}
