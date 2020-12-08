@@ -8,8 +8,6 @@ from qaz.utils import shell
 
 
 class ZSHBase(Module):
-    """Z shell."""
-
     name = "zsh"
     zshrc_file = "_zsh.zsh"  # load early to allow modules to overwrite settings
     symlinks = {
@@ -19,9 +17,6 @@ class ZSHBase(Module):
     }
 
     def _set_default_shell(self):
-        """
-        Set zsh as the system shell.
-        """
         zsh_path = shell.capture("which zsh")
 
         # Make sure zsh is an allowed shell.
@@ -37,8 +32,6 @@ class ZSHBase(Module):
 if platform == "darwin":
 
     class ZSH(ZSHBase, BrewModule):  # type: ignore
-        """Z shell."""
-
         package_name = "zsh"
 
         def install_action(self):
@@ -53,8 +46,6 @@ if platform == "darwin":
 elif platform == "linux":
 
     class ZSH(ZSHBase):  # type: ignore
-        """zsh for Linux."""
-
         def install_action(self):
             shell.run("sudo apt update")
             shell.run("sudo apt install zsh")
@@ -67,13 +58,10 @@ elif platform == "linux":
 
 
 class OhMyZSH(Module):
-    """Framework for managing your Zsh configuration."""
-
     name = "Oh-My-Zsh"
     zshrc_file = "_oh-my-zsh.zsh"  # load early to allow modules to overwrite settings
 
     def install_action(self) -> None:
-        """Install Oh-My-Zsh and plugins."""
         shell.run(
             'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"',  # noqa: E501
             env={"CHSH": "no", "RUNZSH": "no", "KEEP_ZSHRC": "yes"},
@@ -84,7 +72,6 @@ class OhMyZSH(Module):
         self.ZshAutosuggestions().install()
 
     def upgrade_action(self) -> None:
-        """Upgrade oh-my-zsh and plugins."""
         zsh_dir = Path.home().resolve() / ".oh-my-zsh"
         shell.run(f"sh {zsh_dir / 'tools/upgrade.sh'}", env={"ZSH": str(zsh_dir)})
 
@@ -95,8 +82,6 @@ class OhMyZSH(Module):
     #  Plugins
 
     class ZshSyntaxHighlighting(GitModule):
-        """Oh-My-Zsh plugin for syntax highlighting."""
-
         name = "zsh-syntax-highlighting"
         repo_url = "https://github.com/zsh-users/zsh-syntax-highlighting.git"
         repo_path = (
@@ -104,8 +89,6 @@ class OhMyZSH(Module):
         )
 
     class ZshAutosuggestions(GitModule):
-        """Oh-My-Zsh plugin for autosuggestions."""
-
         name = "zsh-autosuggestions"
         repo_url = "https://github.com/zsh-users/zsh-autosuggestions.git"
         repo_path = (

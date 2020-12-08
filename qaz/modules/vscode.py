@@ -13,8 +13,6 @@ else:
 
 
 class VSCode(BrewCaskModule):
-    """Open-source code editor."""
-
     name = "VSCode"
     cask_name = "visual-studio-code"
     symlinks = {"settings.json": SETTINGS_DIR}

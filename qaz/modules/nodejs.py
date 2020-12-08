@@ -15,36 +15,24 @@ class NodeJS(ASDFModule):
     ]
 
     def install_action(self) -> None:
-        """Do not check downloads against OpenPGP signatures."""
         os.environ["NODEJS_CHECK_SIGNATURES"] = "no"
         super().install_action()
 
 
 class Yarn(ASDFModule):
-    """JavaScript package manager."""
-
     name = "Yarn"
     plugin_name = "yarn"
     requires = [NodeJS()]
 
 
 class NodeModule(Module):
-    """A Module which is managed by NPM.
-
-    Attributes:
-      package_name: The name of the package to manage.
-
-    """
-
     package_name: str
     _base_requires = [NodeJS()]
 
     def install_action(self) -> None:
-        """Install this package from Homebrew."""
         npm.install_or_upgrade_package(self.package_name)
         return super().install_action()
 
     def upgrade_action(self) -> None:
-        """Upgrade this package from Homebrew."""
         npm.install_or_upgrade_package(self.package_name)
         return super().upgrade_action()

@@ -4,15 +4,11 @@ from . import output
 
 
 def create_symlink(target: Path, link: Path = Path.home()):
-    """Create a symlink from link to target.
+    """
+    Create a symlink from link to target.
 
     If the link is a directory and the target is a file, the link will be created at the
-    same filename within the given directory
-
-    Args:
-        target: The path of the file to link to.
-        link: The link to create.
-
+    same filename within the given directory.
     """
     if link.is_dir() and not target.is_dir():
         link = link / target.name

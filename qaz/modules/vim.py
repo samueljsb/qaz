@@ -5,19 +5,15 @@ from qaz.utils import shell
 
 
 class Vim(GitModule):
-    """My configuration and plugins for Vim."""
-
     name = "vim"
     repo_url = "https://github.com/VundleVim/Vundle.vim.git"
     repo_path = Path.home() / ".vim/bundle/Vundle.vim"
     symlinks = {".vimrc": "~"}
 
     def install_action(self) -> None:
-        """Install plugins."""
         super().install_action()
         shell.run("vim +PluginInstall +qall")
 
     def upgrade_action(self) -> None:
-        """Install plugins."""
         super().upgrade_action()
         shell.run("vim +PluginInstall +qall")

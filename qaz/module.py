@@ -10,8 +10,6 @@ PathLike = Union[Path, str]
 
 
 class DependenciesMissing(Exception):
-    """Error raised when dependencies of a module are not installed."""
-
     def __init__(self, dependencies: List[str]) -> None:
         self.dependencies = dependencies
 
@@ -58,14 +56,14 @@ class Module:
         output.message(f"... {self.name} installed!")
 
     def install_action(self) -> None:
-        """Run actions to install this module.
+        """
+        Run actions to install this module.
 
         Overwrite this method to provide custom install behaviour.
         """
         pass
 
     def upgrade(self) -> None:
-        """Upgrade this module."""
         if not self.is_installed:
             output.error(f"Cannot upgrade: {self.name} is not installed")
             return
@@ -82,7 +80,8 @@ class Module:
         output.message(f"... {self.name} upgraded!")
 
     def upgrade_action(self) -> None:
-        """Run actions to upgrade this module.
+        """
+        Run actions to upgrade this module.
 
         Overwrite this method to provide custom upgrade behaviour.
         """
@@ -105,7 +104,9 @@ class Module:
             raise DependenciesMissing([dep.name for dep in missing])
 
     def _link_zshrc(self) -> None:
-        """Create symlink from ~/.zshrc.d to the zshrc file for this module."""
+        """
+        Create symlink from ~/.zshrc.d to the zshrc file for this module.
+        """
         if self._zshrc_path.exists():
             files.create_symlink(
                 self._zshrc_path,
@@ -113,7 +114,6 @@ class Module:
             )
 
     def _create_symlinks(self) -> None:
-        """Create symlinks for this module."""
         for _target, _link in self.symlinks.items():
             files.create_symlink(
                 config.get_root_dir() / "configfiles" / _target,
@@ -121,7 +121,6 @@ class Module:
             )
 
     def _install_vscode_extensions(self) -> None:
-        """Install VS Code extensions for this module."""
         command = shell.capture("command -v code")
         if not command or not self.vscode_extensions:
             return
