@@ -48,7 +48,11 @@ def error(msg: str) -> None:
     secho(msg, fg="red", bold=True, err=True)
 
 
-def run(command: str, allow_fail: bool = False, env: Dict[str, str] = None,) -> None:
+def run(
+    command: str,
+    allow_fail: bool = False,
+    env: Dict[str, str] = None,
+) -> None:
     """Run a shell command.
 
     Args:
@@ -62,7 +66,9 @@ def run(command: str, allow_fail: bool = False, env: Dict[str, str] = None,) -> 
     """
     secho(f"$ {command}", bold=True, fg="yellow", err=True)
     process = subprocess.run(
-        command, shell=True, env=os.environ.update(env if env else {}),
+        command,
+        shell=True,
+        env=os.environ.update(env if env else {}),
     )
 
     if not allow_fail:

@@ -145,7 +145,8 @@ class Module:
         """Create symlink from ~/.zshrc.d to the zshrc file for this module."""
         if self._zshrc_path.exists():
             create_symlink(
-                self._zshrc_path, Path.home() / ".zshrc.d",
+                self._zshrc_path,
+                Path.home() / ".zshrc.d",
             )
 
     def _create_symlinks(self) -> None:
