@@ -23,7 +23,7 @@ class Poetry(Module):
 
     # N.B. This is installed by install.sh, so no install script is needed here.
 
-    def upgrade_action(self) -> None:
+    def upgrade_action(self):
         shell.run("poetry self update")
 
 
@@ -37,10 +37,10 @@ class PipxModule(Module):
     package_name: str
     _base_requires = [Pipx()]
 
-    def install_action(self) -> None:
+    def install_action(self):
         pipx.install_or_upgrade_package(self.package_name)
 
-    def upgrade_action(self) -> None:
+    def upgrade_action(self):
         pipx.install_or_upgrade_package(self.package_name)
 
 

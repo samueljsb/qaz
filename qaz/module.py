@@ -10,7 +10,7 @@ PathLike = Union[Path, str]
 
 
 class DependenciesMissing(Exception):
-    def __init__(self, dependencies: List[str]) -> None:
+    def __init__(self, dependencies: List[str]):
         self.dependencies = dependencies
 
     def __str__(self) -> str:
@@ -29,7 +29,7 @@ class Module:
     _zshrc_path: Path
     _base_requires: Optional[List["Module"]] = None
 
-    def __init__(self) -> None:
+    def __init__(self):
         # .zshrc file
         zshrc_fname = self.zshrc_file or f"{self.name.lower()}.zsh"
         self._zshrc_path = config.get_root_dir() / "zshrc" / zshrc_fname
@@ -55,7 +55,7 @@ class Module:
         self.set_installed()
         output.message(f"... {self.name} installed!")
 
-    def install_action(self) -> None:
+    def install_action(self):
         """
         Run actions to install this module.
 
@@ -63,7 +63,7 @@ class Module:
         """
         pass
 
-    def upgrade(self) -> None:
+    def upgrade(self):
         if not self.is_installed:
             output.error(f"Cannot upgrade: {self.name} is not installed")
             return
@@ -79,7 +79,7 @@ class Module:
 
         output.message(f"... {self.name} upgraded!")
 
-    def upgrade_action(self) -> None:
+    def upgrade_action(self):
         """
         Run actions to upgrade this module.
 
@@ -103,7 +103,7 @@ class Module:
         ]:
             raise DependenciesMissing([dep.name for dep in missing])
 
-    def _link_zshrc(self) -> None:
+    def _link_zshrc(self):
         """
         Create symlink from ~/.zshrc.d to the zshrc file for this module.
         """
@@ -113,14 +113,14 @@ class Module:
                 Path.home() / ".zshrc.d",
             )
 
-    def _create_symlinks(self) -> None:
+    def _create_symlinks(self):
         for _target, _link in self.symlinks.items():
             files.create_symlink(
                 config.get_root_dir() / "configfiles" / _target,
                 Path(_link).expanduser(),
             )
 
-    def _install_vscode_extensions(self) -> None:
+    def _install_vscode_extensions(self):
         command = shell.capture("command -v code")
         if not command or not self.vscode_extensions:
             return

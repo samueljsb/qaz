@@ -14,7 +14,7 @@ class NodeJS(ASDFModule):
         "numso.prettier-standard-vscode",
     ]
 
-    def install_action(self) -> None:
+    def install_action(self):
         os.environ["NODEJS_CHECK_SIGNATURES"] = "no"
         super().install_action()
 
@@ -29,10 +29,10 @@ class NodeModule(Module):
     package_name: str
     _base_requires = [NodeJS()]
 
-    def install_action(self) -> None:
+    def install_action(self):
         npm.install_or_upgrade_package(self.package_name)
         return super().install_action()
 
-    def upgrade_action(self) -> None:
+    def upgrade_action(self):
         npm.install_or_upgrade_package(self.package_name)
         return super().upgrade_action()

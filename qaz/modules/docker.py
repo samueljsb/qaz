@@ -11,7 +11,7 @@ if platform == "darwin":
         name = "Docker"
         cask_name = "docker"
 
-        def install_action(self) -> None:
+        def install_action(self):
             super().install_action()
             shell.run("open /Applications/Docker.app")
 
@@ -21,11 +21,11 @@ elif platform == "linux":
     class Docker(Module):  # type: ignore
         name = "Docker"
 
-        def install_action(self) -> None:
+        def install_action(self):
             # TODO
             raise NotImplementedError
 
-        def upgrade_action(self) -> None:
+        def upgrade_action(self):
             # TODO
             raise NotImplementedError
 

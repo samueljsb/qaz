@@ -61,7 +61,7 @@ class OhMyZSH(Module):
     name = "Oh-My-Zsh"
     zshrc_file = "_oh-my-zsh.zsh"  # load early to allow modules to overwrite settings
 
-    def install_action(self) -> None:
+    def install_action(self):
         shell.run(
             'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"',  # noqa: E501
             env={"CHSH": "no", "RUNZSH": "no", "KEEP_ZSHRC": "yes"},
@@ -71,7 +71,7 @@ class OhMyZSH(Module):
         self.ZshSyntaxHighlighting().install()
         self.ZshAutosuggestions().install()
 
-    def upgrade_action(self) -> None:
+    def upgrade_action(self):
         zsh_dir = Path.home().resolve() / ".oh-my-zsh"
         shell.run(f"sh {zsh_dir / 'tools/upgrade.sh'}", env={"ZSH": str(zsh_dir)})
 

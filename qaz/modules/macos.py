@@ -8,10 +8,10 @@ from qaz.utils import shell
 class MacOS(Module):
     name = "macOS"
 
-    def install_action(self) -> None:
+    def install_action(self):
         shell.run(str(config.get_root_dir() / "scripts" / "set-defaults.sh"))
 
-    def upgrade_action(self) -> None:
+    def upgrade_action(self):
         shell.run(str(config.get_root_dir() / "scripts" / "set-defaults.sh"))
 
 
@@ -26,12 +26,12 @@ class QuickLookExtensions(Module):
         "suspicious-package",
     )
 
-    def install_action(self) -> None:
+    def install_action(self):
         for extension in self.extensions:
             brew.install_or_upgrade_cask(extension)
         return super().install_action()
 
-    def upgrade_action(self) -> None:
+    def upgrade_action(self):
         for extension in self.extensions:
             brew.install_or_upgrade_cask(extension)
         return super().upgrade_action()

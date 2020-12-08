@@ -13,7 +13,7 @@ class NerdFonts(GitModule):
     repo_path = Path().home() / ".nerd-fonts"
     additional_clone_options = ["--depth=1"]
 
-    def install_action(self) -> None:
+    def install_action(self):
         output.message("... this might take a while!")
         super().install_action()
 
@@ -22,7 +22,7 @@ class NerdFonts(GitModule):
             shell.run(f"{self.repo_path / 'install.sh'} {font_name}")
             output.message(f"... ... {font_name} installed!")
 
-    def upgrade_action(self) -> None:
+    def upgrade_action(self):
         super().upgrade_action()
 
         for font_name in FONTS:

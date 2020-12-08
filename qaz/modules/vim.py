@@ -10,10 +10,10 @@ class Vim(GitModule):
     repo_path = Path.home() / ".vim/bundle/Vundle.vim"
     symlinks = {".vimrc": "~"}
 
-    def install_action(self) -> None:
+    def install_action(self):
         super().install_action()
         shell.run("vim +PluginInstall +qall")
 
-    def upgrade_action(self) -> None:
+    def upgrade_action(self):
         super().upgrade_action()
         shell.run("vim +PluginInstall +qall")

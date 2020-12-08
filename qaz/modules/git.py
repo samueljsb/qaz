@@ -23,7 +23,7 @@ class Git(BrewModule):
     package_name = "git"
     symlinks = {".gitconfig": "~", ".gitignore": "~"}
 
-    def install_action(self) -> None:
+    def install_action(self):
         super().install_action()
 
         # Set up local config
@@ -64,12 +64,12 @@ class GitModule(Module):
     additional_clone_options: List[str] = list()
     _base_requires = [Git()]
 
-    def install_action(self) -> None:
+    def install_action(self):
         shell.run(
             f"git clone {' '.join(self.additional_clone_options)} {self.repo_url} {self.repo_path}"  # noqa: E501
         )
 
-    def upgrade_action(self) -> None:
+    def upgrade_action(self):
         shell.run(f"git -C {self.repo_path} pull")
 
 
@@ -77,16 +77,16 @@ class GitHubCLI(BrewModule):
     name = "GitHub"
     package_name = "gh"
 
-    def install_action(self) -> None:
+    def install_action(self):
         super().install_action()
         shell.run("gh auth login --web")
         self._set_config()
 
-    def upgrade_action(self) -> None:
+    def upgrade_action(self):
         super().upgrade_action()
         self._set_config()
 
-    def _set_config(self) -> None:
+    def _set_config(self):
         shell.run("gh config set prompt enabled")
         shell.run("gh config set pager 'less -RFX'")
         shell.run("gh alias set newpr 'pr create --fill --web'")
