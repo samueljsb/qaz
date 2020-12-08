@@ -29,7 +29,6 @@
   "editor.detectIndentation": false,
   "editor.fontFamily": "Hack Nerd Font, Menlo, Monaco, 'Courier New', monospace",
   "editor.formatOnSave": true,
-  "editor.formatOnSaveMode": "modifications",
   "editor.insertSpaces": true,
   "editor.minimap.renderCharacters": false,
   "editor.multiCursorModifier": "ctrlCmd",
