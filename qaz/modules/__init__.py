@@ -68,10 +68,10 @@ if platform == "darwin":
 
 
 def get_modules(module_names: Iterable[str]) -> List[Module]:
-    modules_by_name = {m.name: m for m in all_modules}
+    modules_by_name = {m.name.casefold(): m for m in all_modules}
     found = []
     missing = []
-    for name in module_names:
+    for name in (name.casefold() for name in module_names):
         if name in modules_by_name:
             found.append(modules_by_name[name])
         else:
