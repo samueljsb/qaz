@@ -21,7 +21,7 @@ LOCAL_CONFIG_TEMPL = """
 class Git(BrewModule):
     name = "git"
     package_name = "git"
-    symlinks = {".gitconfig": "~", ".gitignore": "~"}
+    symlinks = {".gitconfig": "~", ".gitignore": "~", ".git-commit-msg": "~"}
 
     def install_action(self):
         super().install_action()

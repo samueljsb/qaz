@@ -43,3 +43,5 @@
     insteadOf = https://github.com/
 [fetch]
 	prune = true
+[commit]
+	template = ~/.git-commit-msg
