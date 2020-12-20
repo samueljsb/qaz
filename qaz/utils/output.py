@@ -1,6 +1,10 @@
 import click
 
 
+def echo(msg: str):
+    click.echo(msg, err=True)
+
+
 def message(msg: str):
     click.secho(msg, bold=True, err=True)
 

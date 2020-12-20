@@ -11,9 +11,9 @@ def run(
     cwd: Optional[str] = None,
     allow_fail: bool = False,
     env: Dict[str, str] = None,
-    log: bool = True
+    show: bool = False
 ):
-    if log:
+    if show:
         output.command(command)
 
     process = subprocess.run(
@@ -21,7 +21,14 @@ def run(
         cwd=cwd,
         shell=True,
         env=os.environ.update(env if env else {}),
+        text=True,
+        capture_output=(not show),
     )
+
+    if not show and process.returncode != 0:
+        output.command(command)
+        output.echo(process.stderr)
+
     if not allow_fail:
         process.check_returncode()
 
