@@ -72,7 +72,7 @@ def upgrade(modules: Iterable[str], upgrade_all: bool):
     Upgrade modules.
     """
     if upgrade_all:
-        modules = config.get_installed_module_names()
+        modules = [m.name for m in all_modules if config.is_module_installed(m.name)]
 
     for module in _get_modules(modules):
         try:
