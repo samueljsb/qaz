@@ -93,11 +93,12 @@ def _list():
     """
     List installed and available modules.
     """
-    for module in all_modules:
+    for module in sorted(all_modules, key=lambda m: m.name.casefold()):
         if config.is_module_installed(module.name):
-            click.echo(f"{module.name} - installed")
+            status = click.style("✓", fg="green", bold=True)
         else:
-            click.echo(module.name)
+            status = ""
+        click.echo(f"{status:1} {module.name}")
 
 
 @cli.command()
