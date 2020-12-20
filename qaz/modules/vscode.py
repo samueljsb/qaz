@@ -17,6 +17,7 @@ class VSCode(BrewCaskModule):
     cask_name = "visual-studio-code"
     symlinks = {"settings.json": SETTINGS_DIR}
     vscode_extensions = [
+        "aaron-bond.better-comments",
         "alefragnani.Bookmarks",
         "bungcip.better-toml",
         "byi8220.indented-block-highlighting",
