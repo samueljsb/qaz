@@ -1,3 +1,5 @@
+from contextlib import contextmanager
+
 import rich.console
 
 
@@ -14,3 +16,12 @@ def error(msg: str):
 
 def command(command: str):
     console.print(f"$ {command}", style="bold yellow", highlight=False)
+
+
+@contextmanager
+def status(status_msg: str, complete_msg: str = ""):
+    with console.status(status_msg):
+        yield
+
+    if complete_msg:
+        message(complete_msg)
