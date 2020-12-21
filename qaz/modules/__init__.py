@@ -22,6 +22,10 @@ from .vscode import VSCode
 from .zsh import ZSH, OhMyZSH
 
 
+class ModuleNotFound(Exception):
+    pass
+
+
 modules: List[Module] = [
     ASDF(),
     Brew(),
@@ -78,5 +82,5 @@ def get_modules(module_names: Iterable[str]) -> List[Module]:
             missing.append(name)
 
     if missing:
-        raise ValueError(f"Modules not found with names: {missing}")
+        raise ModuleNotFound(f"Modules not found with names: {missing}")
     return found

@@ -1,14 +1,14 @@
 from pathlib import Path
 from subprocess import CalledProcessError
-from typing import Iterable, List, Tuple
+from typing import Iterable, Tuple
 
 import click
 
 from qaz import config
 from qaz.utils import output, shell
 
-from .module import DependenciesMissing, Module, NotInstalled
-from .modules import all_modules, get_modules
+from .module import DependenciesMissing, NotInstalled
+from .modules import ModuleNotFound, all_modules, get_modules
 
 
 @click.group()
@@ -56,8 +56,14 @@ def install(ctx: click.Context, modules: Tuple[str]):
     """
     Install modules.
     """
+    try:
+        modules_to_install = get_modules(modules)
+    except ModuleNotFound as exc:
+        output.error(str(exc))
+        raise click.Abort()
+
     error = False
-    for module in _get_modules(modules):
+    for module in modules_to_install:
         try:
             output.message(f"Installing {module.name}...")
             module.install()
@@ -80,11 +86,19 @@ def upgrade(ctx: click.Context, modules: Iterable[str], upgrade_all: bool):
     """
     Upgrade modules.
     """
-    error = False
     if upgrade_all:
-        modules = [m.name for m in all_modules if config.is_module_installed(m.name)]
+        modules_to_upgrade = [
+            m for m in all_modules if config.is_module_installed(m.name)
+        ]
+    else:
+        try:
+            modules_to_upgrade = get_modules(modules)
+        except ModuleNotFound as exc:
+            output.error(str(exc))
+            raise click.Abort()
 
-    for module in _get_modules(modules):
+    error = False
+    for module in modules_to_upgrade:
         try:
             output.message(f"Upgrading {module.name}...")
             module.upgrade()
@@ -95,13 +109,6 @@ def upgrade(ctx: click.Context, modules: Iterable[str], upgrade_all: bool):
 
     if error:
         ctx.exit(1)
-
-
-def _get_modules(module_names: Iterable[str]) -> List[Module]:
-    try:
-        return get_modules(module_names)
-    except ValueError as exc:
-        raise click.ClickException(str(exc))
 
 
 @cli.command("list")
