@@ -1,14 +1,14 @@
 from pathlib import Path
 from subprocess import CalledProcessError
-from typing import Iterable, List, Tuple
+from typing import Iterable, Tuple
 
 import click
 
 from qaz import config
 from qaz.utils import output, shell
 
-from .module import DependenciesMissing, Module, NotInstalled
-from .modules import all_modules, get_modules
+from .module import DependenciesMissing, NotInstalled
+from .modules import ModuleNotFound, all_modules, get_modules
 
 
 @click.group()
@@ -55,7 +55,13 @@ def install(modules: Tuple[str]):
     """
     Install modules.
     """
-    for module in _get_modules(modules):
+    try:
+        modules_to_install = get_modules(modules)
+    except ModuleNotFound as exc:
+        output.error(str(exc))
+        raise click.Abort()
+
+    for module in modules_to_install:
         with output.status(
             f"Installing {module.name}...", f"Installed {module.name} 🎉"
         ):
@@ -80,7 +86,13 @@ def upgrade(modules: Iterable[str], upgrade_all: bool):
     if upgrade_all:
         modules = [m.name for m in all_modules if config.is_module_installed(m.name)]
 
-    for module in _get_modules(modules):
+    try:
+        modules_to_upgrade = get_modules(modules)
+    except ModuleNotFound as exc:
+        output.error(str(exc))
+        raise click.Abort()
+
+    for module in modules_to_upgrade:
         with output.status(f"Upgrading {module.name}...", f"Upgraded {module.name} 🥳"):
             try:
                 module.upgrade()
@@ -89,13 +101,6 @@ def upgrade(modules: Iterable[str], upgrade_all: bool):
                 raise click.Abort()
             except CalledProcessError as exc:
                 raise click.ClickException(str(exc))
-
-
-def _get_modules(module_names: Iterable[str]) -> List[Module]:
-    try:
-        return get_modules(module_names)
-    except ValueError as exc:
-        raise click.ClickException(str(exc))
 
 
 @cli.command("list")
