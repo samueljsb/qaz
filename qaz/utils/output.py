@@ -1,13 +1,16 @@
-import click
+import rich.console
+
+
+console = rich.console.Console()
 
 
 def message(msg: str):
-    click.secho(msg, bold=True, err=True)
+    console.print(msg, style="bold")
 
 
 def error(msg: str):
-    click.secho(msg, fg="red", bold=True, err=True)
+    console.print("[bold red]Error:[/bold red]", msg, highlight=False)
 
 
 def command(command: str):
-    click.secho(f"$ {command}", bold=True, fg="yellow", err=True)
+    console.print(f"$ {command}", style="bold yellow", highlight=False)
