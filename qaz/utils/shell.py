@@ -11,10 +11,8 @@ def run(
     cwd: Optional[str] = None,
     allow_fail: bool = False,
     env: Dict[str, str] = None,
-    log: bool = True
 ):
-    if log:
-        output.command(command)
+    output.command(command)
 
     process = subprocess.run(
         command,
