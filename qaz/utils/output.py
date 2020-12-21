@@ -25,3 +25,7 @@ def status(status_msg: str, complete_msg: str = ""):
 
     if complete_msg:
         message(complete_msg)
+
+
+def out(msg: str):
+    console.out(msg, highlight=False)
