@@ -7,7 +7,7 @@ import click
 from qaz import config
 from qaz.utils import output, shell
 
-from .module import DependenciesMissing, Module
+from .module import DependenciesMissing, Module, NotInstalled
 from .modules import all_modules, get_modules
 
 
@@ -51,15 +51,21 @@ def update():
 
 @cli.command()
 @click.argument("modules", nargs=-1)
-def install(modules: Tuple[str]):
+@click.pass_context
+def install(ctx: click.Context, modules: Tuple[str]):
     """
     Install modules.
     """
+    error = False
     for module in _get_modules(modules):
         try:
             module.install()
         except (DependenciesMissing, CalledProcessError) as exc:
-            raise click.ClickException(str(exc))
+            output.error(str(exc))
+            error = True
+
+    if error:
+        ctx.exit(1)
 
 
 @cli.command()
@@ -67,18 +73,24 @@ def install(modules: Tuple[str]):
 @click.option(
     "-a", "--all", "upgrade_all", is_flag=True, help="Upgrade all installed modules."
 )
-def upgrade(modules: Iterable[str], upgrade_all: bool):
+@click.pass_context
+def upgrade(ctx: click.Context, modules: Iterable[str], upgrade_all: bool):
     """
     Upgrade modules.
     """
+    error = False
     if upgrade_all:
         modules = [m.name for m in all_modules if config.is_module_installed(m.name)]
 
     for module in _get_modules(modules):
         try:
             module.upgrade()
-        except (DependenciesMissing, CalledProcessError) as exc:
-            raise click.ClickException(str(exc))
+        except (DependenciesMissing, NotInstalled, CalledProcessError) as exc:
+            output.error(str(exc))
+            error = True
+
+    if error:
+        ctx.exit(1)
 
 
 def _get_modules(module_names: Iterable[str]) -> List[Module]:

@@ -17,6 +17,10 @@ class DependenciesMissing(Exception):
         return f"Dependencies missing: {', '.join(self.dependencies)}."
 
 
+class NotInstalled(Exception):
+    pass
+
+
 class Module:
     # Attributes to overwrite
     name: str
@@ -65,8 +69,7 @@ class Module:
 
     def upgrade(self):
         if not self.is_installed:
-            output.error(f"Cannot upgrade: {self.name} is not installed")
-            return
+            raise NotInstalled(f"Cannot upgrade: {self.name} is not installed")
 
         output.message(f"Upgrading {self.name}...")
 
