@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 
 from qaz.modules.git import GitModule
@@ -21,6 +22,12 @@ class NerdFonts(GitModule):
             shell.run(f"{self.repo_path / 'install.sh'} {font_name}")
 
     def upgrade_action(self):
+        if sys.platform == "darwin":
+            # There are issues with case-insensitive filenames that prevent the repo
+            # from being pulled on macOS.
+            output.message("nerd-fonts cannot be upgraded on MacOS at the moment 😞")
+            return
+
         super().upgrade_action()
 
         for font_name in FONTS:
