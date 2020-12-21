@@ -7,7 +7,7 @@ import click
 from qaz import config
 from qaz.utils import output, shell
 
-from .module import DependenciesMissing, Module
+from .module import DependenciesMissing, Module, NotInstalled
 from .modules import all_modules, get_modules
 
 
@@ -58,7 +58,10 @@ def install(modules: Tuple[str]):
     for module in _get_modules(modules):
         try:
             module.install()
-        except (DependenciesMissing, CalledProcessError) as exc:
+        except DependenciesMissing as exc:
+            output.error(str(exc))
+            raise click.Abort()
+        except CalledProcessError as exc:
             raise click.ClickException(str(exc))
 
 
@@ -77,7 +80,10 @@ def upgrade(modules: Iterable[str], upgrade_all: bool):
     for module in _get_modules(modules):
         try:
             module.upgrade()
-        except (DependenciesMissing, CalledProcessError) as exc:
+        except (DependenciesMissing, NotInstalled) as exc:
+            output.error(str(exc))
+            raise click.Abort()
+        except CalledProcessError as exc:
             raise click.ClickException(str(exc))
 
 
