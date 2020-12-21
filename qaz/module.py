@@ -3,7 +3,7 @@ from typing import Dict, List, Optional, Union
 
 from qaz import config
 from qaz.managers import code
-from qaz.utils import files, output, shell
+from qaz.utils import files, shell
 
 
 PathLike = Union[Path, str]
@@ -44,9 +44,7 @@ class Module:
         return super().__init_subclass__()
 
     def install(self):
-        output.message(f"Installing {self.name}...")
         if self.is_installed:
-            output.message(f"... {self.name} already installed!")
             return
 
         self._check_dependencies()
@@ -57,7 +55,6 @@ class Module:
         self._install_vscode_extensions()
 
         self.set_installed()
-        output.message(f"... {self.name} installed!")
 
     def install_action(self):
         """
@@ -71,16 +68,12 @@ class Module:
         if not self.is_installed:
             raise NotInstalled(f"Cannot upgrade: {self.name} is not installed")
 
-        output.message(f"Upgrading {self.name}...")
-
         self._check_dependencies()
 
         self._link_zshrc()
         self._create_symlinks()
         self._install_vscode_extensions()
         self.upgrade_action()
-
-        output.message(f"... {self.name} upgraded!")
 
     def upgrade_action(self):
         """
@@ -128,6 +121,4 @@ class Module:
         if not command or not self.vscode_extensions:
             return
 
-        output.message("Installing VS Code extensions...")
         code.install_extensions(self.vscode_extensions)
-        output.message("... VS Code extensions installed!")

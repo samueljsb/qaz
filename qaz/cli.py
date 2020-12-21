@@ -24,19 +24,17 @@ def setup(root_dir: str):
     """
     Install this tool and the basics.
     """
-    output.message("Installing qaz...")
+    with output.status("Installing qaz...", "Installed qaz 🎉"):
 
-    # Create config
-    config.create_new_config_file(root_dir)
+        # Create config
+        config.create_new_config_file(root_dir)
 
-    # Create installed dir
-    zshrc_dir = Path.home().joinpath(".zshrc.d")
-    zshrc_dir.mkdir(exist_ok=True)
+        # Create installed dir
+        zshrc_dir = Path.home().joinpath(".zshrc.d")
+        zshrc_dir.mkdir(exist_ok=True)
 
-    ALREADY_INSTALLED = ("asdf", "python", "poetry")
-    install(ALREADY_INSTALLED)
-
-    output.message("... qaz is installed.")
+        ALREADY_INSTALLED = ("asdf", "python", "poetry")
+        install(ALREADY_INSTALLED)
 
 
 @cli.command()
@@ -45,8 +43,10 @@ def update():
     Update this tool.
     """
     root_dir = config.get_root_dir()
-    shell.run(f"git -C {root_dir} pull")
-    shell.run("poetry install --remove-untracked", cwd=root_dir)
+
+    with output.status("Updating qaz...", "Updated qaz 🥳"):
+        shell.run(f"git -C {root_dir} pull")
+        shell.run("poetry install --remove-untracked", cwd=root_dir)
 
 
 @cli.command()
@@ -56,13 +56,16 @@ def install(modules: Tuple[str]):
     Install modules.
     """
     for module in _get_modules(modules):
-        try:
-            module.install()
-        except DependenciesMissing as exc:
-            output.error(str(exc))
-            raise click.Abort()
-        except CalledProcessError as exc:
-            raise click.ClickException(str(exc))
+        with output.status(
+            f"Installing {module.name}...", f"Installed {module.name} 🎉"
+        ):
+            try:
+                module.install()
+            except DependenciesMissing as exc:
+                output.error(str(exc))
+                raise click.Abort()
+            except CalledProcessError as exc:
+                raise click.ClickException(str(exc))
 
 
 @cli.command()
@@ -78,13 +81,14 @@ def upgrade(modules: Iterable[str], upgrade_all: bool):
         modules = [m.name for m in all_modules if config.is_module_installed(m.name)]
 
     for module in _get_modules(modules):
-        try:
-            module.upgrade()
-        except (DependenciesMissing, NotInstalled) as exc:
-            output.error(str(exc))
-            raise click.Abort()
-        except CalledProcessError as exc:
-            raise click.ClickException(str(exc))
+        with output.status(f"Upgrading {module.name}...", f"Upgraded {module.name} 🥳"):
+            try:
+                module.upgrade()
+            except (DependenciesMissing, NotInstalled) as exc:
+                output.error(str(exc))
+                raise click.Abort()
+            except CalledProcessError as exc:
+                raise click.ClickException(str(exc))
 
 
 def _get_modules(module_names: Iterable[str]) -> List[Module]:
