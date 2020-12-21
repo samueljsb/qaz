@@ -12,8 +12,8 @@ class Vim(GitModule):
 
     def install_action(self):
         super().install_action()
-        shell.run("vim +PluginInstall +qall")
+        shell.run("vim +PluginInstall +qall", suppress_output=True)
 
     def upgrade_action(self):
         super().upgrade_action()
-        shell.run("vim +PluginInstall +qall")
+        shell.run("vim +PluginInstall +qall", suppress_output=True)
