@@ -18,14 +18,10 @@ class NerdFonts(GitModule):
         super().install_action()
 
         for font_name in FONTS:
-            output.message(f"... installing font: {font_name} ...")
             shell.run(f"{self.repo_path / 'install.sh'} {font_name}")
-            output.message(f"... ... {font_name} installed!")
 
     def upgrade_action(self):
         super().upgrade_action()
 
         for font_name in FONTS:
-            output.message(f"... installing font: {font_name} ...")
             shell.run(f"{self.repo_path / 'install.sh'} {font_name}")
-            output.message(f"... ... {font_name} installed!")

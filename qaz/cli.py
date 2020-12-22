@@ -59,7 +59,9 @@ def install(ctx: click.Context, modules: Tuple[str]):
     error = False
     for module in _get_modules(modules):
         try:
+            output.message(f"Installing {module.name}...")
             module.install()
+            output.message(f"... {module.name} installed!")
         except (DependenciesMissing, CalledProcessError) as exc:
             output.error(str(exc))
             error = True
@@ -84,7 +86,9 @@ def upgrade(ctx: click.Context, modules: Iterable[str], upgrade_all: bool):
 
     for module in _get_modules(modules):
         try:
+            output.message(f"Upgrading {module.name}...")
             module.upgrade()
+            output.message(f"... {module.name} upgraded!")
         except (DependenciesMissing, NotInstalled, CalledProcessError) as exc:
             output.error(str(exc))
             error = True
