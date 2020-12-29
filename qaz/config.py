@@ -25,7 +25,7 @@ def set_module_installed(name: str):
     if module_cfg := config["modules"].get(name):
         module_cfg["installed"] = True
     else:
-        config["modules"]["name"] = ModuleConfig(installed=True)
+        config["modules"][name] = ModuleConfig(installed=True)
 
     _save_config_to_file(config)
 
