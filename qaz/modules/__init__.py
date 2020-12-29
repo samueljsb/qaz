@@ -16,7 +16,7 @@ from .python import Bpython, Pipx, Poetry, Python, Tox
 from .ruby import Ruby
 from .rust import Rust
 from .starship import Starship
-from .tools import Bat, Exa, Figlet, Less, TrashCLI
+from .tools import Bat, Exa, Figlet, GNUSed, Less, TrashCLI
 from .vim import Vim
 from .vscode import VSCode
 from .zsh import ZSH, OhMyZSH
@@ -64,6 +64,7 @@ mac_modules: List[Module] = [
     QuickLookExtensions(),
     Bartender(),
     Rectangle(),
+    GNUSed(),
 ]
 
 all_modules = modules

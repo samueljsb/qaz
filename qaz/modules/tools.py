@@ -17,6 +17,17 @@ class Figlet(BrewModule):
     package_name = "figlet"
 
 
+class GNUSed(BrewModule):
+    """
+    GNU sed.
+
+    This allows MacOS to have a more convenient version of sed.
+    """
+
+    name = "sed"
+    package_name = "gnu-sed"
+
+
 class Less(BrewModule):
     name = "less"
     package_name = "less"
