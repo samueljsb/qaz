@@ -88,7 +88,7 @@ class Module:
         return config.is_module_installed(self.name)
 
     def set_installed(self):
-        config.set_module_installed(self.name, True)
+        config.set_module_installed(self.name)
 
     def _check_dependencies(self):
         """
