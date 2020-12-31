@@ -12,7 +12,7 @@ from .iterm2 import ITerm2
 from .latex import Mactex
 from .macos import Bartender, MacOS, QuickLookExtensions, Rectangle
 from .nodejs import NodeJS, Yarn
-from .python import Bpython, Pipx, Poetry, Python, Tox
+from .python import Bpython, Pipx, Poetry, Python, Rich, Tox
 from .ruby import Ruby
 from .rust import Rust
 from .starship import Starship
@@ -43,6 +43,7 @@ modules: List[Module] = [
     Poetry(),
     Python(),
     Bpython(),
+    Rich(),
     Tox(),
     Ruby(),
     Rust(),

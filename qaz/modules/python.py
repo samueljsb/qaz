@@ -48,6 +48,11 @@ class PipModule(Module):
         pip.install_or_upgrade_package(self.package_name)
 
 
+class Rich(PipModule):
+    name = "rich"
+    package_name = "rich"
+
+
 class Pipx(BrewModule):
     name = "pipx"
     package_name = "pipx"
