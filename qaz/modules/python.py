@@ -8,7 +8,7 @@ from qaz.utils import shell
 class Python(ASDFModule):
     name = "Python"
     plugin_name = "python"
-    symlinks = {".pypirc": "~"}
+    symlinks = {".pypirc": "~", "pythonstartup.py": "~/.config/"}
     vscode_extensions = [
         "lextudio.restructuredtext",
         "ms-python.python",
@@ -19,10 +19,12 @@ class Python(ASDFModule):
     def install_action(self):
         super().install_action()
         pip.install_or_upgrade_package("pip")
+        pip.install_or_upgrade_package("gnureadline")
 
     def upgrade_action(self):
         super().upgrade_action()
         pip.install_or_upgrade_package("pip")
+        pip.install_or_upgrade_package("gnureadline")
 
 
 class Poetry(Module):
