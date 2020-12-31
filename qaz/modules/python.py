@@ -1,4 +1,4 @@
-from qaz.managers import pipx
+from qaz.managers import pip, pipx
 from qaz.module import Module
 from qaz.modules.asdf import ASDFModule
 from qaz.modules.brew import BrewModule
@@ -16,6 +16,14 @@ class Python(ASDFModule):
         "wholroyd.jinja",
     ]
 
+    def install_action(self):
+        super().install_action()
+        pip.install_or_upgrade_package("pip")
+
+    def upgrade_action(self):
+        super().upgrade_action()
+        pip.install_or_upgrade_package("pip")
+
 
 class Poetry(Module):
     name = "Poetry"
@@ -25,6 +33,17 @@ class Poetry(Module):
 
     def upgrade_action(self):
         shell.run("poetry self update")
+
+
+class PipModule(Module):
+    package_name: str
+    _base_requires = [Python()]
+
+    def install_action(self):
+        pip.install_or_upgrade_package(self.package_name)
+
+    def upgrade_action(self):
+        pip.install_or_upgrade_package(self.package_name)
 
 
 class Pipx(BrewModule):
