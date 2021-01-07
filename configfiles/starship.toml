@@ -19,6 +19,12 @@ discharging_symbol = ""
 [conda]
 symbol = " "
 
+[dart]
+symbol = " "
+
+[directory]
+read_only = " "
+
 [docker]
 symbol = " "
 
@@ -61,6 +67,9 @@ symbol = " "
 [package]
 symbol = " "
 
+[perl]
+symbol = " "
+
 [php]
 symbol = " "
 
@@ -71,4 +80,7 @@ symbol = " "
 symbol = " "
 
 [rust]
-symbol = " "
+symbol = " "
+
+[swift]
+symbol = "ﯣ "
