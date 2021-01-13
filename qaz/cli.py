@@ -122,11 +122,3 @@ def _list():
         else:
             status = ""
         click.echo(f"{status:1} {module.name}")
-
-
-@cli.command()
-def edit():
-    """
-    Open the repo for editing.
-    """
-    shell.run(f"$EDITOR {config.root_dir}")
