@@ -11,7 +11,7 @@ def install_or_upgrade_formula(formula: str):
 
 
 def _get_installed_formulae() -> List[str]:
-    return shell.capture("brew list -1").split()
+    return shell.capture("brew list --formula -1").split()
 
 
 def install_or_upgrade_cask(cask: str):
