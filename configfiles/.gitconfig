@@ -19,6 +19,7 @@
     s = status --short
     grep = grep --break --heading
     fu = commit --edit --fixup
+    gone = ! "git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D"
 
 [submodule]
     recurse = true
