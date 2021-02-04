@@ -3,9 +3,6 @@
     path = ~/.gitconfig.local
     path = ~/.gitconfig.diff-so-fancy
 
-[hub]
-    protocol = https
-
 [core]
     editor = vim
     excludesfile = ~/.gitignore
