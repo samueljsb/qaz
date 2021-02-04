@@ -46,3 +46,5 @@
 	prune = true
 [commit]
 	template = ~/.git-commit-msg
+[merge]
+    conflictStyle = diff3
