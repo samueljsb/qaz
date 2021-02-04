@@ -1,47 +1,56 @@
-# Local/private config goes in the include
-[include]
-    path = ~/.gitconfig.local
-    path = ~/.gitconfig.diff-so-fancy
+[alias]
+    # Make some things prettier.
+    grep = grep --break --heading
+    lg = log --oneline --graph --decorate
+
+    # Convenience.
+    fu = commit --edit --fixup
+    s = status --short
+
+    # Delete branches that have been deleted on the remote (e.g. closed PRs in GitHub).
+    gone = ! "git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D"
+
+[color]
+    ui = true
+
+# Use a template for the commit message.
+[commit]
+    template = ~/.git-commit-msg
 
 [core]
     editor = vim
     excludesfile = ~/.gitignore
     autocrlf = input
 
-[color]
-    ui = true
-
-[alias]
-    lg = log --oneline --graph --decorate
-    s = status --short
-    grep = grep --break --heading
-    fu = commit --edit --fixup
-    gone = ! "git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D"
-
-[submodule]
-    recurse = true
-
-[help]
-    autocorrect = 1
-
-[push]
-    # See `git help config` (search for push.default)
-    # for more information on different options of the below setting.
-    #
-    # Setting to git 2.0 default to suppress warning message
-    default = simple
+[fetch]
+    prune = true
 
 [grep]
     lineNumber = true
 
+[help]
+    autocorrect = 1
+
+# Local configuration.
+[include]
+    path = ~/.gitconfig.local
+
+# Configurations for tools installed with qaz.
+[include]
+    path = ~/.gitconfig.diff-so-fancy
+
+[merge]
+    conflictStyle = diff3
+
 [pull]
     rebase = true
 
+[push]
+    default = simple
+
+[submodule]
+    recurse = true
+
+# Use ssh for GitHub.
 [url "ssh://git@github.com/"]
     insteadOf = https://github.com/
-[fetch]
-	prune = true
-[commit]
-	template = ~/.git-commit-msg
-[merge]
-    conflictStyle = diff3
