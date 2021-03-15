@@ -8,7 +8,7 @@ from qaz.utils import shell
 class Python(ASDFModule):
     name = "Python"
     plugin_name = "python"
-    symlinks = {".pypirc": "~", "pythonstartup.py": "~/.config/"}
+    symlinks = {".pypirc": "~", "pythonstartup.py": "~/.config/", ".pdbrc.py": "~"}
     vscode_extensions = [
         "lextudio.restructuredtext",
         "ms-python.python",
