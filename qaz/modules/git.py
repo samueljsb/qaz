@@ -76,20 +76,11 @@ class GitModule(Module):
 class GitHubCLI(BrewModule):
     name = "GitHub"
     package_name = "gh"
+    symlinks = {"github_config.yml": "~/.config/gh/config.yml"}
 
     def install_action(self):
         super().install_action()
         shell.run("gh auth login --web")
-        self._set_config()
-
-    def upgrade_action(self):
-        super().upgrade_action()
-        self._set_config()
-
-    def _set_config(self):
-        shell.run("gh config set prompt enabled")
-        shell.run("gh config set pager 'less -RFX'")
-        shell.run("gh alias set newpr 'pr create --fill --web'")
 
 
 class LazyGit(BrewModule):
