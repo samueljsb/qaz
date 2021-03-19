@@ -18,6 +18,9 @@ def create_symlink(target: Path, link: Path = Path.home()):
             return
         link.unlink()
 
+    # Ensure the destination directory exists.
+    target.parent.mkdir(exist_ok=True)
+
     try:
         link.symlink_to(target)
         output.message(f"Linked {link} -> {target}")
