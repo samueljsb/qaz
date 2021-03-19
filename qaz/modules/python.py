@@ -1,3 +1,5 @@
+from sys import platform
+
 from qaz.managers import pip, pipx
 from qaz.module import Module
 from qaz.modules.asdf import ASDFModule
@@ -19,12 +21,14 @@ class Python(ASDFModule):
     def install_action(self):
         super().install_action()
         pip.install_or_upgrade_package("pip")
-        pip.install_or_upgrade_package("gnureadline")
+        if platform == "darwin":
+            pip.install_or_upgrade_package("gnureadline")
 
     def upgrade_action(self):
         super().upgrade_action()
         pip.install_or_upgrade_package("pip")
-        pip.install_or_upgrade_package("gnureadline")
+        if platform == "darwin":
+            pip.install_or_upgrade_package("gnureadline")
 
 
 class Poetry(Module):
