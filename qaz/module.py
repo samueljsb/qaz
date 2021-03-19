@@ -30,14 +30,9 @@ class Module:
     vscode_extensions: List[str] = list()
 
     # Internal attributes
-    _zshrc_path: Path
     _base_requires: Optional[List["Module"]] = None
 
     def __init__(self):
-        # .zshrc file
-        zshrc_fname = self.zshrc_file or f"{self.name.lower()}.zsh"
-        self._zshrc_path = config.get_root_dir() / "zshrc" / zshrc_fname
-
         # base requirements
         self.requires = self.requires + (self._base_requires or [])
 
@@ -103,9 +98,11 @@ class Module:
         """
         Create symlink from ~/.zshrc.d to the zshrc file for this module.
         """
-        if self._zshrc_path.exists():
+        zshrc_fname = self.zshrc_file or f"{self.name.lower()}.zsh"
+        zshrc_path = config.get_root_dir() / "zshrc" / zshrc_fname
+        if zshrc_path.exists():
             files.create_symlink(
-                self._zshrc_path,
+                zshrc_path,
                 Path.home() / ".zshrc.d",
             )
 
