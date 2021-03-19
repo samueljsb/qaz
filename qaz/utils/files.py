@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from . import output
+from . import output, shell
 
 
 def create_symlink(target: Path, link: Path = Path.home()):
@@ -18,8 +18,16 @@ def create_symlink(target: Path, link: Path = Path.home()):
             return
         link.unlink()
 
+    # Ensure the destination directory exists.
+    target.parent.mkdir(exist_ok=True)
+
     try:
         link.symlink_to(target)
-        output.message(f"Linked {link} -> {target}")
+    except PermissionError:
+        # Run ln with sudo in a shell.
+        shell.run(f"sudo ln -s {target.expanduser()} {link.expanduser()}")
     except FileExistsError:
         output.error(f"Could not create symlink because a file exists: {link}")
+        return
+
+    output.message(f"Linked {link} -> {target}")

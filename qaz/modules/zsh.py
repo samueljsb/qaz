@@ -48,12 +48,12 @@ elif platform == "linux":
     class ZSH(ZSHBase):  # type: ignore
         def install_action(self):
             shell.run("sudo apt update")
-            shell.run("sudo apt install zsh")
+            shell.run("sudo apt install --yes zsh")
             self._set_default_shell()
 
         def upgrade_action(self):
             shell.run("sudo apt update")
-            shell.run("sudo apt upgrade zsh")
+            shell.run("sudo apt upgrade --yes zsh")
             self._set_default_shell()
 
 
