@@ -62,7 +62,6 @@ class GitModule(Module):
     repo_url: str
     repo_path: Path
     additional_clone_options: List[str] = list()
-    _base_requires = [Git()]
 
     def install_action(self):
         shell.run(
