@@ -1,1 +1,1 @@
-export PAGER=bat
+export PAGER='bat -p'
