@@ -70,6 +70,9 @@
   "python.linting.mypyEnabled": true,
   "python.showStartPage": false,
   "python.terminal.activateEnvironment": true,
+  "spellchecker.ignoreWordsList": [
+    "Kraken"
+  ],
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.fontFamily": "Hack Nerd Font",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
