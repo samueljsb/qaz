@@ -1,12 +1,15 @@
+import logging
 from pathlib import Path
 from sys import platform
-from typing import List
+from typing import Dict, List
 
 import click
 
-from qaz.module import Module
-from qaz.modules.brew import BrewModule
-from qaz.utils import output, shell
+from qaz.managers import brew, shell
+from qaz.modules.base import Module
+
+
+logger = logging.getLogger(__name__)
 
 
 LOCAL_CONFIG_TEMPL = """
@@ -18,13 +21,19 @@ LOCAL_CONFIG_TEMPL = """
 """
 
 
-class Git(BrewModule):
+class Git(Module):
     name = "git"
-    package_name = "git"
+
+    # Configuration files
+    zshrc_file = "git.zsh"
     symlinks = {".gitconfig": "~", ".gitignore": "~", ".git-commit-msg": "~"}
 
-    def install_action(self):
-        super().install_action()
+    # Other
+    vscode_extensions: List[str] = []
+
+    @classmethod
+    def install_action(cls):
+        brew.install_or_upgrade_formula("git")
 
         # Set up local config
         if platform == "darwin":
@@ -54,40 +63,67 @@ class Git(BrewModule):
             shell.run(f"ssh-keygen -t rsa -b 4096 -C '{git_authoremail}' -f {id_rsa}")
         with id_rsa_pub.open() as fd:
             public_key = fd.read()
-        output.message(f"Add your public key to GitHub:\n    {public_key}")
+        logger.info(f"Add your public key to GitHub:\n    {public_key}")
         shell.run(f"ssh-add -K {id_rsa}")
 
-
-class GitModule(Module):
-    repo_url: str
-    repo_path: Path
-    additional_clone_options: List[str] = list()
-
-    def install_action(self):
-        shell.run(
-            f"git clone {' '.join(self.additional_clone_options)} {self.repo_url} {self.repo_path}"  # noqa: E501
-        )
-
-    def upgrade_action(self):
-        shell.run(f"git -C {self.repo_path} pull")
+    @classmethod
+    def upgrade_action(cls):
+        brew.install_or_upgrade_formula("git")
 
 
-class GitHubCLI(BrewModule):
+class GitHubCLI(Module):
     name = "GitHub"
-    package_name = "gh"
+
+    # Configuration files
+    zshrc_file = "github.zsh"
     symlinks = {"github_config.yml": "~/.config/gh/config.yml"}
 
-    def install_action(self):
-        super().install_action()
+    # Other
+    vscode_extensions: List[str] = []
+
+    @classmethod
+    def install_action(cls):
+        brew.install_or_upgrade_formula("gh")
         shell.run("gh auth login --web")
 
+    @classmethod
+    def upgrade_action(cls):
+        brew.install_or_upgrade_formula("gh")
 
-class LazyGit(BrewModule):
+
+class LazyGit(Module):
     name = "lazygit"
-    package_name = "jesseduffield/lazygit/lazygit"
+
+    # Configuration files
+    zshrc_file = None
+    symlinks: Dict[str, str] = {}
+
+    # Other
+    vscode_extensions: List[str] = []
+
+    @classmethod
+    def install_action(cls):
+        brew.install_or_upgrade_formula("jesseduffield/lazygit/lazygit")
+
+    @classmethod
+    def upgrade_action(cls):
+        brew.install_or_upgrade_formula("jesseduffield/lazygit/lazygit")
 
 
-class DiffSoFancy(BrewModule):
+class DiffSoFancy(Module):
     name = "diff-so-fancy"
-    package_name = "diff-so-fancy"
+
+    # Configuration files
+    zshrc_file = None
     symlinks = {".gitconfig.diff-so-fancy": "~"}
+
+    # Other
+    vscode_extensions: List[str] = []
+
+    @classmethod
+    def install_action(cls):
+        brew.install_or_upgrade_formula("diff-so-fancy")
+
+    @classmethod
+    def upgrade_action(cls):
+        brew.install_or_upgrade_formula("diff-so-fancy")

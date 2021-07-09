@@ -1,6 +1,6 @@
 from typing import List
 
-from qaz.utils import shell
+from . import shell
 
 
 def install_or_upgrade_formula(formula: str):

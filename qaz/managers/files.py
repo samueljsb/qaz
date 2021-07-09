@@ -1,6 +1,10 @@
+import logging
 from pathlib import Path
 
-from . import output, shell
+from . import shell
+
+
+logger = logging.getLogger(__name__)
 
 
 def create_symlink(target: Path, link: Path = Path.home()):
@@ -27,7 +31,7 @@ def create_symlink(target: Path, link: Path = Path.home()):
         # Run ln with sudo in a shell.
         shell.run(f"sudo ln -s {target.expanduser()} {link.expanduser()}")
     except FileExistsError:
-        output.error(f"Could not create symlink because a file exists: {link}")
+        logger.error(f"Could not create symlink because a file exists: {link}")
         return
 
-    output.message(f"Linked {link} -> {target}")
+    logger.info(f"Linked {link} -> {target}")
