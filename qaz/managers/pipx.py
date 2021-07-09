@@ -1,7 +1,7 @@
 import re
 from typing import List
 
-from qaz.utils import shell
+from . import shell
 
 
 def install_or_upgrade_package(package: str):

@@ -1,18 +1,31 @@
+import logging
 import os
 import subprocess
-from typing import Dict, Optional
+from pathlib import Path
+from typing import Dict, Optional, Union
 
-from . import output
+from qaz import settings
+
+
+logger = logging.getLogger(__name__)
+
+
+class CommandNotFound(Exception):
+    """
+    The given command was not found.
+    """
+
+    pass
 
 
 def run(
     command: str,
     *,
-    cwd: Optional[str] = None,
+    cwd: Optional[Union[str, Path]] = None,
     allow_fail: bool = False,
     env: Dict[str, str] = None,
 ):
-    output.command(command)
+    logger.debug(f"$ {command}")
 
     process = subprocess.run(
         command,
@@ -21,7 +34,13 @@ def run(
         env=os.environ.update(env if env else {}),
     )
     if not allow_fail:
+        if process.returncode == 127:
+            raise CommandNotFound(f"Command '{command.split()[0]}' not found.")
         process.check_returncode()
+
+
+def run_script(script_name: str) -> None:
+    run(str(settings.get_root_dir() / "scripts" / script_name))
 
 
 def capture(command: str, *, env: Dict[str, str] = None) -> str:

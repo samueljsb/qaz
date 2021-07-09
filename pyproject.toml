@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "qaz"
-version = "0.1.0"
+version = "0"
 description = "Manage your system configuration and install/update tools."
-authors = ["Samuel Searles-Bryant <devel@samueljsb.co.uk>"]
+authors = ["Samuel Searles-Bryant <sam@samueljsb.co.uk>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"

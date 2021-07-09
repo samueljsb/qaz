@@ -1,21 +1,25 @@
-from pathlib import Path
 from sys import platform
 
-from qaz.modules.brew import BrewCaskModule
+from qaz.managers import brew
+from qaz.modules.base import Module
 
 
 if platform == "darwin":
-    SETTINGS_DIR = Path.home() / "Library/Application Support/Code/User"
+    SETTINGS_DIR = "~/Library/Application Support/Code/User"
 elif platform == "linux":
-    SETTINGS_DIR = Path.home() / ".config/Code/User"
+    SETTINGS_DIR = "~/.config/Code/User"
 else:
-    SETTINGS_DIR = Path.home() / ".config/Code/User"
+    SETTINGS_DIR = "~/.config/Code/User"
 
 
-class VSCode(BrewCaskModule):
+class VSCode(Module):
     name = "VSCode"
-    cask_name = "visual-studio-code"
+
+    # Configuration files
+    zshrc_file = None
     symlinks = {"settings.json": SETTINGS_DIR}
+
+    # Other
     vscode_extensions = [
         "aaron-bond.better-comments",
         "alefragnani.Bookmarks",
@@ -43,3 +47,9 @@ class VSCode(BrewCaskModule):
         "wholroyd.jinja",
         "william-voyek.vscode-nginx",
     ]
+
+    def install_action(self):
+        brew.install_or_upgrade_cask("visual-studio-code")
+
+    def upgrade_action(self):
+        brew.install_or_upgrade_cask("visual-studio-code")
