@@ -71,14 +71,15 @@
   "python.showStartPage": false,
   "python.terminal.activateEnvironment": true,
   "spellchecker.ignoreWordsList": [
-    "Kraken"
+    "Kraken",
+    "Django"
   ],
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.fontFamily": "Hack Nerd Font",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "window.zoomLevel": 0,
   "workbench.editorAssociations": {
-    "*.ipynb": "jupyter.notebook.ipynb"
+    "*.ipynb": "jupyter-notebook"
   },
   "workbench.iconTheme": "material-icon-theme"
 }
