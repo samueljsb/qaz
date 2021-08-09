@@ -30,10 +30,10 @@ class VSCode(Module):
         "EditorConfig.EditorConfig",
         "esbenp.prettier-vscode",
         "formulahendry.auto-close-tag",
+        "knisterpeter.vscode-github",
         "mikestead.dotenv",
         "mrmlnc.vscode-apache",
         "ms-azuretools.vscode-docker",
-        "ms-python.python",
         "naumovs.color-highlight",
         "npxms.hide-gitignored",
         "PKief.material-icon-theme",
@@ -46,6 +46,7 @@ class VSCode(Module):
         "waderyan.gitblame",
         "wholroyd.jinja",
         "william-voyek.vscode-nginx",
+        "zamerick.vscode-caddyfile-syntax",
     ]
 
     def install_action(self):

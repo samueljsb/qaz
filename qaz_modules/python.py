@@ -14,6 +14,7 @@ class Python(Module):
 
     # Other
     vscode_extensions = [
+        "freakypie.code-python-isort",
         "lextudio.restructuredtext",
         "ms-python.python",
         "ms-python.vscode-pylance",
