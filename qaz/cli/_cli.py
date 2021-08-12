@@ -49,7 +49,7 @@ def _install(ctx: click.Context, modules: Tuple[str]):
     try:
         install.install_modules(modules)
     except (install.CannotInstallModule, ValueError) as exc:
-        logger.exception(exc)
+        logger.error(exc)
         ctx.exit(1)
 
 
@@ -63,7 +63,7 @@ def _upgrade(ctx: click.Context, modules: Iterable[str]):
     try:
         upgrade.upgrade_modules(modules)
     except (upgrade.CannotUpgradeModule, ValueError) as exc:
-        logger.exception(exc)
+        logger.error(exc)
         ctx.exit(1)
 
 
