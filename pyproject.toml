@@ -7,6 +7,8 @@ authors = ["Samuel Searles-Bryant <sam@samueljsb.co.uk>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 click = ">=8"
+humanize = "^3.11.0"
+rich = "^10.7.0"
 
 [tool.poetry.dev-dependencies]
 black = "*"

@@ -4,8 +4,8 @@ from typing import Iterable, Tuple
 import click
 
 from qaz.application import install, setup, update, upgrade
-from qaz.modules import queries as module_queries
 
+from . import _list as list_modules
 from . import _logging
 
 
@@ -72,16 +72,4 @@ def _list():
     """
     List installed and available modules.
     """
-    all_modules = module_queries.get_all_modules()
-    for module in sorted(all_modules.values(), key=lambda module: module.name):
-        if module_queries.is_module_installed(module):
-            status = click.style("✓", fg="green", bold=True)
-        else:
-            status = ""
-
-        if last_upgraded_at := module_queries.get_last_upgraded_at(module):
-            timestamp = last_upgraded_at.strftime("(last upgraded %c)")
-        else:
-            timestamp = ""
-
-        click.echo(f"{status:1} {module.name} {timestamp}")
+    list_modules.output_modules_lists()
