@@ -1,6 +1,6 @@
 from typing import Dict, List
 
-from qaz.managers import brew, shell
+from qaz.managers import brew
 from qaz.modules.base import Module
 
 
@@ -17,7 +17,6 @@ class MacOSDocker(Module):
     @classmethod
     def install_action(cls):
         brew.install_or_upgrade_cask("docker")
-        shell.run("open /Applications/Docker.app")
 
     @classmethod
     def upgrade_action(cls):
