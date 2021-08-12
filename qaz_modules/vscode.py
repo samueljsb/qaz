@@ -49,8 +49,10 @@ class VSCode(Module):
         "zamerick.vscode-caddyfile-syntax",
     ]
 
+    @classmethod
     def install_action(self):
         brew.install_or_upgrade_cask("visual-studio-code")
 
+    @classmethod
     def upgrade_action(self):
         brew.install_or_upgrade_cask("visual-studio-code")
