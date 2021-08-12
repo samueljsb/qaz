@@ -9,7 +9,7 @@ class ClickHandler(logging.Handler):
         logging.INFO: dict(bold=True, err=True),
         logging.WARNING: dict(fg="bright_black", bg="yellow", bold=True, err=True),
         logging.ERROR: dict(fg="bright_red", bold=True, err=True),
-        logging.CRITICAL: dict(fg="bright_white", bg="red"),
+        logging.CRITICAL: dict(fg="bright_white", bg="red", err=True),
     }
 
     def emit(self, record):
