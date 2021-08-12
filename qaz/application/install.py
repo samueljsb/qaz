@@ -31,7 +31,10 @@ def install_modules(module_names: Iterable[str]) -> None:
     """
     Install modules with names matching the given names.
 
-    Raises CannotInstallModule if a module cannot be installed.
+    Raises:
+        - ValueError if a module name is not recognised.
+        - CannotInstallModule if a module cannot be installed.
+
     """
     # Retrieve the modules to be installed.
     try:

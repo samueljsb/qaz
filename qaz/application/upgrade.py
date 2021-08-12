@@ -22,7 +22,10 @@ def upgrade_modules(module_names: Iterable[str]) -> None:
     """
     Upgrade modules with names matching the given names.
 
-    Raises CannotUpgradeModule if a module cannot be upgraded for any reason.
+    Raises:
+        - ValueError if a module name is not recognised.
+        - CannotUpgradeModule if a module cannot be upgraded for any reason.
+
     """
     # Retrieve the modules to be upgraded.
     try:
