@@ -1,6 +1,7 @@
+import datetime
 import importlib
 import sys
-from typing import Dict, Iterable, List, Tuple
+from typing import Dict, Iterable, List, Optional, Tuple
 
 from qaz import settings
 
@@ -18,6 +19,13 @@ def is_module_installed(module: base.Module) -> bool:
     Check if the given module has been installed.
     """
     return settings.is_module_installed(module.name)
+
+
+def get_last_upgraded_at(module: base.Module) -> Optional[datetime.datetime]:
+    """
+    Get the timestamp of the last time this module was upgraded.
+    """
+    return settings.get_last_upgraded_at(module.name)
 
 
 def get_modules_by_name(module_names: Iterable[str]) -> List[base.Module]:
