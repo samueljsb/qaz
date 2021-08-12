@@ -1,6 +1,7 @@
 import logging
 from typing import Iterable
 
+from qaz import settings
 from qaz.modules import queries as module_queries
 from qaz.modules.base import Module
 
@@ -59,3 +60,5 @@ def upgrade_module(module: Module) -> None:
     except Exception as exc:
         logger.exception(exc)
         raise CannotUpgradeModule(exc)
+
+    settings.record_module_upgraded(module.name)
