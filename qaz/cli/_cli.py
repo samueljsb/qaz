@@ -78,4 +78,10 @@ def _list():
             status = click.style("✓", fg="green", bold=True)
         else:
             status = ""
-        click.echo(f"{status:1} {module.name}")
+
+        if last_upgraded_at := module_queries.get_last_upgraded_at(module):
+            timestamp = last_upgraded_at.strftime("(last upgraded %c)")
+        else:
+            timestamp = ""
+
+        click.echo(f"{status:1} {module.name} {timestamp}")
