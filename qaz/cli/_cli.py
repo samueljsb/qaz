@@ -1,7 +1,9 @@
+import datetime
 import logging
 from typing import Iterable, Tuple
 
 import click
+import humanize
 
 from qaz.application import install, setup, update, upgrade
 from qaz.modules import queries as module_queries
@@ -80,8 +82,9 @@ def _list():
             status = ""
 
         if last_upgraded_at := module_queries.get_last_upgraded_at(module):
-            timestamp = last_upgraded_at.strftime("(last upgraded %c)")
+            timestamp = humanize.naturaltime(datetime.datetime.now() - last_upgraded_at)
+            last_upgraded = f"(last updated {timestamp})"
         else:
-            timestamp = ""
+            last_upgraded = ""
 
-        click.echo(f"{status:1} {module.name} {timestamp}")
+        click.echo(f"{status:1} {module.name} {last_upgraded}")
