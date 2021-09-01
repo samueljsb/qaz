@@ -100,7 +100,10 @@ class OhMyZSH(Module):
     @classmethod
     def upgrade_action(cls):
         zsh_dir = Path.home().resolve() / ".oh-my-zsh"
-        shell.run(f"sh {zsh_dir / 'tools/upgrade.sh'} --interactive", env={"ZSH": str(zsh_dir)})
+        shell.run(
+            f"sh {zsh_dir / 'tools/upgrade.sh'} --interactive",
+            env={"ZSH": str(zsh_dir)},
+        )
 
         # Upgrade themes and plugins.
         git.pull(Path.home() / ".oh-my-zsh/custom/plugins/zsh-syntax-highlighting")
