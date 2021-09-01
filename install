@@ -41,15 +41,15 @@ message '... Poetry installed!'
 # Install management tool
 message "Installing qaz management tool..."
 cd $QAZ
-asdf exec python -m venv venv
-. venv/bin/activate
+asdf exec python -m venv .venv
+. .venv/bin/activate
 $HOME/.poetry/bin/poetry install --no-dev
-sudo ln -sf $QAZ/venv/bin/qaz /usr/local/bin
+sudo ln -sf $QAZ/.venv/bin/qaz /usr/local/bin
 message "... management tool installed!"
 
 # Run management tool to install basics
 mkdir -p $HOME/.config
-$QAZ/venv/bin/qaz setup $QAZ
+$QAZ/.venv/bin/qaz setup $QAZ
 
 # Install zsh and set as default shell
-$QAZ/venv/bin/qaz install zsh
+$QAZ/.venv/bin/qaz install zsh
