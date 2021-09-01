@@ -14,5 +14,4 @@ def update_qaz() -> None:
     shell.run(
         "poetry install --no-dev --remove-untracked",
         cwd=root_dir,
-        env=dict(VIRTUAL_ENV=str(root_dir / "venv")),
     )
