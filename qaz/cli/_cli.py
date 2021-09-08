@@ -3,7 +3,7 @@ from typing import Iterable, Tuple
 
 import click
 
-from qaz.application import install, setup, update, upgrade
+from qaz.application import git, install, setup, update, upgrade
 
 from . import _list as list_modules
 from . import _logging
@@ -29,6 +29,16 @@ def _setup(root_dir: str):
     logger.info("Installing qaz...")
     setup.setup_qaz(root_dir)
     logger.info("... qaz is installed.")
+
+
+@cli.command("git")
+@click.option("--author-name", prompt="Your git author name")
+@click.option("--author-email", prompt="Your git author email")
+def _git(author_name: str, author_email: str):
+    """
+    Configure git.
+    """
+    git.configure_git(author_name=author_name, author_email=author_email)
 
 
 @cli.command("update")
