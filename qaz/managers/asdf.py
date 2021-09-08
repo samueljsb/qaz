@@ -16,7 +16,7 @@ def install_or_upgrade_plugin(plugin: str):
 
 
 def _get_installed_plugins() -> List[str]:
-    return shell.capture(f"asdf plugin list").split()
+    return shell.capture("asdf plugin list").split()
 
 
 def _set_latest(plugin: str):
