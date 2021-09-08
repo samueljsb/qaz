@@ -16,8 +16,7 @@ def install_or_upgrade_plugin(plugin: str):
 
 
 def _get_installed_plugins() -> List[str]:
-    asdf_list = shell.capture("asdf list").split("\n")
-    return [name for name in asdf_list if not name.startswith(" ")]
+    return shell.capture(f"asdf plugin list").split()
 
 
 def _set_latest(plugin: str):
