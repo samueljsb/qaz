@@ -1,5 +1,7 @@
 command_timeout = "1500"
 
+right_format = """$status$cmd_duration$time"""
+
 [git_status]
 ahead = "⇡${count}"
 diverged = "⇡${ahead_count}⇣${behind_count}"
@@ -8,6 +10,9 @@ behind = "⇣${count}"
 [status]
 disabled=false
 symbol=''
+
+[time]
+disabled=false
 
 [aws]
 symbol = " "
