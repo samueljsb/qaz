@@ -1,5 +1,3 @@
-import datetime
-
 import humanize
 from rich.console import Console
 from rich.panel import Panel
@@ -37,7 +35,7 @@ def output_modules_lists() -> None:
 
 def _add_module_to_table(table: Table, module: modules_base.Module) -> None:
     if last_upgraded_at := module_queries.get_last_upgraded_at(module):
-        last_upgraded = humanize.naturaltime(datetime.datetime.now() - last_upgraded_at)
+        last_upgraded = humanize.naturaltime(last_upgraded_at)
     else:
         last_upgraded = "[dim]unknown[/]"
 
