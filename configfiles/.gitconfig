@@ -4,7 +4,6 @@
     lg = log --oneline --graph --decorate
 
     # Convenience.
-    fu = commit --edit --fixup
     s = status --short
 
     # Delete branches that have been deleted on the remote (e.g. closed PRs in GitHub).
