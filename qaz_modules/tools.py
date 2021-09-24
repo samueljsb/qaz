@@ -61,6 +61,25 @@ class Figlet(Module):
         brew.install_or_upgrade_formula("figlet")
 
 
+class Figlet(Module):
+    name = "fzf"
+
+    # Configuration files
+    zshrc_file = None
+    symlinks: Dict[str, str] = {}
+
+    # Other
+    vscode_extensions: List[str] = []
+
+    @classmethod
+    def install_action(cls):
+        brew.install_or_upgrade_formula("fzf")
+
+    @classmethod
+    def upgrade_action(cls):
+        brew.install_or_upgrade_formula("fzf")
+
+
 class GNUSed(Module):
     """
     GNU sed.
