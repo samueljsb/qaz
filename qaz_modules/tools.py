@@ -61,7 +61,7 @@ class Figlet(Module):
         brew.install_or_upgrade_formula("figlet")
 
 
-class Figlet(Module):
+class Fzf(Module):
     name = "fzf"
 
     # Configuration files
