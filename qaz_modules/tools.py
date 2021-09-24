@@ -65,7 +65,7 @@ class Fzf(Module):
     name = "fzf"
 
     # Configuration files
-    zshrc_file = None
+    zshrc_file = "fzf.zsh"
     symlinks: Dict[str, str] = {}
 
     # Other
