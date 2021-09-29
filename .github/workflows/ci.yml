@@ -18,4 +18,4 @@ jobs:
           python -m pip install poetry
           poetry install
       - name: Lint
-        run: poetry run ./lint
+        run: poetry run invoke lint
