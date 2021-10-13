@@ -21,6 +21,9 @@
     excludesfile = ~/.gitignore
     autocrlf = input
 
+[diff]
+    relative = true
+
 [fetch]
     prune = true
 
