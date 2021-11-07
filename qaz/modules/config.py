@@ -23,6 +23,7 @@ COMMON_MODULES = (
     "qaz_modules.tools.Figlet",
     "qaz_modules.tools.Fzf",
     "qaz_modules.tools.Less",
+    "qaz_modules.tools.McFly",
     "qaz_modules.tools.TrashCLI",
     "qaz_modules.vim.Vim",
     "qaz_modules.vscode.VSCode",

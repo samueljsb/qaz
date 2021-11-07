@@ -124,6 +124,25 @@ class Less(Module):
         brew.install_or_upgrade_formula("less")
 
 
+class McFly(Module):
+    name = "McFly"
+
+    # Configuration files
+    zshrc_file = "mcfly.zsh"
+    symlinks: Dict[str, str] = {}
+
+    # Other
+    vscode_extensions: List[str] = []
+
+    @classmethod
+    def install_action(cls):
+        brew.install_or_upgrade_formula("cantino/mcfly/mcfly")
+
+    @classmethod
+    def upgrade_action(cls):
+        brew.install_or_upgrade_formula("cantino/mcfly/mcfly")
+
+
 class TrashCLI(Module):
     name = "trash-cli"
 
