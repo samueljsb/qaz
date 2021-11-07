@@ -3,7 +3,7 @@ plugins=(
     colored-man-pages
     git
     invoke
-    osx
+    macos
     zsh-autosuggestions
     zsh-syntax-highlighting
 )
