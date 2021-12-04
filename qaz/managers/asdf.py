@@ -1,3 +1,4 @@
+from distutils.version import StrictVersion
 from typing import List
 
 from . import shell
@@ -29,4 +30,10 @@ def _set_latest(plugin: str):
 
 
 def _get_installed_versions(plugin: str) -> List[str]:
-    return shell.capture(f"asdf list {plugin}").split()
+    versions = shell.capture(f"asdf list {plugin}").split()
+
+    # Sort the versions.
+    # This is necessary to ensure '3.10.0' is later than '3.1.0'.
+    versions.sort(key=StrictVersion)
+
+    return versions
