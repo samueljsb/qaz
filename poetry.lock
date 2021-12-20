@@ -179,7 +179,7 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "rich"
-version = "10.16.0"
+version = "10.16.1"
 description = "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal"
 category = "main"
 optional = false
@@ -220,7 +220,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "7678f32ed11c1030a54ee7cff6431322e8521649ed368dbea90b2a10c42c8a63"
+content-hash = "a987ab574b329165433c2661331d4253cda3edd06de3f6c140d9d6b9da7acddb"
 
 [metadata.files]
 black = [
@@ -310,8 +310,8 @@ pygments = [
     {file = "Pygments-2.9.0.tar.gz", hash = "sha256:a18f47b506a429f6f4b9df81bb02beab9ca21d0a5fee38ed15aef65f0545519f"},
 ]
 rich = [
-    {file = "rich-10.16.0-py3-none-any.whl", hash = "sha256:24de23bd86b539d02c1570d93ace9bc8a07f2d5db87f97640226e9f6f8ff0253"},
-    {file = "rich-10.16.0.tar.gz", hash = "sha256:06a1355131feda5eba4511dd749e9187ac0fb42209e189845d81e94505fc268e"},
+    {file = "rich-10.16.1-py3-none-any.whl", hash = "sha256:bbe04dd6ac09e4b00d22cb1051aa127beaf6e16c3d8687b026e96d3fca6aad52"},
+    {file = "rich-10.16.1.tar.gz", hash = "sha256:4949e73de321784ef6664ebbc854ac82b20ff60b2865097b93f3b9b41e30da27"},
 ]
 toml = [
     {file = "toml-0.10.2-py2.py3-none-any.whl", hash = "sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b"},
