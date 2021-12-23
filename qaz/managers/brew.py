@@ -1,7 +1,5 @@
 import subprocess
-from typing import List
 
-from . import shell
 from .base import InstallResult, Manager, UpgradeResult
 
 
@@ -59,25 +57,3 @@ class Homebrew(Manager):
         if not proc.stdout:  # not installed
             return ""
         return proc.stdout.split()[-1]
-
-
-def install_or_upgrade_formula(formula: str):
-    if formula.split("/")[-1] in _get_installed_formulae():
-        shell.run(f"brew upgrade {formula}")
-    else:
-        shell.run(f"brew install {formula}")
-
-
-def _get_installed_formulae() -> List[str]:
-    return shell.capture("brew list --formula -1").split()
-
-
-def install_or_upgrade_cask(cask: str):
-    if cask in _get_installed_casks():
-        shell.run(f"brew upgrade --cask {cask}")
-    else:
-        shell.run(f"brew cask install {cask}")
-
-
-def _get_installed_casks() -> List[str]:
-    return shell.capture("brew list --cask -1").split()
