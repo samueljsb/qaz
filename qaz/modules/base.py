@@ -1,7 +1,7 @@
-from typing import Dict, List, Optional, Protocol
+from typing import Dict, List, Optional
 
 
-class Module(Protocol):
+class Module:
     """
     A module that can be installed by QAZ to manage a program or tool.
 
