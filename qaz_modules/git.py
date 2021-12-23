@@ -40,10 +40,6 @@ class GitHubCLI(Module):
 class LazyGit(Module):
     name = "lazygit"
 
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
-
     # Other
     vscode_extensions: list[str] = []
 
@@ -53,10 +49,6 @@ class LazyGit(Module):
 
 class GitUI(Module):
     name = "GitUI"
-
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
 
     # Other
     vscode_extensions: list[str] = []
@@ -69,7 +61,6 @@ class DiffSoFancy(Module):
     name = "diff-so-fancy"
 
     # Configuration files
-    zshrc_file = None
     symlinks = {".gitconfig.diff-so-fancy": "~"}
 
     # Other

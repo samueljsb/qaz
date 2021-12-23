@@ -9,7 +9,6 @@ class Bat(Module):
 
     # Configuration files
     zshrc_file = "bat.zsh"
-    symlinks: dict[str, str] = {}
 
     # Other
     vscode_extensions: list[str] = []
@@ -23,7 +22,6 @@ class Exa(Module):
 
     # Configuration files
     zshrc_file = "exa.zsh"
-    symlinks: dict[str, str] = {}
 
     # Other
     vscode_extensions: list[str] = []
@@ -37,7 +35,6 @@ class Figlet(Module):
 
     # Configuration files
     zshrc_file = "figlet.zsh"
-    symlinks: dict[str, str] = {}
 
     # Other
     vscode_extensions: list[str] = []
@@ -51,7 +48,6 @@ class Fzf(Module):
 
     # Configuration files
     zshrc_file = "fzf.zsh"
-    symlinks: dict[str, str] = {}
 
     # Other
     vscode_extensions: list[str] = []
@@ -71,7 +67,6 @@ class GNUSed(Module):
 
     # Configuration files
     zshrc_file = "sed.zsh"
-    symlinks: dict[str, str] = {}
 
     # Other
     vscode_extensions: list[str] = []
@@ -85,7 +80,6 @@ class Less(Module):
 
     # Configuration files
     zshrc_file = "less.zsh"
-    symlinks: dict[str, str] = {}
 
     # Other
     vscode_extensions: list[str] = []
@@ -99,7 +93,6 @@ class McFly(Module):
 
     # Configuration files
     zshrc_file = "mcfly.zsh"
-    symlinks: dict[str, str] = {}
 
     # Other
     vscode_extensions: list[str] = []
@@ -113,7 +106,6 @@ class TrashCLI(Module):
 
     # Configuration files
     zshrc_file = "trash-cli.zsh"
-    symlinks: dict[str, str] = {}
 
     # Other
     vscode_extensions: list[str] = []

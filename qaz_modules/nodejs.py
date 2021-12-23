@@ -9,10 +9,6 @@ from qaz.modules.base import Module
 class NodeJS(Module):
     name = "Node.js"
 
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
-
     # Other
     vscode_extensions = [
         "dbaeumer.vscode-eslint",
@@ -33,10 +29,6 @@ class NodeJS(Module):
 
 class Yarn(Module):
     name = "Yarn"
-
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
 
     # Other
     vscode_extensions: list[str] = []

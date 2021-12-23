@@ -42,7 +42,6 @@ class Poetry(Module):
 
     # Configuration files
     zshrc_file = "poetry.zsh"
-    symlinks: dict[str, str] = {}
 
     # Other
     vscode_extensions: list[str] = []
@@ -61,10 +60,6 @@ class Poetry(Module):
 class Rich(Module):
     name = "rich"
 
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
-
     # Other
     vscode_extensions: list[str] = []
 
@@ -82,7 +77,6 @@ class Pipx(Module):
 
     # Configuration files
     zshrc_file = "pipx.zsh"
-    symlinks: dict[str, str] = {}
 
     # Other
     vscode_extensions: list[str] = []
@@ -95,7 +89,6 @@ class Bpython(Module):
     name = "bpython"
 
     # Configuration files
-    zshrc_file = None
     symlinks = {"bpython": "~/.config/bpython"}
 
     # Other
@@ -112,10 +105,6 @@ class Bpython(Module):
 
 class Tox(Module):
     name = "tox"
-
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
 
     # Other
     vscode_extensions: list[str] = []

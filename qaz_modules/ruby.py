@@ -7,10 +7,6 @@ from qaz.modules.base import Module
 class Ruby(Module):
     name = "Ruby"
 
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
-
     # Other
     vscode_extensions = [
         "rebornix.ruby",

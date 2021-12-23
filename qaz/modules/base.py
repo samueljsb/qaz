@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+from collections.abc import Iterable, Mapping
+from types import MappingProxyType
+
 from qaz.managers import base as managers
 
 
@@ -26,11 +29,11 @@ class Module:
     auto_update: bool = False
 
     # Configuration files
-    zshrc_file: str | None
-    symlinks: dict[str, str]
+    zshrc_file: str | None = None
+    symlinks: Mapping[str, str] = MappingProxyType({})
 
     # Other
-    vscode_extensions: list[str]
+    vscode_extensions: Iterable[str] = ()
 
     # Package Management
     package_manager: managers.Manager | None = None

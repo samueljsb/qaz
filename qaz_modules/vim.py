@@ -10,7 +10,6 @@ class Vim(Module):
     name = "vim"
 
     # Configuration files
-    zshrc_file = None
     symlinks = {".vimrc": "~"}
 
     # Other

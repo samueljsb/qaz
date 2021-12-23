@@ -7,10 +7,6 @@ from qaz.modules.base import Module
 class Rust(Module):
     name = "Rust"
 
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
-
     # Other
     vscode_extensions = [
         "rust-lang.rust",

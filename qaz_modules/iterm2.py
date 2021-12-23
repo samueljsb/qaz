@@ -8,10 +8,6 @@ class ITerm2(Module):
     name = "iTerm2"
     auto_update = True
 
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
-
     # Other
     vscode_extensions: list[str] = []
 

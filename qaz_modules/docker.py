@@ -10,7 +10,6 @@ class MacOSDocker(Module):
 
     # Configuration files
     zshrc_file = "docker.zsh"
-    symlinks: dict[str, str] = {}
 
     # Other
     vscode_extensions: list[str] = []
@@ -24,7 +23,6 @@ class LinuxDocker(Module):
 
     # Configuration files
     zshrc_file = "docker.zsh"
-    symlinks: dict[str, str] = {}
 
     # Other
     vscode_extensions: list[str] = []
@@ -42,10 +40,6 @@ class LinuxDocker(Module):
 
 class LazyDocker(Module):
     name = "lazydocker"
-
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
 
     # Other
     vscode_extensions: list[str] = []

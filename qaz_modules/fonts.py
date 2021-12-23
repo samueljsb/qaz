@@ -16,10 +16,6 @@ FONTS = ["Hack"]
 class NerdFonts(Module):
     name = "nerd-fonts"
 
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
-
     # Other
     vscode_extensions: list[str] = []
 
