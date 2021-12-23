@@ -11,7 +11,7 @@ function tmpvenv(){
   cd /tmp/$1
 
   python -m venv .venv
-  ./.venv/bin/pip install black isort flake8 mypy
+  ./.venv/bin/pip install black isort flake8 mypy rich
 
   . .venv/bin/activate
 
