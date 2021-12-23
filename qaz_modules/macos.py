@@ -34,13 +34,9 @@ class Bartender(Module):
     # Other
     vscode_extensions: List[str] = []
 
-    @classmethod
-    def install_action(cls):
-        brew.install_or_upgrade_cask("bartender")
-
-    @classmethod
-    def upgrade_action(cls):
-        brew.install_or_upgrade_cask("bartender")
+    # Package Management
+    package_manager = brew.Homebrew
+    package_name = "bartender"
 
 
 class Rectangle(Module):
@@ -54,10 +50,6 @@ class Rectangle(Module):
     # Other
     vscode_extensions: List[str] = []
 
-    @classmethod
-    def install_action(cls):
-        brew.install_or_upgrade_cask("rectangle")
-
-    @classmethod
-    def upgrade_action(cls):
-        brew.install_or_upgrade_cask("rectangle")
+    # Package Management
+    package_manager = brew.Homebrew
+    package_name = "rectangle"

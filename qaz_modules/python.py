@@ -85,13 +85,9 @@ class Pipx(Module):
     # Other
     vscode_extensions: List[str] = []
 
-    @classmethod
-    def install_action(cls):
-        brew.install_or_upgrade_formula("pipx")
-
-    @classmethod
-    def upgrade_action(cls):
-        brew.install_or_upgrade_formula("pipx")
+    # Package Management
+    package_manager = brew.Homebrew
+    package_name = "pipx"
 
 
 class Bpython(Module):

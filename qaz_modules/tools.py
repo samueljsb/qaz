@@ -13,14 +13,9 @@ class Bat(Module):
 
     # Other
     vscode_extensions: List[str] = []
-
-    @classmethod
-    def install_action(cls):
-        brew.install_or_upgrade_formula("bat")
-
-    @classmethod
-    def upgrade_action(cls):
-        brew.install_or_upgrade_formula("bat")
+    # Package Management
+    package_manager = brew.Homebrew
+    package_name = "bat"
 
 
 class Exa(Module):
@@ -33,13 +28,9 @@ class Exa(Module):
     # Other
     vscode_extensions: List[str] = []
 
-    @classmethod
-    def install_action(cls):
-        brew.install_or_upgrade_formula("exa")
-
-    @classmethod
-    def upgrade_action(cls):
-        brew.install_or_upgrade_formula("exa")
+    # Package Management
+    package_manager = brew.Homebrew
+    package_name = "exa"
 
 
 class Figlet(Module):
@@ -52,13 +43,9 @@ class Figlet(Module):
     # Other
     vscode_extensions: List[str] = []
 
-    @classmethod
-    def install_action(cls):
-        brew.install_or_upgrade_formula("figlet")
-
-    @classmethod
-    def upgrade_action(cls):
-        brew.install_or_upgrade_formula("figlet")
+    # Package Management
+    package_manager = brew.Homebrew
+    package_name = "figlet"
 
 
 class Fzf(Module):
@@ -71,13 +58,9 @@ class Fzf(Module):
     # Other
     vscode_extensions: List[str] = []
 
-    @classmethod
-    def install_action(cls):
-        brew.install_or_upgrade_formula("fzf")
-
-    @classmethod
-    def upgrade_action(cls):
-        brew.install_or_upgrade_formula("fzf")
+    # Package Management
+    package_manager = brew.Homebrew
+    package_name = "fzf"
 
 
 class GNUSed(Module):
@@ -96,13 +79,9 @@ class GNUSed(Module):
     # Other
     vscode_extensions: List[str] = []
 
-    @classmethod
-    def install_action(cls):
-        brew.install_or_upgrade_formula("gnu-sed")
-
-    @classmethod
-    def upgrade_action(cls):
-        brew.install_or_upgrade_formula("gnu-sed")
+    # Package Management
+    package_manager = brew.Homebrew
+    package_name = "gnu-sed"
 
 
 class Less(Module):
@@ -115,13 +94,9 @@ class Less(Module):
     # Other
     vscode_extensions: List[str] = []
 
-    @classmethod
-    def install_action(cls):
-        brew.install_or_upgrade_formula("less")
-
-    @classmethod
-    def upgrade_action(cls):
-        brew.install_or_upgrade_formula("less")
+    # Package Management
+    package_manager = brew.Homebrew
+    package_name = "less"
 
 
 class McFly(Module):
@@ -134,13 +109,9 @@ class McFly(Module):
     # Other
     vscode_extensions: List[str] = []
 
-    @classmethod
-    def install_action(cls):
-        brew.install_or_upgrade_formula("cantino/mcfly/mcfly")
-
-    @classmethod
-    def upgrade_action(cls):
-        brew.install_or_upgrade_formula("cantino/mcfly/mcfly")
+    # Package Management
+    package_manager = brew.Homebrew
+    package_name = "cantino/mcfly/mcfly"
 
 
 class TrashCLI(Module):
