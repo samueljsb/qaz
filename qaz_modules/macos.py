@@ -23,36 +23,6 @@ class MacOS(Module):
         shell.run_script("set-defaults.sh")
 
 
-class QuickLookExtensions(Module):
-    name = "QuickLook"
-
-    # Configuration files
-    zshrc_file = None
-    symlinks: Dict[str, str] = {}
-
-    # Other
-    vscode_extensions: List[str] = []
-
-    extensions = (
-        "qlcolorcode",
-        "qlstephen",
-        "qlmarkdown",
-        "suspicious-package",
-    )
-
-    @classmethod
-    def install_action(cls):
-        for extension in cls.extensions:
-            brew.install_or_upgrade_cask(extension)
-        return super().install_action()
-
-    @classmethod
-    def upgrade_action(cls):
-        for extension in cls.extensions:
-            brew.install_or_upgrade_cask(extension)
-        return super().upgrade_action()
-
-
 class Bartender(Module):
     name = "Bartender"
     auto_update = True

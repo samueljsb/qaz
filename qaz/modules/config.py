@@ -36,7 +36,6 @@ MACOS_MODULES = (
     "qaz_modules.iterm2.ITerm2",
     "qaz_modules.latex.MacTex",
     "qaz_modules.macos.MacOS",
-    "qaz_modules.macos.QuickLookExtensions",
     "qaz_modules.macos.Bartender",
     "qaz_modules.macos.Rectangle",
     "qaz_modules.tools.GNUSed",
