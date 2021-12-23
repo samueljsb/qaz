@@ -6,6 +6,7 @@ from qaz.modules.base import Module
 
 class ITerm2(Module):
     name = "iTerm2"
+    auto_update = True
 
     # Configuration files
     zshrc_file = None
