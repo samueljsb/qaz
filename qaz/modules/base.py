@@ -7,6 +7,8 @@ class Module(Protocol):
 
     Attrs:
         name:               This is used to identify the module.
+        auto_update:        Whether this module updates itself. Defaults to False (i.e.
+                            it should be upgraded by QAZ).
         zshrc_file:         This is the name of the zshrc file that should be installed
                             when this module is installed (optional). If none is
                             provided, no file will be installed.
@@ -19,6 +21,7 @@ class Module(Protocol):
     """
 
     name: str
+    auto_update: bool = False
 
     # Configuration files
     zshrc_file: Optional[str]
