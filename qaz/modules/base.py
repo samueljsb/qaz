@@ -1,9 +1,7 @@
 from __future__ import annotations
 
-from typing import Protocol
 
-
-class Module(Protocol):
+class Module:
     """
     A module that can be installed by QAZ to manage a program or tool.
 
