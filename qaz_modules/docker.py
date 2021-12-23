@@ -15,13 +15,8 @@ class MacOSDocker(Module):
     # Other
     vscode_extensions: list[str] = []
 
-    @classmethod
-    def install_action(cls) -> None:
-        brew.install_or_upgrade_cask("docker")
-
-    @classmethod
-    def upgrade_action(cls) -> None:
-        brew.install_or_upgrade_cask("docker")
+    # Package Management
+    package_manager = brew.Homebrew("docker")
 
 
 class LinuxDocker(Module):
@@ -55,10 +50,5 @@ class LazyDocker(Module):
     # Other
     vscode_extensions: list[str] = []
 
-    @classmethod
-    def install_action(cls) -> None:
-        brew.install_or_upgrade_formula("jesseduffield/lazydocker/lazydocker")
-
-    @classmethod
-    def upgrade_action(cls) -> None:
-        brew.install_or_upgrade_formula("jesseduffield/lazydocker/lazydocker")
+    # Package Management
+    package_manager = brew.Homebrew("jesseduffield/lazydocker/lazydocker")

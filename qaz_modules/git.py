@@ -14,13 +14,8 @@ class Git(Module):
     # Other
     vscode_extensions: list[str] = []
 
-    @classmethod
-    def install_action(cls) -> None:
-        brew.install_or_upgrade_formula("git")
-
-    @classmethod
-    def upgrade_action(cls) -> None:
-        brew.install_or_upgrade_formula("git")
+    # Package Management
+    package_manager = brew.Homebrew("git")
 
 
 class GitHubCLI(Module):
@@ -33,14 +28,13 @@ class GitHubCLI(Module):
     # Other
     vscode_extensions: list[str] = []
 
-    @classmethod
-    def install_action(cls) -> None:
-        brew.install_or_upgrade_formula("gh")
-        shell.run("gh auth login --web")
+    # Package Management
+    package_manager = brew.Homebrew("gh")
 
     @classmethod
-    def upgrade_action(cls) -> None:
-        brew.install_or_upgrade_formula("gh")
+    def install_action(cls) -> None:
+        super().install_action()
+        shell.run("gh auth login --web")
 
 
 class LazyGit(Module):
@@ -53,13 +47,8 @@ class LazyGit(Module):
     # Other
     vscode_extensions: list[str] = []
 
-    @classmethod
-    def install_action(cls) -> None:
-        brew.install_or_upgrade_formula("jesseduffield/lazygit/lazygit")
-
-    @classmethod
-    def upgrade_action(cls) -> None:
-        brew.install_or_upgrade_formula("jesseduffield/lazygit/lazygit")
+    # Package Management
+    package_manager = brew.Homebrew("jesseduffield/lazygit/lazygit")
 
 
 class GitUI(Module):
@@ -72,13 +61,8 @@ class GitUI(Module):
     # Other
     vscode_extensions: list[str] = []
 
-    @classmethod
-    def install_action(cls) -> None:
-        brew.install_or_upgrade_formula("gitui")
-
-    @classmethod
-    def upgrade_action(cls) -> None:
-        brew.install_or_upgrade_formula("gitui")
+    # Package Management
+    package_manager = brew.Homebrew("gitui")
 
 
 class DiffSoFancy(Module):
@@ -91,10 +75,5 @@ class DiffSoFancy(Module):
     # Other
     vscode_extensions: list[str] = []
 
-    @classmethod
-    def install_action(cls) -> None:
-        brew.install_or_upgrade_formula("diff-so-fancy")
-
-    @classmethod
-    def upgrade_action(cls) -> None:
-        brew.install_or_upgrade_formula("diff-so-fancy")
+    # Package Management
+    package_manager = brew.Homebrew("diff-so-fancy")

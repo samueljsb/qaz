@@ -20,14 +20,17 @@ class MacOSZsh(Module):
     # Other
     vscode_extensions: list[str] = []
 
+    # Package Management
+    package_manager = brew.Homebrew("zsh")
+
     @classmethod
     def install_action(cls) -> None:
-        brew.install_or_upgrade_formula("zsh")
+        super().install_action()
         _set_default_shell()
 
     @classmethod
     def upgrade_action(cls) -> None:
-        brew.install_or_upgrade_formula("zsh")
+        super().upgrade_action()
         _set_default_shell()
 
 

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from qaz.managers import base as managers
+
 
 class Module:
     """
@@ -30,6 +32,9 @@ class Module:
     # Other
     vscode_extensions: list[str]
 
+    # Package Management
+    package_manager: managers.Manager | None = None
+
     @classmethod
     def install_action(cls) -> None:
         """
@@ -37,7 +42,8 @@ class Module:
 
         Overwrite this method to provide custom install behaviour.
         """
-        ...
+        if cls.package_manager:
+            cls.package_manager.install()
 
     @classmethod
     def upgrade_action(cls) -> None:
@@ -46,4 +52,5 @@ class Module:
 
         Overwrite this method to provide custom upgrade behaviour.
         """
-        ...
+        if cls.package_manager:
+            cls.package_manager.upgrade()
