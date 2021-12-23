@@ -6,6 +6,7 @@ from qaz.modules.base import Module
 
 class MacOSDocker(Module):
     name = "Docker"
+    auto_update = True
 
     # Configuration files
     zshrc_file = "docker.zsh"

@@ -14,6 +14,7 @@ else:
 
 class VSCode(Module):
     name = "VSCode"
+    auto_update = True
 
     # Configuration files
     zshrc_file = None

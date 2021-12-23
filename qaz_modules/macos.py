@@ -55,6 +55,7 @@ class QuickLookExtensions(Module):
 
 class Bartender(Module):
     name = "Bartender"
+    auto_update = True
 
     # Configuration files
     zshrc_file = None
@@ -74,6 +75,7 @@ class Bartender(Module):
 
 class Rectangle(Module):
     name = "Rectangle"
+    auto_update = True
 
     # Configuration files
     zshrc_file = None
