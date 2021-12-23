@@ -14,6 +14,7 @@ def output_modules_lists() -> None:
     console = Console()
 
     installed_table = Table("Name", "Last updated")
+    auto_updating_modules = []
     not_installed_modules = []
 
     all_modules = module_queries.get_all_modules()
@@ -21,12 +22,21 @@ def output_modules_lists() -> None:
         all_modules.values(), key=lambda module: module.name.casefold()
     ):
         if module_queries.is_module_installed(module):
-            _add_module_to_table(installed_table, module)
+            if module.auto_update:
+                auto_updating_modules.append(module)
+            else:
+                _add_module_to_table(installed_table, module)
         else:
             not_installed_modules.append(module)
 
     console.print(Panel("[bold][green]✓[/green]  Installed modules[/bold]"))
     console.print(installed_table)
+
+    console.print(
+        Panel("[bold][green]✓[/green]  Also installed[/bold] (not managed by QAZ)")
+    )
+    for module in auto_updating_modules:
+        console.print(module.name)
 
     console.print(Panel("[bold]   Available modules[/bold]"))
     for module in not_installed_modules:
