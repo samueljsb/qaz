@@ -62,6 +62,25 @@ class LazyGit(Module):
         brew.install_or_upgrade_formula("jesseduffield/lazygit/lazygit")
 
 
+class GitUI(Module):
+    name = "GitUI"
+
+    # Configuration files
+    zshrc_file = None
+    symlinks: Dict[str, str] = {}
+
+    # Other
+    vscode_extensions: List[str] = []
+
+    @classmethod
+    def install_action(cls):
+        brew.install_or_upgrade_formula("gitui")
+
+    @classmethod
+    def upgrade_action(cls):
+        brew.install_or_upgrade_formula("gitui")
+
+
 class DiffSoFancy(Module):
     name = "diff-so-fancy"
 

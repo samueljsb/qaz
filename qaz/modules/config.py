@@ -6,6 +6,7 @@ COMMON_MODULES = (
     "qaz_modules.git.Git",
     "qaz_modules.git.GitHubCLI",
     "qaz_modules.git.LazyGit",
+    "qaz_modules.git.GitUI",
     "qaz_modules.git.DiffSoFancy",
     "qaz_modules.nodejs.NodeJS",
     "qaz_modules.nodejs.Yarn",
