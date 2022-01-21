@@ -23,14 +23,14 @@ class Python(Module):
     ]
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         asdf.install_or_upgrade_plugin("python")
         pip.install_or_upgrade_package("pip")
         if platform == "darwin":
             pip.install_or_upgrade_package("gnureadline")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         asdf.install_or_upgrade_plugin("python")
         pip.install_or_upgrade_package("pip")
         if platform == "darwin":
@@ -49,11 +49,11 @@ class Poetry(Module):
 
     # N.B. This is installed by install.sh, so no install script is needed here.
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         pass
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         shell.run("poetry self update")
 
 
@@ -68,11 +68,11 @@ class Rich(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         pip.install_or_upgrade_package("rich")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         pip.install_or_upgrade_package("rich")
 
 
@@ -87,11 +87,11 @@ class Pipx(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         brew.install_or_upgrade_formula("pipx")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         brew.install_or_upgrade_formula("pipx")
 
 
@@ -106,11 +106,11 @@ class Bpython(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         pipx.install_or_upgrade_package("bpython")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         pipx.install_or_upgrade_package("bpython")
 
 
@@ -125,9 +125,9 @@ class Tox(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         pipx.install_or_upgrade_package("tox")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         pipx.install_or_upgrade_package("tox")

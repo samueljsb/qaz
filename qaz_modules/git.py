@@ -15,11 +15,11 @@ class Git(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         brew.install_or_upgrade_formula("git")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         brew.install_or_upgrade_formula("git")
 
 
@@ -34,12 +34,12 @@ class GitHubCLI(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         brew.install_or_upgrade_formula("gh")
         shell.run("gh auth login --web")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         brew.install_or_upgrade_formula("gh")
 
 
@@ -54,11 +54,11 @@ class LazyGit(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         brew.install_or_upgrade_formula("jesseduffield/lazygit/lazygit")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         brew.install_or_upgrade_formula("jesseduffield/lazygit/lazygit")
 
 
@@ -73,11 +73,11 @@ class GitUI(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         brew.install_or_upgrade_formula("gitui")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         brew.install_or_upgrade_formula("gitui")
 
 
@@ -92,9 +92,9 @@ class DiffSoFancy(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         brew.install_or_upgrade_formula("diff-so-fancy")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         brew.install_or_upgrade_formula("diff-so-fancy")

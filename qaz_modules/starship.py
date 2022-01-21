@@ -15,9 +15,9 @@ class Starship(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         asdf.install_or_upgrade_plugin("starship")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         asdf.install_or_upgrade_plugin("starship")

@@ -76,7 +76,7 @@ def set_root_dir(root_dir: str) -> None:
     logger.debug("qaz root directory set to '%s'", root_dir)
 
 
-def set_module_installed(name: str):
+def set_module_installed(name: str) -> None:
     """
     Set a module as having been installed
     """
@@ -127,5 +127,5 @@ def _load_settings_from_file() -> Settings:
     return json.loads(SETTINGS_FILE_PATH.read_text())
 
 
-def _save_settings_to_file(settings: Settings):
+def _save_settings_to_file(settings: Settings) -> None:
     SETTINGS_FILE_PATH.write_text(json.dumps(settings))

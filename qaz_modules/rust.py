@@ -17,9 +17,9 @@ class Rust(Module):
     ]
 
     @classmethod
-    def install_action(self):
+    def install_action(cls) -> None:
         asdf.install_or_upgrade_plugin("rust")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         asdf.install_or_upgrade_plugin("rust")

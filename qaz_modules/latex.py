@@ -14,8 +14,10 @@ class MacTex(Module):
     # Other
     vscode_extensions: list[str] = []
 
-    def install_action(self):
+    @classmethod
+    def install_action(cls) -> None:
         brew.install_or_upgrade_cask("mactex")
 
-    def upgrade_action(self):
+    @classmethod
+    def upgrade_action(cls) -> None:
         brew.install_or_upgrade_cask("mactex")

@@ -5,7 +5,7 @@ import re
 from . import shell
 
 
-def install_or_upgrade_package(package: str):
+def install_or_upgrade_package(package: str) -> None:
     if package not in _get_installed_packages():
         shell.run(f"pipx install {package}")
     else:

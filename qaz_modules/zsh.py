@@ -21,12 +21,12 @@ class MacOSZsh(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         brew.install_or_upgrade_formula("zsh")
         _set_default_shell()
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         brew.install_or_upgrade_formula("zsh")
         _set_default_shell()
 
@@ -46,19 +46,19 @@ class LinuxZsh(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         shell.run("sudo apt update")
         shell.run("sudo apt install --yes zsh")
         _set_default_shell()
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         shell.run("sudo apt update")
         shell.run("sudo apt upgrade --yes zsh")
         _set_default_shell()
 
 
-def _set_default_shell():
+def _set_default_shell() -> None:
     zsh_path = shell.capture("which zsh")
 
     # Make sure zsh is an allowed shell.
@@ -82,7 +82,7 @@ class OhMyZSH(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         shell.run(
             'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"',  # noqa: E501
             env={"CHSH": "no", "RUNZSH": "no", "KEEP_ZSHRC": "yes"},
@@ -99,7 +99,7 @@ class OhMyZSH(Module):
         )
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         zsh_dir = Path.home().resolve() / ".oh-my-zsh"
         shell.run(
             f"sh {zsh_dir / 'tools/upgrade.sh'} --interactive",

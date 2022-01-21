@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 @click.group()
-def cli():
+def cli() -> None:
     """
     Manage your system configuration and install/update tools.
     """
@@ -24,7 +24,7 @@ def cli():
 
 @cli.command("setup")
 @click.argument("root_dir")
-def _setup(root_dir: str):
+def _setup(root_dir: str) -> None:
     """
     Install this tool and the basics.
     """
@@ -36,7 +36,7 @@ def _setup(root_dir: str):
 @cli.command("git")
 @click.option("--author-name", prompt="Your git author name")
 @click.option("--author-email", prompt="Your git author email")
-def _git(author_name: str, author_email: str):
+def _git(author_name: str, author_email: str) -> None:
     """
     Configure git.
     """
@@ -44,7 +44,7 @@ def _git(author_name: str, author_email: str):
 
 
 @cli.command("update")
-def _update():
+def _update() -> None:
     """
     Update this tool.
     """
@@ -54,7 +54,7 @@ def _update():
 @cli.command("install")
 @click.argument("modules", nargs=-1)
 @click.pass_context
-def _install(ctx: click.Context, modules: tuple[str]):
+def _install(ctx: click.Context, modules: tuple[str]) -> None:
     """
     Install modules.
     """
@@ -68,7 +68,7 @@ def _install(ctx: click.Context, modules: tuple[str]):
 @cli.command("upgrade")
 @click.argument("modules", nargs=-1)
 @click.pass_context
-def _upgrade(ctx: click.Context, modules: Iterable[str]):
+def _upgrade(ctx: click.Context, modules: Iterable[str]) -> None:
     """
     Upgrade modules.
     """
@@ -80,7 +80,7 @@ def _upgrade(ctx: click.Context, modules: Iterable[str]):
 
 
 @cli.command("list")
-def _list():
+def _list() -> None:
     """
     List installed and available modules.
     """

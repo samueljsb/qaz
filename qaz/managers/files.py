@@ -7,7 +7,7 @@ from . import shell
 logger = logging.getLogger(__name__)
 
 
-def create_symlink(target: Path, link: Path = Path.home()):
+def create_symlink(target: Path, link: Path = Path.home()) -> None:
     """
     Create a symlink from link to target.
 

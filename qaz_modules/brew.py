@@ -15,7 +15,7 @@ class Homebrew(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         shell.run(
             "/bin/bash -c "
             '"$(curl -fsSL '
@@ -25,6 +25,6 @@ class Homebrew(Module):
         shell.run("brew analytics off")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         shell.run("brew update")
         shell.run("brew analytics off")

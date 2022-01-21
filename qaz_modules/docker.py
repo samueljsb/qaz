@@ -16,11 +16,11 @@ class MacOSDocker(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         brew.install_or_upgrade_cask("docker")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         brew.install_or_upgrade_cask("docker")
 
 
@@ -35,12 +35,12 @@ class LinuxDocker(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         # TODO
         raise NotImplementedError
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         # TODO
         raise NotImplementedError
 
@@ -56,9 +56,9 @@ class LazyDocker(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         brew.install_or_upgrade_formula("jesseduffield/lazydocker/lazydocker")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         brew.install_or_upgrade_formula("jesseduffield/lazydocker/lazydocker")

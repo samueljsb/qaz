@@ -24,7 +24,7 @@ class NerdFonts(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         logger.warning("... this might take a while!")
         repo_path = Path().home() / ".nerd-fonts"
         git.clone(
@@ -37,7 +37,7 @@ class NerdFonts(Module):
             shell.run(f"{repo_path / 'install.sh'} {font_name}")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         repo_path = Path().home() / ".nerd-fonts"
 
         if sys.platform == "darwin":

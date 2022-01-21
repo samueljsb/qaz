@@ -21,12 +21,12 @@ class NodeJS(Module):
     ]
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         os.environ["NODEJS_CHECK_SIGNATURES"] = "no"
         asdf.install_or_upgrade_plugin("nodejs")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         os.environ["NODEJS_CHECK_SIGNATURES"] = "no"
         asdf.install_or_upgrade_plugin("nodejs")
 
@@ -42,9 +42,9 @@ class Yarn(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         asdf.install_or_upgrade_plugin("yarn")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         asdf.install_or_upgrade_plugin("yarn")

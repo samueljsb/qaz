@@ -3,7 +3,7 @@ from __future__ import annotations
 from . import shell
 
 
-def install_or_upgrade_formula(formula: str):
+def install_or_upgrade_formula(formula: str) -> None:
     if formula.split("/")[-1] in _get_installed_formulae():
         shell.run(f"brew upgrade {formula}")
     else:
@@ -14,7 +14,7 @@ def _get_installed_formulae() -> list[str]:
     return shell.capture("brew list --formula -1").split()
 
 
-def install_or_upgrade_cask(cask: str):
+def install_or_upgrade_cask(cask: str) -> None:
     if cask in _get_installed_casks():
         shell.run(f"brew upgrade --cask {cask}")
     else:

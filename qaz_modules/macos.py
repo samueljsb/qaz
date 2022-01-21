@@ -15,11 +15,11 @@ class MacOS(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         shell.run_script("set-defaults.sh")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         shell.run_script("set-defaults.sh")
 
 
@@ -35,11 +35,11 @@ class Bartender(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         brew.install_or_upgrade_cask("bartender")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         brew.install_or_upgrade_cask("bartender")
 
 
@@ -55,9 +55,9 @@ class Rectangle(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         brew.install_or_upgrade_cask("rectangle")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         brew.install_or_upgrade_cask("rectangle")

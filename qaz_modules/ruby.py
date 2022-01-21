@@ -19,9 +19,9 @@ class Ruby(Module):
     ]
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         asdf.install_or_upgrade_plugin("ruby")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         asdf.install_or_upgrade_plugin("ruby")

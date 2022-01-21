@@ -51,9 +51,9 @@ class VSCode(Module):
     ]
 
     @classmethod
-    def install_action(self):
+    def install_action(cls) -> None:
         brew.install_or_upgrade_cask("visual-studio-code")
 
     @classmethod
-    def upgrade_action(self):
+    def upgrade_action(cls) -> None:
         brew.install_or_upgrade_cask("visual-studio-code")

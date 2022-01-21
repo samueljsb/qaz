@@ -24,8 +24,8 @@ def run(
     *,
     cwd: str | Path | None = None,
     allow_fail: bool = False,
-    env: dict[str, str] = None,
-):
+    env: dict[str, str] | None = None,
+) -> None:
     logger.debug(f"$ {command}")
 
     process = subprocess.run(
@@ -44,7 +44,7 @@ def run_script(script_name: str) -> None:
     run(str(settings.get_root_dir() / "scripts" / script_name))
 
 
-def capture(command: str, *, env: dict[str, str] = None) -> str:
+def capture(command: str, *, env: dict[str, str] | None = None) -> str:
     process = subprocess.run(
         command,
         shell=True,

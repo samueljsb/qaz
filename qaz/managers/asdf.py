@@ -5,7 +5,7 @@ from distutils.version import StrictVersion
 from . import shell
 
 
-def install_or_upgrade_plugin(plugin: str):
+def install_or_upgrade_plugin(plugin: str) -> None:
     shell.run("asdf update")
 
     if plugin not in _get_installed_plugins():
@@ -21,7 +21,7 @@ def _get_installed_plugins() -> list[str]:
     return shell.capture("asdf plugin list").split()
 
 
-def _set_latest(plugin: str):
+def _set_latest(plugin: str) -> None:
     """
     Set the version for a plugin to the latest installed version.
     """

@@ -1,10 +1,11 @@
 import logging
+from typing import Any
 
 import click
 
 
 class ClickHandler(logging.Handler):
-    style_kwargs = {
+    style_kwargs: dict[int, dict[str, Any]] = {
         logging.DEBUG: dict(fg="bright_white", err=True),
         logging.INFO: dict(bold=True, err=True),
         logging.WARNING: dict(fg="bright_black", bg="yellow", bold=True, err=True),
@@ -12,7 +13,7 @@ class ClickHandler(logging.Handler):
         logging.CRITICAL: dict(fg="bright_white", bg="red", err=True),
     }
 
-    def emit(self, record):
+    def emit(self, record: logging.LogRecord) -> None:
         try:
             msg = self.format(record)
             style_kwargs = self.style_kwargs.get(record.levelno, {})

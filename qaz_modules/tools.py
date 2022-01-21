@@ -15,11 +15,11 @@ class Bat(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         brew.install_or_upgrade_formula("bat")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         brew.install_or_upgrade_formula("bat")
 
 
@@ -34,11 +34,11 @@ class Exa(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         brew.install_or_upgrade_formula("exa")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         brew.install_or_upgrade_formula("exa")
 
 
@@ -53,11 +53,11 @@ class Figlet(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         brew.install_or_upgrade_formula("figlet")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         brew.install_or_upgrade_formula("figlet")
 
 
@@ -72,11 +72,11 @@ class Fzf(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         brew.install_or_upgrade_formula("fzf")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         brew.install_or_upgrade_formula("fzf")
 
 
@@ -97,11 +97,11 @@ class GNUSed(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         brew.install_or_upgrade_formula("gnu-sed")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         brew.install_or_upgrade_formula("gnu-sed")
 
 
@@ -116,11 +116,11 @@ class Less(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         brew.install_or_upgrade_formula("less")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         brew.install_or_upgrade_formula("less")
 
 
@@ -135,11 +135,11 @@ class McFly(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         brew.install_or_upgrade_formula("cantino/mcfly/mcfly")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         brew.install_or_upgrade_formula("cantino/mcfly/mcfly")
 
 
@@ -154,9 +154,9 @@ class TrashCLI(Module):
     vscode_extensions: list[str] = []
 
     @classmethod
-    def install_action(cls):
+    def install_action(cls) -> None:
         npm.install_or_upgrade_package("trash-cli")
 
     @classmethod
-    def upgrade_action(cls):
+    def upgrade_action(cls) -> None:
         npm.install_or_upgrade_package("trash-cli")
