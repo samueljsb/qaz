@@ -1,6 +1,6 @@
 #! /bin/sh
 #
-# This installs asdf, python, poetry, and qaz.
+# This installs asdf, python, and qaz.
 
 message() {
     echo "\033[1m[QAZ]\033[0m $@"
@@ -33,17 +33,11 @@ set +e
 asdf shell python $(asdf latest python)
 message '... Python installed!'
 
-# Install Poetry
-message 'Installing Poetry...'
-curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
-message '... Poetry installed!'
-
 # Install management tool
 message "Installing qaz management tool..."
 cd $QAZ
-asdf exec python -m venv .venv
-. .venv/bin/activate
-$HOME/.poetry/bin/poetry install --no-dev
+asdf exec python -m venv $QAZ/.venv
+$QAZ/.venv/bin -m pip install $QAZ
 sudo ln -sf $QAZ/.venv/bin/qaz /usr/local/bin
 message "... management tool installed!"
 

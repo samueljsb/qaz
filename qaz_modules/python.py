@@ -47,10 +47,11 @@ class Poetry(Module):
     # Other
     vscode_extensions: list[str] = []
 
-    # N.B. This is installed by install.sh, so no install script is needed here.
     @classmethod
     def install_action(cls) -> None:
-        pass
+        shell.run(
+            "curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python"  # noqa: E501
+        )
 
     @classmethod
     def upgrade_action(cls) -> None:

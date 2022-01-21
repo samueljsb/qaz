@@ -20,5 +20,5 @@ def setup_qaz(root_dir: str) -> None:
     zshrc_dir.mkdir(exist_ok=True)
 
     # Install the modules which have already been installed by the setup script.
-    already_installed = ("asdf", "python", "poetry")
+    already_installed = ("asdf", "python")
     install.install_modules(already_installed)
