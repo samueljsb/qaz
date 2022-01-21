@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 import logging
-from typing import Iterable, Tuple
+from collections.abc import Iterable
 
 import click
 
@@ -52,7 +54,7 @@ def _update():
 @cli.command("install")
 @click.argument("modules", nargs=-1)
 @click.pass_context
-def _install(ctx: click.Context, modules: Tuple[str]):
+def _install(ctx: click.Context, modules: tuple[str]):
     """
     Install modules.
     """

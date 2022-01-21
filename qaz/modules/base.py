@@ -1,4 +1,6 @@
-from typing import Dict, List, Optional, Protocol
+from __future__ import annotations
+
+from typing import Protocol
 
 
 class Module(Protocol):
@@ -24,11 +26,11 @@ class Module(Protocol):
     auto_update: bool = False
 
     # Configuration files
-    zshrc_file: Optional[str]
-    symlinks: Dict[str, str]
+    zshrc_file: str | None
+    symlinks: dict[str, str]
 
     # Other
-    vscode_extensions: List[str]
+    vscode_extensions: list[str]
 
     @classmethod
     def install_action(cls) -> None:

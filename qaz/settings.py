@@ -1,8 +1,10 @@
+from __future__ import annotations
+
 import datetime
 import json
 import logging
 from pathlib import Path
-from typing import Dict, Optional, TypedDict
+from typing import TypedDict
 
 
 logger = logging.getLogger(__name__)
@@ -22,7 +24,7 @@ class ModuleSettings(TypedDict):
 
 class Settings(TypedDict):
     root_dir: str  # the root of the `qaz` repo
-    modules: Dict[str, ModuleSettings]  # mappping of module name to module settings
+    modules: dict[str, ModuleSettings]  # mappping of module name to module settings
 
 
 # -------
@@ -46,7 +48,7 @@ def is_module_installed(name: str) -> bool:
     return name in settings["modules"]
 
 
-def get_last_upgraded_at(name: str) -> Optional[datetime.datetime]:
+def get_last_upgraded_at(name: str) -> datetime.datetime | None:
     """
     Retrieve the timestamp of the last update to this module.
     """
@@ -92,7 +94,7 @@ def set_module_installed(name: str):
 
 
 def record_module_upgraded(
-    name: str, upgraded_at: Optional[datetime.datetime] = None
+    name: str, upgraded_at: datetime.datetime | None = None
 ) -> None:
     """
     Mark a module as having been upgraded.

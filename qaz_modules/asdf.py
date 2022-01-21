@@ -1,4 +1,4 @@
-from typing import List
+from __future__ import annotations
 
 from qaz.managers import shell
 from qaz.modules.base import Module
@@ -12,7 +12,7 @@ class ASDF(Module):
     symlinks = {".asdfrc": "~"}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     # N.B. This is installed by install.sh, so no install script is needed here.
     @classmethod

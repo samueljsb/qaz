@@ -1,4 +1,4 @@
-from typing import Dict, List
+from __future__ import annotations
 
 from qaz.managers import shell
 from qaz.modules.base import Module
@@ -9,10 +9,10 @@ class Homebrew(Module):
 
     # Configuration files
     zshrc_file = None
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):

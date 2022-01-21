@@ -1,7 +1,8 @@
+from __future__ import annotations
+
 import logging
 import sys
 from pathlib import Path
-from typing import Dict, List
 
 from qaz.managers import git, shell
 from qaz.modules.base import Module
@@ -17,10 +18,10 @@ class NerdFonts(Module):
 
     # Configuration files
     zshrc_file = None
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):

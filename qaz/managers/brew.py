@@ -1,4 +1,4 @@
-from typing import List
+from __future__ import annotations
 
 from . import shell
 
@@ -10,7 +10,7 @@ def install_or_upgrade_formula(formula: str):
         shell.run(f"brew install {formula}")
 
 
-def _get_installed_formulae() -> List[str]:
+def _get_installed_formulae() -> list[str]:
     return shell.capture("brew list --formula -1").split()
 
 
@@ -21,5 +21,5 @@ def install_or_upgrade_cask(cask: str):
         shell.run(f"brew cask install {cask}")
 
 
-def _get_installed_casks() -> List[str]:
+def _get_installed_casks() -> list[str]:
     return shell.capture("brew list --cask -1").split()

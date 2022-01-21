@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 import re
-from typing import List
 
 from . import shell
 
@@ -13,6 +14,6 @@ def install_or_upgrade_package(package: str):
         )  # pipx returns 1 on success
 
 
-def _get_installed_packages() -> List[str]:
+def _get_installed_packages() -> list[str]:
     output = shell.capture("pipx list")
     return re.findall(r"package ([A-Za-z0-9_-]+)", output)

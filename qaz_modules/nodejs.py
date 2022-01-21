@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 import os
-from typing import Dict, List
 
 from qaz.managers import asdf
 from qaz.modules.base import Module
@@ -10,7 +11,7 @@ class NodeJS(Module):
 
     # Configuration files
     zshrc_file = None
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
     vscode_extensions = [
@@ -35,10 +36,10 @@ class Yarn(Module):
 
     # Configuration files
     zshrc_file = None
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):

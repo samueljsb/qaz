@@ -1,4 +1,4 @@
-from typing import Dict, List
+from __future__ import annotations
 
 from qaz.managers import brew, shell
 from qaz.modules.base import Module
@@ -12,7 +12,7 @@ class Git(Module):
     symlinks = {".gitconfig": "~", ".gitignore": "~", ".git-commit-msg": "~"}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):
@@ -31,7 +31,7 @@ class GitHubCLI(Module):
     symlinks = {"github_config.yml": "~/.config/gh/config.yml"}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):
@@ -48,10 +48,10 @@ class LazyGit(Module):
 
     # Configuration files
     zshrc_file = None
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):
@@ -67,10 +67,10 @@ class GitUI(Module):
 
     # Configuration files
     zshrc_file = None
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):
@@ -89,7 +89,7 @@ class DiffSoFancy(Module):
     symlinks = {".gitconfig.diff-so-fancy": "~"}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):
