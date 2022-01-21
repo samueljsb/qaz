@@ -14,9 +14,8 @@ git clone https://github.com/samueljsb/qaz.git .qaz
 The location of the cloned repo doesn't matter much. I like to put mine in
 `~/.qaz`.
 
-The installation script will install [asdf][], Python, and [Poetry][] and use
-these to set up the tool and install zsh (which it will set as the default
-shell).
+The installation script will install [asdf][] and Python and use these to set up
+the tool and install zsh (which it will set as the default shell).
 
 ## Usage
 
@@ -59,6 +58,5 @@ name that reflected that (`dotfiles upgrade python` doesn't make much sense to
 me).
 
 [asdf]: https://asdf-vm.com
-[Poetry]: https://python-poetry.org
 [pipx]: https://pipxproject.github.io/pipx/
 [holman does dotfiles]: https://github.com/holman/dotfiles

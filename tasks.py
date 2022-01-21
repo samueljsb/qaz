@@ -21,7 +21,6 @@ def lint(ctx, fix=False):
         _black(ctx, fix=fix)
         _flake8(ctx)
         _mypy(ctx)
-        _poetry_check(ctx)
 
 
 def _isort(ctx, fix=False):
@@ -50,8 +49,3 @@ def _flake8(ctx):
 def _mypy(ctx):
     print(">>> type-checking...")
     ctx.run("mypy .", pty=True)
-
-
-def _poetry_check(ctx):
-    print(">>> checking pyproject.toml...")
-    ctx.run("poetry check", pty=True)
