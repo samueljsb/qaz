@@ -1,4 +1,4 @@
-from typing import Dict
+from __future__ import annotations
 
 from qaz.managers import asdf
 from qaz.modules.base import Module
@@ -9,7 +9,7 @@ class Ruby(Module):
 
     # Configuration files
     zshrc_file = None
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
     vscode_extensions = [

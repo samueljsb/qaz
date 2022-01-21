@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 import logging
-from typing import Iterable
+from collections.abc import Iterable
 
 from qaz import settings
 from qaz.modules import queries as module_queries

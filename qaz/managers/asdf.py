@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 from distutils.version import StrictVersion
-from typing import List
 
 from . import shell
 
@@ -16,7 +17,7 @@ def install_or_upgrade_plugin(plugin: str):
     _set_latest(plugin)
 
 
-def _get_installed_plugins() -> List[str]:
+def _get_installed_plugins() -> list[str]:
     return shell.capture("asdf plugin list").split()
 
 
@@ -29,7 +30,7 @@ def _set_latest(plugin: str):
     shell.run(f"asdf reshim {plugin}")
 
 
-def _get_installed_versions(plugin: str) -> List[str]:
+def _get_installed_versions(plugin: str) -> list[str]:
     versions = shell.capture(f"asdf list {plugin}").split()
 
     # Sort the versions.

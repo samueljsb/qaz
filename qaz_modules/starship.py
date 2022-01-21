@@ -1,4 +1,4 @@
-from typing import List
+from __future__ import annotations
 
 from qaz.managers import asdf
 from qaz.modules.base import Module
@@ -12,7 +12,7 @@ class Starship(Module):
     symlinks = {"starship.toml": "~/.config"}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):

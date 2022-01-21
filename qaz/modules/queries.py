@@ -1,7 +1,9 @@
+from __future__ import annotations
+
 import datetime
 import importlib
 import sys
-from typing import Dict, Iterable, List, Optional, Tuple
+from collections.abc import Iterable
 
 from qaz import settings
 
@@ -21,14 +23,14 @@ def is_module_installed(module: base.Module) -> bool:
     return settings.is_module_installed(module.name)
 
 
-def get_last_upgraded_at(module: base.Module) -> Optional[datetime.datetime]:
+def get_last_upgraded_at(module: base.Module) -> datetime.datetime | None:
     """
     Get the timestamp of the last time this module was upgraded.
     """
     return settings.get_last_upgraded_at(module.name)
 
 
-def get_modules_by_name(module_names: Iterable[str]) -> List[base.Module]:
+def get_modules_by_name(module_names: Iterable[str]) -> list[base.Module]:
     """
     Get a sequence of modules with the given names.
 
@@ -54,7 +56,7 @@ def get_modules_by_name(module_names: Iterable[str]) -> List[base.Module]:
     return modules
 
 
-def get_all_modules() -> Dict[str, base.Module]:
+def get_all_modules() -> dict[str, base.Module]:
     """
     Import all available modules.
 
@@ -62,13 +64,13 @@ def get_all_modules() -> Dict[str, base.Module]:
 
     Raises RuntimeError if there is more than one module with a given name
     """
-    module_paths: Tuple[str, ...] = config.COMMON_MODULES
+    module_paths: tuple[str, ...] = config.COMMON_MODULES
     if sys.platform == "darwin":
         module_paths = module_paths + config.MACOS_MODULES
     elif sys.platform == "Linux":
         module_paths = module_paths + config.LINUX_MODULES
 
-    modules: Dict[str, base.Module] = {}
+    modules: dict[str, base.Module] = {}
     for module_path in module_paths:
         module = _import_module(module_path)
 

@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 from pathlib import Path
-from typing import Dict, List
 
 from qaz.managers import brew, git, shell
 from qaz.modules.base import Module
@@ -17,7 +18,7 @@ class MacOSZsh(Module):
     }
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):
@@ -42,7 +43,7 @@ class LinuxZsh(Module):
     }
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):
@@ -75,10 +76,10 @@ class OhMyZSH(Module):
 
     # Configuration files
     zshrc_file = "_oh-my-zsh.zsh"  # load early to allow modules to overwrite settings
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):

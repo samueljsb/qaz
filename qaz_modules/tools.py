@@ -1,4 +1,4 @@
-from typing import Dict, List
+from __future__ import annotations
 
 from qaz.managers import brew, npm
 from qaz.modules.base import Module
@@ -9,10 +9,10 @@ class Bat(Module):
 
     # Configuration files
     zshrc_file = "bat.zsh"
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):
@@ -28,10 +28,10 @@ class Exa(Module):
 
     # Configuration files
     zshrc_file = "exa.zsh"
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):
@@ -47,10 +47,10 @@ class Figlet(Module):
 
     # Configuration files
     zshrc_file = "figlet.zsh"
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):
@@ -66,10 +66,10 @@ class Fzf(Module):
 
     # Configuration files
     zshrc_file = "fzf.zsh"
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):
@@ -91,10 +91,10 @@ class GNUSed(Module):
 
     # Configuration files
     zshrc_file = "sed.zsh"
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):
@@ -110,10 +110,10 @@ class Less(Module):
 
     # Configuration files
     zshrc_file = "less.zsh"
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):
@@ -129,10 +129,10 @@ class McFly(Module):
 
     # Configuration files
     zshrc_file = "mcfly.zsh"
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):
@@ -148,10 +148,10 @@ class TrashCLI(Module):
 
     # Configuration files
     zshrc_file = "trash-cli.zsh"
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):

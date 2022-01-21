@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 from sys import platform
-from typing import Dict, List
 
 from qaz.managers import asdf, brew, pip, pipx, shell
 from qaz.modules.base import Module
@@ -41,10 +42,10 @@ class Poetry(Module):
 
     # Configuration files
     zshrc_file = "poetry.zsh"
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     # N.B. This is installed by install.sh, so no install script is needed here.
     @classmethod
@@ -61,10 +62,10 @@ class Rich(Module):
 
     # Configuration files
     zshrc_file = None
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):
@@ -80,10 +81,10 @@ class Pipx(Module):
 
     # Configuration files
     zshrc_file = "pipx.zsh"
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):
@@ -102,7 +103,7 @@ class Bpython(Module):
     symlinks = {"bpython": "~/.config/bpython"}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):
@@ -118,10 +119,10 @@ class Tox(Module):
 
     # Configuration files
     zshrc_file = None
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):

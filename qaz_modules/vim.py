@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 from pathlib import Path
-from typing import List
 
 from qaz.managers import git, shell
 from qaz.modules.base import Module
@@ -13,7 +14,7 @@ class Vim(Module):
     symlinks = {".vimrc": "~"}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):

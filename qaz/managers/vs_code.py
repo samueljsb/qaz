@@ -1,4 +1,6 @@
-from typing import Iterable, Set
+from __future__ import annotations
+
+from collections.abc import Iterable, Set
 
 from . import shell
 

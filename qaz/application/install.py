@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 import logging
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable
 
 from qaz import settings
 from qaz.managers import files, vs_code

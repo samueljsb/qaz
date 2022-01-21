@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 import json
-from typing import List
 
 from . import shell
 
@@ -11,7 +12,7 @@ def install_or_upgrade_package(package: str):
         shell.run(f"npm update --global {package}")
 
 
-def _get_installed_packages() -> List[str]:
+def _get_installed_packages() -> list[str]:
     output = shell.capture("npm list --global --json")
     data = json.loads(output)
     return [k for k in data.get("dependencies", {})]

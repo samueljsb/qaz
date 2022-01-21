@@ -1,8 +1,9 @@
+from __future__ import annotations
+
 import logging
 import os
 import subprocess
 from pathlib import Path
-from typing import Dict, Optional, Union
 
 from qaz import settings
 
@@ -21,9 +22,9 @@ class CommandNotFound(Exception):
 def run(
     command: str,
     *,
-    cwd: Optional[Union[str, Path]] = None,
+    cwd: str | Path | None = None,
     allow_fail: bool = False,
-    env: Dict[str, str] = None,
+    env: dict[str, str] = None,
 ):
     logger.debug(f"$ {command}")
 
@@ -43,7 +44,7 @@ def run_script(script_name: str) -> None:
     run(str(settings.get_root_dir() / "scripts" / script_name))
 
 
-def capture(command: str, *, env: Dict[str, str] = None) -> str:
+def capture(command: str, *, env: dict[str, str] = None) -> str:
     process = subprocess.run(
         command,
         shell=True,

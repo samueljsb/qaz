@@ -1,4 +1,4 @@
-from typing import Dict, List
+from __future__ import annotations
 
 from qaz.managers import brew, shell
 from qaz.modules.base import Module
@@ -9,10 +9,10 @@ class MacOS(Module):
 
     # Configuration files
     zshrc_file = None
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):
@@ -29,10 +29,10 @@ class Bartender(Module):
 
     # Configuration files
     zshrc_file = None
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):
@@ -49,10 +49,10 @@ class Rectangle(Module):
 
     # Configuration files
     zshrc_file = None
-    symlinks: Dict[str, str] = {}
+    symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions: List[str] = []
+    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls):
