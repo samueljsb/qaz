@@ -11,7 +11,5 @@ def update_qaz() -> None:
     """
     root_dir = settings.get_root_dir()
     git.pull(root_dir)
-    shell.run(
-        f"{root_dir}/.venv/bin/python -m pip install {root_dir}",
-        cwd=root_dir,
-    )
+    shell.run(f"{root_dir}/.venv/bin/python -m pip install --upgrade pip")
+    shell.run(f"{root_dir}/.venv/bin/python -m pip install {root_dir}")
