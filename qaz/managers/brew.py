@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import subprocess
 
-from . import shell
 from .base import Manager
 
 
