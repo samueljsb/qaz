@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import subprocess
 from collections.abc import Iterable, Set
 
 from . import shell
@@ -22,13 +21,7 @@ class VSCodeExtensions(Manager):
         # VS Code extensions cannot be upgraded from the command line so we skip already
         # installed extensions.
         for extension in set(self.extensions) - _get_installed_extensions():
-            proc = subprocess.run(
-                f"code --install-extension {extension}",
-                shell=True,
-                text=True,
-                capture_output=True,
-            )
-            proc.check_returncode()
+            shell.run(f"code --install-extension {extension}")
 
         return "", None
 

@@ -19,13 +19,7 @@ class Git(Manager):
 
     def install(self) -> tuple[str, subprocess.CompletedProcess[str] | None]:
         # Clone the repo.
-        proc = subprocess.run(
-            f"git clone {self.options} {self.url} {self.repo_path}",
-            shell=True,
-            text=True,
-            capture_output=True,
-        )
-        proc.check_returncode()
+        proc = shell.run(f"git clone {self.options} {self.url} {self.repo_path}")
 
         return self._commit_sha(), proc
 
@@ -33,13 +27,7 @@ class Git(Manager):
         from_sha = self._commit_sha()
 
         # Pull the repo.
-        proc = subprocess.run(
-            f"git -C {self.repo_path} pull",
-            shell=True,
-            text=True,
-            capture_output=True,
-        )
-        proc.check_returncode()
+        proc = shell.run(f"git -C {self.repo_path} pull")
 
         return from_sha, self._commit_sha(), proc
 

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import subprocess
 
+from . import shell
 from .base import Manager
 
 
@@ -18,13 +19,7 @@ class Homebrew(Manager):
             return version, None
 
         # Install.
-        proc = subprocess.run(
-            f"brew install {self.name}",
-            shell=True,
-            text=True,
-            capture_output=True,
-        )
-        proc.check_returncode()
+        proc = shell.run(f"brew install {self.name}")
 
         # Get the new version.
         version = self._version()
@@ -35,26 +30,14 @@ class Homebrew(Manager):
         from_version = self._version()
 
         # Upgrade.
-        proc = subprocess.run(
-            f"brew upgrade {self.name}",
-            shell=True,
-            text=True,
-            capture_output=True,
-        )
-        proc.check_returncode()
+        proc = shell.run(f"brew upgrade {self.name}")
 
         # Get the new version.
         version = self._version()
         return from_version, version, proc
 
     def _version(self) -> str:
-        proc = subprocess.run(
-            f"brew list --versions {self.name}",
-            shell=True,
-            text=True,
-            capture_output=True,
-        )
-
-        if not proc.stdout:  # not installed
+        versions = shell.capture(f"brew list --versions {self.name}")
+        if not versions:  # not installed
             return ""
-        return proc.stdout.split()[-1]
+        return versions.split()[-1]

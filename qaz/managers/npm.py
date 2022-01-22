@@ -15,13 +15,7 @@ class NPM(Manager):
 
     def install(self) -> tuple[str, subprocess.CompletedProcess[str] | None]:
         # Install the package.
-        proc = subprocess.run(
-            f"npm install --global {self.package}",
-            shell=True,
-            text=True,
-            capture_output=True,
-        )
-        proc.check_returncode()
+        proc = shell.run(f"npm install --global {self.package}")
 
         return self._version(), proc
 
@@ -29,13 +23,7 @@ class NPM(Manager):
         from_version = self._version()
 
         # Update the package.
-        proc = subprocess.run(
-            f"npm update --global {self.package}",
-            shell=True,
-            text=True,
-            capture_output=True,
-        )
-        proc.check_returncode()
+        proc = shell.run(f"npm update --global {self.package}")
 
         return from_version, self._version(), proc
 

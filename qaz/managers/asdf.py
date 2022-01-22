@@ -18,22 +18,10 @@ class ASDF(Manager):
         shell.run("asdf update")
 
         # Add the plugin.
-        proc = subprocess.run(
-            f"asdf plugin add {self.plugin}",
-            shell=True,
-            text=True,
-            capture_output=True,
-        )
-        proc.check_returncode()
+        shell.run(f"asdf plugin add {self.plugin}")
 
         # Install the plugin.
-        proc = subprocess.run(
-            f"asdf install {self.plugin} latest",
-            shell=True,
-            text=True,
-            capture_output=True,
-        )
-        proc.check_returncode()
+        proc = shell.run(f"asdf install {self.plugin} latest")
 
         version = self._set_latest()
         return version, proc
@@ -43,13 +31,7 @@ class ASDF(Manager):
         from_version = self._latest_version()
 
         # Install the latest version of the plugin.
-        proc = subprocess.run(
-            f"asdf install {self.plugin} latest",
-            shell=True,
-            text=True,
-            capture_output=True,
-        )
-        proc.check_returncode()
+        proc = shell.run(f"asdf install {self.plugin} latest")
 
         version = self._set_latest()
         return from_version, version, proc

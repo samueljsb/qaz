@@ -15,19 +15,18 @@ class PipX(Manager):
 
     def install(self) -> tuple[str, subprocess.CompletedProcess[str] | None]:
         # Install the package.
-        proc = subprocess.run(
-            f"pipx install {self.package}",
-            shell=True,
-            text=True,
-            capture_output=True,
-        )
-        if proc.returncode not in (0, 1):  # pipx returns 1 on success
-            raise subprocess.CalledProcessError(
-                returncode=proc.returncode,
-                cmd=f"pipx install {self.package}",
-                output=proc.stdout,
-                stderr=proc.stderr,
-            )
+        try:
+            proc = shell.run(f"pipx install {self.package}")
+        except subprocess.CalledProcessError as exc:
+            if exc.returncode == 1:  # pipx returns 1 on success
+                proc = subprocess.CompletedProcess(
+                    args=(exc.cmd,),
+                    returncode=1,
+                    stdout=exc.output,
+                    stderr=exc.stderr,
+                )
+            else:
+                raise
 
         return self._version(), proc
 
@@ -35,19 +34,18 @@ class PipX(Manager):
         from_version = self._version()
 
         # Update the package.
-        proc = subprocess.run(
-            f"pipx upgrade {self.package}",
-            shell=True,
-            text=True,
-            capture_output=True,
-        )
-        if proc.returncode not in (0, 1):  # pipx returns 1 on success
-            raise subprocess.CalledProcessError(
-                returncode=proc.returncode,
-                cmd=f"pipx upgrade {self.package}",
-                output=proc.stdout,
-                stderr=proc.stderr,
-            )
+        try:
+            proc = shell.run(f"pipx upgrade {self.package}")
+        except subprocess.CalledProcessError as exc:
+            if exc.returncode == 1:  # pipx returns 1 on success
+                proc = subprocess.CompletedProcess(
+                    args=(exc.cmd,),
+                    returncode=1,
+                    stdout=exc.output,
+                    stderr=exc.stderr,
+                )
+            else:
+                raise
 
         return from_version, self._version(), proc
 
