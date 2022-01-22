@@ -110,10 +110,4 @@ class TrashCLI(Module):
     # Other
     vscode_extensions: list[str] = []
 
-    @classmethod
-    def install_action(cls) -> None:
-        npm.install_or_upgrade_package("trash-cli")
-
-    @classmethod
-    def upgrade_action(cls) -> None:
-        npm.install_or_upgrade_package("trash-cli")
+    package_manager = npm.NPM("trash-cli")
