@@ -96,13 +96,7 @@ class Bpython(Module):
     # Other
     vscode_extensions: list[str] = []
 
-    @classmethod
-    def install_action(cls) -> None:
-        pipx.install_or_upgrade_package("bpython")
-
-    @classmethod
-    def upgrade_action(cls) -> None:
-        pipx.install_or_upgrade_package("bpython")
+    package_manager = pipx.PipX("bpython")
 
 
 class Tox(Module):
@@ -111,10 +105,4 @@ class Tox(Module):
     # Other
     vscode_extensions: list[str] = []
 
-    @classmethod
-    def install_action(cls) -> None:
-        pipx.install_or_upgrade_package("tox")
-
-    @classmethod
-    def upgrade_action(cls) -> None:
-        pipx.install_or_upgrade_package("tox")
+    package_manager = pipx.PipX("tox")
