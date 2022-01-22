@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-from sys import platform
-
-from qaz.managers import asdf, brew, pip, pipx, shell
+from qaz.managers import brew, pip, pipx, shell
 from qaz.modules.base import Module
 
 
@@ -22,20 +20,6 @@ class Python(Module):
         "ms-python.vscode-pylance",
         "wholroyd.jinja",
     ]
-
-    @classmethod
-    def install_action(cls) -> None:
-        asdf.install_or_upgrade_plugin("python")
-        pip.install_or_upgrade_package("pip")
-        if platform == "darwin":
-            pip.install_or_upgrade_package("gnureadline")
-
-    @classmethod
-    def upgrade_action(cls) -> None:
-        asdf.install_or_upgrade_plugin("python")
-        pip.install_or_upgrade_package("pip")
-        if platform == "darwin":
-            pip.install_or_upgrade_package("gnureadline")
 
 
 class Poetry(Module):
