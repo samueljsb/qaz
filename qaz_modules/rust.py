@@ -12,10 +12,4 @@ class Rust(Module):
         "rust-lang.rust",
     ]
 
-    @classmethod
-    def install_action(cls) -> None:
-        asdf.install_or_upgrade_plugin("rust")
-
-    @classmethod
-    def upgrade_action(cls) -> None:
-        asdf.install_or_upgrade_plugin("rust")
+    package_manager = asdf.ASDF("rust")

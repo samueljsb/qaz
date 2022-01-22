@@ -14,10 +14,4 @@ class Ruby(Module):
         "wingrunr21.vscode-ruby",
     ]
 
-    @classmethod
-    def install_action(cls) -> None:
-        asdf.install_or_upgrade_plugin("ruby")
-
-    @classmethod
-    def upgrade_action(cls) -> None:
-        asdf.install_or_upgrade_plugin("ruby")
+    package_manager = asdf.ASDF("ruby")

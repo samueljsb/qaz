@@ -22,16 +22,18 @@ class Python(Module):
         "wholroyd.jinja",
     ]
 
+    package_manager = asdf.ASDF("python")
+
     @classmethod
     def install_action(cls) -> None:
-        asdf.install_or_upgrade_plugin("python")
+        super().install_action()
         pip.install_or_upgrade_package("pip")
         if platform == "darwin":
             pip.install_or_upgrade_package("gnureadline")
 
     @classmethod
     def upgrade_action(cls) -> None:
-        asdf.install_or_upgrade_plugin("python")
+        super().upgrade_action()
         pip.install_or_upgrade_package("pip")
         if platform == "darwin":
             pip.install_or_upgrade_package("gnureadline")

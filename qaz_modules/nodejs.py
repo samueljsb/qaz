@@ -16,15 +16,17 @@ class NodeJS(Module):
         "numso.prettier-standard-vscode",
     ]
 
+    package_manager = asdf.ASDF("nodejs")
+
     @classmethod
     def install_action(cls) -> None:
         os.environ["NODEJS_CHECK_SIGNATURES"] = "no"
-        asdf.install_or_upgrade_plugin("nodejs")
+        super().install_action()
 
     @classmethod
     def upgrade_action(cls) -> None:
         os.environ["NODEJS_CHECK_SIGNATURES"] = "no"
-        asdf.install_or_upgrade_plugin("nodejs")
+        super().upgrade_action()
 
 
 class Yarn(Module):
@@ -33,10 +35,4 @@ class Yarn(Module):
     # Other
     vscode_extensions: list[str] = []
 
-    @classmethod
-    def install_action(cls) -> None:
-        asdf.install_or_upgrade_plugin("yarn")
-
-    @classmethod
-    def upgrade_action(cls) -> None:
-        asdf.install_or_upgrade_plugin("yarn")
+    package_manager = asdf.ASDF("yarn")
