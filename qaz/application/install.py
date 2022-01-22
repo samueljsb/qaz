@@ -90,10 +90,16 @@ def link_zshrc_file(module: Module) -> None:
 
     zshrc_path = settings.get_root_dir() / "zshrc" / zshrc_fname
     if zshrc_path.exists():
-        files.create_symlink(
-            zshrc_path,
-            Path.home() / ".zshrc.d",
-        )
+        dot_zshrc_dir = Path.home() / ".zshrc.d"
+        try:
+            files.Symlink(
+                zshrc_path,
+                dot_zshrc_dir,
+            ).install()
+        except Exception as exc:
+            logger.error(exc)
+        else:
+            logger.info(f"Linked {dot_zshrc_dir / zshrc_path.name} -> {zshrc_path}")
 
 
 def create_symlinks(module: Module) -> None:
@@ -101,10 +107,17 @@ def create_symlinks(module: Module) -> None:
     Create symlinks for this this module's configuration files.
     """
     for target, link in module.symlinks.items():
-        files.create_symlink(
-            settings.get_root_dir() / "configfiles" / target,
-            Path(link).expanduser(),
-        )
+        target_file = settings.get_root_dir() / "configfiles" / target
+        link_dir = Path(link).expanduser()
+        try:
+            files.Symlink(
+                target_file,
+                link_dir,
+            ).install()
+        except Exception as exc:
+            logger.error(exc)
+        else:
+            logger.info(f"Linked {link_dir / target_file.name} -> {target_file}")
 
 
 def install_vscode_extensions(module: Module) -> None:
