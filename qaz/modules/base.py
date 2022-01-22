@@ -24,6 +24,7 @@ class Module(Protocol):
 
     name: str
     auto_update: bool = False
+    is_language: bool = False
 
     # Configuration files
     zshrc_file: str | None

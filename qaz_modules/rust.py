@@ -6,6 +6,7 @@ from qaz.modules.base import Module
 
 class Rust(Module):
     name = "Rust"
+    is_language = True
 
     # Configuration files
     zshrc_file = None

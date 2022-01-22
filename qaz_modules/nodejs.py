@@ -8,6 +8,7 @@ from qaz.modules.base import Module
 
 class NodeJS(Module):
     name = "Node.js"
+    is_language = True
 
     # Configuration files
     zshrc_file = None

@@ -8,6 +8,7 @@ from qaz.modules.base import Module
 
 class Python(Module):
     name = "Python"
+    is_language = True
 
     # Configuration files
     zshrc_file = "python.zsh"

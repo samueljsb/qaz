@@ -6,6 +6,7 @@ from qaz.modules.base import Module
 
 class Ruby(Module):
     name = "Ruby"
+    is_language = True
 
     # Configuration files
     zshrc_file = None
