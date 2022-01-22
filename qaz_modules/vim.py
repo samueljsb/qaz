@@ -15,16 +15,17 @@ class Vim(Module):
     # Other
     vscode_extensions: list[str] = []
 
+    package_manager = git.Git(
+        url="https://github.com/VundleVim/Vundle.vim.git",
+        repo_path=Path().home() / ".vim/bundle/Vundle.vim",
+    )
+
     @classmethod
     def install_action(cls) -> None:
-        repo_path = Path.home() / ".vim/bundle/Vundle.vim"
-        git.clone(
-            repo_url="https://github.com/VundleVim/Vundle.vim.git", repo_path=repo_path
-        )
+        super().install_action()
         shell.run("vim +PluginInstall +qall")
 
     @classmethod
     def upgrade_action(cls) -> None:
-        repo_path = Path.home() / ".vim/bundle/Vundle.vim"
-        git.pull(repo_path)
+        super().upgrade_action()
         shell.run("vim +PluginInstall +qall")

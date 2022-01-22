@@ -83,6 +83,17 @@ class OhMyZSH(Module):
     # Other
     vscode_extensions: list[str] = []
 
+    plugins = (
+        git.Git(
+            url="https://github.com/zsh-users/zsh-syntax-highlighting.git",
+            repo_path=Path.home() / ".oh-my-zsh/custom/plugins/zsh-syntax-highlighting",
+        ),
+        git.Git(
+            url="https://github.com/zsh-users/zsh-autosuggestions.git",
+            repo_path=Path.home() / ".oh-my-zsh/custom/plugins/zsh-autosuggestions",
+        ),
+    )
+
     @classmethod
     def install_action(cls) -> None:
         shell.run(
@@ -91,14 +102,8 @@ class OhMyZSH(Module):
         )
 
         # Install themes and plugins.
-        git.clone(
-            repo_url="https://github.com/zsh-users/zsh-syntax-highlighting.git",
-            repo_path=Path.home() / ".oh-my-zsh/custom/plugins/zsh-syntax-highlighting",
-        )
-        git.clone(
-            repo_url="https://github.com/zsh-users/zsh-autosuggestions.git",
-            repo_path=Path.home() / ".oh-my-zsh/custom/plugins/zsh-autosuggestions",
-        )
+        for plugin in cls.plugins:
+            plugin.install()
 
     @classmethod
     def upgrade_action(cls) -> None:
@@ -109,5 +114,5 @@ class OhMyZSH(Module):
         )
 
         # Upgrade themes and plugins.
-        git.pull(Path.home() / ".oh-my-zsh/custom/plugins/zsh-syntax-highlighting")
-        git.pull(Path.home() / ".oh-my-zsh/custom/plugins/zsh-autosuggestions")
+        for plugin in cls.plugins:
+            plugin.upgrade()

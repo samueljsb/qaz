@@ -1,5 +1,5 @@
 from qaz import settings
-from qaz.managers import git, shell
+from qaz.managers import shell
 
 
 def update_qaz() -> None:
@@ -10,6 +10,6 @@ def update_qaz() -> None:
     for this tool.
     """
     root_dir = settings.get_root_dir()
-    git.pull(root_dir)
+    shell.run(f"git -C {root_dir} pull")
     shell.run(f"{root_dir}/.venv/bin/python -m pip install --upgrade pip")
     shell.run(f"{root_dir}/.venv/bin/python -m pip install {root_dir}")
