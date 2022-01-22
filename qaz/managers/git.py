@@ -48,11 +48,3 @@ class Git(Manager):
             f"git -C {self.repo_path} show --format=reference --no-patch"
         )
         return reference.split()[0]
-
-
-def clone(*, repo_url: str, repo_path: Path | str, options: str = "") -> None:
-    shell.run(f"git clone {options} {repo_url} {repo_path}")
-
-
-def pull(repo_path: Path | str) -> None:
-    shell.run(f"git -C {repo_path} pull")
