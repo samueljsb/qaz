@@ -129,4 +129,4 @@ def install_vscode_extensions(module: Module) -> None:
     if not module.vscode_extensions:
         return
 
-    vs_code.install_extensions(module.vscode_extensions)
+    vs_code.VSCodeExtensions(module.vscode_extensions).install()
