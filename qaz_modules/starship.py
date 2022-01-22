@@ -11,9 +11,6 @@ class Starship(Module):
     zshrc_file = "starship.zsh"
     symlinks = {"starship.toml": "~/.config"}
 
-    # Other
-    vscode_extensions: list[str] = []
-
     @classmethod
     def install_action(cls) -> None:
         asdf.install_or_upgrade_plugin("starship")

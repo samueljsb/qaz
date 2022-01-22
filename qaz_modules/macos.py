@@ -11,9 +11,6 @@ class MacOS(Module):
     zshrc_file = None
     symlinks: dict[str, str] = {}
 
-    # Other
-    vscode_extensions: list[str] = []
-
     @classmethod
     def install_action(cls) -> None:
         shell.run_script("set-defaults.sh")
@@ -31,9 +28,6 @@ class Bartender(Module):
     zshrc_file = None
     symlinks: dict[str, str] = {}
 
-    # Other
-    vscode_extensions: list[str] = []
-
     @classmethod
     def install_action(cls) -> None:
         brew.install_or_upgrade_cask("bartender")
@@ -50,9 +44,6 @@ class Rectangle(Module):
     # Configuration files
     zshrc_file = None
     symlinks: dict[str, str] = {}
-
-    # Other
-    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls) -> None:

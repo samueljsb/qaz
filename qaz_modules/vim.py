@@ -13,9 +13,6 @@ class Vim(Module):
     zshrc_file = None
     symlinks = {".vimrc": "~"}
 
-    # Other
-    vscode_extensions: list[str] = []
-
     @classmethod
     def install_action(cls) -> None:
         repo_path = Path.home() / ".vim/bundle/Vundle.vim"

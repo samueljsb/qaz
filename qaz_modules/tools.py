@@ -11,9 +11,6 @@ class Bat(Module):
     zshrc_file = "bat.zsh"
     symlinks: dict[str, str] = {}
 
-    # Other
-    vscode_extensions: list[str] = []
-
     @classmethod
     def install_action(cls) -> None:
         brew.install_or_upgrade_formula("bat")
@@ -29,9 +26,6 @@ class Exa(Module):
     # Configuration files
     zshrc_file = "exa.zsh"
     symlinks: dict[str, str] = {}
-
-    # Other
-    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls) -> None:
@@ -49,9 +43,6 @@ class Figlet(Module):
     zshrc_file = "figlet.zsh"
     symlinks: dict[str, str] = {}
 
-    # Other
-    vscode_extensions: list[str] = []
-
     @classmethod
     def install_action(cls) -> None:
         brew.install_or_upgrade_formula("figlet")
@@ -67,9 +58,6 @@ class Fzf(Module):
     # Configuration files
     zshrc_file = "fzf.zsh"
     symlinks: dict[str, str] = {}
-
-    # Other
-    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls) -> None:
@@ -93,9 +81,6 @@ class GNUSed(Module):
     zshrc_file = "sed.zsh"
     symlinks: dict[str, str] = {}
 
-    # Other
-    vscode_extensions: list[str] = []
-
     @classmethod
     def install_action(cls) -> None:
         brew.install_or_upgrade_formula("gnu-sed")
@@ -111,9 +96,6 @@ class Less(Module):
     # Configuration files
     zshrc_file = "less.zsh"
     symlinks: dict[str, str] = {}
-
-    # Other
-    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls) -> None:
@@ -131,9 +113,6 @@ class McFly(Module):
     zshrc_file = "mcfly.zsh"
     symlinks: dict[str, str] = {}
 
-    # Other
-    vscode_extensions: list[str] = []
-
     @classmethod
     def install_action(cls) -> None:
         brew.install_or_upgrade_formula("cantino/mcfly/mcfly")
@@ -149,9 +128,6 @@ class TrashCLI(Module):
     # Configuration files
     zshrc_file = "trash-cli.zsh"
     symlinks: dict[str, str] = {}
-
-    # Other
-    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls) -> None:

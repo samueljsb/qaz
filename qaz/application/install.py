@@ -5,7 +5,7 @@ from collections.abc import Iterable
 from pathlib import Path
 
 from qaz import settings
-from qaz.managers import files, vs_code
+from qaz.managers import files
 from qaz.modules import queries as module_queries
 from qaz.modules.base import Module
 
@@ -72,7 +72,6 @@ def install_module(module: Module) -> None:
         module.install_action()
         link_zshrc_file(module)
         create_symlinks(module)
-        install_vscode_extensions(module)
     except Exception as exc:
         raise CannotInstallModule(exc)
 
@@ -105,15 +104,3 @@ def create_symlinks(module: Module) -> None:
             settings.get_root_dir() / "configfiles" / target,
             Path(link).expanduser(),
         )
-
-
-def install_vscode_extensions(module: Module) -> None:
-    """
-    Install the VS Code extensions for the given module.
-
-    If VS Code is not installed, this will do nothing.
-    """
-    if not module.vscode_extensions:
-        return
-
-    vs_code.install_extensions(module.vscode_extensions)

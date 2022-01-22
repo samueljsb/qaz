@@ -11,9 +11,6 @@ class ASDF(Module):
     zshrc_file = "asdf.zsh"
     symlinks = {".asdfrc": "~"}
 
-    # Other
-    vscode_extensions: list[str] = []
-
     # N.B. This is installed by install.sh, so no install script is needed here.
     @classmethod
     def install_action(cls) -> None:

@@ -23,9 +23,6 @@ class Yarn(Module):
     zshrc_file = None
     symlinks: dict[str, str] = {}
 
-    # Other
-    vscode_extensions: list[str] = []
-
     @classmethod
     def install_action(cls) -> None:
         asdf.install_or_upgrade_plugin("yarn")

@@ -12,9 +12,6 @@ class Python(Module):
     zshrc_file = "python.zsh"
     symlinks = {".pypirc": "~", "pythonstartup.py": "~/.config/", ".pdbrc.py": "~"}
 
-    # Other
-    vscode_extensions: list[str] = []
-
 
 class Poetry(Module):
     name = "Poetry"
@@ -22,9 +19,6 @@ class Poetry(Module):
     # Configuration files
     zshrc_file = "poetry.zsh"
     symlinks: dict[str, str] = {}
-
-    # Other
-    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls) -> None:
@@ -44,9 +38,6 @@ class Rich(Module):
     zshrc_file = None
     symlinks: dict[str, str] = {}
 
-    # Other
-    vscode_extensions: list[str] = []
-
     @classmethod
     def install_action(cls) -> None:
         pip.install_or_upgrade_package("rich")
@@ -62,9 +53,6 @@ class Pipx(Module):
     # Configuration files
     zshrc_file = "pipx.zsh"
     symlinks: dict[str, str] = {}
-
-    # Other
-    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls) -> None:
@@ -82,9 +70,6 @@ class Bpython(Module):
     zshrc_file = None
     symlinks = {"bpython": "~/.config/bpython"}
 
-    # Other
-    vscode_extensions: list[str] = []
-
     @classmethod
     def install_action(cls) -> None:
         pipx.install_or_upgrade_package("bpython")
@@ -100,9 +85,6 @@ class Tox(Module):
     # Configuration files
     zshrc_file = None
     symlinks: dict[str, str] = {}
-
-    # Other
-    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls) -> None:

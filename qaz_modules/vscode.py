@@ -1,6 +1,6 @@
 from sys import platform
 
-from qaz.managers import brew
+from qaz.managers import brew, vs_code
 from qaz.modules.base import Module
 
 
@@ -21,7 +21,7 @@ class VSCode(Module):
     symlinks = {"settings.json": SETTINGS_DIR}
 
     # Other
-    vscode_extensions = [
+    extensions = [
         "aaron-bond.better-comments",
         "alefragnani.Bookmarks",
         "bungcip.better-toml",
@@ -69,7 +69,9 @@ class VSCode(Module):
     @classmethod
     def install_action(cls) -> None:
         brew.install_or_upgrade_cask("visual-studio-code")
+        vs_code.install_extensions(cls.extensions)
 
     @classmethod
     def upgrade_action(cls) -> None:
         brew.install_or_upgrade_cask("visual-studio-code")
+        vs_code.install_extensions(cls.extensions)
