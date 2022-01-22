@@ -12,8 +12,4 @@ class Ruby(Module):
     symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions = [
-        "rebornix.ruby",
-        "sissel.shopify-liquid",
-        "wingrunr21.vscode-ruby",
-    ]
+    vscode_extensions: list[str] = []

@@ -13,13 +13,7 @@ class Python(Module):
     symlinks = {".pypirc": "~", "pythonstartup.py": "~/.config/", ".pdbrc.py": "~"}
 
     # Other
-    vscode_extensions = [
-        "freakypie.code-python-isort",
-        "lextudio.restructuredtext",
-        "ms-python.python",
-        "ms-python.vscode-pylance",
-        "wholroyd.jinja",
-    ]
+    vscode_extensions: list[str] = []
 
 
 class Poetry(Module):

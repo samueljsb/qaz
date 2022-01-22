@@ -12,6 +12,4 @@ class Rust(Module):
     symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions = [
-        "rust-lang.rust",
-    ]
+    vscode_extensions: list[str] = []

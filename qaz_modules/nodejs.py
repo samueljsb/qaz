@@ -13,11 +13,7 @@ class NodeJS(Module):
     symlinks: dict[str, str] = {}
 
     # Other
-    vscode_extensions = [
-        "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
-        "numso.prettier-standard-vscode",
-    ]
+    vscode_extensions: list[str] = []
 
 
 class Yarn(Module):

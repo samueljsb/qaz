@@ -48,6 +48,22 @@ class VSCode(Module):
         "wholroyd.jinja",
         "william-voyek.vscode-nginx",
         "zamerick.vscode-caddyfile-syntax",
+        # NodeJS
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "numso.prettier-standard-vscode",
+        # Python
+        "freakypie.code-python-isort",
+        "lextudio.restructuredtext",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "wholroyd.jinja",
+        # Ruby
+        "rebornix.ruby",
+        "sissel.shopify-liquid",
+        "wingrunr21.vscode-ruby",
+        # Rust
+        "rust-lang.rust",
     ]
 
     @classmethod
