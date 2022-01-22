@@ -3,7 +3,6 @@ from __future__ import annotations
 import logging
 import os
 import subprocess
-from pathlib import Path
 
 from qaz import settings
 
@@ -22,22 +21,28 @@ class CommandNotFound(Exception):
 def run(
     command: str,
     *,
-    cwd: str | Path | None = None,
-    allow_fail: bool = False,
     env: dict[str, str] | None = None,
-) -> None:
-    logger.debug(f"$ {command}")
+) -> subprocess.CompletedProcess[str]:
+    env = env or {}
 
+    # Run the command.
+    logger.debug(f"$ {command}")
     process = subprocess.run(
         command,
-        cwd=cwd,
+        env=os.environ.update(env),
         shell=True,
-        env=os.environ.update(env if env else {}),
+        text=True,
+        capture_output=True,
     )
-    if not allow_fail:
-        if process.returncode == 127:
-            raise CommandNotFound(f"Command '{command.split()[0]}' not found.")
+
+    # Log stderr if the process failed.
+    try:
         process.check_returncode()
+    except Exception:
+        logger.error(process.stderr)
+        raise
+
+    return process
 
 
 def run_script(script_name: str) -> None:
