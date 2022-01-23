@@ -48,4 +48,4 @@ def _flake8(ctx):
 
 def _mypy(ctx):
     print(">>> type-checking...")
-    ctx.run("mypy .", pty=True)
+    ctx.run("mypy qaz qaz_modules", pty=True)
