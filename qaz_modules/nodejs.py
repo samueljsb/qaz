@@ -4,18 +4,6 @@ from qaz.managers import asdf
 from qaz.modules.base import Module
 
 
-class NodeJS(Module):
-    name = "Node.js"
-    is_language = True
-
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
-
-    # Other
-    vscode_extensions: list[str] = []
-
-
 class Yarn(Module):
     name = "Yarn"
 
