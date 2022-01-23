@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from qaz.managers import brew, shell
+from qaz.managers import shell
 from qaz.modules.base import Module
 
 
@@ -29,19 +29,3 @@ class Poetry(Module):
     @classmethod
     def upgrade_action(cls) -> None:
         shell.run("poetry self update")
-
-
-class Pipx(Module):
-    name = "pipx"
-
-    # Configuration files
-    zshrc_file = "pipx.zsh"
-    symlinks: dict[str, str] = {}
-
-    @classmethod
-    def install_action(cls) -> None:
-        brew.install_or_upgrade_formula("pipx")
-
-    @classmethod
-    def upgrade_action(cls) -> None:
-        brew.install_or_upgrade_formula("pipx")

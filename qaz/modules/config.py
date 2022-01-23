@@ -11,7 +11,6 @@ COMMON_MODULES = (
     "qaz_modules.nodejs.Yarn",
     "qaz_modules.python.Python",
     "qaz_modules.python.Poetry",
-    "qaz_modules.python.Pipx",
     "qaz_modules.starship.Starship",
     "qaz_modules.tools.Bat",
     "qaz_modules.tools.Exa",
