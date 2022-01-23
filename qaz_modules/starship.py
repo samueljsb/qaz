@@ -11,10 +11,8 @@ class Starship(Module):
     zshrc_file = "starship.zsh"
     symlinks = {"starship.toml": "~/.config"}
 
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         asdf.install_or_upgrade_plugin("starship")
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         asdf.install_or_upgrade_plugin("starship")

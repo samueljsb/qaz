@@ -17,13 +17,11 @@ class MacOSZsh(Module):
         "e": "/usr/local/bin",
     }
 
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         brew.install_or_upgrade_formula("zsh")
         _set_default_shell()
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("zsh")
         _set_default_shell()
 
@@ -39,14 +37,12 @@ class LinuxZsh(Module):
         "e": "/usr/local/bin",
     }
 
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         shell.run("sudo apt update")
         shell.run("sudo apt install --yes zsh")
         _set_default_shell()
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         shell.run("sudo apt update")
         shell.run("sudo apt upgrade --yes zsh")
         _set_default_shell()
@@ -71,8 +67,7 @@ class OhMyZSH(Module):
     # Configuration files
     zshrc_file = "_oh-my-zsh.zsh"  # load early to allow modules to overwrite settings
 
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         shell.run(
             'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"',  # noqa: E501
             env={"CHSH": "no", "RUNZSH": "no", "KEEP_ZSHRC": "yes"},
@@ -88,8 +83,7 @@ class OhMyZSH(Module):
             repo_path=Path.home() / ".oh-my-zsh/custom/plugins/zsh-autosuggestions",
         )
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         zsh_dir = Path.home().resolve() / ".oh-my-zsh"
         shell.run(
             f"sh {zsh_dir / 'tools/upgrade.sh'} --interactive",

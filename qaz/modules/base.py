@@ -29,8 +29,7 @@ class Module:
     zshrc_file: str | None = None
     symlinks: Mapping[str, str] = MappingProxyType({})
 
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         """
         Run actions to install this module.
 
@@ -38,8 +37,7 @@ class Module:
         """
         pass
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         """
         Run actions to upgrade this module.
 

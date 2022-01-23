@@ -16,8 +16,7 @@ FONTS = ["Hack"]
 class NerdFonts(Module):
     name = "nerd-fonts"
 
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         logger.warning("... this might take a while!")
         repo_path = Path().home() / ".nerd-fonts"
         git.clone(
@@ -29,8 +28,7 @@ class NerdFonts(Module):
         for font_name in FONTS:
             shell.run(f"{repo_path / 'install.sh'} {font_name}")
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         repo_path = Path().home() / ".nerd-fonts"
 
         if sys.platform == "darwin":

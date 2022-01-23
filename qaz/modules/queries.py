@@ -72,7 +72,7 @@ def get_all_modules() -> dict[str, base.Module]:
 
     modules: dict[str, base.Module] = {}
     for module_path in module_paths:
-        module = _import_module(module_path)
+        module = _import_module(module_path)()
 
         if module.name in modules:
             raise RuntimeError(f"Multiple modules configured with name '{module.name}'")
@@ -81,7 +81,7 @@ def get_all_modules() -> dict[str, base.Module]:
     return modules
 
 
-def _import_module(dotted_path: str) -> base.Module:
+def _import_module(dotted_path: str) -> type[base.Module]:
     """
     Import a module class.
 
