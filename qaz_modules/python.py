@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from qaz.managers import brew, pipx, shell
+from qaz.managers import brew, shell
 from qaz.modules.base import Module
 
 
@@ -45,19 +45,3 @@ class Pipx(Module):
     @classmethod
     def upgrade_action(cls) -> None:
         brew.install_or_upgrade_formula("pipx")
-
-
-class Bpython(Module):
-    name = "bpython"
-
-    # Configuration files
-    zshrc_file = None
-    symlinks = {"bpython": "~/.config/bpython"}
-
-    @classmethod
-    def install_action(cls) -> None:
-        pipx.install_or_upgrade_package("bpython")
-
-    @classmethod
-    def upgrade_action(cls) -> None:
-        pipx.install_or_upgrade_package("bpython")
