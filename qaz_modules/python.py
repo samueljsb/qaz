@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from qaz.managers import brew, pip, pipx, shell
+from qaz.managers import brew, pipx, shell
 from qaz.modules.base import Module
 
 
@@ -29,22 +29,6 @@ class Poetry(Module):
     @classmethod
     def upgrade_action(cls) -> None:
         shell.run("poetry self update")
-
-
-class Rich(Module):
-    name = "rich"
-
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
-
-    @classmethod
-    def install_action(cls) -> None:
-        pip.install_or_upgrade_package("rich")
-
-    @classmethod
-    def upgrade_action(cls) -> None:
-        pip.install_or_upgrade_package("rich")
 
 
 class Pipx(Module):
@@ -77,19 +61,3 @@ class Bpython(Module):
     @classmethod
     def upgrade_action(cls) -> None:
         pipx.install_or_upgrade_package("bpython")
-
-
-class Tox(Module):
-    name = "tox"
-
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
-
-    @classmethod
-    def install_action(cls) -> None:
-        pipx.install_or_upgrade_package("tox")
-
-    @classmethod
-    def upgrade_action(cls) -> None:
-        pipx.install_or_upgrade_package("tox")
