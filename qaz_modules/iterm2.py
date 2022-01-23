@@ -8,10 +8,6 @@ class ITerm2(Module):
     name = "iTerm2"
     auto_update = True
 
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
-
     @classmethod
     def install_action(cls) -> None:
         brew.install_or_upgrade_cask("iterm2")

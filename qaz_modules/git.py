@@ -40,10 +40,6 @@ class GitHubCLI(Module):
 class LazyGit(Module):
     name = "lazygit"
 
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
-
     @classmethod
     def install_action(cls) -> None:
         brew.install_or_upgrade_formula("jesseduffield/lazygit/lazygit")
@@ -55,10 +51,6 @@ class LazyGit(Module):
 
 class GitUI(Module):
     name = "GitUI"
-
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
 
     @classmethod
     def install_action(cls) -> None:
@@ -73,7 +65,6 @@ class DiffSoFancy(Module):
     name = "diff-so-fancy"
 
     # Configuration files
-    zshrc_file = None
     symlinks = {".gitconfig.diff-so-fancy": "~"}
 
     @classmethod

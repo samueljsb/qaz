@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-from typing import Protocol
+from collections.abc import Mapping
+from types import MappingProxyType
 
 
-class Module(Protocol):
+class Module:
     """
     A module that can be installed by QAZ to manage a program or tool.
 
@@ -25,8 +26,8 @@ class Module(Protocol):
     is_language: bool = False
 
     # Configuration files
-    zshrc_file: str | None
-    symlinks: dict[str, str]
+    zshrc_file: str | None = None
+    symlinks: Mapping[str, str] = MappingProxyType({})
 
     @classmethod
     def install_action(cls) -> None:
@@ -35,7 +36,7 @@ class Module(Protocol):
 
         Overwrite this method to provide custom install behaviour.
         """
-        ...
+        pass
 
     @classmethod
     def upgrade_action(cls) -> None:
@@ -44,4 +45,4 @@ class Module(Protocol):
 
         Overwrite this method to provide custom upgrade behaviour.
         """
-        ...
+        pass

@@ -7,10 +7,6 @@ from qaz.modules.base import Module
 class Homebrew(Module):
     name = "Homebrew"
 
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
-
     @classmethod
     def install_action(cls) -> None:
         shell.run(

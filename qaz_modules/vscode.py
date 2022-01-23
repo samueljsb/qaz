@@ -17,7 +17,6 @@ class VSCode(Module):
     auto_update = True
 
     # Configuration files
-    zshrc_file = None
     symlinks = {"settings.json": SETTINGS_DIR}
 
     # Other

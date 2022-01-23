@@ -10,7 +10,6 @@ class MacOSDocker(Module):
 
     # Configuration files
     zshrc_file = "docker.zsh"
-    symlinks: dict[str, str] = {}
 
     @classmethod
     def install_action(cls) -> None:
@@ -26,7 +25,6 @@ class LinuxDocker(Module):
 
     # Configuration files
     zshrc_file = "docker.zsh"
-    symlinks: dict[str, str] = {}
 
     @classmethod
     def install_action(cls) -> None:
@@ -41,10 +39,6 @@ class LinuxDocker(Module):
 
 class LazyDocker(Module):
     name = "lazydocker"
-
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
 
     @classmethod
     def install_action(cls) -> None:

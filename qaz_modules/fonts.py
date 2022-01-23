@@ -16,10 +16,6 @@ FONTS = ["Hack"]
 class NerdFonts(Module):
     name = "nerd-fonts"
 
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
-
     @classmethod
     def install_action(cls) -> None:
         logger.warning("... this might take a while!")

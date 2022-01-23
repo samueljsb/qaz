@@ -70,7 +70,6 @@ class OhMyZSH(Module):
 
     # Configuration files
     zshrc_file = "_oh-my-zsh.zsh"  # load early to allow modules to overwrite settings
-    symlinks: dict[str, str] = {}
 
     @classmethod
     def install_action(cls) -> None:

@@ -7,10 +7,6 @@ from qaz.modules.base import Module
 class Yarn(Module):
     name = "Yarn"
 
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
-
     @classmethod
     def install_action(cls) -> None:
         asdf.install_or_upgrade_plugin("yarn")

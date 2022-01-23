@@ -7,10 +7,6 @@ from qaz.modules.base import Module
 class MacOS(Module):
     name = "macOS"
 
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
-
     @classmethod
     def install_action(cls) -> None:
         shell.run_script("set-defaults.sh")
@@ -24,10 +20,6 @@ class Bartender(Module):
     name = "Bartender"
     auto_update = True
 
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
-
     @classmethod
     def install_action(cls) -> None:
         brew.install_or_upgrade_cask("bartender")
@@ -40,10 +32,6 @@ class Bartender(Module):
 class Rectangle(Module):
     name = "Rectangle"
     auto_update = True
-
-    # Configuration files
-    zshrc_file = None
-    symlinks: dict[str, str] = {}
 
     @classmethod
     def install_action(cls) -> None:
