@@ -11,12 +11,10 @@ class MacOSDocker(Module):
     # Configuration files
     zshrc_file = "docker.zsh"
 
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         brew.install_or_upgrade_cask("docker")
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         brew.install_or_upgrade_cask("docker")
 
 
@@ -26,13 +24,11 @@ class LinuxDocker(Module):
     # Configuration files
     zshrc_file = "docker.zsh"
 
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         # TODO
         raise NotImplementedError
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         # TODO
         raise NotImplementedError
 
@@ -40,10 +36,8 @@ class LinuxDocker(Module):
 class LazyDocker(Module):
     name = "lazydocker"
 
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         brew.install_or_upgrade_formula("jesseduffield/lazydocker/lazydocker")
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("jesseduffield/lazydocker/lazydocker")

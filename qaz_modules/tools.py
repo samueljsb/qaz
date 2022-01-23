@@ -10,12 +10,10 @@ class Bat(Module):
     # Configuration files
     zshrc_file = "bat.zsh"
 
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         brew.install_or_upgrade_formula("bat")
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("bat")
 
 
@@ -25,12 +23,10 @@ class Exa(Module):
     # Configuration files
     zshrc_file = "exa.zsh"
 
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         brew.install_or_upgrade_formula("exa")
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("exa")
 
 
@@ -40,12 +36,10 @@ class Figlet(Module):
     # Configuration files
     zshrc_file = "figlet.zsh"
 
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         brew.install_or_upgrade_formula("figlet")
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("figlet")
 
 
@@ -55,12 +49,10 @@ class Fzf(Module):
     # Configuration files
     zshrc_file = "fzf.zsh"
 
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         brew.install_or_upgrade_formula("fzf")
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("fzf")
 
 
@@ -76,12 +68,10 @@ class GNUSed(Module):
     # Configuration files
     zshrc_file = "sed.zsh"
 
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         brew.install_or_upgrade_formula("gnu-sed")
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("gnu-sed")
 
 
@@ -91,12 +81,10 @@ class Less(Module):
     # Configuration files
     zshrc_file = "less.zsh"
 
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         brew.install_or_upgrade_formula("less")
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("less")
 
 
@@ -106,12 +94,10 @@ class McFly(Module):
     # Configuration files
     zshrc_file = "mcfly.zsh"
 
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         brew.install_or_upgrade_formula("cantino/mcfly/mcfly")
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("cantino/mcfly/mcfly")
 
 
@@ -121,10 +107,8 @@ class TrashCLI(Module):
     # Configuration files
     zshrc_file = "trash-cli.zsh"
 
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         npm.install_or_upgrade_package("trash-cli")
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         npm.install_or_upgrade_package("trash-cli")

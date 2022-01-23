@@ -12,10 +12,8 @@ class ASDF(Module):
     symlinks = {".asdfrc": "~"}
 
     # N.B. This is installed by install.sh, so no install script is needed here.
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         pass
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         shell.run("asdf update")

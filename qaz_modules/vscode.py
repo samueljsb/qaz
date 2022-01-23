@@ -67,12 +67,10 @@ class VSCode(Module):
         "william-voyek.vscode-nginx",
     ]
 
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         brew.install_or_upgrade_cask("visual-studio-code")
-        vs_code.install_extensions(cls.extensions)
+        vs_code.install_extensions(self.extensions)
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         brew.install_or_upgrade_cask("visual-studio-code")
-        vs_code.install_extensions(cls.extensions)
+        vs_code.install_extensions(self.extensions)

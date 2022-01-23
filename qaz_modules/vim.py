@@ -12,16 +12,14 @@ class Vim(Module):
     # Configuration files
     symlinks = {".vimrc": "~"}
 
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         repo_path = Path.home() / ".vim/bundle/Vundle.vim"
         git.clone(
             repo_url="https://github.com/VundleVim/Vundle.vim.git", repo_path=repo_path
         )
         shell.run("vim +PluginInstall +qall")
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         repo_path = Path.home() / ".vim/bundle/Vundle.vim"
         git.pull(repo_path)
         shell.run("vim +PluginInstall +qall")

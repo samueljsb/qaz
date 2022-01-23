@@ -7,8 +7,7 @@ from qaz.modules.base import Module
 class Homebrew(Module):
     name = "Homebrew"
 
-    @classmethod
-    def install_action(cls) -> None:
+    def install_action(self) -> None:
         shell.run(
             "/bin/bash -c "
             '"$(curl -fsSL '
@@ -17,7 +16,6 @@ class Homebrew(Module):
         )
         shell.run("brew analytics off")
 
-    @classmethod
-    def upgrade_action(cls) -> None:
+    def upgrade_action(self) -> None:
         shell.run("brew update")
         shell.run("brew analytics off")
