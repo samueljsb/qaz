@@ -22,32 +22,24 @@ class VSCode(Module):
 
     # Other
     extensions = [
+        # VS Code
         "aaron-bond.better-comments",
         "alefragnani.Bookmarks",
-        "bungcip.better-toml",
         "byi8220.indented-block-highlighting",
-        "codezombiech.gitignore",
-        "DavidAnson.vscode-markdownlint",
         "EditorConfig.EditorConfig",
-        "esbenp.prettier-vscode",
         "formulahendry.auto-close-tag",
-        "knisterpeter.vscode-github",
         "mikestead.dotenv",
-        "mrmlnc.vscode-apache",
-        "ms-azuretools.vscode-docker",
         "naumovs.color-highlight",
-        "npxms.hide-gitignored",
         "PKief.material-icon-theme",
         "pnp.polacode",
-        "sidneys1.gitconfig",
-        "syler.sass-indented",
         "swyphcosmo.spellchecker",
-        "torn4dom4n.latex-support",
         "VisualStudioExptTeam.vscodeintellicode",
+        # Git
+        "codezombiech.gitignore",
+        "knisterpeter.vscode-github",
+        "npxms.hide-gitignored",
+        "sidneys1.gitconfig",
         "waderyan.gitblame",
-        "wholroyd.jinja",
-        "william-voyek.vscode-nginx",
-        "zamerick.vscode-caddyfile-syntax",
         # NodeJS
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
@@ -64,6 +56,16 @@ class VSCode(Module):
         "wingrunr21.vscode-ruby",
         # Rust
         "rust-lang.rust",
+        # TOML
+        "bungcip.better-toml",
+        # Misc.
+        "DavidAnson.vscode-markdownlint",
+        "mrmlnc.vscode-apache",
+        "ms-azuretools.vscode-docker",
+        "syler.sass-indented",
+        "torn4dom4n.latex-support",
+        "wholroyd.jinja",
+        "william-voyek.vscode-nginx",
     ]
 
     @classmethod
