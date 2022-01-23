@@ -11,9 +11,6 @@ class Git(Module):
     zshrc_file = "git.zsh"
     symlinks = {".gitconfig": "~", ".gitignore": "~", ".git-commit-msg": "~"}
 
-    # Other
-    vscode_extensions: list[str] = []
-
     @classmethod
     def install_action(cls) -> None:
         brew.install_or_upgrade_formula("git")
@@ -29,9 +26,6 @@ class GitHubCLI(Module):
     # Configuration files
     zshrc_file = "github.zsh"
     symlinks = {"github_config.yml": "~/.config/gh/config.yml"}
-
-    # Other
-    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls) -> None:
@@ -50,9 +44,6 @@ class LazyGit(Module):
     zshrc_file = None
     symlinks: dict[str, str] = {}
 
-    # Other
-    vscode_extensions: list[str] = []
-
     @classmethod
     def install_action(cls) -> None:
         brew.install_or_upgrade_formula("jesseduffield/lazygit/lazygit")
@@ -69,9 +60,6 @@ class GitUI(Module):
     zshrc_file = None
     symlinks: dict[str, str] = {}
 
-    # Other
-    vscode_extensions: list[str] = []
-
     @classmethod
     def install_action(cls) -> None:
         brew.install_or_upgrade_formula("gitui")
@@ -87,9 +75,6 @@ class DiffSoFancy(Module):
     # Configuration files
     zshrc_file = None
     symlinks = {".gitconfig.diff-so-fancy": "~"}
-
-    # Other
-    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls) -> None:

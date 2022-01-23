@@ -58,5 +58,4 @@ name that reflected that (`dotfiles upgrade python` doesn't make much sense to
 me).
 
 [asdf]: https://asdf-vm.com
-[pipx]: https://pipxproject.github.io/pipx/
 [holman does dotfiles]: https://github.com/holman/dotfiles

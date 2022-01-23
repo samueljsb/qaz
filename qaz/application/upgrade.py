@@ -58,7 +58,6 @@ def upgrade_module(module: Module) -> None:
         module.upgrade_action()
         install.link_zshrc_file(module)
         install.create_symlinks(module)
-        install.install_vscode_extensions(module)
     except Exception as exc:
         logger.exception(exc)
         raise CannotUpgradeModule(exc)

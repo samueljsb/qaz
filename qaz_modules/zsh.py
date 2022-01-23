@@ -17,9 +17,6 @@ class MacOSZsh(Module):
         "e": "/usr/local/bin",
     }
 
-    # Other
-    vscode_extensions: list[str] = []
-
     @classmethod
     def install_action(cls) -> None:
         brew.install_or_upgrade_formula("zsh")
@@ -41,9 +38,6 @@ class LinuxZsh(Module):
         ".editorconfig": "~",
         "e": "/usr/local/bin",
     }
-
-    # Other
-    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls) -> None:
@@ -77,9 +71,6 @@ class OhMyZSH(Module):
     # Configuration files
     zshrc_file = "_oh-my-zsh.zsh"  # load early to allow modules to overwrite settings
     symlinks: dict[str, str] = {}
-
-    # Other
-    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls) -> None:

@@ -17,20 +17,16 @@ class Module(Protocol):
         symlinks:           Additional files that should be installed for this module.
                             This is a dictionary of config filepaths to destination
                             paths.
-        vscode_extensions:  The VSCode extensions to install for working with this
-                            module (optional).
 
     """
 
     name: str
     auto_update: bool = False
+    is_language: bool = False
 
     # Configuration files
     zshrc_file: str | None
     symlinks: dict[str, str]
-
-    # Other
-    vscode_extensions: list[str]
 
     @classmethod
     def install_action(cls) -> None:

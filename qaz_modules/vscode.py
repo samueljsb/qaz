@@ -1,6 +1,6 @@
 from sys import platform
 
-from qaz.managers import brew
+from qaz.managers import brew, vs_code
 from qaz.modules.base import Module
 
 
@@ -21,39 +21,59 @@ class VSCode(Module):
     symlinks = {"settings.json": SETTINGS_DIR}
 
     # Other
-    vscode_extensions = [
+    extensions = [
+        # VS Code
         "aaron-bond.better-comments",
         "alefragnani.Bookmarks",
-        "bungcip.better-toml",
         "byi8220.indented-block-highlighting",
-        "codezombiech.gitignore",
-        "DavidAnson.vscode-markdownlint",
         "EditorConfig.EditorConfig",
-        "esbenp.prettier-vscode",
         "formulahendry.auto-close-tag",
-        "knisterpeter.vscode-github",
         "mikestead.dotenv",
-        "mrmlnc.vscode-apache",
-        "ms-azuretools.vscode-docker",
         "naumovs.color-highlight",
-        "npxms.hide-gitignored",
         "PKief.material-icon-theme",
         "pnp.polacode",
-        "sidneys1.gitconfig",
-        "syler.sass-indented",
         "swyphcosmo.spellchecker",
-        "torn4dom4n.latex-support",
         "VisualStudioExptTeam.vscodeintellicode",
+        # Git
+        "codezombiech.gitignore",
+        "knisterpeter.vscode-github",
+        "npxms.hide-gitignored",
+        "sidneys1.gitconfig",
         "waderyan.gitblame",
+        # NodeJS
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "numso.prettier-standard-vscode",
+        # Python
+        "freakypie.code-python-isort",
+        "lextudio.restructuredtext",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "wholroyd.jinja",
+        # Ruby
+        "rebornix.ruby",
+        "sissel.shopify-liquid",
+        "wingrunr21.vscode-ruby",
+        # Rust
+        "rust-lang.rust",
+        # TOML
+        "bungcip.better-toml",
+        # Misc.
+        "DavidAnson.vscode-markdownlint",
+        "mrmlnc.vscode-apache",
+        "ms-azuretools.vscode-docker",
+        "syler.sass-indented",
+        "torn4dom4n.latex-support",
         "wholroyd.jinja",
         "william-voyek.vscode-nginx",
-        "zamerick.vscode-caddyfile-syntax",
     ]
 
     @classmethod
     def install_action(cls) -> None:
         brew.install_or_upgrade_cask("visual-studio-code")
+        vs_code.install_extensions(cls.extensions)
 
     @classmethod
     def upgrade_action(cls) -> None:
         brew.install_or_upgrade_cask("visual-studio-code")
+        vs_code.install_extensions(cls.extensions)

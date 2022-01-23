@@ -12,9 +12,6 @@ class MacOSDocker(Module):
     zshrc_file = "docker.zsh"
     symlinks: dict[str, str] = {}
 
-    # Other
-    vscode_extensions: list[str] = []
-
     @classmethod
     def install_action(cls) -> None:
         brew.install_or_upgrade_cask("docker")
@@ -30,9 +27,6 @@ class LinuxDocker(Module):
     # Configuration files
     zshrc_file = "docker.zsh"
     symlinks: dict[str, str] = {}
-
-    # Other
-    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls) -> None:
@@ -51,9 +45,6 @@ class LazyDocker(Module):
     # Configuration files
     zshrc_file = None
     symlinks: dict[str, str] = {}
-
-    # Other
-    vscode_extensions: list[str] = []
 
     @classmethod
     def install_action(cls) -> None:
