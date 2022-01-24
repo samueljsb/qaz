@@ -10,6 +10,7 @@ COMMON_MODULES = (
     "qaz_modules.git.DiffSoFancy",
     "qaz_modules.python.Python",
     "qaz_modules.python.Poetry",
+    "qaz_modules.python.PythonLauncher",
     "qaz_modules.starship.Starship",
     "qaz_modules.tools.Bat",
     "qaz_modules.tools.Exa",

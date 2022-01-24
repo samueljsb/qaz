@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from qaz.managers import shell
+from qaz.managers import brew, shell
 from qaz.modules.base import Module
 
 
@@ -27,3 +27,13 @@ class Poetry(Module):
 
     def upgrade_action(self) -> None:
         shell.run("poetry self update")
+
+
+class PythonLauncher(Module):
+    name = "py"
+
+    def install_action(self) -> None:
+        brew.install_or_upgrade_formula("python-launcher")
+
+    def upgrade_action(self) -> None:
+        brew.install_or_upgrade_formula("python-launcher")
