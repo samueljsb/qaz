@@ -1,11 +1,23 @@
 command_timeout = "1500"
 
-right_format = """$status$cmd_duration$time"""
+# Move the status, duration, and time to the right of the prompt without using
+# the 'right prompt' (which is on the same line as the input).
+format = """
+$all\
+$fill\
+$status$cmd_duration$time\
+$line_break\
+$jobs$battery$shell\
+$character\
+"""
 
 [git_status]
 ahead = "⇡${count}"
 diverged = "⇡${ahead_count}⇣${behind_count}"
 behind = "⇣${count}"
+
+[fill]
+symbol = " "
 
 [status]
 disabled=false
