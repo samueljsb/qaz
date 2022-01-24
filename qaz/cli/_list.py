@@ -18,9 +18,8 @@ def output_modules_lists() -> None:
     auto_updating_modules = []
     not_installed_modules = []
 
-    all_modules = module_queries.all_modules()
     for module in sorted(
-        all_modules.values(), key=lambda module: module.name.casefold()
+        module_queries.all_modules(), key=lambda module: module.name.casefold()
     ):
         if module_queries.is_module_installed(module):
             if module.is_language:
