@@ -32,7 +32,7 @@ class Settings(TypedDict):
 # -------
 
 
-def get_root_dir() -> Path:
+def root_dir() -> Path:
     """
     Get the root directory of the qaz repo.
     """
@@ -48,7 +48,7 @@ def is_module_installed(name: str) -> bool:
     return name in settings["modules"]
 
 
-def get_last_upgraded_at(name: str) -> datetime.datetime | None:
+def last_upgraded_at(name: str) -> datetime.datetime | None:
     """
     Retrieve the timestamp of the last update to this module.
     """

@@ -40,7 +40,7 @@ def install_modules(module_names: Iterable[str]) -> None:
     """
     # Retrieve the modules to be installed.
     try:
-        modules_to_install = module_queries.get_modules_by_name(module_names)
+        modules_to_install = module_queries.modules_by_name(module_names)
     except module_queries.ModuleNotFound as exc:
         raise ValueError(exc)
 
@@ -87,7 +87,7 @@ def link_zshrc_file(module: Module) -> None:
     if zshrc_fname is None:
         return
 
-    zshrc_path = settings.get_root_dir() / "zshrc" / zshrc_fname
+    zshrc_path = settings.root_dir() / "zshrc" / zshrc_fname
     if zshrc_path.exists():
         files.create_symlink(
             zshrc_path,
@@ -101,6 +101,6 @@ def create_symlinks(module: Module) -> None:
     """
     for target, link in module.symlinks.items():
         files.create_symlink(
-            settings.get_root_dir() / "configfiles" / target,
+            settings.root_dir() / "configfiles" / target,
             Path(link).expanduser(),
         )
