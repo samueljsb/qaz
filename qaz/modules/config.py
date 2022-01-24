@@ -8,7 +8,6 @@ COMMON_MODULES = (
     "qaz_modules.git.LazyGit",
     "qaz_modules.git.GitUI",
     "qaz_modules.git.DiffSoFancy",
-    "qaz_modules.nodejs.Yarn",
     "qaz_modules.python.Python",
     "qaz_modules.python.Poetry",
     "qaz_modules.starship.Starship",
