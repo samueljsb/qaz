@@ -32,7 +32,7 @@ def upgrade_modules(module_names: Iterable[str]) -> None:
     """
     # Retrieve the modules to be upgraded.
     try:
-        modules_to_upgrade = module_queries.get_modules_by_name(module_names)
+        modules_to_upgrade = module_queries.modules_by_name(module_names)
     except module_queries.ModuleNotFound as exc:
         raise ValueError(exc)
 

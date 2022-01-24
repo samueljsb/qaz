@@ -36,7 +36,7 @@ def configure_git(*, author_name: str, author_email: str) -> None:
 
 
 def _install_git() -> None:
-    (git_module,) = module_queries.get_modules_by_name(["git"])
+    (git_module,) = module_queries.modules_by_name(["git"])
     try:
         install.install_module(git_module)
     except install.ModuleAlreadyInstalled:

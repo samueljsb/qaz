@@ -23,14 +23,14 @@ def is_module_installed(module: base.Module) -> bool:
     return settings.is_module_installed(module.name)
 
 
-def get_last_upgraded_at(module: base.Module) -> datetime.datetime | None:
+def last_upgraded_at(module: base.Module) -> datetime.datetime | None:
     """
     Get the timestamp of the last time this module was upgraded.
     """
-    return settings.get_last_upgraded_at(module.name)
+    return settings.last_upgraded_at(module.name)
 
 
-def get_modules_by_name(module_names: Iterable[str]) -> list[base.Module]:
+def modules_by_name(module_names: Iterable[str]) -> list[base.Module]:
     """
     Get a sequence of modules with the given names.
 
@@ -42,13 +42,13 @@ def get_modules_by_name(module_names: Iterable[str]) -> list[base.Module]:
     module_names = [name.casefold() for name in module_names]
 
     # Retrieve all of the configured modules.
-    all_modules = get_all_modules()
+    all_modules_ = all_modules()
 
     modules = []
     for name in module_names:
         # Try to get the module with the given name.
         try:
-            module = all_modules[name]
+            module = all_modules_[name]
         except KeyError:
             raise ModuleNotFound(f"No module configured with name '{name}'.")
         modules.append(module)
@@ -56,7 +56,7 @@ def get_modules_by_name(module_names: Iterable[str]) -> list[base.Module]:
     return modules
 
 
-def get_all_modules() -> dict[str, base.Module]:
+def all_modules() -> dict[str, base.Module]:
     """
     Import all available modules.
 

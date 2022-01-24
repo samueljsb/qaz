@@ -26,7 +26,7 @@ def run(
 
 
 def run_script(script_name: str) -> None:
-    run(str(settings.get_root_dir() / "scripts" / script_name))
+    run(str(settings.root_dir() / "scripts" / script_name))
 
 
 def capture(command: str, *, env: dict[str, str] | None = None) -> str:
