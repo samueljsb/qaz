@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from qaz.managers import asdf
+from qaz.managers import brew
 from qaz.modules.base import Module
 
 
@@ -12,7 +12,7 @@ class Starship(Module):
     symlinks = {"starship.toml": "~/.config"}
 
     def install_action(self) -> None:
-        asdf.install_or_upgrade_plugin("starship")
+        brew.install_or_upgrade_formula("starship")
 
     def upgrade_action(self) -> None:
-        asdf.install_or_upgrade_plugin("starship")
+        brew.install_or_upgrade_formula("starship")
