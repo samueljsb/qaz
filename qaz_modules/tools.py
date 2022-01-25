@@ -101,6 +101,16 @@ class McFly(Module):
         brew.install_or_upgrade_formula("cantino/mcfly/mcfly")
 
 
+class PGCLI(Module):
+    name = "pgcli"
+
+    def install_action(self) -> None:
+        brew.install_or_upgrade_formula("pgcli")
+
+    def upgrade_action(self) -> None:
+        brew.install_or_upgrade_formula("pgcli")
+
+
 class TrashCLI(Module):
     name = "trash-cli"
 
