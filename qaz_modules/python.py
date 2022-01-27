@@ -29,6 +29,17 @@ class Poetry(Module):
         shell.run("poetry self update")
 
 
+class PreCommit(Module):
+    name = "pre-commit"
+
+    def install_action(self) -> None:
+        brew.install_or_upgrade_formula("pre-commit")
+
+    def upgrade_action(self) -> None:
+        brew.install_or_upgrade_formula("pre-commit")
+
+
+
 class PythonLauncher(Module):
     name = "py"
 
