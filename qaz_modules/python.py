@@ -39,7 +39,6 @@ class PreCommit(Module):
         brew.install_or_upgrade_formula("pre-commit")
 
 
-
 class PythonLauncher(Module):
     name = "py"
 
