@@ -11,3 +11,9 @@ alias grf=': \
   && gh pr status \
   && git branch \
   && :'
+
+alias gh-merged='\
+  gh pr list \
+  --author=@me --state=merged \
+  --search="closed:>$(date -v-7d +%Y-%m-%d) sort:updated-desc"\
+'
