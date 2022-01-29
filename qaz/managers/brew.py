@@ -5,7 +5,10 @@ from . import shell
 
 def install_or_upgrade_formula(formula: str) -> None:
     if formula.split("/")[-1] in _installed_formulae():
-        shell.run(f"brew upgrade {formula}")
+        shell.run(
+            f"brew upgrade {formula}",
+            env={"HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK": "1"},
+        )
     else:
         shell.run(f"brew install {formula}")
 
