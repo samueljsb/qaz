@@ -2,8 +2,10 @@ from __future__ import annotations
 
 from qaz.managers import brew, shell
 from qaz.modules.base import Module
+from qaz.modules.registry import register
 
 
+@register
 class Python(Module):
     name = "Python"
     is_language = True
@@ -13,6 +15,7 @@ class Python(Module):
     symlinks = {".pypirc": "~", "pythonstartup.py": "~/.config/", ".pdbrc.py": "~"}
 
 
+@register
 class Poetry(Module):
     name = "Poetry"
 
@@ -29,6 +32,7 @@ class Poetry(Module):
         shell.run("poetry self update")
 
 
+@register
 class PreCommit(Module):
     name = "pre-commit"
 
@@ -39,6 +43,7 @@ class PreCommit(Module):
         brew.install_or_upgrade_formula("pre-commit")
 
 
+@register
 class PythonLauncher(Module):
     name = "py"
 

@@ -5,6 +5,7 @@ from rich.table import Table
 
 from qaz.modules import base as modules_base
 from qaz.modules import queries as module_queries
+from qaz.modules.registry import registry as all_modules
 
 
 def output_modules_lists() -> None:
@@ -19,7 +20,7 @@ def output_modules_lists() -> None:
     not_installed_modules = []
 
     for module in sorted(
-        module_queries.all_modules(), key=lambda module: module.name.casefold()
+        all_modules.values(), key=lambda module: module.name.casefold()
     ):
         if module_queries.is_module_installed(module):
             if module.is_language:

@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+import sys
+
 from qaz.managers import brew
 from qaz.modules.base import Module
+from qaz.modules.registry import register
 
 
 class MacOSDocker(Module):
@@ -33,6 +36,13 @@ class LinuxDocker(Module):
         raise NotImplementedError
 
 
+if sys.platform == "darwin":
+    register(MacOSDocker)
+elif sys.platform == "Linux":
+    register(LinuxDocker)
+
+
+@register
 class LazyDocker(Module):
     name = "lazydocker"
 
