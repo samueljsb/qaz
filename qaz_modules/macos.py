@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+import sys
+
 from qaz.managers import brew, shell
 from qaz.modules.base import Module
+from qaz.modules.registry import register
 
 
 class MacOS(Module):
@@ -34,3 +37,9 @@ class Rectangle(Module):
 
     def upgrade_action(self) -> None:
         brew.install_or_upgrade_cask("rectangle")
+
+
+if sys.platform == "darwin":
+    register(MacOS)
+    register(Bartender)
+    register(Rectangle)

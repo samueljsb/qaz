@@ -1,9 +1,13 @@
 from __future__ import annotations
 
+import sys
+
 from qaz.managers import brew, npm
 from qaz.modules.base import Module
+from qaz.modules.registry import register
 
 
+@register
 class Bat(Module):
     name = "bat"
 
@@ -17,6 +21,7 @@ class Bat(Module):
         brew.install_or_upgrade_formula("bat")
 
 
+@register
 class Exa(Module):
     name = "exa"
 
@@ -30,6 +35,7 @@ class Exa(Module):
         brew.install_or_upgrade_formula("exa")
 
 
+@register
 class Figlet(Module):
     name = "FIGlet"
 
@@ -43,6 +49,7 @@ class Figlet(Module):
         brew.install_or_upgrade_formula("figlet")
 
 
+@register
 class Fzf(Module):
     name = "fzf"
 
@@ -75,6 +82,11 @@ class GNUSed(Module):
         brew.install_or_upgrade_formula("gnu-sed")
 
 
+if sys.platform == "darwin":
+    register(GNUSed)
+
+
+@register
 class Less(Module):
     name = "less"
 
@@ -88,6 +100,7 @@ class Less(Module):
         brew.install_or_upgrade_formula("less")
 
 
+@register
 class McFly(Module):
     name = "McFly"
 
@@ -101,6 +114,7 @@ class McFly(Module):
         brew.install_or_upgrade_formula("cantino/mcfly/mcfly")
 
 
+@register
 class PGCLI(Module):
     name = "pgcli"
 
@@ -111,6 +125,7 @@ class PGCLI(Module):
         brew.install_or_upgrade_formula("pgcli")
 
 
+@register
 class TrashCLI(Module):
     name = "trash-cli"
 

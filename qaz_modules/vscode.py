@@ -2,6 +2,7 @@ from sys import platform
 
 from qaz.managers import brew, vs_code
 from qaz.modules.base import Module
+from qaz.modules.registry import register
 
 
 if platform == "darwin":
@@ -12,6 +13,7 @@ else:
     SETTINGS_DIR = "~/.config/Code/User"
 
 
+@register
 class VSCode(Module):
     name = "VSCode"
     auto_update = True

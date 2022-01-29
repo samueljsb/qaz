@@ -2,8 +2,10 @@ from __future__ import annotations
 
 from qaz.managers import shell
 from qaz.modules.base import Module
+from qaz.modules.registry import register
 
 
+@register
 class ASDF(Module):
     name = "asdf"
 

@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+import sys
+
 from qaz.managers import brew, shell
 from qaz.modules.base import Module
+from qaz.modules.registry import register
 
 
 class ITerm2(Module):
@@ -16,3 +19,7 @@ class ITerm2(Module):
 
     def upgrade_action(self) -> None:
         brew.install_or_upgrade_cask("iterm2")
+
+
+if sys.platform == "darwin":
+    register(ITerm2)

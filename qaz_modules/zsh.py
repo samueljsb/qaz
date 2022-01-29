@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 from qaz.managers import brew, git, shell
 from qaz.modules.base import Module
+from qaz.modules.registry import register
 
 
 class MacOSZsh(Module):
@@ -48,6 +50,12 @@ class LinuxZsh(Module):
         _set_default_shell()
 
 
+if sys.platform == "darwin":
+    register(MacOSZsh)
+elif sys.platform == "Linux":
+    register(LinuxZsh)
+
+
 def _set_default_shell() -> None:
     zsh_path = shell.capture("which zsh")
 
@@ -61,6 +69,7 @@ def _set_default_shell() -> None:
     shell.run(f"chsh -s {zsh_path}")
 
 
+@register
 class OhMyZSH(Module):
     name = "Oh-My-Zsh"
 
