@@ -33,6 +33,7 @@ class VSCode(Module):
         "naumovs.color-highlight",
         "PKief.material-icon-theme",
         "pnp.polacode",
+        "stkb.rewrap",
         "swyphcosmo.spellchecker",
         "VisualStudioExptTeam.vscodeintellicode",
         # Git
