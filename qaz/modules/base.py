@@ -10,8 +10,6 @@ class Module:
 
     Attrs:
         name:               This is used to identify the module.
-        auto_update:        Whether this module updates itself. Defaults to False (i.e.
-                            it should be upgraded by QAZ).
         zshrc_file:         This is the name of the zshrc file that should be installed
                             when this module is installed (optional). If none is
                             provided, no file will be installed.
@@ -22,8 +20,6 @@ class Module:
     """
 
     name: str
-    auto_update: bool = False
-    is_language: bool = False
 
     # Configuration files
     zshrc_file: str | None = None

@@ -16,7 +16,6 @@ else:
 @register
 class VSCode(Module):
     name = "VSCode"
-    auto_update = True
 
     # Configuration files
     symlinks = {"settings.json": SETTINGS_DIR}
