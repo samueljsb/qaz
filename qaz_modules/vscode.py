@@ -1,6 +1,6 @@
 from sys import platform
 
-from qaz.managers import brew, vs_code
+from qaz.managers import vs_code
 from qaz.modules.base import Module
 from qaz.modules.registry import register
 
@@ -16,7 +16,6 @@ else:
 @register
 class VSCode(Module):
     name = "VSCode"
-    auto_update = True
 
     # Configuration files
     symlinks = {"settings.json": SETTINGS_DIR}
@@ -71,9 +70,7 @@ class VSCode(Module):
     ]
 
     def install_action(self) -> None:
-        brew.install_or_upgrade_cask("visual-studio-code")
         vs_code.install_extensions(self.extensions)
 
     def upgrade_action(self) -> None:
-        brew.install_or_upgrade_cask("visual-studio-code")
         vs_code.install_extensions(self.extensions)
