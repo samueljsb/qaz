@@ -21,4 +21,4 @@ function tmpvenv(){
 # Kill mypy processes.
 # Sometimes I end up with lots of concurrent mypy processes, which hog the CPU.
 # This kills them all.
-alias kill-mypy="ps -x | grep 'python3 -m mypy' | grep -v grep | awk '{print \$1}' | xargs kill -9"
+alias kill-mypy="ps -x | grep -E 'python[\d.]* -m mypy' | grep -v grep | tee /dev/stderr | awk '{print \$1}' | xargs kill -9"
