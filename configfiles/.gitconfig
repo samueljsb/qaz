@@ -41,6 +41,9 @@
 [include]
     path = ~/.gitconfig.diff-so-fancy
 
+[init]
+    defaultBranch = main
+
 [merge]
     conflictStyle = diff3
 
