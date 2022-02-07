@@ -10,6 +10,8 @@ repos:
       - id: check-yaml
       - id: end-of-file-fixer
       - id: mixed-line-ending
+      - id: pretty-format-json
+        args: [--autofix]
       - id: trailing-whitespace
   - repo: https://github.com/pre-commit/pygrep-hooks
     rev: v1.9.0  # Use the ref you want to point at

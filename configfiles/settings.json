@@ -7,17 +7,23 @@
   },
   "[markdown]": {
     "editor.formatOnSave": false,
-    "editor.rulers": [80]
+    "editor.rulers": [
+      80
+    ]
   },
   "[plaintext]": {
     "editor.wordWrap": "on"
   },
   "[python]": {
     "editor.formatOnSaveMode": "file",
-    "editor.rulers": [88]
+    "editor.rulers": [
+      88
+    ]
   },
   "[restructuredtext]": {
-    "editor.rulers": [79]
+    "editor.rulers": [
+      79
+    ]
   },
   "[yaml]": {
     "editor.formatOnSaveMode": "file"
@@ -42,11 +48,11 @@
     "*.md": "markdown"
   },
   "files.exclude": {
-    "**/.git": true,
     "**/.DS_Store": true,
-    "**/__pycache__": true,
+    "**/.git": true,
     "**/.pytest_cache": true,
-    "**/.vscode": true
+    "**/.vscode": true,
+    "**/__pycache__": true
   },
   "html.format.enable": false,
   "material-icon-theme.files.associations": {
@@ -66,8 +72,8 @@
   "python.languageServer": "Pylance",
   "python.linting.enabled": true,
   "python.linting.flake8Enabled": true,
-  "python.linting.pylintEnabled": false,
   "python.linting.mypyEnabled": true,
+  "python.linting.pylintEnabled": false,
   "python.showStartPage": false,
   "python.terminal.activateEnvironment": true,
   "spellchecker.ignoreWordsList": [
