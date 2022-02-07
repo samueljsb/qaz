@@ -65,7 +65,6 @@
   "python.formatting.provider": "black",
   "python.languageServer": "Pylance",
   "python.linting.enabled": true,
-  "python.linting.flake8Args": ["--ignore D501"],
   "python.linting.flake8Enabled": true,
   "python.linting.pylintEnabled": false,
   "python.linting.mypyEnabled": true,
