@@ -12,6 +12,14 @@ alias grf=': \
   && git branch \
   && :'
 
+# Create a new PR in the origin repo
+function newpr() {
+  currentBranch=$(git branch --show-current)
+
+  git push --set-upstream origin $currentBranch
+  gh pr create --fill --web --head $currentBranch
+}
+
 alias gh-merged='\
   gh pr list \
   --author=@me --state=merged \
