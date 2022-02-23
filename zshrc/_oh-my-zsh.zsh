@@ -2,7 +2,6 @@ export ZSH=$HOME/.oh-my-zsh
 plugins=(
     colored-man-pages
     git
-    invoke
     zsh-autosuggestions
     zsh-syntax-highlighting
 )
