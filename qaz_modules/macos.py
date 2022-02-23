@@ -10,6 +10,9 @@ from qaz.modules.registry import register
 class MacOS(Module):
     name = "macOS"
 
+    # Configuration files
+    zshrc_file = "macos.zsh"
+
     def install_action(self) -> None:
         shell.run_script("set-defaults.sh")
 

@@ -1,5 +1,4 @@
 alias gpp='git push --set-upstream origin $(git branch --show-current)'
-alias gfu='git fu'
 alias glrbom='git pull --rebase origin master'
 
 # These assume the oh-my-zsh git plugin is installed.

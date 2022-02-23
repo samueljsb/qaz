@@ -36,20 +36,6 @@ class Exa(Module):
 
 
 @register
-class Figlet(Module):
-    name = "FIGlet"
-
-    # Configuration files
-    zshrc_file = "figlet.zsh"
-
-    def install_action(self) -> None:
-        brew.install_or_upgrade_formula("figlet")
-
-    def upgrade_action(self) -> None:
-        brew.install_or_upgrade_formula("figlet")
-
-
-@register
 class Fzf(Module):
     name = "fzf"
 
