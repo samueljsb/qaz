@@ -1,6 +1,8 @@
 #! /bin/sh
 #
-# This installs asdf, python, and qaz.
+# This installs qaz.
+
+set -e
 
 message() {
     echo "\033[1m[QAZ]\033[0m $@"
@@ -10,34 +12,11 @@ QAZ=$(pwd)/$(dirname "$0")
 
 message 'Installing dotfiles and management tool...'
 
-# Install asdf
-message 'Installing asdf...'
-## check if asdf is already installed
-if [ ! -x "$(command -v asdf)" ]; then
-  ## install asdf
-  if [ ! -d $HOME/.asdf ]; then
-    git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf
-    cd $HOME/.asdf
-    git checkout "$(git describe --abbrev=0 --tags)"
-  fi
-  . $HOME/.asdf/asdf.sh
-fi
-message '... asdf installed!'
-
-# Install Python
-message 'Installing Python...'
-asdf plugin add python
-set -e  # Exit if Python install fails. This is not unlikely.
-asdf install python latest
-set +e
-asdf shell python $(asdf latest python)
-message '... Python installed!'
-
 # Install management tool
 message "Installing qaz management tool..."
-cd $QAZ
-asdf exec python -m venv $QAZ/.venv
-$QAZ/.venv/bin -m pip install $QAZ
+python3 -m venv $QAZ/.venv
+$QAZ/.venv/bin/python -m pip install --upgrade pip
+$QAZ/.venv/bin/python -m pip install $QAZ
 sudo ln -sf $QAZ/.venv/bin/qaz /usr/local/bin
 message "... management tool installed!"
 

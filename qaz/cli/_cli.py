@@ -4,12 +4,10 @@ import logging
 from collections.abc import Iterable
 
 import click
-
 from qaz.application import git, install, setup, update, upgrade
 
 from . import _list as list_modules
 from . import _logging
-
 
 logger = logging.getLogger(__name__)
 
@@ -26,7 +24,7 @@ def cli() -> None:
 @click.argument("root_dir")
 def _setup(root_dir: str) -> None:
     """
-    Install this tool and the basics.
+    Install this tool.
     """
     logger.info("Installing qaz...")
     setup.setup_qaz(root_dir)

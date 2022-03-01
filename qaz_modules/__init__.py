@@ -1,4 +1,3 @@
-from . import asdf  # noqa: F401
 from . import brew  # noqa: F401
 from . import docker  # noqa: F401
 from . import fonts  # noqa: F401
