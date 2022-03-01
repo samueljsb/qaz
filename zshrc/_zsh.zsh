@@ -8,7 +8,7 @@ alias la='ls -lAh'
 # Pipe my public key to my clipboard
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 # Add my public key to keychain
-alias addkey="ssh-add -K ~/.ssh/id_rsa"
+alias addkey="ssh-add --apple-use-keychain ~/.ssh/id_rsa"
 
 # Set editor
 if [ -x "$(command -v code)" ]; then
