@@ -6,7 +6,6 @@ import logging
 from pathlib import Path
 from typing import TypedDict
 
-
 logger = logging.getLogger(__name__)
 
 

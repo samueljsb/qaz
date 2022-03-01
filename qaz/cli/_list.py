@@ -1,11 +1,10 @@
 import humanize
-from rich.console import Console
-from rich.panel import Panel
-from rich.table import Table
-
 from qaz.modules import base as modules_base
 from qaz.modules import queries as module_queries
 from qaz.modules.registry import registry as all_modules
+from rich.console import Console
+from rich.panel import Panel
+from rich.table import Table
 
 
 def output_modules_lists() -> None:

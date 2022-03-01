@@ -6,7 +6,6 @@ import subprocess
 
 from qaz import settings
 
-
 logger = logging.getLogger(__name__)
 
 

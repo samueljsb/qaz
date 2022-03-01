@@ -9,7 +9,6 @@ from qaz.managers import files
 from qaz.modules import queries as module_queries
 from qaz.modules.base import Module
 
-
 logger = logging.getLogger(__name__)
 
 

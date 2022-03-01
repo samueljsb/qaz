@@ -4,7 +4,6 @@ from qaz.managers import vs_code
 from qaz.modules.base import Module
 from qaz.modules.registry import register
 
-
 if platform == "darwin":
     SETTINGS_DIR = "~/Library/Application Support/Code/User"
 elif platform == "linux":
