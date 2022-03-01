@@ -14,8 +14,10 @@ git clone https://github.com/samueljsb/qaz.git .qaz
 The location of the cloned repo doesn't matter much. I like to put mine in
 `~/.qaz`.
 
-The installation script will install [asdf][] and Python and use these to set up
-the tool and install zsh (which it will set as the default shell).
+The installation script will set up the tool and install zsh (which it will set
+as the default shell).
+
+N.B. You must have Python 3.8+ installed to use qaz.
 
 ## Usage
 
@@ -57,5 +59,4 @@ but this is more than just symlinking some config files so I wanted it to have a
 name that reflected that (`dotfiles upgrade python` doesn't make much sense to
 me).
 
-[asdf]: https://asdf-vm.com
 [holman does dotfiles]: https://github.com/holman/dotfiles
