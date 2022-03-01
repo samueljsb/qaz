@@ -26,7 +26,7 @@ def cli() -> None:
 @click.argument("root_dir")
 def _setup(root_dir: str) -> None:
     """
-    Install this tool and the basics.
+    Install this tool.
     """
     logger.info("Installing qaz...")
     setup.setup_qaz(root_dir)
