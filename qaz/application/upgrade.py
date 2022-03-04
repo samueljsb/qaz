@@ -7,8 +7,6 @@ from qaz import settings
 from qaz.modules import queries as module_queries
 from qaz.modules.base import Module
 
-from . import install
-
 
 logger = logging.getLogger(__name__)
 
@@ -55,9 +53,7 @@ def upgrade_module(module: Module) -> None:
 
     # Upgrade the module.
     try:
-        module.upgrade_action()
-        install.link_zshrc_file(module)
-        install.create_symlinks(module)
+        module.upgrade()
     except Exception as exc:
         logger.exception(exc)
         raise CannotUpgradeModule(exc)
