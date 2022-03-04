@@ -7,6 +7,7 @@ from qaz.modules import queries as module_queries
 
 from . import install
 
+
 logger = logging.getLogger(__name__)
 
 LOCAL_CONFIG_TEMPL = """

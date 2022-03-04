@@ -8,6 +8,7 @@ from qaz.managers import git, shell
 from qaz.modules.base import Module
 from qaz.modules.registry import register
 
+
 logger = logging.getLogger(__name__)
 
 FONTS = ["Hack"]
