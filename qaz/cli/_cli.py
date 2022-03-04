@@ -4,10 +4,12 @@ import logging
 from collections.abc import Iterable
 
 import click
+
 from qaz.application import git, install, setup, update, upgrade
 
 from . import _list as list_modules
 from . import _logging
+
 
 logger = logging.getLogger(__name__)
 

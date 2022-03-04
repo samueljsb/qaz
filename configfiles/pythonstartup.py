@@ -6,6 +6,7 @@
 # Always have pp available
 from pprint import pprint as pp
 
+
 # Import rich (https://rich.readthedocs.io/en/latest/introduction.html) to get prettier
 # output in the REPL.
 try:
