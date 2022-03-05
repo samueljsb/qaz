@@ -1,9 +1,6 @@
 from __future__ import annotations
 
-import datetime
 from collections.abc import Iterable, Iterator
-
-from qaz import settings
 
 from . import base
 from .registry import populate, registry
@@ -17,13 +14,6 @@ class ModuleNotFound(Exception):
 
 # Populate the registry if we are going to query it.
 populate()
-
-
-def last_upgraded_at(module: base.Module) -> datetime.datetime | None:
-    """
-    Get the timestamp of the last time this module was upgraded.
-    """
-    return settings.last_upgraded_at(module.name)
 
 
 def modules_by_name(module_names: Iterable[str]) -> Iterator[base.Module]:

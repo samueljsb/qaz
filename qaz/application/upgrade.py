@@ -1,9 +1,9 @@
 from __future__ import annotations
 
+import datetime
 import logging
 from collections.abc import Iterable
 
-from qaz import settings
 from qaz.modules import queries as module_queries
 from qaz.modules.base import Module
 
@@ -58,4 +58,4 @@ def upgrade_module(module: Module) -> None:
         logger.exception(exc)
         raise CannotUpgradeModule(exc)
 
-    settings.record_module_upgraded(module.name)
+    module.last_upgraded_at = datetime.datetime.now()

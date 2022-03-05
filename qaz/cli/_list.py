@@ -4,7 +4,6 @@ from rich.panel import Panel
 from rich.table import Table
 
 from qaz.modules import base as modules_base
-from qaz.modules import queries as module_queries
 from qaz.modules.registry import registry as all_modules
 
 
@@ -34,7 +33,7 @@ def output_modules_lists() -> None:
 
 
 def _add_module_to_table(table: Table, module: modules_base.Module) -> None:
-    if last_upgraded_at := module_queries.last_upgraded_at(module):
+    if last_upgraded_at := module.last_upgraded_at:
         last_upgraded = humanize.naturaltime(last_upgraded_at)
     else:
         last_upgraded = "[dim]unknown[/]"

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
 from pathlib import Path
 from types import MappingProxyType
@@ -39,6 +40,14 @@ class Module:
             settings.set_module_installed(self.name)
         else:
             raise ValueError("It is not possible to uninstall a module")
+
+    @property
+    def last_upgraded_at(self) -> datetime.datetime | None:
+        return settings.last_upgraded_at(self.name)
+
+    @last_upgraded_at.setter
+    def last_upgraded_at(self, upgraded_at: datetime.datetime) -> None:
+        settings.record_module_upgraded(self.name, upgraded_at)
 
     @property
     def zshrc_path(self) -> Path | None:
