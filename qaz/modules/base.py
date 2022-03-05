@@ -30,6 +30,17 @@ class Module:
     symlinks: Mapping[str, str] = MappingProxyType({})
 
     @property
+    def is_installed(self) -> bool:
+        return settings.is_module_installed(self.name)
+
+    @is_installed.setter
+    def is_installed(self, is_installed_: bool) -> None:
+        if is_installed_:
+            settings.set_module_installed(self.name)
+        else:
+            raise ValueError("It is not possible to uninstall a module")
+
+    @property
     def zshrc_path(self) -> Path | None:
         if self.zshrc_file:
             return settings.root_dir() / "zshrc" / self.zshrc_file

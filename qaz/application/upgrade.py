@@ -48,7 +48,7 @@ def upgrade_module(module: Module) -> None:
     Raises CannotUpgradeModule if the module cannot be upgraded for any reason.
     """
     # Check the module can be installed.
-    if not module_queries.is_module_installed(module):
+    if not module.is_installed:
         raise CannotUpgradeModule(f"Module '{module.name}' not installed.")
 
     # Upgrade the module.

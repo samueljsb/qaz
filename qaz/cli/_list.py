@@ -20,7 +20,7 @@ def output_modules_lists() -> None:
     for module in sorted(
         all_modules.values(), key=lambda module: module.name.casefold()
     ):
-        if module_queries.is_module_installed(module):
+        if module.is_installed:
             _add_module_to_table(installed_table, module)
         else:
             not_installed_modules.append(module)

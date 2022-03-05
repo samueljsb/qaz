@@ -19,13 +19,6 @@ class ModuleNotFound(Exception):
 populate()
 
 
-def is_module_installed(module: base.Module) -> bool:
-    """
-    Check if the given module has been installed.
-    """
-    return settings.is_module_installed(module.name)
-
-
 def last_upgraded_at(module: base.Module) -> datetime.datetime | None:
     """
     Get the timestamp of the last time this module was upgraded.
