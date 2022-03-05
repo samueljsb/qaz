@@ -4,10 +4,10 @@ import sys
 
 from qaz.managers import brew, npm
 from qaz.modules.base import Module
-from qaz.modules.registry import register
+from qaz.modules.registry import registry
 
 
-@register
+@registry.register
 class Bat(Module):
     name = "bat"
 
@@ -21,7 +21,7 @@ class Bat(Module):
         brew.install_or_upgrade_formula("bat")
 
 
-@register
+@registry.register
 class Exa(Module):
     name = "exa"
 
@@ -35,7 +35,7 @@ class Exa(Module):
         brew.install_or_upgrade_formula("exa")
 
 
-@register
+@registry.register
 class Fzf(Module):
     name = "fzf"
 
@@ -69,10 +69,10 @@ class GNUSed(Module):
 
 
 if sys.platform == "darwin":
-    register(GNUSed)
+    registry.register(GNUSed)
 
 
-@register
+@registry.register
 class Less(Module):
     name = "less"
 
@@ -86,7 +86,7 @@ class Less(Module):
         brew.install_or_upgrade_formula("less")
 
 
-@register
+@registry.register
 class McFly(Module):
     name = "McFly"
 
@@ -100,7 +100,7 @@ class McFly(Module):
         brew.install_or_upgrade_formula("cantino/mcfly/mcfly")
 
 
-@register
+@registry.register
 class PGCLI(Module):
     name = "pgcli"
 
@@ -111,7 +111,7 @@ class PGCLI(Module):
         brew.install_or_upgrade_formula("pgcli")
 
 
-@register
+@registry.register
 class TrashCLI(Module):
     name = "trash-cli"
 

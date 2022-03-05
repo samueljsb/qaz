@@ -3,9 +3,8 @@ from __future__ import annotations
 import logging
 from collections.abc import Iterable
 
-from qaz import settings
-from qaz.modules import queries as module_queries
 from qaz.modules.base import Module
+from qaz.modules.registry import registry
 
 
 logger = logging.getLogger(__name__)
@@ -36,14 +35,9 @@ def install_modules(module_names: Iterable[str]) -> None:
         - CannotInstallModule if a module cannot be installed.
 
     """
-    # Retrieve the modules to be installed.
-    try:
-        modules_to_install = module_queries.modules_by_name(module_names)
-    except module_queries.ModuleNotFound as exc:
-        raise ValueError(exc)
-
     # Install each module.
-    for module in modules_to_install:
+    for name in module_names:
+        module = registry.modules[name]
         logger.info("Installing %s...", module.name)
         try:
             install_module(module)
@@ -62,7 +56,7 @@ def install_module(module: Module) -> None:
         - CannotInstallModule if the module cannot be installed for any other reason.
     """
     # Check the module can be installed.
-    if module_queries.is_module_installed(module):
+    if module.is_installed:
         raise ModuleAlreadyInstalled
 
     # Install the module
@@ -72,4 +66,4 @@ def install_module(module: Module) -> None:
         raise CannotInstallModule(exc)
 
     # Save installed status.
-    settings.set_module_installed(module.name)
+    module.is_installed = True

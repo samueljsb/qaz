@@ -5,7 +5,7 @@ from pathlib import Path
 
 from qaz.managers import brew, git, shell
 from qaz.modules.base import Module
-from qaz.modules.registry import register
+from qaz.modules.registry import registry
 
 
 class MacOSZsh(Module):
@@ -51,9 +51,9 @@ class LinuxZsh(Module):
 
 
 if sys.platform == "darwin":
-    register(MacOSZsh)
+    registry.register(MacOSZsh)
 elif sys.platform == "Linux":
-    register(LinuxZsh)
+    registry.register(LinuxZsh)
 
 
 def _set_default_shell() -> None:
@@ -69,7 +69,7 @@ def _set_default_shell() -> None:
     shell.run(f"chsh -s {zsh_path}")
 
 
-@register
+@registry.register
 class OhMyZSH(Module):
     name = "Oh-My-Zsh"
 

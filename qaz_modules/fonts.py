@@ -6,7 +6,7 @@ from pathlib import Path
 
 from qaz.managers import git, shell
 from qaz.modules.base import Module
-from qaz.modules.registry import register
+from qaz.modules.registry import registry
 
 
 logger = logging.getLogger(__name__)
@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 FONTS = ["Hack"]
 
 
-@register
+@registry.register
 class NerdFonts(Module):
     name = "nerd-fonts"
 

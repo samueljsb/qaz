@@ -93,16 +93,12 @@ def set_module_installed(name: str) -> None:
     _save_settings_to_file(config)
 
 
-def record_module_upgraded(
-    name: str, upgraded_at: datetime.datetime | None = None
-) -> None:
+def record_module_upgraded(name: str, upgraded_at: datetime.datetime) -> None:
     """
     Mark a module as having been upgraded.
 
     If no timestamp is passed in, the current time will be used.
     """
-    upgraded_at = upgraded_at or datetime.datetime.now()
-
     config = _load_settings_from_file()
 
     if module_settings := config["modules"].get(name):

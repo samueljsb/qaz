@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from qaz.managers import brew, shell
 from qaz.modules.base import Module
-from qaz.modules.registry import register
+from qaz.modules.registry import registry
 
 
-@register
+@registry.register
 class Git(Module):
     name = "git"
 
@@ -20,7 +20,7 @@ class Git(Module):
         brew.install_or_upgrade_formula("git")
 
 
-@register
+@registry.register
 class GitHubCLI(Module):
     name = "GitHub"
 
@@ -36,7 +36,7 @@ class GitHubCLI(Module):
         brew.install_or_upgrade_formula("gh")
 
 
-@register
+@registry.register
 class LazyGit(Module):
     name = "lazygit"
 
@@ -47,7 +47,7 @@ class LazyGit(Module):
         brew.install_or_upgrade_formula("jesseduffield/lazygit/lazygit")
 
 
-@register
+@registry.register
 class GitUI(Module):
     name = "GitUI"
 
@@ -58,7 +58,7 @@ class GitUI(Module):
         brew.install_or_upgrade_formula("gitui")
 
 
-@register
+@registry.register
 class DiffSoFancy(Module):
     name = "diff-so-fancy"
 

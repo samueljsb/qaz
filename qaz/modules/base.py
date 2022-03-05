@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
 from pathlib import Path
 from types import MappingProxyType
@@ -28,6 +29,25 @@ class Module:
     # Configuration files
     zshrc_file: str | None = None
     symlinks: Mapping[str, str] = MappingProxyType({})
+
+    @property
+    def is_installed(self) -> bool:
+        return settings.is_module_installed(self.name)
+
+    @is_installed.setter
+    def is_installed(self, is_installed_: bool) -> None:
+        if is_installed_:
+            settings.set_module_installed(self.name)
+        else:
+            raise ValueError("It is not possible to uninstall a module")
+
+    @property
+    def last_upgraded_at(self) -> datetime.datetime | None:
+        return settings.last_upgraded_at(self.name)
+
+    @last_upgraded_at.setter
+    def last_upgraded_at(self, upgraded_at: datetime.datetime) -> None:
+        settings.record_module_upgraded(self.name, upgraded_at)
 
     @property
     def zshrc_path(self) -> Path | None:

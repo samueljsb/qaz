@@ -1,11 +1,11 @@
 from __future__ import annotations
 
+import datetime
 import logging
 from collections.abc import Iterable
 
-from qaz import settings
-from qaz.modules import queries as module_queries
 from qaz.modules.base import Module
+from qaz.modules.registry import registry
 
 
 logger = logging.getLogger(__name__)
@@ -28,14 +28,9 @@ def upgrade_modules(module_names: Iterable[str]) -> None:
         - CannotUpgradeModule if a module cannot be upgraded for any reason.
 
     """
-    # Retrieve the modules to be upgraded.
-    try:
-        modules_to_upgrade = module_queries.modules_by_name(module_names)
-    except module_queries.ModuleNotFound as exc:
-        raise ValueError(exc)
-
     # Install each module.
-    for module in modules_to_upgrade:
+    for name in module_names:
+        module = registry.modules[name]
         logger.info("Upgrading %s...", module.name)
         upgrade_module(module)
         logger.info("...%s upgraded.", module.name)
@@ -48,7 +43,7 @@ def upgrade_module(module: Module) -> None:
     Raises CannotUpgradeModule if the module cannot be upgraded for any reason.
     """
     # Check the module can be installed.
-    if not module_queries.is_module_installed(module):
+    if not module.is_installed:
         raise CannotUpgradeModule(f"Module '{module.name}' not installed.")
 
     # Upgrade the module.
@@ -58,4 +53,4 @@ def upgrade_module(module: Module) -> None:
         logger.exception(exc)
         raise CannotUpgradeModule(exc)
 
-    settings.record_module_upgraded(module.name)
+    module.last_upgraded_at = datetime.datetime.now()

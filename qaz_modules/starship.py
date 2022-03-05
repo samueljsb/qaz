@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from qaz.managers import brew
 from qaz.modules.base import Module
-from qaz.modules.registry import register
+from qaz.modules.registry import registry
 
 
-@register
+@registry.register
 class Starship(Module):
     name = "starship"
 

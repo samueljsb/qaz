@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from qaz.managers import brew
 from qaz.modules.base import Module
-from qaz.modules.registry import register
+from qaz.modules.registry import registry
 
 
-@register
+@registry.register
 class MacOSDocker(Module):
     name = "Docker"
     auto_update = True
@@ -14,7 +14,7 @@ class MacOSDocker(Module):
     zshrc_file = "docker.zsh"
 
 
-@register
+@registry.register
 class LazyDocker(Module):
     name = "lazydocker"
 
