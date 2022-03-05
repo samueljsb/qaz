@@ -3,7 +3,7 @@ from __future__ import annotations
 from .base import Module
 
 
-registry = {}
+registry: dict[str, Module] = {}
 
 
 def register(cls: type[Module]) -> Module:
