@@ -4,7 +4,7 @@ import sys
 
 from qaz.managers import shell
 from qaz.modules.base import Module
-from qaz.modules.registry import register
+from qaz.modules.registry import registry
 
 
 class ITerm2(Module):
@@ -18,4 +18,4 @@ class ITerm2(Module):
 
 
 if sys.platform == "darwin":
-    register(ITerm2)
+    registry.register(ITerm2)

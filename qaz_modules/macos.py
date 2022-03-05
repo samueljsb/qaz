@@ -4,7 +4,7 @@ import sys
 
 from qaz.managers import shell
 from qaz.modules.base import Module
-from qaz.modules.registry import register
+from qaz.modules.registry import registry
 
 
 class MacOS(Module):
@@ -21,4 +21,4 @@ class MacOS(Module):
 
 
 if sys.platform == "darwin":
-    register(MacOS)
+    registry.register(MacOS)

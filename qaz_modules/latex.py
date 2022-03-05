@@ -4,7 +4,7 @@ import sys
 
 from qaz.managers import brew
 from qaz.modules.base import Module
-from qaz.modules.registry import register
+from qaz.modules.registry import registry
 
 
 class MacTex(Module):
@@ -18,4 +18,4 @@ class MacTex(Module):
 
 
 if sys.platform == "darwin":
-    register(MacTex)
+    registry.register(MacTex)
