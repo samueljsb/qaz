@@ -58,11 +58,13 @@ def _install(ctx: click.Context, modules: tuple[str]) -> None:
     """
     Install modules.
     """
-    try:
-        install.install_modules(modules)
-    except (install.CannotInstallModule, KeyError) as exc:
-        logger.error(exc)
-        ctx.exit(1)
+    for name in modules:
+        try:
+            install.install_module(name)
+        except install.ModuleAlreadyInstalled:
+            continue
+        except (install.CannotInstallModule, KeyError):
+            ctx.exit(1)
 
 
 @cli.command("upgrade")

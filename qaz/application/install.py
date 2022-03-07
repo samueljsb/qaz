@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import logging
-from collections.abc import Iterable
 
 from qaz.modules.registry import registry
 
@@ -23,20 +22,6 @@ class ModuleAlreadyInstalled(CannotInstallModule):
     """
 
     pass
-
-
-def install_modules(module_names: Iterable[str]) -> None:
-    """
-    Install modules with names matching the given names.
-
-    Raises:
-        - ValueError if a module name is not recognised.
-        - CannotInstallModule if a module cannot be installed.
-
-    """
-    # Install each module.
-    for name in module_names:
-        install_module(name)
 
 
 def install_module(name: str) -> None:
