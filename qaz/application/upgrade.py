@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import datetime
-
 from qaz.modules.registry import registry
 
 
@@ -37,5 +35,3 @@ def upgrade_module(name: str) -> None:
         module.upgrade()
     except Exception as exc:
         raise CannotUpgradeModule(exc) from exc
-
-    module.last_upgraded_at = datetime.datetime.now()

@@ -40,6 +40,3 @@ def install_module(name: str) -> None:
         module.install()
     except Exception as exc:
         raise CannotInstallModule(exc) from exc
-
-    # Save installed status.
-    module.is_installed = True

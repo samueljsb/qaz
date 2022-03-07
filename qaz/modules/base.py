@@ -59,10 +59,12 @@ class Module:
     def install(self) -> None:
         self.install_action()
         self.configure()
+        self.is_installed = True
 
     def upgrade(self) -> None:
         self.upgrade_action()
         self.configure()
+        self.last_upgraded_at = datetime.datetime.now()
 
     def install_action(self) -> None:
         """
