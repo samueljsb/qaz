@@ -15,7 +15,7 @@ class NotInstalled(CannotUpgradeModule):
     pass
 
 
-def upgrade_module(name: str) -> None:
+def upgrade_module(name: str) -> tuple[str, str]:
     """
     Upgrade the given module.
 
@@ -30,8 +30,12 @@ def upgrade_module(name: str) -> None:
     if not module.is_installed:
         raise CannotUpgradeModule
 
+    from_version = module.version
+
     # Upgrade the module.
     try:
         module.upgrade()
     except Exception as exc:
         raise CannotUpgradeModule(exc) from exc
+
+    return from_version, module.version
