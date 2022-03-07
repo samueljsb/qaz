@@ -3,7 +3,6 @@ from __future__ import annotations
 import logging
 from collections.abc import Iterable
 
-from qaz.modules.base import Module
 from qaz.modules.registry import registry
 
 
@@ -37,33 +36,35 @@ def install_modules(module_names: Iterable[str]) -> None:
     """
     # Install each module.
     for name in module_names:
-        module = registry.modules[name]
-        logger.info("Installing %s...", module.name)
-        try:
-            install_module(module)
-        except ModuleAlreadyInstalled:
-            logger.warning("...%s is already installed.", module.name)
-        else:
-            logger.info("...%s installed.", module.name)
+        install_module(name)
 
 
-def install_module(module: Module) -> None:
+def install_module(name: str) -> None:
     """
     Install the given module.
 
     Raises:
+        - KeyError if the module name is not registered.
         - ModuleAlreadyInstalled if the module is already installed.
         - CannotInstallModule if the module cannot be installed for any other reason.
+
     """
+    module = registry.modules[name.casefold()]
+    logger.info("Installing %s...", module.name)
+
     # Check the module can be installed.
     if module.is_installed:
+        logger.warning("...%s is already installed.", module.name)
         raise ModuleAlreadyInstalled
 
-    # Install the module
+    # Install the module.
     try:
         module.install()
     except Exception as exc:
-        raise CannotInstallModule(exc)
+        logger.exception("... error installing %s.", module.name)
+        raise CannotInstallModule(exc) from exc
 
     # Save installed status.
     module.is_installed = True
+
+    logger.info("...%s installed.", module.name)

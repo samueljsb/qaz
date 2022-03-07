@@ -3,7 +3,6 @@ from pathlib import Path
 from sys import platform
 
 from qaz.managers import shell
-from qaz.modules.registry import registry
 
 from . import install
 
@@ -36,9 +35,8 @@ def configure_git(*, author_name: str, author_email: str) -> None:
 
 
 def _install_git() -> None:
-    git_module = registry.modules["git"]
     try:
-        install.install_module(git_module)
+        install.install_module("git")
     except install.ModuleAlreadyInstalled:
         pass
 
