@@ -1,11 +1,6 @@
 from __future__ import annotations
 
-import logging
-
 from qaz.modules.registry import registry
-
-
-logger = logging.getLogger(__name__)
 
 
 class CannotInstallModule(Exception):
@@ -35,21 +30,16 @@ def install_module(name: str) -> None:
 
     """
     module = registry.modules[name.casefold()]
-    logger.info("Installing %s...", module.name)
 
     # Check the module can be installed.
     if module.is_installed:
-        logger.warning("...%s is already installed.", module.name)
         raise ModuleAlreadyInstalled
 
     # Install the module.
     try:
         module.install()
     except Exception as exc:
-        logger.exception("... error installing %s.", module.name)
         raise CannotInstallModule(exc) from exc
 
     # Save installed status.
     module.is_installed = True
-
-    logger.info("...%s installed.", module.name)
