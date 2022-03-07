@@ -20,6 +20,10 @@ class Bat(Module):
     def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("bat")
 
+    @property
+    def version(self) -> str:
+        return brew.version("bat")
+
 
 @registry.register
 class Exa(Module):
@@ -34,6 +38,10 @@ class Exa(Module):
     def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("exa")
 
+    @property
+    def version(self) -> str:
+        return brew.version("exa")
+
 
 @registry.register
 class Fzf(Module):
@@ -47,6 +55,10 @@ class Fzf(Module):
 
     def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("fzf")
+
+    @property
+    def version(self) -> str:
+        return brew.version("fzf")
 
 
 class GNUSed(Module):
@@ -67,6 +79,10 @@ class GNUSed(Module):
     def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("gnu-sed")
 
+    @property
+    def version(self) -> str:
+        return brew.version("gnu-sed")
+
 
 if sys.platform == "darwin":
     registry.register(GNUSed)
@@ -85,6 +101,10 @@ class Less(Module):
     def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("less")
 
+    @property
+    def version(self) -> str:
+        return brew.version("less")
+
 
 @registry.register
 class McFly(Module):
@@ -99,6 +119,10 @@ class McFly(Module):
     def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("cantino/mcfly/mcfly")
 
+    @property
+    def version(self) -> str:
+        return brew.version("cantino/mcfly/mcfly")
+
 
 @registry.register
 class PGCLI(Module):
@@ -109,6 +133,10 @@ class PGCLI(Module):
 
     def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("pgcli")
+
+    @property
+    def version(self) -> str:
+        return brew.version("pgcli")
 
 
 @registry.register
@@ -123,3 +151,7 @@ class TrashCLI(Module):
 
     def upgrade_action(self) -> None:
         npm.install_or_upgrade_package("trash-cli")
+
+    @property
+    def version(self) -> str:
+        return npm.version("trash-cli")

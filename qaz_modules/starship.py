@@ -18,3 +18,7 @@ class Starship(Module):
 
     def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("starship")
+
+    @property
+    def version(self) -> str:
+        return brew.version("starship")

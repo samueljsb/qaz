@@ -26,3 +26,10 @@ def install_or_upgrade_cask(cask: str) -> None:
 
 def _installed_casks() -> list[str]:
     return shell.capture("brew list --cask -1").split()
+
+
+def version(name: str) -> str:
+    versions = shell.capture(f"brew list --versions {name}").strip()
+    if not versions:  # not installed
+        return ""
+    return versions.split()[-1]

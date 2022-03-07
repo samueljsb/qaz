@@ -19,6 +19,10 @@ class Git(Module):
     def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("git")
 
+    @property
+    def version(self) -> str:
+        return brew.version("git")
+
 
 @registry.register
 class GitHubCLI(Module):
@@ -35,6 +39,10 @@ class GitHubCLI(Module):
     def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("gh")
 
+    @property
+    def version(self) -> str:
+        return brew.version("gh")
+
 
 @registry.register
 class LazyGit(Module):
@@ -46,6 +54,10 @@ class LazyGit(Module):
     def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("jesseduffield/lazygit/lazygit")
 
+    @property
+    def version(self) -> str:
+        return brew.version("jesseduffield/lazygit/lazygit")
+
 
 @registry.register
 class GitUI(Module):
@@ -56,6 +68,10 @@ class GitUI(Module):
 
     def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("gitui")
+
+    @property
+    def version(self) -> str:
+        return brew.version("gitui")
 
 
 @registry.register
@@ -70,3 +86,7 @@ class DiffSoFancy(Module):
 
     def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("diff-so-fancy")
+
+    @property
+    def version(self) -> str:
+        return brew.version("diff-so-fancy")

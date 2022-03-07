@@ -21,3 +21,7 @@ class Homebrew(Module):
     def upgrade_action(self) -> None:
         shell.run("brew update")
         shell.run("brew analytics off")
+
+    @property
+    def version(self) -> str:
+        return shell.capture("brew --version").split("\n")[0].split()[-1]

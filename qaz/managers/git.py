@@ -11,3 +11,9 @@ def clone(*, repo_url: str, repo_path: Path | str, options: str = "") -> None:
 
 def pull(repo_path: Path | str) -> None:
     shell.run(f"git -C {repo_path} pull")
+
+
+def version(repo_path: Path | str) -> str:
+    return shell.capture(
+        f"git -C {repo_path} show --format='%(describe:tags)' --no-patch"
+    ).strip()
