@@ -1,14 +1,10 @@
-import logging
 from pathlib import Path
 from sys import platform
 
 from qaz.managers import shell
-from qaz.modules.registry import registry
 
 from . import install
 
-
-logger = logging.getLogger(__name__)
 
 LOCAL_CONFIG_TEMPL = """
 [user]
@@ -19,9 +15,11 @@ LOCAL_CONFIG_TEMPL = """
 """
 
 
-def configure_git(*, author_name: str, author_email: str) -> None:
+def configure_git(*, author_name: str, author_email: str) -> str:
     """
     Install and configure git.
+
+    Returns the public key configured for git.
     """
     _install_git()
 
@@ -31,14 +29,12 @@ def configure_git(*, author_name: str, author_email: str) -> None:
         file.write(config_file_content)
 
     # Generate SSH key.
-    public_key = _generate_or_retrieve_ssh_key(author_email)
-    logger.info(f"Add your public key to GitHub:\n    {public_key}")
+    return _generate_or_retrieve_ssh_key(author_email)
 
 
 def _install_git() -> None:
-    git_module = registry.modules["git"]
     try:
-        install.install_module(git_module)
+        install.install_module("git")
     except install.ModuleAlreadyInstalled:
         pass
 

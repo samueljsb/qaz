@@ -40,7 +40,8 @@ def _git(author_name: str, author_email: str) -> None:
     """
     Configure git.
     """
-    git.configure_git(author_name=author_name, author_email=author_email)
+    public_key = git.configure_git(author_name=author_name, author_email=author_email)
+    logger.info(f"Add your public key to GitHub:\n    {public_key}")
 
 
 @cli.command("update")
@@ -58,11 +59,21 @@ def _install(ctx: click.Context, modules: tuple[str]) -> None:
     """
     Install modules.
     """
-    try:
-        install.install_modules(modules)
-    except (install.CannotInstallModule, KeyError) as exc:
-        logger.error(exc)
-        ctx.exit(1)
+    for name in modules:
+        logger.info("Installing %s...", name)
+        try:
+            install.install_module(name)
+        except install.ModuleAlreadyInstalled:
+            logger.warning("...%s is already installed.", name)
+            continue
+        except KeyError:
+            logger.exception("... unknown module name '%s'.", name)
+            ctx.exit(1)
+        except install.CannotInstallModule:
+            logger.exception("... error installing %s.", name)
+            ctx.exit(1)
+        else:
+            logger.info("...%s installed.", name)
 
 
 @cli.command("upgrade")
@@ -72,11 +83,21 @@ def _upgrade(ctx: click.Context, modules: Iterable[str]) -> None:
     """
     Upgrade modules.
     """
-    try:
-        upgrade.upgrade_modules(modules)
-    except (upgrade.CannotUpgradeModule, KeyError) as exc:
-        logger.error(exc)
-        ctx.exit(1)
+    for name in modules:
+        logger.info("Upgrading %s...", name)
+        try:
+            upgrade.upgrade_module(name)
+        except KeyError:
+            logger.exception("... unknown module name '%s'.", name)
+            ctx.exit(1)
+        except upgrade.NotInstalled:
+            logger.exception("...%s is not installed.", name)
+            ctx.exit(1)
+        except install.CannotInstallModule:
+            logger.exception("... error upgrading %s.", name)
+            ctx.exit(1)
+        else:
+            logger.info("...%s upgraded.", name)
 
 
 @cli.command("list")
