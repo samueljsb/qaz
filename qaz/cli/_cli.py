@@ -74,11 +74,11 @@ def _upgrade(ctx: click.Context, modules: Iterable[str]) -> None:
     """
     Upgrade modules.
     """
-    try:
-        upgrade.upgrade_modules(modules)
-    except (upgrade.CannotUpgradeModule, KeyError) as exc:
-        logger.error(exc)
-        ctx.exit(1)
+    for name in modules:
+        try:
+            upgrade.upgrade_module(name)
+        except (upgrade.CannotUpgradeModule, KeyError):
+            ctx.exit(1)
 
 
 @cli.command("list")
