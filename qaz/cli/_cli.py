@@ -62,7 +62,7 @@ def _install(ctx: click.Context, modules: tuple[str]) -> None:
     for name in modules:
         logger.info("Installing %s...", name)
         try:
-            install.install_module(name)
+            installed_version = install.install_module(name)
         except install.ModuleAlreadyInstalled:
             logger.warning("...%s is already installed.", name)
             continue
@@ -73,7 +73,10 @@ def _install(ctx: click.Context, modules: tuple[str]) -> None:
             logger.exception("... error installing %s.", name)
             ctx.exit(1)
         else:
-            logger.info("...%s installed.", name)
+            if installed_version:
+                logger.info("...%s installed (%s).", name, installed_version)
+            else:
+                logger.info("...%s installed.", name)
 
 
 @cli.command("upgrade")
@@ -86,7 +89,7 @@ def _upgrade(ctx: click.Context, modules: Iterable[str]) -> None:
     for name in modules:
         logger.info("Upgrading %s...", name)
         try:
-            upgrade.upgrade_module(name)
+            from_version, to_version = upgrade.upgrade_module(name)
         except KeyError:
             logger.exception("... unknown module name '%s'.", name)
             ctx.exit(1)
@@ -97,7 +100,12 @@ def _upgrade(ctx: click.Context, modules: Iterable[str]) -> None:
             logger.exception("... error upgrading %s.", name)
             ctx.exit(1)
         else:
-            logger.info("...%s upgraded.", name)
+            if from_version and to_version and from_version != to_version:
+                logger.info(
+                    "...%s upgraded (%s -> %s).", name, from_version, to_version
+                )
+            else:
+                logger.info("...%s upgraded.", name)
 
 
 @cli.command("list")

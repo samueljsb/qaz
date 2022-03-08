@@ -27,6 +27,10 @@ class MacOSZsh(Module):
         brew.install_or_upgrade_formula("zsh")
         _set_default_shell()
 
+    @property
+    def version(self) -> str:
+        return brew.version("zsh")
+
 
 class LinuxZsh(Module):
     name = "zsh"
@@ -102,3 +106,8 @@ class OhMyZSH(Module):
         # Upgrade themes and plugins.
         git.pull(Path.home() / ".oh-my-zsh/custom/plugins/zsh-syntax-highlighting")
         git.pull(Path.home() / ".oh-my-zsh/custom/plugins/zsh-autosuggestions")
+
+    @property
+    def version(self) -> str:
+        zsh_dir = Path.home().resolve() / ".oh-my-zsh"
+        return git.version(zsh_dir)

@@ -42,3 +42,8 @@ class NerdFonts(Module):
 
         for font_name in FONTS:
             shell.run(f"{repo_path / 'install.sh'} {font_name}")
+
+    @property
+    def version(self) -> str:
+        repo_path = Path().home() / ".nerd-fonts"
+        return git.version(repo_path)

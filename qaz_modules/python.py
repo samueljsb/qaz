@@ -30,6 +30,10 @@ class Poetry(Module):
     def upgrade_action(self) -> None:
         shell.run("poetry self update")
 
+    @property
+    def version(self) -> str:
+        return shell.capture("poetry --version").strip().split()[-1]
+
 
 @registry.register
 class PreCommit(Module):
@@ -41,6 +45,10 @@ class PreCommit(Module):
     def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("pre-commit")
 
+    @property
+    def version(self) -> str:
+        return brew.version("pre-commit")
+
 
 @registry.register
 class PythonLauncher(Module):
@@ -51,3 +59,7 @@ class PythonLauncher(Module):
 
     def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("python-launcher")
+
+    @property
+    def version(self) -> str:
+        return brew.version("python-launcher")

@@ -16,3 +16,8 @@ def _installed_packages() -> list[str]:
     output = shell.capture("npm list --global --json")
     data = json.loads(output)
     return [k for k in data.get("dependencies", {})]
+
+
+def version(package: str) -> str:
+    data = json.loads(shell.capture("npm list --global --json"))
+    return data["dependencies"][package]["version"]

@@ -19,9 +19,11 @@ class ModuleAlreadyInstalled(CannotInstallModule):
     pass
 
 
-def install_module(name: str) -> None:
+def install_module(name: str) -> str:
     """
     Install the given module.
+
+    Returns the version that has been installed.
 
     Raises:
         - KeyError if the module name is not registered.
@@ -40,3 +42,5 @@ def install_module(name: str) -> None:
         module.install()
     except Exception as exc:
         raise CannotInstallModule(exc) from exc
+
+    return module.version

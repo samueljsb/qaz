@@ -25,3 +25,8 @@ class Vim(Module):
         repo_path = Path.home() / ".vim/bundle/Vundle.vim"
         git.pull(repo_path)
         shell.run("vim +PluginInstall +qall")
+
+    @property
+    def version(self) -> str:
+        repo_path = Path.home() / ".vim/bundle/Vundle.vim"
+        return git.version(repo_path)

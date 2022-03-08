@@ -16,6 +16,10 @@ class MacTex(Module):
     def upgrade_action(self) -> None:
         brew.install_or_upgrade_cask("mactex")
 
+    @property
+    def version(self) -> str:
+        return brew.version("mactex")
+
 
 if sys.platform == "darwin":
     registry.register(MacTex)

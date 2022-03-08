@@ -23,3 +23,7 @@ class LazyDocker(Module):
 
     def upgrade_action(self) -> None:
         brew.install_or_upgrade_formula("jesseduffield/lazydocker/lazydocker")
+
+    @property
+    def version(self) -> str:
+        return brew.version("jesseduffield/lazydocker/lazydocker")
