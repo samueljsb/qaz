@@ -64,19 +64,19 @@ def _install(ctx: click.Context, modules: tuple[str]) -> None:
         try:
             installed_version = install.install_module(name)
         except install.ModuleAlreadyInstalled:
-            logger.warning("...%s is already installed.", name)
+            logger.warning("... %s is already installed.", name)
             continue
         except KeyError:
-            logger.exception("... unknown module name '%s'.", name)
+            logger.error("... unknown module name '%s'.", name)
             ctx.exit(1)
         except install.CannotInstallModule:
             logger.exception("... error installing %s.", name)
             ctx.exit(1)
         else:
             if installed_version:
-                logger.info("...%s installed (%s).", name, installed_version)
+                logger.info("... %s installed (%s).", name, installed_version)
             else:
-                logger.info("...%s installed.", name)
+                logger.info("... %s installed.", name)
 
 
 @cli.command("upgrade")
@@ -91,10 +91,10 @@ def _upgrade(ctx: click.Context, modules: Iterable[str]) -> None:
         try:
             from_version, to_version = upgrade.upgrade_module(name)
         except KeyError:
-            logger.exception("... unknown module name '%s'.", name)
+            logger.error("... unknown module name '%s'.", name)
             ctx.exit(1)
         except upgrade.NotInstalled:
-            logger.exception("...%s is not installed.", name)
+            logger.error("... %s is not installed.", name)
             ctx.exit(1)
         except install.CannotInstallModule:
             logger.exception("... error upgrading %s.", name)
@@ -102,10 +102,10 @@ def _upgrade(ctx: click.Context, modules: Iterable[str]) -> None:
         else:
             if from_version and to_version and from_version != to_version:
                 logger.info(
-                    "...%s upgraded (%s -> %s).", name, from_version, to_version
+                    "... %s upgraded (%s -> %s).", name, from_version, to_version
                 )
             else:
-                logger.info("...%s upgraded.", name)
+                logger.info("... %s upgraded.", name)
 
 
 @cli.command("list")
