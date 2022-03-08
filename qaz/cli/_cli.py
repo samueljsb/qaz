@@ -69,7 +69,7 @@ def _install(ctx: click.Context, modules: tuple[str]) -> None:
         except KeyError:
             logger.error("... unknown module name '%s'.", name)
             ctx.exit(1)
-        except install.CannotInstallModule:
+        except Exception:
             logger.exception("... error installing %s.", name)
             ctx.exit(1)
         else:
@@ -96,7 +96,7 @@ def _upgrade(ctx: click.Context, modules: Iterable[str]) -> None:
         except upgrade.NotInstalled:
             logger.error("... %s is not installed.", name)
             ctx.exit(1)
-        except install.CannotInstallModule:
+        except Exception:
             logger.exception("... error upgrading %s.", name)
             ctx.exit(1)
         else:
