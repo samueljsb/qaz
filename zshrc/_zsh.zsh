@@ -21,6 +21,8 @@ if [ -x "$(command -v vim)" ]; then
   export VISUAL=vim
 fi
 
+alias e='$EDITOR'
+
 # Set pager options
 # -X is needed to fix a bug with the --quit-if-one-screen feature in old versions of less.
 # Unfortunately, it also breaks mouse-wheel support in less.

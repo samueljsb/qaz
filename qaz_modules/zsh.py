@@ -16,7 +16,6 @@ class MacOSZsh(Module):
     symlinks = {
         ".zshrc": "~",
         ".editorconfig": "~",
-        "e": "/usr/local/bin",
     }
 
     def install_action(self) -> None:
@@ -40,7 +39,6 @@ class LinuxZsh(Module):
     symlinks = {
         ".zshrc": "~",
         ".editorconfig": "~",
-        "e": "/usr/local/bin",
     }
 
     def install_action(self) -> None:
