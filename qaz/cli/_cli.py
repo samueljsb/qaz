@@ -5,7 +5,7 @@ from collections.abc import Iterable
 
 import click
 
-from qaz.application import git, install, setup, update, upgrade
+from qaz.application import configure, git, install, setup, update, upgrade
 
 from . import _list as list_modules
 from . import _logging
@@ -77,6 +77,14 @@ def _install(ctx: click.Context, modules: tuple[str]) -> None:
                 logger.info("... %s installed (%s).", name, installed_version)
             else:
                 logger.info("... %s installed.", name)
+
+
+@cli.command("configure")
+def _configure() -> None:
+    """
+    Configure all installed modules.
+    """
+    configure.configure_qaz()
 
 
 @cli.command("upgrade")
