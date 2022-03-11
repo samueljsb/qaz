@@ -4,5 +4,5 @@ alias gfun='git log --pretty=format:"%h %s" --no-merges $(git_main_branch).. | f
 
 # Use fzf to find a file in a git repo and open it in the editor.
 function ef(){
-  git ls-files | fzf --select-1 --multi --print0 --query=$@ | xargs -0 e
+  git ls-files | fzf --select-1 --multi --print0 --query=$@ | xargs -0 $EDITOR
 }
