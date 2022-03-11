@@ -21,7 +21,7 @@ def configure_git(*, author_name: str, author_email: str) -> str:
 
     Returns the public key configured for git.
     """
-    _install_git()
+    _install.install_module("git")
 
     # Create local git config.
     config_file_content = _build_config_file(author_name, author_email)
@@ -30,13 +30,6 @@ def configure_git(*, author_name: str, author_email: str) -> str:
 
     # Generate SSH key.
     return _generate_or_retrieve_ssh_key(author_email)
-
-
-def _install_git() -> None:
-    try:
-        _install.install_module("git")
-    except _install.ModuleAlreadyInstalled:
-        pass
 
 
 def _build_config_file(author_name: str, author_email: str) -> str:

@@ -65,9 +65,6 @@ def _install(ctx: click.Context, modules: tuple[str]) -> None:
         logger.info("Installing %s...", name)
         try:
             installed_version = application.install_module(name)
-        except application.ModuleAlreadyInstalled:
-            logger.warning("... %s is already installed.", name)
-            continue
         except KeyError:
             logger.error("... unknown module name '%s'.", name)
             ctx.exit(1)
