@@ -2,7 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from qaz.managers import git, shell
+from qaz.managers import git
+from qaz.managers import shell
 from qaz.modules.base import Module
 from qaz.modules.registry import registry
 

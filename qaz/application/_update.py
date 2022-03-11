@@ -1,5 +1,6 @@
 from qaz import settings
-from qaz.managers import git, shell
+from qaz.managers import git
+from qaz.managers import shell
 
 
 def update() -> None:

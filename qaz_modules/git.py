@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from qaz.managers import brew, shell
+from qaz.managers import brew
+from qaz.managers import shell
 from qaz.modules.base import Module
 from qaz.modules.registry import registry
 

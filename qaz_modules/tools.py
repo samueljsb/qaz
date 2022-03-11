@@ -2,7 +2,8 @@ from __future__ import annotations
 
 import sys
 
-from qaz.managers import brew, npm
+from qaz.managers import brew
+from qaz.managers import npm
 from qaz.modules.base import Module
 from qaz.modules.registry import registry
 
