@@ -10,7 +10,7 @@ def update() -> None:
     for this tool.
     """
     root_dir = settings.root_dir()
-    git.pull(root_dir)
+    git.pull(root_dir, with_stash=True)
     shell.run(f"{root_dir}/.venv/bin/python -m pip install --upgrade pip")
     shell.run(f"{root_dir}/.venv/bin/python -m pip install {root_dir}")
 
