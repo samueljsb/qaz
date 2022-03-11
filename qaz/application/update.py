@@ -1,6 +1,5 @@
 from qaz import settings
 from qaz.managers import git, shell
-from qaz.modules.registry import registry
 
 
 def update_qaz() -> None:
@@ -15,5 +14,4 @@ def update_qaz() -> None:
     shell.run(f"{root_dir}/.venv/bin/python -m pip install --upgrade pip")
     shell.run(f"{root_dir}/.venv/bin/python -m pip install {root_dir}")
 
-    for module in registry.installed_modules:
-        module.configure()
+    shell.run("qaz configure")
