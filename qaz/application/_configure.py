@@ -1,7 +1,7 @@
 from qaz.modules.registry import registry
 
 
-def configure_qaz() -> None:
+def configure() -> None:
     """
     Configure all installed modules.
 

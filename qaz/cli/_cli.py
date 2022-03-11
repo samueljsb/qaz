@@ -5,7 +5,7 @@ from collections.abc import Iterable
 
 import click
 
-from qaz.application import configure, git, install, setup, update, upgrade
+from qaz import application
 
 from . import _list as list_modules
 from . import _logging
@@ -29,7 +29,7 @@ def _setup(root_dir: str) -> None:
     Install this tool.
     """
     logger.info("Installing qaz...")
-    setup.setup_qaz(root_dir)
+    application.setup(root_dir)
     logger.info("... qaz is installed.")
 
 
@@ -40,7 +40,9 @@ def _git(author_name: str, author_email: str) -> None:
     """
     Configure git.
     """
-    public_key = git.configure_git(author_name=author_name, author_email=author_email)
+    public_key = application.configure_git(
+        author_name=author_name, author_email=author_email
+    )
     logger.info(f"Add your public key to GitHub:\n    {public_key}")
 
 
@@ -49,7 +51,7 @@ def _update() -> None:
     """
     Update this tool.
     """
-    update.update_qaz()
+    application.update()
 
 
 @cli.command("install")
@@ -62,8 +64,8 @@ def _install(ctx: click.Context, modules: tuple[str]) -> None:
     for name in modules:
         logger.info("Installing %s...", name)
         try:
-            installed_version = install.install_module(name)
-        except install.ModuleAlreadyInstalled:
+            installed_version = application.install_module(name)
+        except application.ModuleAlreadyInstalled:
             logger.warning("... %s is already installed.", name)
             continue
         except KeyError:
@@ -84,7 +86,7 @@ def _configure() -> None:
     """
     Configure all installed modules.
     """
-    configure.configure_qaz()
+    application.configure()
 
 
 @cli.command("upgrade")
@@ -97,11 +99,11 @@ def _upgrade(ctx: click.Context, modules: Iterable[str]) -> None:
     for name in modules:
         logger.info("Upgrading %s...", name)
         try:
-            from_version, to_version = upgrade.upgrade_module(name)
+            from_version, to_version = application.upgrade_module(name)
         except KeyError:
             logger.error("... unknown module name '%s'.", name)
             ctx.exit(1)
-        except upgrade.NotInstalled:
+        except application.NotInstalled:
             logger.error("... %s is not installed.", name)
             ctx.exit(1)
         except Exception:

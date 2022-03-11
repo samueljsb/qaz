@@ -2,7 +2,7 @@ from qaz import settings
 from qaz.managers import git, shell
 
 
-def update_qaz() -> None:
+def update() -> None:
     """
     Update QAZ.
 

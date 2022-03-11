@@ -3,7 +3,7 @@ from sys import platform
 
 from qaz.managers import shell
 
-from . import install
+from . import _install
 
 
 LOCAL_CONFIG_TEMPL = """
@@ -34,8 +34,8 @@ def configure_git(*, author_name: str, author_email: str) -> str:
 
 def _install_git() -> None:
     try:
-        install.install_module("git")
-    except install.ModuleAlreadyInstalled:
+        _install.install_module("git")
+    except _install.ModuleAlreadyInstalled:
         pass
 
 

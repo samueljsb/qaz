@@ -3,7 +3,7 @@ from pathlib import Path
 from qaz import settings
 
 
-def setup_qaz(root_dir: str) -> None:
+def setup(root_dir: str) -> None:
     """
     Set up QAZ for the first time.
 
