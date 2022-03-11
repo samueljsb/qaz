@@ -10,7 +10,7 @@ alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pa
 # Add my public key to keychain
 # We need to use a different command on older version of macOS
 macOSVersion=$(sw_vers -productVersion)
-if [[ "$macOSVersion" == 11.*.* ]]; then
+if [[ "$macOSVersion" < 12.*.* ]]; then
   alias addkey='ssh-add -K ~/.ssh/id_rsa'
 else
   alias addkey='ssh-add --apple-use-keychain ~/.ssh/id_rsa'
