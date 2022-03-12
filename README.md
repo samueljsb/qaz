@@ -7,7 +7,7 @@ A tool for managing installation, upgrading, and configurations.
 Install this tool by cloning the repo and running the installation script:
 
 ```shell
-git clone https://github.com/samueljsb/qaz.git .qaz
+git clone https://github.com/samueljsb/qaz .qaz
 .qaz/install
 ```
 

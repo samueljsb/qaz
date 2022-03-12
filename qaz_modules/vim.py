@@ -18,7 +18,7 @@ class Vim(Module):
     def install_action(self) -> None:
         repo_path = Path.home() / ".vim/bundle/Vundle.vim"
         git.clone(
-            repo_url="https://github.com/VundleVim/Vundle.vim.git", repo_path=repo_path
+            repo_url="https://github.com/VundleVim/Vundle.vim", repo_path=repo_path
         )
         shell.run("vim +PluginInstall +qall")
 

@@ -23,7 +23,7 @@ class NerdFonts(Module):
         logger.warning("... this might take a while!")
         repo_path = Path().home() / ".nerd-fonts"
         git.clone(
-            repo_url="https://github.com/ryanoasis/nerd-fonts.git",
+            repo_url="https://github.com/ryanoasis/nerd-fonts",
             repo_path=repo_path,
             options="--depth=1",
         )

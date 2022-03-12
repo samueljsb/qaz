@@ -88,11 +88,11 @@ class OhMyZSH(Module):
 
         # Install themes and plugins.
         git.clone(
-            repo_url="https://github.com/zsh-users/zsh-syntax-highlighting.git",
+            repo_url="https://github.com/zsh-users/zsh-syntax-highlighting",
             repo_path=Path.home() / ".oh-my-zsh/custom/plugins/zsh-syntax-highlighting",
         )
         git.clone(
-            repo_url="https://github.com/zsh-users/zsh-autosuggestions.git",
+            repo_url="https://github.com/zsh-users/zsh-autosuggestions",
             repo_path=Path.home() / ".oh-my-zsh/custom/plugins/zsh-autosuggestions",
         )
 
