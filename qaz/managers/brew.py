@@ -1,35 +1,70 @@
 from __future__ import annotations
 
+from typing import NamedTuple
+
 from qaz.utils import shell
 
 
+class BrewFormula(NamedTuple):
+    formula: str
+
+    def install(self) -> None:
+        return self._install_or_upgrade()
+
+    def upgrade(self) -> None:
+        return self._install_or_upgrade()
+
+    def _install_or_upgrade(self) -> None:
+        if self.formula.split("/")[-1] in self._installed():
+            shell.run(
+                f"brew upgrade {self.formula}",
+                env={"HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK": "1"},
+            )
+        else:
+            shell.run(f"brew install {self.formula}")
+
+    def _installed(self) -> list[str]:
+        return shell.capture("brew list --formula -1").split()
+
+    def version(self) -> str:
+        versions = shell.capture(f"brew list --versions {self.formula}").strip()
+        if not versions:  # not installed
+            return ""
+        return versions.split()[-1]
+
+
+class BrewCask(NamedTuple):
+    cask: str
+
+    def install(self) -> None:
+        return self._install_or_upgrade()
+
+    def upgrade(self) -> None:
+        return self._install_or_upgrade()
+
+    def _install_or_upgrade(self) -> None:
+        if self.cask in self._installed():
+            shell.run(f"brew upgrade --cask {self.cask}")
+        else:
+            shell.run(f"brew cask install {self.cask}")
+
+    def _installed(self) -> list[str]:
+        return shell.capture("brew list --cask -1").split()
+
+    def version(self) -> str:
+        versions = shell.capture(f"brew list --versions {self.cask}").strip()
+        if not versions:  # not installed
+            return ""
+        return versions.split()[-1]
+
+
 def install_or_upgrade_formula(formula: str) -> None:
-    if formula.split("/")[-1] in _installed_formulae():
-        shell.run(
-            f"brew upgrade {formula}",
-            env={"HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK": "1"},
-        )
-    else:
-        shell.run(f"brew install {formula}")
-
-
-def _installed_formulae() -> list[str]:
-    return shell.capture("brew list --formula -1").split()
+    return BrewFormula(formula).install()
 
 
 def install_or_upgrade_cask(cask: str) -> None:
-    if cask in _installed_casks():
-        shell.run(f"brew upgrade --cask {cask}")
-    else:
-        shell.run(f"brew cask install {cask}")
-
-
-def _installed_casks() -> list[str]:
-    return shell.capture("brew list --cask -1").split()
+    return BrewCask(cask).install()
 
 
 def version(name: str) -> str:
-    versions = shell.capture(f"brew list --versions {name}").strip()
-    if not versions:  # not installed
-        return ""
-    return versions.split()[-1]
+    return BrewFormula(name).version()
