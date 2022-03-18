@@ -29,11 +29,3 @@ class NPM(NamedTuple):
     def version(self) -> str:
         data = json.loads(shell.capture("npm list --global --json"))
         return data["dependencies"][self.package]["version"]
-
-
-def install_or_upgrade_package(package: str) -> None:
-    NPM(package)._install_or_upgrade()
-
-
-def version(package: str) -> str:
-    return NPM(package).version()

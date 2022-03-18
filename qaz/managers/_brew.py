@@ -56,15 +56,3 @@ class BrewCask(NamedTuple):
         if not versions:  # not installed
             return ""
         return versions.split()[-1]
-
-
-def install_or_upgrade_formula(formula: str) -> None:
-    return BrewFormula(formula).install()
-
-
-def install_or_upgrade_cask(cask: str) -> None:
-    return BrewCask(cask).install()
-
-
-def version(name: str) -> str:
-    return BrewFormula(name).version()
