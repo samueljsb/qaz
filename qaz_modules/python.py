@@ -64,3 +64,18 @@ class PythonLauncher(Module):
     @property
     def version(self) -> str:
         return brew.version("python-launcher")
+
+
+@registry.register
+class Virtualenv(Module):
+    name = "virtualenv"
+
+    def install_action(self) -> None:
+        brew.install_or_upgrade_formula("virtualenv")
+
+    def upgrade_action(self) -> None:
+        brew.install_or_upgrade_formula("virtualenv")
+
+    @property
+    def version(self) -> str:
+        return brew.version("virtualenv")
