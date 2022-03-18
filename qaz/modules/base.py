@@ -6,7 +6,7 @@ from pathlib import Path
 from types import MappingProxyType
 
 from qaz import settings
-from qaz.managers import files
+from qaz.utils import files
 
 
 class Module:

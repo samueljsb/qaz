@@ -1,7 +1,7 @@
 from pathlib import Path
 from sys import platform
 
-from qaz.managers import shell
+from qaz.utils import shell
 
 from . import _install
 

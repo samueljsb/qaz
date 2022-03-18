@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 from qaz.managers import brew
-from qaz.managers import shell
 from qaz.modules.base import Module
 from qaz.modules.registry import registry
+from qaz.utils import shell
 
 
 @registry.register

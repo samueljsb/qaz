@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from . import shell
+from qaz.utils import shell
 
 
 def install_or_upgrade_formula(formula: str) -> None:

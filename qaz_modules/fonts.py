@@ -4,10 +4,10 @@ import logging
 import sys
 from pathlib import Path
 
-from qaz.managers import git
-from qaz.managers import shell
 from qaz.modules.base import Module
 from qaz.modules.registry import registry
+from qaz.utils import git
+from qaz.utils import shell
 
 
 logger = logging.getLogger(__name__)

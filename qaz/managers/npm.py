@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 
-from . import shell
+from qaz.utils import shell
 
 
 def install_or_upgrade_package(package: str) -> None:
