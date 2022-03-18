@@ -1,16 +1,12 @@
 from __future__ import annotations
 
-import logging
-import sys
 from pathlib import Path
 
+from qaz import managers
 from qaz.modules.base import Module
 from qaz.modules.registry import registry
-from qaz.utils import git
 from qaz.utils import shell
 
-
-logger = logging.getLogger(__name__)
 
 FONTS = ["Hack"]
 
@@ -18,33 +14,16 @@ FONTS = ["Hack"]
 @registry.register
 class NerdFonts(Module):
     name = "nerd-fonts"
+    manager = managers.Git(
+        "https://github.com/ryanoasis/nerd-fonts",
+        Path().home() / ".nerd-fonts",
+        clone_options="--depth=1",
+    )
 
     def install_action(self) -> None:
-        logger.warning("... this might take a while!")
-        repo_path = Path().home() / ".nerd-fonts"
-        git.clone(
-            repo_url="https://github.com/ryanoasis/nerd-fonts",
-            repo_path=repo_path,
-            options="--depth=1",
-        )
-
         for font_name in FONTS:
-            shell.run(f"{repo_path / 'install.sh'} {font_name}")
+            shell.run(f"{self.manager.repo_path / 'install.sh'} {font_name}")
 
     def upgrade_action(self) -> None:
-        repo_path = Path().home() / ".nerd-fonts"
-
-        if sys.platform == "darwin":
-            # There are issues with case-insensitive filenames that prevent the repo
-            # from being pulled on macOS.
-            logger.error("nerd-fonts cannot be upgraded on MacOS at the moment 😞")
-        else:
-            git.pull(repo_path)
-
         for font_name in FONTS:
-            shell.run(f"{repo_path / 'install.sh'} {font_name}")
-
-    @property
-    def version(self) -> str:
-        repo_path = Path().home() / ".nerd-fonts"
-        return git.version(repo_path)
+            shell.run(f"{self.manager.repo_path / 'install.sh'} {font_name}")
