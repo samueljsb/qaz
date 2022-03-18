@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from qaz.managers import brew
-from qaz.managers import shell
+from qaz import managers
 from qaz.modules.base import Module
 from qaz.modules.registry import registry
+from qaz.utils import shell
 
 
 @registry.register
@@ -39,43 +39,16 @@ class Poetry(Module):
 @registry.register
 class PreCommit(Module):
     name = "pre-commit"
-
-    def install_action(self) -> None:
-        brew.install_or_upgrade_formula("pre-commit")
-
-    def upgrade_action(self) -> None:
-        brew.install_or_upgrade_formula("pre-commit")
-
-    @property
-    def version(self) -> str:
-        return brew.version("pre-commit")
+    manager = managers.BrewFormula("pre-commit")
 
 
 @registry.register
 class PythonLauncher(Module):
     name = "py"
-
-    def install_action(self) -> None:
-        brew.install_or_upgrade_formula("python-launcher")
-
-    def upgrade_action(self) -> None:
-        brew.install_or_upgrade_formula("python-launcher")
-
-    @property
-    def version(self) -> str:
-        return brew.version("python-launcher")
+    manager = managers.BrewFormula("python-launcher")
 
 
 @registry.register
 class Virtualenv(Module):
     name = "virtualenv"
-
-    def install_action(self) -> None:
-        brew.install_or_upgrade_formula("virtualenv")
-
-    def upgrade_action(self) -> None:
-        brew.install_or_upgrade_formula("virtualenv")
-
-    @property
-    def version(self) -> str:
-        return brew.version("virtualenv")
+    manager = managers.BrewFormula("virtualenv")

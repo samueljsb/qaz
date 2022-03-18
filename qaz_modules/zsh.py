@@ -3,15 +3,16 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-from qaz.managers import brew
-from qaz.managers import git
-from qaz.managers import shell
+from qaz import managers
 from qaz.modules.base import Module
 from qaz.modules.registry import registry
+from qaz.utils import git
+from qaz.utils import shell
 
 
 class MacOSZsh(Module):
     name = "zsh"
+    manager = managers.BrewFormula("zsh")
 
     # Configuration files
     zshrc_file = "_zsh.zsh"  # load early to allow modules to overwrite settings
@@ -21,16 +22,10 @@ class MacOSZsh(Module):
     }
 
     def install_action(self) -> None:
-        brew.install_or_upgrade_formula("zsh")
         _set_default_shell()
 
     def upgrade_action(self) -> None:
-        brew.install_or_upgrade_formula("zsh")
         _set_default_shell()
-
-    @property
-    def version(self) -> str:
-        return brew.version("zsh")
 
 
 class LinuxZsh(Module):

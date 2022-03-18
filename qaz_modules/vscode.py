@@ -1,8 +1,8 @@
 from sys import platform
 
-from qaz.managers import vs_code
 from qaz.modules.base import Module
 from qaz.modules.registry import registry
+from qaz.utils import vs_code
 
 
 if platform == "darwin":

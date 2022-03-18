@@ -5,8 +5,9 @@ from collections.abc import Mapping
 from pathlib import Path
 from types import MappingProxyType
 
+from qaz import managers
 from qaz import settings
-from qaz.managers import files
+from qaz.utils import files
 
 
 class Module:
@@ -25,6 +26,8 @@ class Module:
     """
 
     name: str
+
+    manager: managers.Manager | None = None
 
     # Configuration files
     zshrc_file: str | None = None
@@ -64,14 +67,21 @@ class Module:
         Returns an empty string if the module is not installed or the version cannot be
         determined.
         """
-        return ""
+        if self.manager:
+            return self.manager.version()
+        else:
+            return ""
 
     def install(self) -> None:
+        if self.manager:
+            self.manager.install()
         self.install_action()
         self.configure()
         self.is_installed = True
 
     def upgrade(self) -> None:
+        if self.manager:
+            self.manager.upgrade()
         self.upgrade_action()
         self.configure()
         self.last_upgraded_at = datetime.datetime.now()

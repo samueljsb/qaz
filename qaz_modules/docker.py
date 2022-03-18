@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from qaz.managers import brew
+from qaz import managers
 from qaz.modules.base import Module
 from qaz.modules.registry import registry
 
@@ -17,13 +17,4 @@ class MacOSDocker(Module):
 @registry.register
 class LazyDocker(Module):
     name = "lazydocker"
-
-    def install_action(self) -> None:
-        brew.install_or_upgrade_formula("jesseduffield/lazydocker/lazydocker")
-
-    def upgrade_action(self) -> None:
-        brew.install_or_upgrade_formula("jesseduffield/lazydocker/lazydocker")
-
-    @property
-    def version(self) -> str:
-        return brew.version("jesseduffield/lazydocker/lazydocker")
+    manager = managers.BrewFormula("jesseduffield/lazydocker/lazydocker")
