@@ -15,7 +15,7 @@ def pull(repo_path: Path | str, with_stash: bool = False) -> None:
 
     shell.run(f"git -C {repo_path} pull")
 
-    if with_stash:
+    if with_stash and shell.capture(f"git -C {repo_path} stash list"):
         shell.run(f"git -C {repo_path} stash pop")
 
 
