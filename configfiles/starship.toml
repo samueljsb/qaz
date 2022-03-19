@@ -90,6 +90,7 @@ symbol = " "
 symbol = " "
 
 [python]
+python_binary = ["py", "python3", "python"]
 symbol = " "
 
 [ruby]
