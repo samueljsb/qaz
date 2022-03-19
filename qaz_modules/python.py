@@ -52,3 +52,6 @@ class PythonLauncher(Module):
 class Virtualenv(Module):
     name = "virtualenv"
     manager = managers.BrewFormula("virtualenv")
+
+    # Configuration files
+    zshrc_file = "virtualenv.zsh"
