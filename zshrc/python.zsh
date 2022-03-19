@@ -1,5 +1,11 @@
 export PYTHONSTARTUP=~/.config/pythonstartup.py
 
+if [ -x "$(command -v py)" ]; then
+  alias python=py
+else
+  alias python=python3
+fi
+
 # Django
 alias django='python manage.py'
 
