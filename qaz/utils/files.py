@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import logging
 from pathlib import Path
 
@@ -7,13 +9,15 @@ from . import shell
 logger = logging.getLogger(__name__)
 
 
-def create_symlink(target: Path, link: Path = Path.home()) -> None:
+def create_symlink(target: Path, link: Path | None = None) -> None:
     """
     Create a symlink from link to target.
 
     If the link is a directory and the target is a file, the link will be created at the
     same filename within the given directory.
     """
+    link = link or Path.home()
+
     if link.is_dir() and not target.is_dir():
         link = link / target.name
 
