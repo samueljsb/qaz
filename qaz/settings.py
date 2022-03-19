@@ -67,7 +67,7 @@ def set_root_dir(root_dir: str) -> None:
 
 
 def set_module_installed(name: str) -> None:
-    """Set a module as having been installed"""
+    """Set a module as having been installed."""
     config = _load_settings_from_file()
 
     if module_settings := config["modules"].get(name):
