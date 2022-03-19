@@ -8,8 +8,7 @@ def setup(root_dir: str) -> None:
     Set up QAZ for the first time.
 
     This creates a settings file and the directory for zshrc files.
-    """
-    # Create settings file.
+    """  # Create settings file.
     settings.set_root_dir(root_dir)
 
     # Create installed dir

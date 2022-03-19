@@ -16,18 +16,14 @@ logger = logging.getLogger(__name__)
 
 @click.group()
 def cli() -> None:
-    """
-    Manage your system configuration and install/update tools.
-    """
+    """Manage your system configuration and install/update tools."""
     _logging.configure_logging()
 
 
 @cli.command("setup")
 @click.argument("root_dir")
 def _setup(root_dir: str) -> None:
-    """
-    Install this tool.
-    """
+    """Install this tool."""
     logger.info("Installing qaz...")
     application.setup(root_dir)
     logger.info("... qaz is installed.")
@@ -37,9 +33,7 @@ def _setup(root_dir: str) -> None:
 @click.option("--author-name", prompt="Your git author name")
 @click.option("--author-email", prompt="Your git author email")
 def _git(author_name: str, author_email: str) -> None:
-    """
-    Configure git.
-    """
+    """Configure git."""
     public_key = application.configure_git(
         author_name=author_name, author_email=author_email
     )
@@ -48,9 +42,7 @@ def _git(author_name: str, author_email: str) -> None:
 
 @cli.command("update")
 def _update() -> None:
-    """
-    Update this tool.
-    """
+    """Update this tool."""
     application.update()
 
 
@@ -58,9 +50,7 @@ def _update() -> None:
 @click.argument("modules", nargs=-1)
 @click.pass_context
 def _install(ctx: click.Context, modules: tuple[str]) -> None:
-    """
-    Install modules.
-    """
+    """Install modules."""
     for name in modules:
         logger.info("Installing %s...", name)
         try:
@@ -80,9 +70,7 @@ def _install(ctx: click.Context, modules: tuple[str]) -> None:
 
 @cli.command("configure")
 def _configure() -> None:
-    """
-    Configure all installed modules.
-    """
+    """Configure all installed modules."""
     application.configure()
 
 
@@ -90,9 +78,7 @@ def _configure() -> None:
 @click.argument("modules", nargs=-1)
 @click.pass_context
 def _upgrade(ctx: click.Context, modules: Iterable[str]) -> None:
-    """
-    Upgrade modules.
-    """
+    """Upgrade modules."""
     for name in modules:
         logger.info("Upgrading %s...", name)
         try:
@@ -117,7 +103,5 @@ def _upgrade(ctx: click.Context, modules: Iterable[str]) -> None:
 
 @cli.command("list")
 def _list() -> None:
-    """
-    List installed and available modules.
-    """
+    """List installed and available modules."""
     list_modules.output_modules_lists()

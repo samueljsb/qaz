@@ -25,9 +25,7 @@ class ClickHandler(logging.Handler):
 
 
 def configure_logging() -> None:
-    """
-    Configure both the core qaz logger and the logger for the module plugins.
-    """
+    """Configure both the core qaz logger and the logger for the module plugins."""
     loggers = [logging.getLogger("qaz"), logging.getLogger("qaz_modules")]
     for logger in loggers:
         logger.handlers = [ClickHandler()]

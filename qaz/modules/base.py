@@ -103,9 +103,7 @@ class Module:
         pass
 
     def configure(self) -> None:
-        """
-        Configure this module by linking settings files and running config scripts.
-        """
+        """Configure this module by linking config files and running config scripts."""
         if self.zshrc_path:
             files.create_symlink(
                 self.zshrc_path,

@@ -14,9 +14,7 @@ SETTINGS_FILE_PATH = Path("~/.config/qaz.json").expanduser()
 
 
 class ModuleSettings(TypedDict):
-    """
-    Saved settings for a module.
-    """
+    """Saved settings for a module."""
 
     installed: bool  # is this module installed?
     last_upgraded: str  # timestamp of last upgrade in ISO 8601 format
@@ -33,25 +31,19 @@ class Settings(TypedDict):
 
 
 def root_dir() -> Path:
-    """
-    Get the root directory of the qaz repo.
-    """
+    """Get the root directory of the qaz repo."""
     settings = _load_settings_from_file()
     return Path(settings["root_dir"])
 
 
 def is_module_installed(name: str) -> bool:
-    """
-    Check whether a module with the given name is recorded as having been installed.
-    """
+    """Check whether a module with the given name is recorded as installed."""
     settings = _load_settings_from_file()
     return name in settings["modules"]
 
 
 def last_upgraded_at(name: str) -> datetime.datetime | None:
-    """
-    Retrieve the timestamp of the last update to this module.
-    """
+    """Retrieve the timestamp of the last update to this module."""
     settings = _load_settings_from_file()
 
     if module_settings := settings["modules"].get(name):
@@ -67,9 +59,7 @@ def last_upgraded_at(name: str) -> datetime.datetime | None:
 
 
 def set_root_dir(root_dir: str) -> None:
-    """
-    Set the root directory of the qaz repo.
-    """
+    """Set the root directory of the qaz repo."""
     settings = _load_settings_from_file()
     settings["root_dir"] = root_dir
     _save_settings_to_file(settings)
@@ -77,9 +67,7 @@ def set_root_dir(root_dir: str) -> None:
 
 
 def set_module_installed(name: str) -> None:
-    """
-    Set a module as having been installed
-    """
+    """Set a module as having been installed"""
     config = _load_settings_from_file()
 
     if module_settings := config["modules"].get(name):

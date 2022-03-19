@@ -6,9 +6,7 @@ from qaz.modules.registry import registry
 
 
 def output_modules_lists() -> None:
-    """
-    Print the installed and available modules.
-    """
+    """Print the installed and available modules."""
     installed_modules: list[tuple[str, str]] = []
     not_installed_modules: list[str] = []
     for module in sorted(

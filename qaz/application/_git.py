@@ -6,7 +6,7 @@ from qaz.utils import shell
 from . import _install
 
 
-LOCAL_CONFIG_TEMPL = """
+LOCAL_CONFIG_TEMPL = """\
 [user]
         name = {author_name}
         email = {author_email}

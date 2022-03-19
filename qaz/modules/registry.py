@@ -26,9 +26,7 @@ class Registry:
         return module
 
     def populate(self) -> None:
-        """
-        Populate the registry.
-        """
+        """Populate the registry."""
         import qaz_modules  # noqa: F401
 
 
