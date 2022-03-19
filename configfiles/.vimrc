@@ -12,6 +12,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugins
 Plugin 'itchyny/lightline.vim'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'tomasiser/vim-code-dark'
 
 call vundle#end()
 
@@ -22,6 +23,8 @@ syntax on
 set number
 highlight LineNr ctermfg=grey
 :set mouse=a
+
+colorscheme codedark
 
 " Wrap gitcommit file types at the appropriate length
 filetype indent plugin on
