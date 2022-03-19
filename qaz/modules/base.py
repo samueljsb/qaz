@@ -62,7 +62,7 @@ class Module:
     @property
     def version(self) -> str:
         """
-        The currently installed version.
+        Get the currently installed version.
 
         Returns an empty string if the module is not installed or the version cannot be
         determined.
