@@ -1,1 +1,1 @@
-from ._cli import cli  # noqa: F401
+from ._cli import cli
