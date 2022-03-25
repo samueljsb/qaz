@@ -20,8 +20,6 @@ call vundle#end()
 set laststatus=2
 
 syntax on
-set number
-highlight LineNr ctermfg=grey
 :set mouse=a
 
 colorscheme codedark
