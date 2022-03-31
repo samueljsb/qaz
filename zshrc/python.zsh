@@ -9,6 +9,8 @@ fi
 # Django
 alias django='python manage.py'
 
+alias zen="python -c 'import this'"
+
 # Create a new directory with virtual environment in /tmp.
 function tmpvenv(){
   # Create the new tmp directory.
