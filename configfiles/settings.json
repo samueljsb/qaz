@@ -59,11 +59,15 @@
     "*.sqlite3": "database",
     ".flake8": "python-misc",
     ".ruby-version": "ruby",
-    "TODO": "contributing"
+    "TODO": "contributing",
+    "pyproject.toml": "python-misc",
+    "setup.cfg": "python-misc"
   },
   "material-icon-theme.folders.associations": {
+    ".mypy_cache": "python",
     "_layouts": "template",
-    "migrations": "database"
+    "migrations": "database",
+    "venv": "environment"
   },
   "material-icon-theme.languages.associations": {
     "dockerfile": "docker"
