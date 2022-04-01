@@ -90,7 +90,10 @@ symbol = " "
 symbol = " "
 
 [python]
-python_binary = ["py", "python3", "python"]
+# Only show Python if a virtual environment is currently activated
+detect_extensions = []
+detect_files = []
+detect_folders = []
 symbol = " "
 
 [ruby]
