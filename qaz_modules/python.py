@@ -3,7 +3,6 @@ from __future__ import annotations
 from qaz import managers
 from qaz.modules.base import Module
 from qaz.modules.registry import registry
-from qaz.utils import shell
 
 
 @registry.register
@@ -13,27 +12,6 @@ class Python(Module):
     # Configuration files
     zshrc_file = "python.zsh"
     symlinks = {".pypirc": "~", "pythonstartup.py": "~/.config/", ".pdbrc.py": "~"}
-
-
-@registry.register
-class Poetry(Module):
-    name = "Poetry"
-
-    # Configuration files
-    zshrc_file = "poetry.zsh"
-    symlinks: dict[str, str] = {}
-
-    def install_action(self) -> None:
-        shell.run(
-            "curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python"  # noqa: E501
-        )
-
-    def upgrade_action(self) -> None:
-        shell.run("poetry self update")
-
-    @property
-    def version(self) -> str:
-        return shell.capture("poetry --version").strip().split()[-1]
 
 
 @registry.register
