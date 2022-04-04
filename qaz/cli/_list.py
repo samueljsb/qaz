@@ -9,9 +9,7 @@ def output_modules_lists() -> None:
     """Print the installed and available modules."""
     installed_modules: list[tuple[str, str]] = []
     not_installed_modules: list[str] = []
-    for module in sorted(
-        registry.modules.values(), key=lambda module: module.name.casefold()
-    ):
+    for module in sorted(registry.modules.values(), key=lambda m: m.name.casefold()):
         if module.is_installed:
             installed_modules.append(
                 (
