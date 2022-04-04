@@ -97,8 +97,10 @@ def _upgrade(ctx: click.Context, modules: Iterable[str]) -> None:
                 logger.info(
                     "... %s upgraded (%s -> %s).", name, from_version, to_version
                 )
+            elif to_version:
+                logger.info("... %s is up to date (%s).", name, to_version)
             else:
-                logger.info("... %s is already up to date (%s).", name, to_version)
+                logger.info("... %s is up to date.", name)
 
 
 @cli.command("list")
