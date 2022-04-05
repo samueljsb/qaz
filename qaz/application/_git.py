@@ -52,8 +52,8 @@ def _generate_or_retrieve_ssh_key(email: str) -> str:
     id_rsa = ssh_dir / "id_rsa"
     id_rsa_pub = ssh_dir / "id_rsa.pub"
     if not id_rsa.exists():
-        shell.run(f"ssh-keygen -t rsa -b 4096 -C '{email}' -f {id_rsa}")
-        shell.run(f"ssh-add -K {id_rsa}")
+        shell.run("ssh-keygen", "-t", "rsa", "-b", "4096", "-C", email, "-f", id_rsa)
+        shell.run("ssh-add", "-K", id_rsa)
     with id_rsa_pub.open() as fd:
         public_key = fd.read()
     return public_key

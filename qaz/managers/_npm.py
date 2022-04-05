@@ -17,15 +17,15 @@ class NPM(NamedTuple):
 
     def _install_or_upgrade(self) -> None:
         if self.package not in self._installed():
-            shell.run(f"npm install --global {self.package}")
+            shell.run("npm", "install", "--global", self.package)
         else:
-            shell.run(f"npm update --global {self.package}")
+            shell.run("npm", "update", "--global", self.package)
 
     def _installed(self) -> list[str]:
-        output = shell.capture("npm list --global --json")
+        output = shell.capture("npm", "list", "--global", "--json")
         data = json.loads(output)
         return [k for k in data.get("dependencies", {})]
 
     def version(self) -> str:
-        data = json.loads(shell.capture("npm list --global --json"))
+        data = json.loads(shell.capture("npm", "list", "--global", "--json"))
         return data["dependencies"][self.package]["version"]

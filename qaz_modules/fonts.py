@@ -22,8 +22,8 @@ class NerdFonts(Module):
 
     def install_action(self) -> None:
         for font_name in FONTS:
-            shell.run(f"{self.manager.repo_path / 'install.sh'} {font_name}")
+            shell.run(self.manager.repo_path / "install.sh", font_name)
 
     def upgrade_action(self) -> None:
         for font_name in FONTS:
-            shell.run(f"{self.manager.repo_path / 'install.sh'} {font_name}")
+            shell.run(self.manager.repo_path / "install.sh", font_name)

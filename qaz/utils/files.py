@@ -33,7 +33,7 @@ def create_symlink(target: Path, link: Path | None = None) -> None:
         link.symlink_to(target)
     except PermissionError:
         # Run ln with sudo in a shell.
-        shell.run(f"sudo ln -s {target.expanduser()} {link.expanduser()}")
+        shell.run("sudo", "ln", "-s", target.expanduser(), link.expanduser())
     except FileExistsError:
         logger.error(f"Could not create symlink because a file exists: {link}")
         return

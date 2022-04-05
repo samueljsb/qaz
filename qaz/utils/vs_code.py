@@ -18,13 +18,15 @@ def install_extensions(extensions: Iterable[str]) -> None:
         return
 
     for extension in {ext.casefold() for ext in extensions} - _installed_extensions():
-        shell.run(f"code --install-extension {extension}")
+        shell.run("code", "--install-extension", extension)
 
 
 def _is_vs_code_installed() -> bool:
-    command = shell.capture("command -v code")
+    command = shell.capture("command", "-v", "code")
     return bool(command)
 
 
 def _installed_extensions() -> Set[str]:
-    return {ext.casefold() for ext in shell.capture("code --list-extensions").split()}
+    return {
+        ext.casefold() for ext in shell.capture("code", "--list-extensions").split()
+    }

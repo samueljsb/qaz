@@ -20,7 +20,7 @@ class Vim(Module):
     symlinks = {".vimrc": "~"}
 
     def install_action(self) -> None:
-        shell.run("vim +PluginInstall +qall")
+        shell.run("vim", "+PluginInstall", "+qall")
 
     def upgrade_action(self) -> None:
-        shell.run("vim +PluginInstall +qall")
+        shell.run("vim", "+PluginInstall", "+qall")

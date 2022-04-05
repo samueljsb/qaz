@@ -13,7 +13,8 @@ class ITerm2(Module):
 
     def install_action(self) -> None:
         shell.run(
-            "curl -L https://iterm2.com/shell_integration/zsh -o ~/.zshrc.d/.iterm2_shell_integration.zsh"  # noqa: E501
+            *("curl", "-L", "https://iterm2.com/shell_integration/zsh"),
+            *("-o", "~/.zshrc.d/.iterm2_shell_integration.zsh"),
         )
 
 

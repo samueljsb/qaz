@@ -3,6 +3,7 @@ from __future__ import annotations
 import logging
 import os
 import subprocess
+from os import PathLike
 
 from qaz import settings
 
@@ -11,28 +12,28 @@ logger = logging.getLogger(__name__)
 
 
 def run(
-    command: str,
-    *,
+    *args: str | PathLike[str],
     env: dict[str, str] | None = None,
 ) -> None:
-    logger.debug(f"$ {command}")
+    logger.debug("$ " + " ".join(str(part) for part in args))
 
-    process = subprocess.run(
-        command,
-        shell=True,
+    subprocess.run(
+        args,
+        check=True,
         env=os.environ.update(env if env else {}),
     )
-    process.check_returncode()
 
 
 def run_script(script_name: str) -> None:
-    run(str(settings.root_dir() / "scripts" / script_name))
+    run(settings.root_dir() / "scripts" / script_name)
 
 
-def capture(command: str, *, env: dict[str, str] | None = None) -> str:
+def capture(
+    *args: str | PathLike[str],
+    env: dict[str, str] | None = None,
+) -> str:
     process = subprocess.run(
-        command,
-        shell=True,
+        args,
         env=os.environ.update(env if env else {}),
         text=True,
         capture_output=True,

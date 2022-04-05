@@ -12,7 +12,7 @@ def update() -> None:
     """
     root_dir = settings.root_dir()
     git.pull(root_dir, with_stash=True)
-    shell.run(f"{root_dir}/.venv/bin/python -m pip install --upgrade pip")
-    shell.run(f"{root_dir}/.venv/bin/python -m pip install {root_dir}")
+    shell.run(root_dir / ".venv/bin/python", "-m", "pip", "install", "--upgrade", "pip")
+    shell.run(root_dir / ".venv/bin/python", "-m", "pip", "install", root_dir)
 
-    shell.run("qaz configure")
+    shell.run("qaz", "configure")
