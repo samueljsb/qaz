@@ -11,17 +11,17 @@ class Homebrew(Module):
 
     def install_action(self) -> None:
         shell.run(
-            "/bin/bash -c "
-            '"$(curl -fsSL '
-            'https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"',
+            "/bin/bash",
+            "-c",
+            '"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"',  # noqa: E501
             env={"CI": "1"},
         )
-        shell.run("brew analytics off")
+        shell.run("brew", "analytics", "off")
 
     def upgrade_action(self) -> None:
-        shell.run("brew update")
-        shell.run("brew analytics off")
+        shell.run("brew", "update")
+        shell.run("brew", "analytics", "off")
 
     @property
     def version(self) -> str:
-        return shell.capture("brew --version").split("\n")[0].split()[-1]
+        return shell.capture("brew", "--version").split("\n")[0].split()[-1]

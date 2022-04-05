@@ -17,17 +17,17 @@ class BrewFormula(NamedTuple):
     def _install_or_upgrade(self) -> None:
         if self.formula.split("/")[-1] in self._installed():
             shell.run(
-                f"brew upgrade {self.formula}",
+                *("brew", "upgrade", self.formula),
                 env={"HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK": "1"},
             )
         else:
-            shell.run(f"brew install {self.formula}")
+            shell.run("brew", "install", self.formula)
 
     def _installed(self) -> list[str]:
-        return shell.capture("brew list --formula -1").split()
+        return shell.capture("brew", "list", "--formula", "-1").split()
 
     def version(self) -> str:
-        versions = shell.capture(f"brew list --versions {self.formula}").strip()
+        versions = shell.capture("brew", "list", "--versions", self.formula).strip()
         if not versions:  # not installed
             return ""
         return versions.split()[-1]
@@ -44,15 +44,15 @@ class BrewCask(NamedTuple):
 
     def _install_or_upgrade(self) -> None:
         if self.cask in self._installed():
-            shell.run(f"brew upgrade --cask {self.cask}")
+            shell.run("brew", "upgrade", "--cask", self.cask)
         else:
-            shell.run(f"brew cask install {self.cask}")
+            shell.run("brew", "cask", "install", self.cask)
 
     def _installed(self) -> list[str]:
-        return shell.capture("brew list --cask -1").split()
+        return shell.capture("brew", "list", "--cask", "-1").split()
 
     def version(self) -> str:
-        versions = shell.capture(f"brew list --versions {self.cask}").strip()
+        versions = shell.capture("brew", "list", "--versions", self.cask).strip()
         if not versions:  # not installed
             return ""
         return versions.split()[-1]

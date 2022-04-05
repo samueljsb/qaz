@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import subprocess
 import sys
 from pathlib import Path
 
@@ -39,13 +40,13 @@ class LinuxZsh(Module):
     }
 
     def install_action(self) -> None:
-        shell.run("sudo apt update")
-        shell.run("sudo apt install --yes zsh")
+        shell.run("sudo", "apt", "update")
+        shell.run("sudo", "apt", "install", "--yes", "zsh")
         _set_default_shell()
 
     def upgrade_action(self) -> None:
-        shell.run("sudo apt update")
-        shell.run("sudo apt upgrade --yes zsh")
+        shell.run("sudo", "apt", "update")
+        shell.run("sudo", "apt", "upgrade", "--yes", "zsh")
         _set_default_shell()
 
 
@@ -56,7 +57,7 @@ elif sys.platform == "Linux":
 
 
 def _set_default_shell() -> None:
-    zsh_path = shell.capture("which zsh")
+    zsh_path = shell.capture("which", "zsh")
 
     # Make sure zsh is an allowed shell.
     shells = Path("/etc/shells")
@@ -65,7 +66,7 @@ def _set_default_shell() -> None:
             fd.write(zsh_path + "\n")
 
     # Make zsh the default shell.
-    shell.run(f"chsh -s {zsh_path}")
+    shell.run("chsh", "-s", zsh_path)
 
 
 @registry.register
@@ -76,8 +77,13 @@ class OhMyZSH(Module):
     zshrc_file = "_oh-my-zsh.zsh"  # load early to allow modules to overwrite settings
 
     def install_action(self) -> None:
-        shell.run(
-            'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"',  # noqa: E501
+        install_script = shell.capture(
+            "curl",
+            "-fsSL",
+            "https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh",
+        )
+        subprocess.run(
+            ("sh", "-c", install_script),
             env={"CHSH": "no", "RUNZSH": "no", "KEEP_ZSHRC": "yes"},
         )
 
@@ -94,7 +100,7 @@ class OhMyZSH(Module):
     def upgrade_action(self) -> None:
         zsh_dir = Path.home().resolve() / ".oh-my-zsh"
         shell.run(
-            f"sh {zsh_dir / 'tools/upgrade.sh'} --interactive",
+            *("sh", zsh_dir / "tools/upgrade.sh", "--interactive"),
             env={"ZSH": str(zsh_dir)},
         )
 

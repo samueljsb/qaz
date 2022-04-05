@@ -26,7 +26,7 @@ class GitHubCLI(Module):
     symlinks = {"github_config.yml": "~/.config/gh/config.yml"}
 
     def install_action(self) -> None:
-        shell.run("gh auth login --web")
+        shell.run("gh", "auth", "login", "--web")
 
 
 @registry.register
