@@ -6,15 +6,6 @@ from qaz.utils import shell
 from . import _install
 
 
-LOCAL_CONFIG_TEMPL = """\
-[user]
-        name = {author_name}
-        email = {author_email}
-[credential]
-        helper = {git_credential}
-"""
-
-
 def configure_git(*, author_name: str, author_email: str) -> str:
     """
     Install and configure git.
@@ -40,11 +31,14 @@ def _build_config_file(author_name: str, author_email: str) -> str:
     else:
         git_credential = ""
 
-    return LOCAL_CONFIG_TEMPL.format(
-        git_authorname=author_name,
-        git_authoremail=author_email,
-        git_credential=git_credential,
-    )
+    return f"""\
+[user]
+    name = {author_name}
+    email = {author_email}
+
+[credential]
+    helper = {git_credential}
+"""
 
 
 def _generate_or_retrieve_ssh_key(email: str) -> str:
