@@ -54,6 +54,7 @@
     "**/.vscode": true,
     "**/__pycache__": true
   },
+  "files.participants.timeout": 0,
   "html.format.enable": false,
   "material-icon-theme.files.associations": {
     "*.sqlite3": "database",
