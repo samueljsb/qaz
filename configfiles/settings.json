@@ -2,9 +2,6 @@
   "[html]": {
     "editor.formatOnSaveMode": "file"
   },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "[markdown]": {
     "editor.formatOnSave": false,
     "editor.rulers": [
@@ -28,14 +25,16 @@
   "[yaml]": {
     "editor.formatOnSaveMode": "file"
   },
-  "breadcrumbs.enabled": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
+  "color-highlight.markRuler": false,
+  "color-highlight.markerType": "dot-after",
+  "debug.showInStatusBar": "never",
+  "editor.acceptSuggestionOnEnter": "off",
   "editor.detectIndentation": false,
   "editor.fontFamily": "Hack Nerd Font, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 13,
   "editor.formatOnSave": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.guides.bracketPairsHorizontal": false,
   "editor.insertSpaces": true,
   "editor.minimap.renderCharacters": false,
   "editor.multiCursorModifier": "ctrlCmd",
@@ -48,13 +47,19 @@
     "*.md": "markdown"
   },
   "files.exclude": {
+    "**/*.egg-info": true,
     "**/.DS_Store": true,
     "**/.git": true,
+    "**/.mypy_cache": true,
     "**/.pytest_cache": true,
     "**/.vscode": true,
     "**/__pycache__": true
   },
   "files.participants.timeout": 0,
+  "git.enableStatusBarSync": false,
+  "github.gitAuthentication": false,
+  "github.statusbar.color": false,
+  "github.statusbar.enabled": false,
   "html.format.enable": false,
   "material-icon-theme.files.associations": {
     "*.sqlite3": "database",
@@ -79,17 +84,7 @@
   "python.linting.flake8Enabled": true,
   "python.linting.mypyEnabled": true,
   "python.linting.pylintEnabled": false,
-  "python.showStartPage": false,
-  "python.terminal.activateEnvironment": true,
-  "spellchecker.ignoreWordsList": [
-    "Kraken",
-    "Django"
-  ],
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.fontFamily": "Hack Nerd Font",
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-  "workbench.editorAssociations": {
-    "*.ipynb": "jupyter-notebook"
-  },
   "workbench.iconTheme": "material-icon-theme"
 }
