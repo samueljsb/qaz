@@ -1,28 +1,65 @@
-#! /bin/sh
-#
-# This installs qaz.
+#!/usr/bin/env python3
+"""Install qaz."""
 
-set -e
+import os
+import subprocess
+import sys
 
-message() {
-    echo "\033[1m[QAZ]\033[0m $@"
-}
 
-QAZ=$(pwd)/$(dirname "$0")
+def _msg(msg: str) -> None:
+    print(f"\033[1m[QAZ]\033[0m {msg}")
 
-message 'Installing dotfiles and management tool...'
 
-# Install management tool
-message "Installing qaz management tool..."
-python3 -m venv $QAZ/.venv
-$QAZ/.venv/bin/python -m pip install --upgrade pip
-$QAZ/.venv/bin/python -m pip install $QAZ
-sudo ln -sf $QAZ/.venv/bin/qaz /usr/local/bin
-message "... management tool installed!"
+def main() -> int:
+    if not (sys.version_info.major == 3 and sys.version_info.minor >= 8):
+        print(sys.version)
+        print("\033[31mPython 3.8 or later required.\033[0m")
+        return 1
 
-# Run management tool to install basics
-mkdir -p $HOME/.config
-$QAZ/.venv/bin/qaz setup $QAZ
+    qaz_dir = os.path.dirname(os.path.abspath(__name__))
+    qaz_python = os.path.join(qaz_dir, ".venv", "bin", "python")
+    qaz_entrypoint = os.path.join(qaz_dir, ".venv", "bin", "qaz")
 
-# Install zsh and set as default shell
-$QAZ/.venv/bin/qaz install zsh
+    _msg("Installing dotfiles and management tool...")
+
+    # Install management tool
+    _msg("Installing qaz management tool...")
+    subprocess.run(
+        ("python3", "-m", "venv", os.path.join(qaz_dir, ".venv")),
+        check=True,
+    )
+    subprocess.run(
+        (qaz_python, "-m", "pip", "install", "--upgrade", "pip"),
+        check=True,
+    )
+    subprocess.run(
+        (qaz_python, "-m", "pip", "install", qaz_dir),
+        check=True,
+    )
+    subprocess.run(
+        ("sudo", "ln", "-sf", qaz_entrypoint, "/usr/local/bin"),
+        check=True,
+    )
+    _msg("... management tool installed!")
+
+    # Run qaz to install basics
+    subprocess.run(
+        ("mkdir", "-p", os.path.expanduser("~/.config")),
+        check=True,
+    )
+    subprocess.run(
+        (qaz_entrypoint, "setup", qaz_dir),
+        check=True,
+    )
+
+    # Install zsh and set as default shell
+    subprocess.run(
+        (qaz_entrypoint, "install", "zsh"),
+        check=True,
+    )
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
