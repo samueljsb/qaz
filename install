@@ -3,19 +3,34 @@
 
 import os
 import subprocess
-import sys
 
 
 def _msg(msg: str) -> None:
     print(f"\033[1m[QAZ]\033[0m {msg}")
 
 
-def main() -> int:
-    if not (sys.version_info.major == 3 and sys.version_info.minor >= 8):
-        print(sys.version)
-        print("\033[31mPython 3.8 or later required.\033[0m")
-        return 1
+def _create_venv(qaz_dir: str) -> None:
+    try:
+        # fmt: off
+        subprocess.run(
+            (
+                "virtualenv",
+                "--python", "python3.10",
+                "--python", "python3.9",
+                "--python", "python3.8",
+                os.path.join(qaz_dir, ".venv"),
+            ),
+            check=True,
+        )
+        # fmt: on
+    except FileNotFoundError:
+        subprocess.run(
+            ("python3", "-m", "venv", os.path.join(qaz_dir, ".venv")),
+            check=True,
+        )
 
+
+def main() -> int:
     qaz_dir = os.path.dirname(os.path.abspath(__name__))
     qaz_python = os.path.join(qaz_dir, ".venv", "bin", "python")
     qaz_entrypoint = os.path.join(qaz_dir, ".venv", "bin", "qaz")
@@ -24,6 +39,7 @@ def main() -> int:
 
     # Install management tool
     _msg("Installing qaz management tool...")
+    _create_venv(qaz_dir)
     subprocess.run(
         ("python3", "-m", "venv", os.path.join(qaz_dir, ".venv")),
         check=True,
