@@ -112,4 +112,4 @@ def _load_settings_from_file() -> Settings:
 
 
 def _save_settings_to_file(settings: Settings) -> None:
-    SETTINGS_FILE_PATH.write_text(json.dumps(settings))
+    SETTINGS_FILE_PATH.write_text(json.dumps(settings, indent=2))
