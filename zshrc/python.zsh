@@ -18,7 +18,12 @@ function tmpvenv(){
   mkdir /tmp/$1 || return 1
   cd /tmp/$1
 
-  python -m venv .venv
+  if [ -x "$(command -v virtualenv)" ]; then
+    virtualenv venv
+  else
+    python -m venv .venv
+  fi
+
   ./.venv/bin/pip install black isort flake8 mypy rich
 
   . .venv/bin/activate
