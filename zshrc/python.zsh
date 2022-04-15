@@ -21,12 +21,12 @@ function tmpvenv(){
   if [ -x "$(command -v virtualenv)" ]; then
     virtualenv venv
   else
-    python -m venv .venv
+    python -m venv venv
   fi
 
-  ./.venv/bin/pip install black isort flake8 mypy rich
+  ./venv/bin/pip install black isort flake8 mypy rich
 
-  . .venv/bin/activate
+  . venv/bin/activate
 
   return 0
 }
