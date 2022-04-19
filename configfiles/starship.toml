@@ -1,4 +1,4 @@
-command_timeout = "1500"
+command_timeout = 1500
 
 # Move the status, duration, and time to the right of the prompt without using
 # the 'right prompt' (which is on the same line as the input).
