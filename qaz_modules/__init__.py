@@ -2,7 +2,6 @@ from . import brew
 from . import docker
 from . import fonts
 from . import git
-from . import iterm2
 from . import macos
 from . import python
 from . import starship
