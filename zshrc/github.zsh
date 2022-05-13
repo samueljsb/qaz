@@ -17,7 +17,7 @@ function newpr() {
   currentBranch=$(git branch --show-current)
 
   git push --set-upstream origin $currentBranch
-  gh pr create --fill --web --head $currentBranch
+  gh pr create --draft --fill --web --head $currentBranch
 }
 
 alias gh-merged='\
