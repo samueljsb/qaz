@@ -29,6 +29,7 @@
   "color-highlight.markerType": "dot-after",
   "debug.showInStatusBar": "never",
   "editor.acceptSuggestionOnEnter": "off",
+  "editor.bracketPairColorization.enabled": false,
   "editor.detectIndentation": false,
   "editor.fontFamily": "Hack Nerd Font, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 13,
