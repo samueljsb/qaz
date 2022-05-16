@@ -3,6 +3,7 @@ from __future__ import annotations
 from qaz import managers
 from qaz.modules.base import Module
 from qaz.modules.registry import registry
+from qaz.utils import shell
 
 
 @registry.register
@@ -18,6 +19,15 @@ class Python(Module):
 class PreCommit(Module):
     name = "pre-commit"
     manager = managers.BrewFormula("pre-commit")
+
+    # Configuration files
+    symlinks = {".gitconfig.pre-commit": "~"}
+
+    def install_action(self) -> None:
+        shell.run("pre-commit", "init-templatedir", "~/.git-template")
+
+    def update_action(self) -> None:
+        shell.run("pre-commit", "init-templatedir", "~/.git-template")
 
 
 @registry.register
