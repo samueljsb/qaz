@@ -15,6 +15,7 @@
 # Use a template for the commit message.
 [commit]
     template = ~/.git-commit-msg
+    verbose = true
 
 [core]
     editor = vim
