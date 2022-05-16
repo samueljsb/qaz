@@ -75,15 +75,15 @@ class Module:
     def install(self) -> None:
         if self.manager:
             self.manager.install()
-        self.install_action()
         self.configure()
+        self.install_action()
         self.is_installed = True
 
     def upgrade(self) -> None:
         if self.manager:
             self.manager.upgrade()
-        self.upgrade_action()
         self.configure()
+        self.upgrade_action()
         self.last_upgraded_at = datetime.datetime.now()
 
     def install_action(self) -> None:
