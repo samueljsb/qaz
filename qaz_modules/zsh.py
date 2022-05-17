@@ -89,10 +89,6 @@ class OhMyZSH(Module):
 
         # Install themes and plugins.
         git.clone(
-            repo_url="https://github.com/zsh-users/zsh-syntax-highlighting",
-            repo_path=Path.home() / ".oh-my-zsh/custom/plugins/zsh-syntax-highlighting",
-        )
-        git.clone(
             repo_url="https://github.com/zsh-users/zsh-autosuggestions",
             repo_path=Path.home() / ".oh-my-zsh/custom/plugins/zsh-autosuggestions",
         )
@@ -105,10 +101,27 @@ class OhMyZSH(Module):
         )
 
         # Upgrade themes and plugins.
-        git.pull(Path.home() / ".oh-my-zsh/custom/plugins/zsh-syntax-highlighting")
         git.pull(Path.home() / ".oh-my-zsh/custom/plugins/zsh-autosuggestions")
 
     @property
     def version(self) -> str:
         zsh_dir = Path.home().resolve() / ".oh-my-zsh"
         return git.version(zsh_dir)
+
+
+@registry.register
+class ZshAutosuggestions(Module):
+    name = "zsh-autosuggestions"
+    manager = managers.BrewFormula("zsh-autosuggestions")
+
+    # Configuration files
+    zshrc_file = "zsh_autosuggestions.zsh"
+
+
+@registry.register
+class ZshSyntaxHighlighting(Module):
+    name = "zsh-syntax-highlighting"
+    manager = managers.BrewFormula("zsh-syntax-highlighting")
+
+    # Configuration files
+    zshrc_file = "zsh_syntax_highlighting.zsh"
