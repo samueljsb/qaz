@@ -115,7 +115,7 @@ class ZshAutosuggestions(Module):
     manager = managers.BrewFormula("zsh-autosuggestions")
 
     # Configuration files
-    zshrc_file = "zsh_autosuggestions.zsh"
+    zshrc_file = "zsh-autosuggestions.zsh"
 
 
 @registry.register
@@ -124,4 +124,4 @@ class ZshSyntaxHighlighting(Module):
     manager = managers.BrewFormula("zsh-syntax-highlighting")
 
     # Configuration files
-    zshrc_file = "zsh_syntax_highlighting.zsh"
+    zshrc_file = "zsh-syntax-highlighting.zsh"
