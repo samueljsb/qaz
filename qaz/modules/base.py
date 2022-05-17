@@ -4,9 +4,10 @@ import datetime
 from collections.abc import Mapping
 from pathlib import Path
 from types import MappingProxyType
+from typing import Sequence
 
-from qaz import managers
 from qaz import settings
+from qaz.managers import Manager
 from qaz.utils import files
 
 
@@ -86,7 +87,7 @@ class ModuleBase:
 class Module(ModuleBase):
     """A module that provides a single tool."""
 
-    manager: managers.Manager | None = None
+    manager: Manager | None = None
     zshrc_file: str | None = None
 
     @property
@@ -112,6 +113,40 @@ class Module(ModuleBase):
             zshrc_path = settings.root_dir() / "zshrc" / self.zshrc_file
             files.create_symlink(
                 zshrc_path,
+                Path.home() / ".zshrc.d",
+            )
+
+        super().configure()
+
+
+class Bundle(ModuleBase):
+    """A module that bundles together several tools."""
+
+    managers: Sequence[Manager] = ()
+
+    zshrc_files: Sequence[str] = ()
+
+    @property
+    def version(self) -> str:
+        # Bundles do not have an obvious candidate for the version.
+        return ""
+
+    def install(self) -> None:
+        for manager in self.managers:
+            manager.install()
+        super().install()
+
+    def upgrade(self) -> None:
+        for manager in self.managers:
+            manager.upgrade()
+        super().upgrade()
+
+    def configure(self) -> None:
+        """Configure this module by linking config files and running config scripts."""
+        for rc_file in self.zshrc_files:
+            rc_path = settings.root_dir() / "zshrc" / rc_file
+            files.create_symlink(
+                rc_path,
                 Path.home() / ".zshrc.d",
             )
 
