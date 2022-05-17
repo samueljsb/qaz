@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from qaz import settings
 from qaz.utils import git
 from qaz.utils import shell
