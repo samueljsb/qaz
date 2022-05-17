@@ -3,6 +3,8 @@
 # Ensure a PYTHONSTARTUP environment variable points to the location of this file.
 # See https://docs.python.org/3/using/cmdline.html#envvar-PYTHONSTARTUP
 
+from __future__ import annotations
+
 # Always have pp available
 from pprint import pprint as pp
 

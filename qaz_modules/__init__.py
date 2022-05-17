@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from . import brew
 from . import docker
 from . import fonts

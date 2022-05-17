@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from sys import platform
 
 from qaz.modules.base import Module
