@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import sys
-
 from qaz import managers
 from qaz.modules.base import Module
 from qaz.modules.registry import registry
@@ -32,24 +30,6 @@ class Fzf(Module):
 
     # Configuration files
     zshrc_file = "fzf.zsh"
-
-
-class GNUSed(Module):
-    """
-    GNU sed.
-
-    This allows MacOS to have a more convenient version of sed.
-    """
-
-    name = "sed"
-    manager = managers.BrewFormula("gnu-sed")
-
-    # Configuration files
-    zshrc_file = "sed.zsh"
-
-
-if sys.platform == "darwin":
-    registry.register(GNUSed)
 
 
 @registry.register
