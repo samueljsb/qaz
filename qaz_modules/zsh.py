@@ -57,7 +57,7 @@ elif sys.platform == "Linux":
 
 
 def _set_default_shell() -> None:
-    zsh_path = shell.capture("which", "zsh")
+    zsh_path = shell.capture("which", "zsh").strip()
 
     # Make sure zsh is an allowed shell.
     shells = Path("/etc/shells")
