@@ -110,6 +110,15 @@ class OhMyZSH(Module):
 
 
 @registry.register
+class ZshAutosuggestions(Module):
+    name = "zsh-autosuggestions"
+    manager = managers.BrewFormula("zsh-autosuggestions")
+
+    # Configuration files
+    zshrc_file = "zsh_autosuggestions.zsh"
+
+
+@registry.register
 class ZshSyntaxHighlighting(Module):
     name = "zsh-syntax-highlighting"
     manager = managers.BrewFormula("zsh-syntax-highlighting")
