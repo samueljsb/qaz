@@ -17,7 +17,10 @@ class Vim(Module):
     )
 
     # Configuration files
-    symlinks = {".vimrc": "~"}
+    symlinks = {
+        ".vimrc": "~",
+        ".editorconfig": "~",
+    }
 
     def install_action(self) -> None:
         shell.run("vim", "+PluginInstall", "+qall")
