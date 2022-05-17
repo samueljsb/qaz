@@ -26,6 +26,9 @@ class BrewFormula(NamedTuple):
     def _installed(self) -> list[str]:
         return shell.capture("brew", "list", "--formula", "-1").split()
 
+    def name(self) -> str:
+        return self.formula
+
     def version(self) -> str:
         versions = shell.capture("brew", "list", "--versions", self.formula).strip()
         if not versions:  # not installed
@@ -50,6 +53,9 @@ class BrewCask(NamedTuple):
 
     def _installed(self) -> list[str]:
         return shell.capture("brew", "list", "--cask", "-1").split()
+
+    def name(self) -> str:
+        return self.cask
 
     def version(self) -> str:
         versions = shell.capture("brew", "list", "--versions", self.cask).strip()

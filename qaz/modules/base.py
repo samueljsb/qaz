@@ -40,14 +40,11 @@ class ModuleBase:
         settings.record_module_upgraded(self.name, upgraded_at)
 
     @property
-    def version(self) -> str:
+    def versions(self) -> dict[str, str]:  # name: version
         """
-        Get the currently installed version.
-
-        Returns an empty string if the module is not installed or the version cannot be
-        determined.
+        Get the currently installed versions of the tools this module installs.
         """
-        return ""
+        return {}
 
     def install(self) -> None:
         self.configure()
@@ -91,11 +88,11 @@ class Module(ModuleBase):
     zshrc_file: str | None = None
 
     @property
-    def version(self) -> str:
+    def versions(self) -> dict[str, str]:
         if self.manager:
-            return self.manager.version()
+            return {self.manager.name(): self.manager.version()}
         else:
-            return ""
+            return {}
 
     def install(self) -> None:
         if self.manager:
@@ -127,9 +124,8 @@ class Bundle(ModuleBase):
     zshrc_files: Sequence[str] = ()
 
     @property
-    def version(self) -> str:
-        # Bundles do not have an obvious candidate for the version.
-        return ""
+    def versions(self) -> dict[str, str]:
+        return {manager.name(): manager.version() for manager in self.managers}
 
     def install(self) -> None:
         for manager in self.managers:

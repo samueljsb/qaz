@@ -104,9 +104,9 @@ class OhMyZSH(Module):
         git.pull(Path.home() / ".oh-my-zsh/custom/plugins/zsh-autosuggestions")
 
     @property
-    def version(self) -> str:
+    def versions(self) -> dict[str, str]:
         zsh_dir = Path.home().resolve() / ".oh-my-zsh"
-        return git.version(zsh_dir)
+        return {"oh-my-zsh": git.version(zsh_dir)}
 
 
 @registry.register

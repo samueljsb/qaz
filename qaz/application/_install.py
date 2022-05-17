@@ -3,11 +3,11 @@ from __future__ import annotations
 from qaz.modules.registry import registry
 
 
-def install_module(name: str) -> str:
+def install_module(name: str) -> dict[str, str]:  # name: version
     """
     Install the given module.
 
-    Returns the version that has been installed.
+    Returns the versions of tools installed by this module.
 
     Raises:
         - KeyError if the module name is not registered.
@@ -19,4 +19,4 @@ def install_module(name: str) -> str:
     if not module.is_installed:
         module.install()
 
-    return module.version
+    return module.versions
