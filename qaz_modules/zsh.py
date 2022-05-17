@@ -87,21 +87,12 @@ class OhMyZSH(Module):
             env={"CHSH": "no", "RUNZSH": "no", "KEEP_ZSHRC": "yes"},
         )
 
-        # Install themes and plugins.
-        git.clone(
-            repo_url="https://github.com/zsh-users/zsh-autosuggestions",
-            repo_path=Path.home() / ".oh-my-zsh/custom/plugins/zsh-autosuggestions",
-        )
-
     def upgrade_action(self) -> None:
         zsh_dir = Path.home().resolve() / ".oh-my-zsh"
         shell.run(
             *("sh", zsh_dir / "tools/upgrade.sh", "--interactive"),
             env={"ZSH": str(zsh_dir)},
         )
-
-        # Upgrade themes and plugins.
-        git.pull(Path.home() / ".oh-my-zsh/custom/plugins/zsh-autosuggestions")
 
     @property
     def versions(self) -> dict[str, str]:
