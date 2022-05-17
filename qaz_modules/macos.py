@@ -2,16 +2,22 @@ from __future__ import annotations
 
 import sys
 
-from qaz.modules.base import Module
+from qaz import managers
+from qaz.modules.base import Bundle
 from qaz.modules.registry import registry
 from qaz.utils import shell
 
 
-class MacOS(Module):
+class MacOS(Bundle):
     name = "macOS"
 
+    managers = (managers.BrewFormula("gnu-sed"),)
+
     # Configuration files
-    zshrc_file = "macos.zsh"
+    zshrc_files = (
+        "macos.zsh",
+        "sed.zsh",
+    )
 
     def install_action(self) -> None:
         shell.run_script("set-defaults.sh")

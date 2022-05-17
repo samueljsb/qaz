@@ -7,7 +7,7 @@ class NotInstalled(Exception):
     pass
 
 
-def upgrade_module(name: str) -> tuple[str, str]:
+def upgrade_module(name: str) -> dict[str, tuple[str, str]]:
     """
     Upgrade the given module.
 
@@ -22,8 +22,14 @@ def upgrade_module(name: str) -> tuple[str, str]:
     if not module.is_installed:
         raise NotInstalled
 
-    from_version = module.version
+    from_versions = module.versions
 
     module.upgrade()
+    to_versions = module.versions
 
-    return from_version, module.version
+    upgrade_versions = {
+        name_: (from_versions.get(name_, ""), to_version)
+        for name_, to_version in to_versions.items()
+    }
+
+    return upgrade_versions

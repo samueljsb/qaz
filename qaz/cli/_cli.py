@@ -54,7 +54,7 @@ def _install(ctx: click.Context, modules: tuple[str]) -> None:
     for name in modules:
         logger.info("Installing %s...", name)
         try:
-            installed_version = application.install_module(name)
+            installed_versions = application.install_module(name)
         except KeyError:
             logger.error("... unknown module name '%s'.", name)
             ctx.exit(1)
@@ -62,10 +62,11 @@ def _install(ctx: click.Context, modules: tuple[str]) -> None:
             logger.exception("... error installing %s.", name)
             ctx.exit(1)
         else:
-            if installed_version:
-                logger.info("... %s installed (%s).", name, installed_version)
-            else:
-                logger.info("... %s installed.", name)
+            for name_, version in installed_versions.items():
+                if version:
+                    logger.info("... %s installed (%s).", name_, version)
+                else:
+                    logger.info("... %s installed.", name_)
 
 
 @cli.command("configure")
@@ -82,7 +83,7 @@ def _upgrade(ctx: click.Context, modules: Iterable[str]) -> None:
     for name in modules:
         logger.info("Upgrading %s...", name)
         try:
-            from_version, to_version = application.upgrade_module(name)
+            upgraded_versions = application.upgrade_module(name)
         except KeyError:
             logger.error("... unknown module name '%s'.", name)
             ctx.exit(1)
@@ -93,14 +94,15 @@ def _upgrade(ctx: click.Context, modules: Iterable[str]) -> None:
             logger.exception("... error upgrading %s.", name)
             ctx.exit(1)
         else:
-            if from_version and to_version and from_version != to_version:
-                logger.info(
-                    "... %s upgraded (%s -> %s).", name, from_version, to_version
-                )
-            elif to_version:
-                logger.info("... %s is up to date (%s).", name, to_version)
-            else:
-                logger.info("... %s is up to date.", name)
+            for name_, (from_version, to_version) in upgraded_versions.items():
+                if from_version and to_version and from_version != to_version:
+                    logger.info(
+                        "... %s upgraded (%s -> %s).", name_, from_version, to_version
+                    )
+                elif to_version:
+                    logger.info("... %s is up to date (%s).", name_, to_version)
+                else:
+                    logger.info("... %s is up to date.", name_)
 
 
 @cli.command("list")

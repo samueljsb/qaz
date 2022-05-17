@@ -2,20 +2,20 @@ from __future__ import annotations
 
 from collections.abc import Iterator
 
-from .base import Module
+from .base import ModuleBase
 
 
 class Registry:
     def __init__(self) -> None:
-        self.modules: dict[str, Module] = {}
+        self.modules: dict[str, ModuleBase] = {}
 
     @property
-    def installed_modules(self) -> Iterator[Module]:
+    def installed_modules(self) -> Iterator[ModuleBase]:
         for module in self.modules.values():
             if module.is_installed:
                 yield module
 
-    def register(self, cls: type[Module]) -> Module:
+    def register(self, cls: type[ModuleBase]) -> ModuleBase:
         assert (
             cls.name not in self.modules
         ), f"Module with name '{cls.name}' is already registered"

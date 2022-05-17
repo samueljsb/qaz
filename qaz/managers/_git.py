@@ -23,5 +23,9 @@ class Git(NamedTuple):
     def upgrade(self) -> None:
         git.pull(self.repo_path, with_stash=self.preserve_local_changes)
 
+    def name(self) -> str:
+        __, name = self.repo_url.rsplit("/", maxsplit=1)
+        return name
+
     def version(self) -> str:
         return git.version(self.repo_path)

@@ -26,6 +26,9 @@ class NPM(NamedTuple):
         data = json.loads(output)
         return [k for k in data.get("dependencies", {})]
 
+    def name(self) -> str:
+        return self.package
+
     def version(self) -> str:
         data = json.loads(shell.capture("npm", "list", "--global", "--json"))
         return data["dependencies"][self.package]["version"]
