@@ -17,10 +17,7 @@ class MacOSZsh(Module):
 
     # Configuration files
     zshrc_file = "_zsh.zsh"  # load early to allow modules to overwrite settings
-    symlinks = {
-        ".zshrc": "~",
-        ".editorconfig": "~",
-    }
+    symlinks = {".zshrc": "~"}
 
     def install_action(self) -> None:
         _set_default_shell()

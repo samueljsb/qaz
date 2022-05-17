@@ -20,7 +20,10 @@ class VSCode(Module):
     name = "VSCode"
 
     # Configuration files
-    symlinks = {"settings.json": SETTINGS_DIR}
+    symlinks = {
+        "settings.json": SETTINGS_DIR,
+        ".editorconfig": "~",
+    }
 
     # Other
     extensions = [
