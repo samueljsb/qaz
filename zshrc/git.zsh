@@ -45,3 +45,13 @@ alias gswc='git switch -c'
 alias gswm='git switch $(_git_main_branch)'
 
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"'
+
+# "Git refresh"
+#   - gbda: delete all local merged branches
+alias grf=': \
+  && git checkout $(_git_main_branch) \
+  && git pull
+  && gbda \
+  && clear \
+  && git branch \
+  && :'
