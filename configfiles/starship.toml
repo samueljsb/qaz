@@ -11,6 +11,10 @@ $jobs$battery$shell\
 $character\
 """
 
+[character]
+success_symbol = '[\$](bold green)'
+error_symbol = '[\$](bold red)'
+
 [git_status]
 ahead = "⇡${count}"
 diverged = "⇡${ahead_count}⇣${behind_count}"
