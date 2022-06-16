@@ -5,6 +5,9 @@
 
 from __future__ import annotations
 
+# Modules I often want to have available
+import datetime  # noqa: F401
+
 # Always have pp available
 from pprint import pprint as pp
 
@@ -31,6 +34,7 @@ else:
 # Print the commands that have been imported as a memory jogger.
 print(">>> from pprint import pprint as pp")
 print(">>> from rich import inspect")
+print(">>> import datetime")
 
 # Define aliases for true, false and null so JSON can be pasted straight in.
 true = True
