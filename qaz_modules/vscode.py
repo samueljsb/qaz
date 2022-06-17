@@ -30,6 +30,7 @@ class VSCode(Module):
         # VS Code
         "aaron-bond.better-comments",
         "alefragnani.Bookmarks",
+        "artdiniz.quitcontrol-vscode",
         "byi8220.indented-block-highlighting",
         "EditorConfig.EditorConfig",
         "formulahendry.auto-close-tag",
