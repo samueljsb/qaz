@@ -18,9 +18,10 @@
     verbose = true
 
 [core]
+    autocrlf = input
     editor = vim
     excludesfile = ~/.gitignore
-    autocrlf = input
+    fsmonitor = true
 
 [diff]
     relative = true

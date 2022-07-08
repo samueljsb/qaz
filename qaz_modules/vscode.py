@@ -21,6 +21,7 @@ class VSCode(Module):
 
     # Configuration files
     symlinks = {
+        "keybindings.json": SETTINGS_DIR,
         "settings.json": SETTINGS_DIR,
         ".editorconfig": "~",
     }
@@ -41,7 +42,7 @@ class VSCode(Module):
         "swyphcosmo.spellchecker",
         # Git
         "codezombiech.gitignore",
-        "knisterpeter.vscode-github",
+        "fabiospampinato.vscode-open-in-github",
         "sidneys1.gitconfig",
         "waderyan.gitblame",
         # Python

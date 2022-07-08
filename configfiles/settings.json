@@ -58,9 +58,6 @@
   },
   "files.participants.timeout": 0,
   "git.enableStatusBarSync": false,
-  "github.gitAuthentication": false,
-  "github.statusbar.color": false,
-  "github.statusbar.enabled": false,
   "html.format.enable": false,
   "material-icon-theme.files.associations": {
     "*.sqlite3": "database",
@@ -79,6 +76,10 @@
   "material-icon-theme.languages.associations": {
     "dockerfile": "docker"
   },
+  "openInGitHub.remote.branch": "HEAD",
+  "openInGitHub.useLocalBranch": false,
+  "openInGitHub.useLocalLine": true,
+  "openInGitHub.useLocalRange": true,
   "python.formatting.provider": "black",
   "python.languageServer": "Pylance",
   "python.linting.enabled": true,

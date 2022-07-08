@@ -1,46 +1,54 @@
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
+-   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.3.0
     hooks:
-      - id: end-of-file-fixer
-      - id: mixed-line-ending
-      - id: pretty-format-json
+    -   id: end-of-file-fixer
+    -   id: mixed-line-ending
+    -   id: pretty-format-json
         args: [--autofix]
-      - id: trailing-whitespace
-      - id: check-case-conflict
-      - id: check-merge-conflict
-      - id: check-executables-have-shebangs
-      - id: check-json
-      - id: check-shebang-scripts-are-executable
-      - id: check-yaml
-  - repo: https://github.com/PyCQA/isort
+        exclude: 'configfiles/keybindings\.json'
+    -   id: trailing-whitespace
+    -   id: check-case-conflict
+    -   id: check-merge-conflict
+    -   id: check-executables-have-shebangs
+    -   id: check-json
+        exclude: 'configfiles/keybindings\.json'
+    -   id: check-shebang-scripts-are-executable
+    -   id: check-yaml
+-   repo: https://gitlab.com/bmares/check-json5
+    rev: v1.0.0
+    hooks:
+    -   id: check-json5
+-   repo: https://github.com/PyCQA/isort
     rev: "5.10.1"
     hooks:
-      - id: isort
+    -   id: isort
         args: ['--settings-path', 'setup.cfg', "--add-import", "__future__.annotations"]
-  - repo: https://github.com/psf/black
-    rev: 22.6.0
+-   repo: https://github.com/psf/black
+    rev: "22.6.0"
     hooks:
-      - id: black
-  - repo: https://github.com/PyCQA/flake8
+    -   id: black
+-   repo: https://github.com/PyCQA/flake8
     rev: "4.0.1"
     hooks:
-      - id: flake8
+    -   id: flake8
         additional_dependencies: [flake8-bugbear]
-  - repo: https://github.com/pre-commit/pygrep-hooks
+        # Need to empty the ignore list so these are picked up. Will be fixed in next release of flake8.
+        args: ['--ignore=', '--extend-select', 'B901,B902,B903,B904']
+-   repo: https://github.com/pre-commit/pygrep-hooks
     rev: v1.9.0
     hooks:
-      - id: python-check-blanket-noqa
-      - id: python-check-blanket-type-ignore
-      - id: python-check-mock-methods
-  - repo: https://github.com/asottile/yesqa
+    -   id: python-check-blanket-noqa
+    -   id: python-check-blanket-type-ignore
+    -   id: python-check-mock-methods
+-   repo: https://github.com/asottile/yesqa
     rev: v1.3.0
     hooks:
-      - id: yesqa
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v0.961"
+    -   id: yesqa
+-   repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.961
     hooks:
-      - id: mypy
+    -   id: mypy
         exclude: |
           (?x)^(
             configfiles/.*|
