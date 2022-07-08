@@ -41,7 +41,7 @@ class VSCode(Module):
         "swyphcosmo.spellchecker",
         # Git
         "codezombiech.gitignore",
-        "knisterpeter.vscode-github",
+        "fabiospampinato.vscode-open-in-github",
         "sidneys1.gitconfig",
         "waderyan.gitblame",
         # Python
