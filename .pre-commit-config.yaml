@@ -15,6 +15,10 @@ repos:
         exclude: 'configfiles/keybindings\.json'
     -   id: check-shebang-scripts-are-executable
     -   id: check-yaml
+-   repo: https://gitlab.com/bmares/check-json5
+    rev: v1.0.0
+    hooks:
+    -   id: check-json5
 -   repo: https://github.com/PyCQA/isort
     rev: "5.10.1"
     hooks:
