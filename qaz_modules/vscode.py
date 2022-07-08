@@ -21,6 +21,7 @@ class VSCode(Module):
 
     # Configuration files
     symlinks = {
+        "keybindings.json": SETTINGS_DIR,
         "settings.json": SETTINGS_DIR,
         ".editorconfig": "~",
     }

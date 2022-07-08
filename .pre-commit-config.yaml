@@ -6,11 +6,13 @@ repos:
       - id: mixed-line-ending
       - id: pretty-format-json
         args: [--autofix]
+        exclude: 'configfiles/keybindings\.json'
       - id: trailing-whitespace
       - id: check-case-conflict
       - id: check-merge-conflict
       - id: check-executables-have-shebangs
       - id: check-json
+        exclude: 'configfiles/keybindings\.json'
       - id: check-shebang-scripts-are-executable
       - id: check-yaml
   - repo: https://github.com/PyCQA/isort
