@@ -15,7 +15,7 @@ class Registry:
             if module.is_installed:
                 yield module
 
-    def register(self, cls: type[ModuleBase]) -> ModuleBase:
+    def register(self, cls: type[ModuleBase]) -> type[ModuleBase]:
         assert (
             cls.name not in self.modules
         ), f"Module with name '{cls.name}' is already registered"
@@ -23,7 +23,7 @@ class Registry:
         module = cls()
         self.modules[cls.name.casefold()] = module
 
-        return module
+        return cls
 
     def populate(self) -> None:
         """Populate the registry."""
