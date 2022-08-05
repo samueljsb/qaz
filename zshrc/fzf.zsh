@@ -1,5 +1,5 @@
 function gfu(){
-  commit_sha=$(git log --pretty=format:"%h %s" --no-merges $(_git_main_branch).. | fzf | cut -c -7)
+  commit_sha=$(git log --pretty=format:"%h %s" --no-merges origin/HEAD.. | fzf | cut -c -7)
 
   git commit --fixup $commit_sha $@
 }
