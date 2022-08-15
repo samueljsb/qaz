@@ -58,6 +58,7 @@
   },
   "files.participants.timeout": 0,
   "git.enableStatusBarSync": false,
+  "git.mergeEditor": false,
   "html.format.enable": false,
   "material-icon-theme.files.associations": {
     "*.sqlite3": "database",
