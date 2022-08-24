@@ -8,6 +8,10 @@ _git_main_branch () {
   || return
 }
 
+_git_main_branch_origin () {
+    git rev-parse --abbrev-ref origin/HEAD | cut -d/ -f2-
+}
+
 
 alias gpp='git push --set-upstream origin $(git branch --show-current)'
 alias glrbom='git pull --rebase origin master'
@@ -50,8 +54,8 @@ alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commi
 #   - gbda: delete all local merged branches
 alias grf=': \
   && git checkout $(_git_main_branch) \
-  && git pull \
+  && git pull origin $(_git_main_branch_origin)
   && gbda \
   && clear \
-  && git branch \
+  && git branch --color=always -vv | cut -c -$COLUMNS \
   && :'
