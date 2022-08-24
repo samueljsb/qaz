@@ -57,5 +57,5 @@ alias grf=': \
   && git pull origin $(_git_main_branch_origin)
   && gbda \
   && clear \
-  && git branch \
+  && git branch --color=always -vv | cut -c -$COLUMNS \
   && :'
