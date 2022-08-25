@@ -54,7 +54,7 @@ alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commi
 #   - gbda: delete all local merged branches
 alias grf=': \
   && git checkout $(_git_main_branch) \
-  && git pull origin $(_git_main_branch_origin)
+  && git pull origin $(_git_main_branch_origin) \
   && gbda \
   && clear \
   && git branch --color=always -vv | cut -c -$COLUMNS \
