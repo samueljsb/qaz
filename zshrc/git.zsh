@@ -50,6 +50,8 @@ alias gswm='git switch $(_git_main_branch)'
 
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"'
 
+alias git-branches="git branch --format='%(color:green)%(HEAD)%(color:reset) %(if)%(upstream)%(then)%(else)%(color:dim)%(end)%(refname:short)%(color:reset) %(color:blue)%(upstream:track)%(color:reset)'"
+
 # "Git refresh"
 #   - gbda: delete all local merged branches
 alias grf=': \
@@ -57,5 +59,5 @@ alias grf=': \
   && git pull origin $(_git_main_branch_origin) \
   && gbda \
   && clear \
-  && git branch --color=always -vv | cut -c -$COLUMNS \
+  && git-branches \
   && :'
