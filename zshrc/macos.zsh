@@ -3,7 +3,4 @@ alias showfiles="defaults write com.apple.finder AppleShowAllFiles -bool true &&
 alias hidefiles="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
 # Prefer GNU tools over the MacOS BSD ones.
-export GNUBINS="$(find /usr/local/opt -type d -follow -name gnubin -print)";
-for bindir in ${GNUBINS[@]}; do
-  export PATH=$bindir:$PATH;
-done;
+export PATH="/usr/local/opt/findutils/libexec/gnubin:/usr/local/opt/gawk/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/opt/grep/libexec/gnubin:$PATH"
