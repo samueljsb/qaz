@@ -18,6 +18,9 @@ class MacOS(Bundle):
         "macos.zsh",
         "sed.zsh",
     )
+    symlinks = {
+        "RectangleConfig.json": "~/Library/Application Support/Rectangle/",
+    }
 
     def install_action(self) -> None:
         shell.run_script("set-defaults.sh")
