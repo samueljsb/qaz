@@ -11,13 +11,15 @@ from qaz.utils import shell
 class MacOS(Bundle):
     name = "macOS"
 
-    managers = (managers.BrewFormula("gnu-sed"),)
+    managers = (
+        managers.BrewFormula("findutils"),  # find, locate, updatedb, xargs
+        managers.BrewFormula("gawk"),  # awk
+        managers.BrewFormula("gnu-sed"),  # sed
+        managers.BrewFormula("grep"),  # egrep, fgrep, grep
+    )
 
     # Configuration files
-    zshrc_files = (
-        "macos.zsh",
-        "sed.zsh",
-    )
+    zshrc_files = ("macos.zsh",)
     symlinks = {
         "RectangleConfig.json": "~/Library/Application Support/Rectangle/",
     }
