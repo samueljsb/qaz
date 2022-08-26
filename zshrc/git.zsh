@@ -26,7 +26,7 @@ function co-author(){
 # Aliases from OMZ
 alias ga='git add'
 alias gb='git branch'
-alias gbda='git branch --no-color --merged | command grep -vE "^([+*]|\s*$(_git_main_branch)\s*$)" | command xargs git branch -d 2>/dev/null'
+alias gbda='git branch --no-color --merged | command grep -vE "^([+*]|\s*$(_git_main_branch)\s*$)" | command xargs -r git branch -d 2>/dev/null'
 alias gc='git commit'
 alias gc!='git commit --amend'
 alias gcn!='git commit --no-edit --amend'
