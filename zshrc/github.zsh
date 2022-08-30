@@ -4,7 +4,7 @@ alias clg='clear && gh pr status && git branch'
 function newpr() {
   currentBranch=$(git branch --show-current)
 
-  git push --set-upstream origin $currentBranch
+  git push --set-upstream origin $currentBranch || return
   gh pr create --fill --web --head $currentBranch
 }
 
