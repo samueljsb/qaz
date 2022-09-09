@@ -16,7 +16,8 @@ def pull(repo_path: Path | str, with_stash: bool = False) -> None:
     shell.run("git", "-C", repo_path, "pull")
 
     if with_stash and shell.capture("git", "-C", repo_path, "stash", "list"):
-        shell.run("git", "-C", repo_path, "stash", "pop")
+        shell.run("git", "-C", repo_path, "stash", "pop", "--quiet")
+        shell.run("git", "-C", repo_path, "diff")
 
 
 def version(repo_path: Path | str) -> str:
