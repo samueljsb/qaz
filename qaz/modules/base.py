@@ -48,6 +48,7 @@ class ModuleBase(abc.ABC):
         return {}
 
     def install(self) -> None:
+        self.pre_install()
         self._install()
         self.configure()
         self.post_install()
@@ -56,6 +57,14 @@ class ModuleBase(abc.ABC):
     @abc.abstractmethod
     def _install(self) -> None:
         ...
+
+    def pre_install(self) -> None:
+        """
+        Run actions before this module has been installed.
+
+        Overwrite this method to provide custom install behaviour.
+        """
+        pass
 
     def post_install(self) -> None:
         """
@@ -66,6 +75,7 @@ class ModuleBase(abc.ABC):
         pass
 
     def upgrade(self) -> None:
+        self.pre_upgrade()
         self._upgrade()
         self.configure()
         self.post_upgrade()
@@ -74,6 +84,14 @@ class ModuleBase(abc.ABC):
     @abc.abstractmethod
     def _upgrade(self) -> None:
         ...
+
+    def pre_upgrade(self) -> None:
+        """
+        Run actions aftbeforeer this module has been upgraded.
+
+        Overwrite this method to provide custom upgrade behaviour.
+        """
+        pass
 
     def post_upgrade(self) -> None:
         """
