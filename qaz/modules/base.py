@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import abc
 import datetime
 from collections.abc import Mapping
 from pathlib import Path
@@ -11,7 +12,7 @@ from qaz.managers import Manager
 from qaz.utils import files
 
 
-class ModuleBase:
+class ModuleBase(abc.ABC):
     """
     A module that can be installed by QAZ to manage a program or tool.
     """
@@ -47,14 +48,14 @@ class ModuleBase:
         return {}
 
     def install(self) -> None:
+        self._install()
         self.configure()
         self.install_action()
         self.is_installed = True
 
-    def upgrade(self) -> None:
-        self.configure()
-        self.upgrade_action()
-        self.last_upgraded_at = datetime.datetime.now()
+    @abc.abstractmethod
+    def _install(self) -> None:
+        ...
 
     def install_action(self) -> None:
         """
@@ -63,6 +64,16 @@ class ModuleBase:
         Overwrite this method to provide custom install behaviour.
         """
         pass
+
+    def upgrade(self) -> None:
+        self._upgrade()
+        self.configure()
+        self.upgrade_action()
+        self.last_upgraded_at = datetime.datetime.now()
+
+    @abc.abstractmethod
+    def _upgrade(self) -> None:
+        ...
 
     def upgrade_action(self) -> None:
         """
@@ -94,15 +105,13 @@ class Module(ModuleBase):
         else:
             return {}
 
-    def install(self) -> None:
+    def _install(self) -> None:
         if self.manager:
             self.manager.install()
-        super().install()
 
-    def upgrade(self) -> None:
+    def _upgrade(self) -> None:
         if self.manager:
             self.manager.upgrade()
-        super().upgrade()
 
     def configure(self) -> None:
         """Configure this module by linking config files and running config scripts."""
@@ -127,15 +136,13 @@ class Bundle(ModuleBase):
     def versions(self) -> dict[str, str]:
         return {manager.name(): manager.version() for manager in self.managers}
 
-    def install(self) -> None:
+    def _install(self) -> None:
         for manager in self.managers:
             manager.install()
-        super().install()
 
-    def upgrade(self) -> None:
+    def _upgrade(self) -> None:
         for manager in self.managers:
             manager.upgrade()
-        super().upgrade()
 
     def configure(self) -> None:
         """Configure this module by linking config files and running config scripts."""
