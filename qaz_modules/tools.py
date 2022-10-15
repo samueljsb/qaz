@@ -53,7 +53,7 @@ class McFly(Module):
 @registry.register
 class PGCLI(Module):
     name = "pgcli"
-    manager = managers.BrewFormula("pgcli")
+    manager = managers.Pip("pgcli")
 
 
 @registry.register
