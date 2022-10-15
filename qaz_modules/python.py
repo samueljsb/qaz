@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import os.path
+
 from qaz import managers
 from qaz.modules.base import Bundle
 from qaz.modules.base import Module
@@ -28,13 +30,17 @@ class Python(Bundle):
     }
 
     def post_install(self) -> None:
-        shell.run("pre-commit", "init-templatedir", "~/.git-template")
+        shell.run(
+            "pre-commit", "init-templatedir", os.path.expanduser("~/.git-template")
+        )
 
     def pre_upgrade(self) -> None:
         managers.Pip("pip", executables=[]).upgrade()
 
-    def update_action(self) -> None:
-        shell.run("pre-commit", "init-templatedir", "~/.git-template")
+    def post_upgrade(self) -> None:
+        shell.run(
+            "pre-commit", "init-templatedir", os.path.expanduser("~/.git-template")
+        )
 
 
 @registry.register
