@@ -22,8 +22,8 @@ class Vim(Module):
         ".editorconfig": "~",
     }
 
-    def install_action(self) -> None:
+    def post_install(self) -> None:
         shell.run("vim", "+PluginInstall", "+qall")
 
-    def upgrade_action(self) -> None:
+    def post_upgrade(self) -> None:
         shell.run("vim", "+PluginInstall", "+qall")

@@ -19,10 +19,10 @@ class MacOSZsh(Module):
     zshrc_file = "_zsh.zsh"  # load early to allow modules to overwrite settings
     symlinks = {".zshrc": "~"}
 
-    def install_action(self) -> None:
+    def post_install(self) -> None:
         _set_default_shell()
 
-    def upgrade_action(self) -> None:
+    def post_upgrade(self) -> None:
         _set_default_shell()
 
 
@@ -36,12 +36,12 @@ class LinuxZsh(Module):
         ".editorconfig": "~",
     }
 
-    def install_action(self) -> None:
+    def post_install(self) -> None:
         shell.run("sudo", "apt", "update")
         shell.run("sudo", "apt", "install", "--yes", "zsh")
         _set_default_shell()
 
-    def upgrade_action(self) -> None:
+    def post_upgrade(self) -> None:
         shell.run("sudo", "apt", "update")
         shell.run("sudo", "apt", "upgrade", "--yes", "zsh")
         _set_default_shell()
@@ -73,7 +73,7 @@ class OhMyZSH(Module):
     # Configuration files
     zshrc_file = "_oh-my-zsh.zsh"  # load early to allow modules to overwrite settings
 
-    def install_action(self) -> None:
+    def post_install(self) -> None:
         install_script = shell.capture(
             "curl",
             "-fsSL",
@@ -84,7 +84,7 @@ class OhMyZSH(Module):
             env={"CHSH": "no", "RUNZSH": "no", "KEEP_ZSHRC": "yes"},
         )
 
-    def upgrade_action(self) -> None:
+    def post_upgrade(self) -> None:
         zsh_dir = Path.home().resolve() / ".oh-my-zsh"
         shell.run(
             *("sh", zsh_dir / "tools/upgrade.sh", "--interactive"),

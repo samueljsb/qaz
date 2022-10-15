@@ -54,8 +54,8 @@ class VSCode(Module):
         "ms-azuretools.vscode-docker",
     ]
 
-    def install_action(self) -> None:
+    def post_install(self) -> None:
         vs_code.install_extensions(self.extensions)
 
-    def upgrade_action(self) -> None:
+    def post_upgrade(self) -> None:
         vs_code.install_extensions(self.extensions)

@@ -24,10 +24,10 @@ class MacOS(Bundle):
         "RectangleConfig.json": "~/Library/Application Support/Rectangle/",
     }
 
-    def install_action(self) -> None:
+    def post_install(self) -> None:
         shell.run_script("set-defaults.sh")
 
-    def upgrade_action(self) -> None:
+    def post_upgrade(self) -> None:
         shell.run_script("set-defaults.sh")
 
 

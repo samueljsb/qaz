@@ -35,7 +35,7 @@ class GitHubCLI(Module):
     zshrc_file = "github.zsh"
     symlinks = {"github_config.yml": "~/.config/gh/config.yml"}
 
-    def install_action(self) -> None:
+    def post_install(self) -> None:
         shell.run("gh", "auth", "login", "--web")
 
 
