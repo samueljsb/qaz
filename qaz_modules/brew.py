@@ -9,7 +9,7 @@ from qaz.utils import shell
 class Homebrew(Module):
     name = "Homebrew"
 
-    def install_action(self) -> None:
+    def post_install(self) -> None:
         shell.run(
             "/bin/bash",
             "-c",
@@ -18,7 +18,7 @@ class Homebrew(Module):
         )
         shell.run("brew", "analytics", "off")
 
-    def upgrade_action(self) -> None:
+    def post_upgrade(self) -> None:
         shell.run("brew", "update")
         shell.run("brew", "analytics", "off")
 

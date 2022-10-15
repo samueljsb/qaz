@@ -20,10 +20,10 @@ class NerdFonts(Module):
         clone_options="--depth=1",
     )
 
-    def install_action(self) -> None:
+    def post_install(self) -> None:
         for font_name in FONTS:
             shell.run(self.manager.repo_path / "install.sh", font_name)
 
-    def upgrade_action(self) -> None:
+    def post_upgrade(self) -> None:
         for font_name in FONTS:
             shell.run(self.manager.repo_path / "install.sh", font_name)

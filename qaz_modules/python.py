@@ -27,7 +27,7 @@ class Python(Bundle):
         ".pdbrc.py": "~",
     }
 
-    def install_action(self) -> None:
+    def post_install(self) -> None:
         shell.run("pre-commit", "init-templatedir", "~/.git-template")
 
     def update_action(self) -> None:

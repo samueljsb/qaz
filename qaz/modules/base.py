@@ -50,16 +50,16 @@ class ModuleBase(abc.ABC):
     def install(self) -> None:
         self._install()
         self.configure()
-        self.install_action()
+        self.post_install()
         self.is_installed = True
 
     @abc.abstractmethod
     def _install(self) -> None:
         ...
 
-    def install_action(self) -> None:
+    def post_install(self) -> None:
         """
-        Run actions to install this module.
+        Run actions after this module has been installed.
 
         Overwrite this method to provide custom install behaviour.
         """
@@ -68,16 +68,16 @@ class ModuleBase(abc.ABC):
     def upgrade(self) -> None:
         self._upgrade()
         self.configure()
-        self.upgrade_action()
+        self.post_upgrade()
         self.last_upgraded_at = datetime.datetime.now()
 
     @abc.abstractmethod
     def _upgrade(self) -> None:
         ...
 
-    def upgrade_action(self) -> None:
+    def post_upgrade(self) -> None:
         """
-        Run actions to upgrade this module.
+        Run actions after this module has been upgraded.
 
         Overwrite this method to provide custom upgrade behaviour.
         """
