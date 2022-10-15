@@ -12,8 +12,8 @@ class Python(Bundle):
     name = "Python"
 
     managers = (
-        managers.BrewFormula("pre-commit"),
-        managers.BrewFormula("virtualenv"),
+        managers.Pip("pre-commit"),
+        managers.Pip("virtualenv"),
     )
 
     # Configuration files
