@@ -30,6 +30,9 @@ class Python(Bundle):
     def post_install(self) -> None:
         shell.run("pre-commit", "init-templatedir", "~/.git-template")
 
+    def pre_upgrade(self) -> None:
+        managers.Pip("pip", executables=[]).upgrade()
+
     def update_action(self) -> None:
         shell.run("pre-commit", "init-templatedir", "~/.git-template")
 
