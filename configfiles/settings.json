@@ -60,6 +60,8 @@
   "git.enableStatusBarSync": false,
   "git.mergeEditor": false,
   "html.format.enable": false,
+  "intellicodeApiExamples.python.enabled": false,
+  "intellicodeApiExamples.typescript.enabled": false,
   "material-icon-theme.files.associations": {
     "*.sqlite3": "database",
     ".flake8": "python-misc",
