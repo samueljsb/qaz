@@ -16,6 +16,9 @@ else
   alias addkey='ssh-add --apple-use-keychain ~/.ssh/id_rsa'
 fi
 
+# Add user bin directory to PATH
+export PATH="$HOME/bin:$PATH"
+
 # Set editor
 if [ -x "$(command -v code)" ]; then
   export EDITOR=code
