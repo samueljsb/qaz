@@ -58,7 +58,7 @@ class ModuleBase(abc.ABC):
     def _install(self) -> None:
         ...
 
-    def pre_install(self) -> None:
+    def pre_install(self) -> None:  # default no-op  # noqa: B027
         """
         Run actions before this module has been installed.
 
@@ -66,7 +66,7 @@ class ModuleBase(abc.ABC):
         """
         pass
 
-    def post_install(self) -> None:
+    def post_install(self) -> None:  # default no-op  # noqa: B027
         """
         Run actions after this module has been installed.
 
@@ -85,7 +85,7 @@ class ModuleBase(abc.ABC):
     def _upgrade(self) -> None:
         ...
 
-    def pre_upgrade(self) -> None:
+    def pre_upgrade(self) -> None:  # default no-op  # noqa: B027
         """
         Run actions aftbeforeer this module has been upgraded.
 
@@ -93,7 +93,7 @@ class ModuleBase(abc.ABC):
         """
         pass
 
-    def post_upgrade(self) -> None:
+    def post_upgrade(self) -> None:  # default no-op  # noqa: B027
         """
         Run actions after this module has been upgraded.
 
