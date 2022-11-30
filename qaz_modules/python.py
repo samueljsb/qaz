@@ -14,6 +14,7 @@ class Python(Bundle):
     name = "Python"
 
     managers = (
+        managers.Pip("aactivator"),
         managers.Pip("pre-commit"),
         managers.Pip("tox"),
         managers.Pip("virtualenv"),
@@ -21,6 +22,7 @@ class Python(Bundle):
 
     # Configuration files
     zshrc_files = (
+        "aactivator.zsh",
         "python.zsh",
         "virtualenv.zsh",
     )
