@@ -73,6 +73,8 @@ class Pip:
         return self.package
 
     def version(self) -> str:
+        _ensure_venv()
+
         versions = shell.capture(VENV_PATH / "bin" / "python", "-m", "pip", "freeze")
         for line in versions.splitlines():
             package, __, version = line.partition("==")
