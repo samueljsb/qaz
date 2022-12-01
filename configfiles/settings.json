@@ -90,6 +90,7 @@
   "python.linting.flake8Enabled": true,
   "python.linting.mypyEnabled": true,
   "python.linting.pylintEnabled": false,
+  "restructuredtext.editor.listEditing.list.indentationSize": "inherit",
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.fontFamily": "Hack Nerd Font",
   "workbench.iconTheme": "material-icon-theme"
