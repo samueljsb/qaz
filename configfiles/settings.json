@@ -65,6 +65,7 @@
   "material-icon-theme.files.associations": {
     "*.sqlite3": "database",
     ".flake8": "python-misc",
+    ".git-blame-ignore-revs": "git",
     ".ruby-version": "ruby",
     "TODO": "contributing",
     "pyproject.toml": "python-misc",
