@@ -4,17 +4,7 @@ alias reload!='. ~/.zshrc'
 # ls
 alias ll='ls -lh'
 alias la='ls -lAh'
-
-# Pipe my public key to my clipboard
-alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
-# Add my public key to keychain
-# We need to use a different command on older version of macOS
-macOSVersion=$(sw_vers -productVersion)
-if [[ "$macOSVersion" < 12.*.* ]]; then
-  alias addkey='ssh-add -K ~/.ssh/id_rsa'
-else
-  alias addkey='ssh-add --apple-use-keychain ~/.ssh/id_rsa'
-fi
+export LSCOLORS=gxfxhxdxcxegedabagacad
 
 # Add user bin directory to PATH
 export PATH="$HOME/bin:$PATH"
@@ -34,10 +24,6 @@ fi
 # -X is needed to fix a bug with the --quit-if-one-screen feature in old versions of less.
 # Unfortunately, it also breaks mouse-wheel support in less.
 export LESS='-SRFX --tabs=4'
-
-# Prompt
-RPROMPT="%B%*%b"
-export LSCOLORS=gxfxhxdxcxegedabagacad
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000

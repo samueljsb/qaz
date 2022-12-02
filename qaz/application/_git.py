@@ -47,9 +47,9 @@ def _generate_or_retrieve_ssh_key(email: str) -> str:
     ssh_dir = Path.home() / ".ssh"
     id_rsa = ssh_dir / "id_rsa"
     id_rsa_pub = ssh_dir / "id_rsa.pub"
+
     if not id_rsa.exists():
         shell.run("ssh-keygen", "-t", "rsa", "-b", "4096", "-C", email, "-f", id_rsa)
-        shell.run("ssh-add", "-K", id_rsa)
-    with id_rsa_pub.open() as fd:
-        public_key = fd.read()
-    return public_key
+        shell.run("ssh-add", "--apple-use-keychain")
+
+    return id_rsa_pub.read_text()
