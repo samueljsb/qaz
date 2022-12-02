@@ -5,17 +5,6 @@ alias reload!='. ~/.zshrc'
 alias ll='ls -lh'
 alias la='ls -lAh'
 
-# Pipe my public key to my clipboard
-alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
-# Add my public key to keychain
-# We need to use a different command on older version of macOS
-macOSVersion=$(sw_vers -productVersion)
-if [[ "$macOSVersion" < 12.*.* ]]; then
-  alias addkey='ssh-add -K ~/.ssh/id_rsa'
-else
-  alias addkey='ssh-add --apple-use-keychain ~/.ssh/id_rsa'
-fi
-
 # Add user bin directory to PATH
 export PATH="$HOME/bin:$PATH"
 
