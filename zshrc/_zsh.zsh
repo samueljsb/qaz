@@ -4,6 +4,7 @@ alias reload!='. ~/.zshrc'
 # ls
 alias ll='ls -lh'
 alias la='ls -lAh'
+export LSCOLORS=gxfxhxdxcxegedabagacad
 
 # Add user bin directory to PATH
 export PATH="$HOME/bin:$PATH"
@@ -23,10 +24,6 @@ fi
 # -X is needed to fix a bug with the --quit-if-one-screen feature in old versions of less.
 # Unfortunately, it also breaks mouse-wheel support in less.
 export LESS='-SRFX --tabs=4'
-
-# Prompt
-RPROMPT="%B%*%b"
-export LSCOLORS=gxfxhxdxcxegedabagacad
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
