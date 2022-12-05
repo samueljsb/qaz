@@ -26,3 +26,6 @@ colorscheme codedark
 
 " Wrap gitcommit file types at the appropriate length
 filetype indent plugin on
+
+" spelling
+:set spell
