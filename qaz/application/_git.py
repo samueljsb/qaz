@@ -16,16 +16,18 @@ def configure_git(*, author_name: str, author_email: str) -> str:
     """
     _install.install_module("git")
 
+    # Generate SSH key.
+    public_key_path = _generate_or_retrieve_ssh_key(author_email)
+
     # Create local git config.
-    config_file_content = _build_config_file(author_name, author_email)
+    config_file_content = _build_config_file(author_name, author_email, public_key_path)
     with Path.home().joinpath(".gitconfig.local").open("w+") as file:
         file.write(config_file_content)
 
-    # Generate SSH key.
-    return _generate_or_retrieve_ssh_key(author_email)
+    return public_key_path.read_text()
 
 
-def _build_config_file(author_name: str, author_email: str) -> str:
+def _build_config_file(author_name: str, author_email: str, ssh_key_path: Path) -> str:
     if platform == "darwin":
         git_credential = "osxkeychain"
     elif platform == "linux":
@@ -34,16 +36,23 @@ def _build_config_file(author_name: str, author_email: str) -> str:
         git_credential = ""
 
     return f"""\
-[user]
-    name = {author_name}
-    email = {author_email}
+[commit]
+    gpgsign = true
 
 [credential]
     helper = {git_credential}
+
+[gpg]
+    format = ssh
+
+[user]
+    name = {author_name}
+    email = {author_email}
+    signingkey = {ssh_key_path}
 """
 
 
-def _generate_or_retrieve_ssh_key(email: str) -> str:
+def _generate_or_retrieve_ssh_key(email: str) -> Path:
     ssh_dir = Path.home() / ".ssh"
     id_rsa = ssh_dir / "id_rsa"
     id_rsa_pub = ssh_dir / "id_rsa.pub"
@@ -52,4 +61,4 @@ def _generate_or_retrieve_ssh_key(email: str) -> str:
         shell.run("ssh-keygen", "-t", "rsa", "-b", "4096", "-C", email, "-f", id_rsa)
         shell.run("ssh-add", "--apple-use-keychain")
 
-    return id_rsa_pub.read_text()
+    return id_rsa_pub
