@@ -29,3 +29,7 @@ filetype indent plugin on
 
 " spelling
 :set spell
+:iabbrev becasue because
+:iabbrev odcument document
+:iabbrev odcuments documents
+:iabbrev trasnaction transaction
