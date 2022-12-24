@@ -13,6 +13,7 @@ class Git(Bundle):
 
     managers = (
         managers.BrewFormula("git"),
+        managers.BrewFormula("git-absorb"),
         managers.BrewFormula("diff-so-fancy"),
     )
 

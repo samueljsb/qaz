@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -63,7 +64,8 @@ def _set_default_shell() -> None:
             fd.write(zsh_path + "\n")
 
     # Make zsh the default shell.
-    shell.run("chsh", "-s", zsh_path)
+    if os.getenv("SHELL") != zsh_path:
+        shell.run("chsh", "-s", zsh_path)
 
 
 @registry.register
