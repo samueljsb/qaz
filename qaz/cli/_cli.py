@@ -34,10 +34,7 @@ def _setup(root_dir: str) -> None:
 @click.option("--author-email", prompt="Your git author email")
 def _git(author_name: str, author_email: str) -> None:
     """Configure git."""
-    public_key = application.configure_git(
-        author_name=author_name, author_email=author_email
-    )
-    logger.info(f"Add your public key to GitHub:\n    {public_key}")
+    application.configure_git(author_name=author_name, author_email=author_email)
 
 
 @cli.command("update")
