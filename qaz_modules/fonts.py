@@ -17,13 +17,21 @@ class NerdFonts(Module):
     manager = managers.Git(
         "https://github.com/ryanoasis/nerd-fonts",
         Path().home() / ".nerd-fonts",
-        clone_options=("--depth=1",),
+        clone_options=("--filter=blob:none", "--sparse"),
     )
+
+    def _install_font(self, font_name: str) -> None:
+        # fmt: off
+        shell.run(
+            "git", "-C", self.manager.repo_path, "sparse-checkout", "add", f"patched-fonts/{font_name}",  # noqa: E501
+        )
+        # fmt: on
+        shell.run(self.manager.repo_path / "install.sh", font_name)
 
     def post_install(self) -> None:
         for font_name in FONTS:
-            shell.run(self.manager.repo_path / "install.sh", font_name)
+            self._install_font(font_name)
 
     def post_upgrade(self) -> None:
         for font_name in FONTS:
-            shell.run(self.manager.repo_path / "install.sh", font_name)
+            self._install_font(font_name)
