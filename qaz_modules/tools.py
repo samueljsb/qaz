@@ -63,3 +63,12 @@ class TrashCLI(Module):
 
     # Configuration files
     zshrc_file = "trash-cli.zsh"
+
+
+@registry.register
+class OnePassword(Module):
+    name = "1Password"
+
+    symlinks = {
+        "ssh_config": "~/.ssh/config",
+    }
