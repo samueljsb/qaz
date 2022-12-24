@@ -27,7 +27,7 @@ class MacOS(Bundle):
     }
 
     def _configure_1password_ssh_agent(self) -> None:
-        Path("~", ".1password").expanduser().mkdir()
+        Path("~", ".1password").expanduser().mkdir(exist_ok=True)
         files.create_symlink(
             Path(
                 "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
