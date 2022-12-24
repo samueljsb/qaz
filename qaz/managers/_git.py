@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import NamedTuple
+from typing import Sequence
 
 from qaz.utils import git
 
@@ -10,7 +11,7 @@ class Git(NamedTuple):
     repo_url: str
     repo_path: Path
 
-    clone_options: str = ""
+    clone_options: Sequence[str] = ()
     preserve_local_changes: bool = False
 
     def install(self) -> None:

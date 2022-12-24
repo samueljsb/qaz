@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Sequence
 
 from . import shell
 
 
-def clone(*, repo_url: str, repo_path: Path | str, options: str = "") -> None:
-    shell.run("git", "clone", options, repo_url, repo_path)
+def clone(*, repo_url: str, repo_path: Path | str, options: Sequence[str] = ()) -> None:
+    shell.run("git", "clone", *options, repo_url, repo_path)
 
 
 def pull(repo_path: Path | str, with_stash: bool = False) -> None:

@@ -17,7 +17,7 @@ class NerdFonts(Module):
     manager = managers.Git(
         "https://github.com/ryanoasis/nerd-fonts",
         Path().home() / ".nerd-fonts",
-        clone_options="--depth=1",
+        clone_options=("--depth=1",),
     )
 
     def post_install(self) -> None:
