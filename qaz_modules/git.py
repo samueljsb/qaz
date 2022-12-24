@@ -40,12 +40,6 @@ class GitHubCLI(Module):
 
 
 @registry.register
-class LazyGit(Module):
-    name = "lazygit"
-    manager = managers.BrewFormula("jesseduffield/lazygit/lazygit")
-
-
-@registry.register
 class GitUI(Module):
     name = "GitUI"
     manager = managers.BrewFormula("gitui")
