@@ -17,6 +17,7 @@ class Python(Bundle):
         managers.Pip("aactivator"),
         managers.Pip("pre-commit"),
         managers.Pip("tox"),
+        managers.Pip("twine"),
         managers.Pip("virtualenv"),
     )
 
