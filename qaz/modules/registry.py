@@ -18,7 +18,7 @@ class Registry:
     def register(self, cls: type[ModuleBase]) -> type[ModuleBase]:
         assert (
             cls.name not in self.modules
-        ), f"Module with name '{cls.name}' is already registered"
+        ), f"Module with name {cls.name!r} is already registered"
 
         module = cls()
         self.modules[cls.name.casefold()] = module

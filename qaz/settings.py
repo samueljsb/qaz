@@ -93,7 +93,7 @@ def record_module_upgraded(name: str, upgraded_at: datetime.datetime) -> None:
         module_settings["last_upgraded"] = upgraded_at.isoformat()
     else:
         # If there are no settings for this module yet, we cannot mark it as upgraded.
-        raise ValueError(f"There is no information saved for the module '{name}'.")
+        raise ValueError(f"There is no information saved for the module {name!r}.")
 
     _save_settings_to_file(config)
 
