@@ -36,7 +36,7 @@ repos:
         # Need to empty the ignore list so these are picked up. Will be fixed in next release of flake8.
         args: ['--ignore=', '--extend-select', 'B901,B902,B903,B904']
 -   repo: https://github.com/pre-commit/pygrep-hooks
-    rev: v1.9.0
+    rev: v1.10.0
     hooks:
     -   id: python-check-blanket-noqa
     -   id: python-check-blanket-type-ignore
