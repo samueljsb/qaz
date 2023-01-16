@@ -1,5 +1,7 @@
 export PYTHONSTARTUP=~/.config/pythonstartup.py
 
+export PIP_REQUIRE_VIRTUALENV=1
+
 if [ -x "$(command -v py)" ]; then
   alias python=py
 else
