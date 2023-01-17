@@ -15,10 +15,16 @@ alias zen="python -c 'import this'"
 
 # Create a new directory with virtual environment in /tmp.
 function tmpvenv(){
+  if [ $1 ]; then
+    dirname=$1
+  else
+    dirname="tmpvenv-$RANDOM"
+  fi
+
   # Create the new tmp directory.
   # Exit early if this fails.
-  mkdir /tmp/$1 || return 1
-  cd /tmp/$1
+  mkdir /tmp/$dirname || return 1
+  cd /tmp/$dirname
 
   if [ -x "$(command -v virtualenv)" ]; then
     virtualenv venv
