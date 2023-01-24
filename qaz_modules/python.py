@@ -25,7 +25,6 @@ class Python(Bundle):
     zshrc_files = (
         "aactivator.zsh",
         "python.zsh",
-        "virtualenv.zsh",
     )
     symlinks = {
         ".pypirc": "~",
