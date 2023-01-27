@@ -1,0 +1,93 @@
+#!/usr/bin/env python3.10
+from __future__ import annotations
+
+import argparse
+import subprocess
+from typing import Iterator
+
+
+def _parse_branches(
+    lines: list[str], base_ref: str, remotes: list[str]
+) -> Iterator[str]:
+    branches = []
+
+    for line in lines:
+        refs = [ref.strip() for ref in line.removeprefix("HEAD -> ").split(",")]
+        for ref in refs:
+            if not ref:
+                continue
+            elif ref == base_ref:
+                continue
+            elif any(ref.startswith(f"{remote}/") for remote in remotes):
+                continue
+            else:
+                branches.append(ref)
+
+    yield from reversed(branches)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Push a sequence of branches that correspond to a chain of PRs. "
+            "This is useful to run immediately after a successfuly rebase "
+            "with the `--update-refs` option."
+        )
+    )
+    parser.add_argument("base_ref", nargs="?", default="main")
+    args = parser.parse_args()
+
+    remotes = subprocess.check_output(("git", "remote"), text=True).split()
+    log_lines = subprocess.check_output(
+        ("git", "log", f"{args.base_ref}..", "--format=format:%D"), text=True
+    ).split("\n")
+
+    for branch in _parse_branches(log_lines, args.base_ref, remotes):
+        # disable hooks with '-c core.hooksPath=/dev/null'
+        subprocess.check_call(
+            ("git", "-c", "core.hooksPath=/dev/null", "switch", "--quiet", branch)
+        )
+        subprocess.check_call(("git", "push", "--quiet", "--force-with-lease"))
+
+        print(f"pushed {branch}")
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+
+# add .py to the end of this filename to run these with pytest
+
+
+def test_parse_branches_up_to_date() -> None:
+    log_output = """\
+HEAD -> my-test-2, origin/my-test-2
+
+
+origin/my-test-1, my-test-1
+
+origin/my-test-0, my-test-0
+origin/main, origin/HEAD, main
+"""
+    assert list(_parse_branches(log_output.split("\n"), "main", ["origin"])) == [
+        "my-test-0",
+        "my-test-1",
+        "my-test-2",
+    ]
+
+
+def test_parse_branches_behind() -> None:
+    log_output = """\
+HEAD -> my-test-2
+
+my-test-1
+
+my-test-0
+"""
+    assert list(_parse_branches(log_output.split("\n"), "main", ["origin"])) == [
+        "my-test-0",
+        "my-test-1",
+        "my-test-2",
+    ]
