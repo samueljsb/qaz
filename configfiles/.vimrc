@@ -29,6 +29,7 @@ filetype indent plugin on
 
 " spelling
 :set spell
+:iabbrev amoutn amount
 :iabbrev becasue because
 :iabbrev notificatiosn notifications
 :iabbrev odcument document
