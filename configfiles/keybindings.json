@@ -23,5 +23,11 @@
       "key": "ctrl+`",
       "command": "-workbench.action.terminal.toggleTerminal",
       "when": "terminal.active"
-  }
+    },
+    // Disable the 'find' dialog in the file tree pane
+    {
+      "key": "cmd+f",
+      "command": "-list.find",
+      "when": "listFocus && listSupportsFind"
+    }
 ]
