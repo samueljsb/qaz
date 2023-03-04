@@ -20,10 +20,7 @@ class Git(Bundle):
     # Configuration files
     zshrc_file = "git.zsh"
     symlinks = {
-        ".gitconfig": "~",
-        ".gitignore": "~",
-        ".git-commit-msg": "~",
-        ".gitconfig.diff-so-fancy": "~",
+        "git": "~/.config/git",
     }
 
 

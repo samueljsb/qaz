@@ -14,13 +14,12 @@
 
 # Use a template for the commit message.
 [commit]
-    template = ~/.git-commit-msg
+    template = ~/.config/git/commit-msg.txt
     verbose = true
 
 [core]
     autocrlf = input
     editor = vim
-    excludesfile = ~/.gitignore
     fsmonitor = true
 
 [diff]
@@ -35,17 +34,8 @@
 [help]
     autocorrect = 1
 
-# Local configuration.
-[include]
-    path = ~/.gitconfig.local
-
-# Configurations for tools installed with qaz.
-[include]
-    path = ~/.gitconfig.diff-so-fancy
-
 [init]
     defaultBranch = main
-    templateDir = ~/.git-template
 
 [merge]
     conflictStyle = diff3
@@ -66,3 +56,20 @@
 # Use ssh for GitHub.
 [url "ssh://git@github.com/"]
     insteadOf = https://github.com/
+
+# diff-so-fancy
+[pager]
+    diff = diff-so-fancy | $PAGER
+
+[color "diff"]
+    meta = 11
+    frag = "magenta bold"
+    commit = "yellow bold"
+    new = "green bold"
+    whitespace = "red reverse"
+
+[color "diff-highlight"]
+    oldNormal = "red bold"
+    oldHighlight = "red bold 52"
+    newNormal = "green bold"
+    newHighlight = "green bold 22"

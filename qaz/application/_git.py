@@ -12,7 +12,7 @@ def configure_git(*, author_name: str, author_email: str) -> None:
     _install.install_module("git")
 
     # Create local git config.
-    with Path.home().joinpath(".gitconfig.local").open("w+") as file:
+    with Path.home().joinpath(".gitconfig").open("w+") as file:
         file.write(
             f"""\
 [user]
