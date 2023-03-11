@@ -36,6 +36,7 @@
 
 [init]
     defaultBranch = main
+    templateDir = ~/.local/share/git-core/templates
 
 [merge]
     conflictStyle = diff3
