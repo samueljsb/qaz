@@ -52,12 +52,25 @@ alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commi
 
 alias git-branches="git branch --format='%(color:green)%(HEAD)%(color:reset) %(if)%(upstream)%(then)%(else)%(color:dim)%(end)%(refname:short)%(color:reset) %(color:blue)%(upstream:track)%(color:reset)'"
 
+
+function _changed_files() {
+git diff ORIG_HEAD HEAD --name-only | grep --silent "$@"
+}
+
 # "Git refresh"
-#   - gbda: delete all local merged branches
-alias grf=': \
-  && git checkout $(_git_main_branch) \
-  && git pull origin $(_git_main_branch_origin) \
-  && gbda \
-  && clear \
-  && git-branches \
-  && :'
+function grf() {
+  git checkout $(_git_main_branch)
+  git pull origin $(_git_main_branch_origin)
+  gbda
+
+  clear
+
+  if _changed_files 'requirements'; then
+    echo "\033[33mrequirements have changed\033[0m"
+  fi
+  if _changed_files '/migrations/' ; then
+    echo "\033[33mmigrations have changed\033[0m"
+  fi
+
+  git-branches
+}
