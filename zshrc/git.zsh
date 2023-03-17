@@ -55,7 +55,7 @@ alias git-branches="git branch --format='%(color:green)%(HEAD)%(color:reset) %(i
 
 
 function _changed_files() {
-git diff ORIG_HEAD HEAD --name-only | grep --silent "$@"
+git diff ORIG_HEAD HEAD --name-only --no-relative | grep --silent "$@"
 }
 
 # "Git refresh"
