@@ -23,6 +23,16 @@ function co-author(){
   git log --author=$1 | grep -m 1 $1 | gsed 's/Author/Co-authored-by/'
 }
 
+function git_commit(){
+  if (( ${+GIT_CO_AUTHOR} )); then
+    cp -f $(git config commit.template | sed -e "s|^~|$HOME|") /tmp/commit-msg.txt
+    echo "\nCo-authored-by: $GIT_CO_AUTHOR" >> /tmp/commit-msg.txt
+    git commit -t /tmp/commit-msg.txt $@
+  else
+    git commit $@
+  fi
+}
+
 # Aliases from OMZ
 alias ga='git add'
 alias gb='git branch'
