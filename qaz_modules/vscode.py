@@ -43,6 +43,7 @@ class VSCode(Module):
         # Git
         "codezombiech.gitignore",
         "fabiospampinato.vscode-open-in-github",
+        "github.vscode-github-actions",
         "sidneys1.gitconfig",
         "waderyan.gitblame",
         # Python
