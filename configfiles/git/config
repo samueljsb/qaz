@@ -1,4 +1,7 @@
 [alias]
+    # override builtin commands
+    commit = !git_commit
+
     # Make some things prettier.
     grep = grep --break --heading
     lg = log --oneline --graph --decorate
