@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import os
+
 from qaz import managers
 from qaz.modules.base import Bundle
 from qaz.modules.base import Module
@@ -22,6 +24,18 @@ class Git(Bundle):
     symlinks = {
         "git": "~/.config/git",
     }
+
+    def post_install(self) -> None:
+        shell.run_script(
+            "configure-git-hooks.sh",
+            os.path.expanduser("~/.local/share/git-core/templates"),
+        )
+
+    def post_upgrade(self) -> None:
+        shell.run_script(
+            "configure-git-hooks.sh",
+            os.path.expanduser("~/.local/share/git-core/templates"),
+        )
 
 
 @registry.register

@@ -24,8 +24,8 @@ def run(
     )
 
 
-def run_script(script_name: str) -> None:
-    run(settings.root_dir() / "scripts" / script_name)
+def run_script(script_name: str, *args: str) -> None:
+    run(settings.root_dir() / "scripts" / script_name, *args)
 
 
 def capture(
