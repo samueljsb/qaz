@@ -60,8 +60,8 @@ git diff ORIG_HEAD HEAD --name-only --no-relative | grep --silent "$@"
 
 # "Git refresh"
 function grf() {
-  git checkout $(_git_main_branch)
-  git pull origin $(_git_main_branch_origin)
+  git checkout $(_git_main_branch) || return
+  git pull origin $(_git_main_branch_origin) || return
   gbda
 
   clear
