@@ -4,7 +4,6 @@ import os.path
 
 from qaz import managers
 from qaz.modules.base import Bundle
-from qaz.modules.base import Module
 from qaz.modules.registry import registry
 from qaz.utils import shell
 
@@ -49,9 +48,3 @@ class Python(Bundle):
             "init-templatedir",
             os.path.expanduser("~/.local/share/git-core/templates"),
         )
-
-
-@registry.register
-class PythonLauncher(Module):
-    name = "py"
-    manager = managers.BrewFormula("python-launcher")
