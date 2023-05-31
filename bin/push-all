@@ -3,12 +3,13 @@ from __future__ import annotations
 
 import argparse
 import subprocess
-from typing import Iterator
 
 
-def _parse_branches(
-    lines: list[str], base_ref: str, remotes: list[str]
-) -> Iterator[str]:
+def _git(*args: str, capture: bool = True) -> str:
+    return subprocess.check_output(("git", *args), text=capture)
+
+
+def _parse_branches(lines: list[str], base_ref: str, remotes: list[str]) -> list[str]:
     branches = []
 
     for line in lines:
@@ -23,33 +24,34 @@ def _parse_branches(
             else:
                 branches.append(ref)
 
-    yield from reversed(branches)
+    return list(reversed(branches))
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(
         description=(
             "Push a sequence of branches that correspond to a chain of PRs. "
-            "This is useful to run immediately after a successfuly rebase "
+            "This is useful to run immediately after a successfully rebase "
             "with the `--update-refs` option."
         )
     )
     parser.add_argument("base_ref", nargs="?", default="main")
+    # fmt: off
+    parser.add_argument(
+        "-f", "--force",
+        action="store_const", dest="force_flag",
+        const="--force", default="--force-with-lease",
+        help="force push (default uses 'force-with-lease')",
+    )
+    # fmt: on
     args = parser.parse_args()
 
-    remotes = subprocess.check_output(("git", "remote"), text=True).split()
-    log_lines = subprocess.check_output(
-        ("git", "log", f"{args.base_ref}..", "--format=format:%D"), text=True
-    ).split("\n")
+    remotes = _git("remote").split()
+    log_lines = _git("log", f"{args.base_ref}..", "--format=format:%D").split("\n")
 
-    for branch in _parse_branches(log_lines, args.base_ref, remotes):
-        # disable hooks with '-c core.hooksPath=/dev/null'
-        subprocess.check_call(
-            ("git", "-c", "core.hooksPath=/dev/null", "switch", "--quiet", branch)
-        )
-        subprocess.check_call(("git", "push", "--quiet", "--force-with-lease"))
-
-        print(f"pushed {branch}")
+    branches = _parse_branches(log_lines, args.base_ref, remotes)
+    _git("push", "--quiet", args.force_flag, "--atomic", *branches, capture=False)
+    print("pushed branches atomically:", ",".join(*branches))
 
     return 0
 
@@ -71,7 +73,7 @@ origin/my-test-1, my-test-1
 origin/my-test-0, my-test-0
 origin/main, origin/HEAD, main
 """
-    assert list(_parse_branches(log_output.split("\n"), "main", ["origin"])) == [
+    assert _parse_branches(log_output.split("\n"), "main", ["origin"]) == [
         "my-test-0",
         "my-test-1",
         "my-test-2",
@@ -86,7 +88,7 @@ my-test-1
 
 my-test-0
 """
-    assert list(_parse_branches(log_output.split("\n"), "main", ["origin"])) == [
+    assert _parse_branches(log_output.split("\n"), "main", ["origin"]) == [
         "my-test-0",
         "my-test-1",
         "my-test-2",
