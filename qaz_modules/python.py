@@ -15,6 +15,7 @@ class Python(Bundle):
 
     managers = (
         managers.Pip("aactivator"),
+        managers.Pip("nox"),
         managers.Pip("pre-commit"),
         managers.Pip("tox"),
         managers.Pip("twine"),
