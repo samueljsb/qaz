@@ -5,8 +5,8 @@ import argparse
 import subprocess
 
 
-def _git(*args: str, capture: bool = True) -> str:
-    return subprocess.check_output(("git", *args), text=capture)
+def _git(*args: str) -> str:
+    return subprocess.check_output(("git", *args), text=True)
 
 
 def _parse_branches(lines: list[str], base_ref: str, remotes: list[str]) -> list[str]:
@@ -50,7 +50,7 @@ def main() -> int:
     log_lines = _git("log", f"{args.base_ref}..", "--format=format:%D").split("\n")
 
     branches = _parse_branches(log_lines, args.base_ref, remotes)
-    _git("push", "--quiet", args.force_flag, "--atomic", *branches, capture=False)
+    _git("push", "--quiet", args.force_flag, "--atomic", *branches)
     print("pushed branches atomically:", ",".join(*branches))
 
     return 0
