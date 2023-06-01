@@ -51,7 +51,7 @@ def main() -> int:
 
     branches = _parse_branches(log_lines, args.base_ref, remotes)
     _git("push", "--quiet", args.force_flag, "--atomic", "origin", *branches)
-    print("pushed branches atomically:", ",".join(*branches))
+    print("pushed branches atomically:", ",".join(branches))
 
     return 0
 
