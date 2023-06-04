@@ -4,6 +4,7 @@ export PIP_REQUIRE_VIRTUALENV=1
 
 alias python=python3
 
+export VIRTUALENV_PYTHON=python3.11,python3.10,python3.9,python3.8
 
 alias zen="python -c 'import this'"
 
