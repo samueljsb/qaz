@@ -4,8 +4,6 @@ export PIP_REQUIRE_VIRTUALENV=1
 
 alias python=python3
 
-# Django
-alias django='python manage.py'
 
 alias zen="python -c 'import this'"
 
