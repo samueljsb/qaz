@@ -23,7 +23,7 @@ class MacOS(Bundle):
     # Configuration files
     zshrc_files = ("macos.zsh",)
     symlinks = {
-        "RectangleConfig.json": "~/Library/Application Support/Rectangle/",
+        "RectangleConfig.json": "~/Library/Application Support/Rectangle/RectangleConfig.json",  # noqa: E501
     }
 
     def _configure_1password_ssh_agent(self) -> None:
