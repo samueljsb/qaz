@@ -8,31 +8,7 @@ export VIRTUALENV_PYTHON=python3.11,python3.10,python3.9,python3.8
 
 alias zen="python -c 'import this'"
 
-# Create a new directory with virtual environment in /tmp.
-function tmpvenv(){
-  if [ $1 ]; then
-    dirname=$1
-  else
-    dirname="tmpvenv-$RANDOM"
-  fi
-
-  # Create the new tmp directory.
-  # Exit early if this fails.
-  mkdir /tmp/$dirname || return 1
-  cd /tmp/$dirname
-
-  if [ -x "$(command -v virtualenv)" ]; then
-    virtualenv venv
-  else
-    python -m venv venv
-  fi
-
-  ./venv/bin/pip install black isort flake8 mypy rich
-
-  . venv/bin/activate
-
-  return 0
-}
+alias tmpvenv='cd $(mktmpvenv -p black flake8 isort mypy rich); . venv/bin/activate'
 
 # Kill mypy processes.
 # Sometimes I end up with lots of concurrent mypy processes, which hog the CPU.
