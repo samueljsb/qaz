@@ -6,6 +6,8 @@ alias ll='ls -lh'
 alias la='ls -lAh'
 export LSCOLORS=gxfxhxdxcxegedabagacad
 
+alias local-ip="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | awk '{print \$2}'"
+
 # Add user bin directory to PATH
 export PATH="$HOME/bin:$PATH"
 
