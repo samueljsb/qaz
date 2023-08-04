@@ -59,6 +59,7 @@
   "files.participants.timeout": 0,
   "git.enableStatusBarSync": false,
   "git.mergeEditor": false,
+  "githubPullRequests.pullBranch": "never",
   "html.format.enable": false,
   "intellicodeApiExamples.python.enabled": false,
   "intellicodeApiExamples.typescript.enabled": false,
