@@ -22,6 +22,12 @@ if [ -x "$(command -v vim)" ]; then
   export VISUAL=vim
 fi
 
+# XDG
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
+
 # Set pager options
 # -X is needed to fix a bug with the --quit-if-one-screen feature in old versions of less.
 # Unfortunately, it also breaks mouse-wheel support in less.
