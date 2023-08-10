@@ -30,6 +30,7 @@ class Python(Bundle):
         ".pypirc": "~",
         "pythonstartup.py": "~/.config/",
         ".pdbrc.py": "~",
+        "virtualenv.ini": "~/.config/",
     }
 
     def post_install(self) -> None:
