@@ -109,6 +109,16 @@ class ModuleBase(abc.ABC):
                 Path(link).expanduser(),
             )
 
+    def unconfigure(self) -> None:
+        for target, link in self.symlinks.items():
+            files.remove_symlink(
+                Path(link).expanduser(),
+            )
+            files.copy_file(
+                settings.root_dir() / "configfiles" / target,
+                Path(link).expanduser(),
+            )
+
 
 class Module(ModuleBase):
     """A module that provides a single tool."""
@@ -142,6 +152,19 @@ class Module(ModuleBase):
 
         super().configure()
 
+    def unconfigure(self) -> None:
+        if self.zshrc_file:
+            zshrc_path = settings.root_dir() / "zshrc" / self.zshrc_file
+            files.remove_symlink(
+                Path.home() / ".zshrc.d" / self.zshrc_file,
+            )
+            files.copy_file(
+                zshrc_path,
+                Path.home() / ".zshrc.d",
+            )
+
+        super().configure()
+
 
 class Bundle(ModuleBase):
     """A module that bundles together several tools."""
@@ -167,6 +190,19 @@ class Bundle(ModuleBase):
         for rc_file in self.zshrc_files:
             rc_path = settings.root_dir() / "zshrc" / rc_file
             files.create_symlink(
+                rc_path,
+                Path.home() / ".zshrc.d",
+            )
+
+        super().configure()
+
+    def unconfigure(self) -> None:
+        for rc_file in self.zshrc_files:
+            rc_path = settings.root_dir() / "zshrc" / rc_file
+            files.remove_symlink(
+                Path.home() / ".zshrc.d" / rc_file,
+            )
+            files.copy_file(
                 rc_path,
                 Path.home() / ".zshrc.d",
             )

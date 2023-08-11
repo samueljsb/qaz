@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from ._configure import configure
+from ._configure import unconfigure
 from ._git import configure_git
 from ._install import install_module
 from ._setup import setup

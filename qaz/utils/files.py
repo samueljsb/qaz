@@ -1,12 +1,22 @@
 from __future__ import annotations
 
 import logging
+import shutil
 from pathlib import Path
 
 from . import shell
 
 
 logger = logging.getLogger(__name__)
+
+
+def _determine_dest(src: Path, dest: Path | None) -> Path:
+    dest = dest or Path.home()
+
+    if dest.is_dir() and not src.is_dir():
+        dest = dest / src.name
+
+    return dest
 
 
 def create_symlink(target: Path, link: Path | None = None) -> None:
@@ -17,9 +27,7 @@ def create_symlink(target: Path, link: Path | None = None) -> None:
     same filename within the given directory.
     """
     link = link or Path.home()
-
-    if link.is_dir() and not target.is_dir():
-        link = link / target.name
+    link = _determine_dest(target, link)
 
     if link.is_symlink():
         if link.exists() and link.samefile(target):
@@ -39,3 +47,24 @@ def create_symlink(target: Path, link: Path | None = None) -> None:
         return
 
     logger.info(f"Linked {link} -> {target}")
+
+
+class NotASymlink(Exception):
+    pass
+
+
+def remove_symlink(link: Path) -> None:
+    if not link.is_symlink():
+        raise NotASymlink
+
+    target = link.resolve()
+
+    link.unlink()
+    logger.info(f"Removed link {link} -> {target}")
+
+
+def copy_file(src: Path, dest: Path) -> None:
+    dest = _determine_dest(src, dest)
+    shutil.copy(src, dest)
+
+    logger.info(f"Copied file {src} -> {dest}")
