@@ -22,7 +22,9 @@ class Git(Bundle):
     # Configuration files
     zshrc_file = "git.zsh"
     symlinks = {
-        "git": "~/.config/git",
+        "git/config": "~/.config/git/config",
+        "git/ignore": "~/.config/git/ignore",
+        "git/commit-msg.txt": "~/.config/git/commit-msg.txt",
     }
 
     def post_install(self) -> None:
