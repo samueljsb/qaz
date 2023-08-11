@@ -72,6 +72,12 @@ def _configure() -> None:
     application.configure()
 
 
+@cli.command("unconfigure")
+def _unconfigure() -> None:
+    """Unconfigure all installed modules."""
+    application.unconfigure()
+
+
 @cli.command("upgrade")
 @click.argument("modules", nargs=-1)
 @click.pass_context

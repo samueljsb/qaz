@@ -11,3 +11,14 @@ def configure() -> None:
     """
     for module in registry.installed_modules:
         module.configure()
+
+
+def unconfigure() -> None:
+    """
+    Unconfigure all installed modules.
+
+    This removes symlinks for zshrc and configuration files for all of the installed
+    modules and copies the file across in their place.
+    """
+    for module in registry.installed_modules:
+        module.unconfigure()
