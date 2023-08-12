@@ -163,7 +163,7 @@ class Module(ModuleBase):
                 Path.home() / ".zshrc.d",
             )
 
-        super().configure()
+        super().unconfigure()
 
 
 class Bundle(ModuleBase):
@@ -207,4 +207,4 @@ class Bundle(ModuleBase):
                 Path.home() / ".zshrc.d",
             )
 
-        super().configure()
+        super().unconfigure()
