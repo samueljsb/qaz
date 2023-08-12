@@ -50,16 +50,18 @@ def create_symlink(target: Path, link: Path | None = None) -> None:
 
 
 class NotASymlink(Exception):
-    pass
+    def __init__(self, link: str) -> None:
+        self.link = link
 
 
-def remove_symlink(link: Path) -> None:
-    if not link.is_symlink():
-        raise NotASymlink
+def remove_symlink(target: Path, link: Path) -> None:
+    link_to_remove = _determine_dest(target, link)
+    if not link_to_remove.is_symlink():
+        raise NotASymlink(link_to_remove)
 
-    target = link.resolve()
+    target = link_to_remove.resolve()
 
-    link.unlink()
+    link_to_remove.unlink()
     logger.info(f"Removed link {link} -> {target}")
 
 

@@ -117,10 +117,11 @@ class ModuleBase(abc.ABC):
         for target, link in self.symlinks.items():
             try:
                 files.remove_symlink(
+                    settings.root_dir() / "configfiles" / target,
                     Path(link).expanduser(),
                 )
-            except files.NotASymlink:
-                logger.warn(f"Skipping {target}: no symlink found")
+            except files.NotASymlink as exc:
+                logger.warn(f"Skipping {exc.link}: no symlink found")
                 continue
 
             files.copy_file(
@@ -166,10 +167,11 @@ class Module(ModuleBase):
             zshrc_path = settings.root_dir() / "zshrc" / self.zshrc_file
             try:
                 files.remove_symlink(
-                    Path.home() / ".zshrc.d" / self.zshrc_file,
+                    zshrc_path,
+                    Path.home() / ".zshrc.d",
                 )
-            except files.NotASymlink:
-                logger.warn(f"Skipping {zshrc_path}: no symlink found")
+            except files.NotASymlink as exc:
+                logger.warn(f"Skipping {exc.link}: no symlink found")
             else:
                 files.copy_file(
                     zshrc_path,
@@ -214,10 +216,11 @@ class Bundle(ModuleBase):
             rc_path = settings.root_dir() / "zshrc" / rc_file
             try:
                 files.remove_symlink(
-                    Path.home() / ".zshrc.d" / rc_file,
+                    rc_path,
+                    Path.home() / ".zshrc.d",
                 )
-            except files.NotASymlink:
-                logger.warn(f"Skipping {rc_path}: no symlink found")
+            except files.NotASymlink as exc:
+                logger.warn(f"Skipping {exc.link}: no symlink found")
                 continue
 
             files.copy_file(
